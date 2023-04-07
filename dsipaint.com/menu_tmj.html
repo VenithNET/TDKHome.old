@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dsipaint.com/menu_tmj.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:01:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="DSiPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="DSiPaint, DSi Opera SDK, Nintendo DSi, DSi, JavaScript, video games" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="stylesheet" href="stylee993.css" type="text/css" />
+<link rel="stylesheet" href="lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-9']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	<title>The Mystical Journey at DSiPaint</title>
+</head>
+<body style="background: url(images/backgrounds/background0.png)">
+
+<div style="padding:2px; text-align:center">
+	<a href="index.html"><img src="images/logo.png" alt="Logo" /></a>
+</div>
+
+<div class="menu_section" style="padding:0px">
+
+
+	<div class="menu_section">
+		<div class="nav_avatar">
+			<a onclick="showLogin();"><img src="avatars_site/0.png" alt="Login" title="Login" /></a>
+		</div>
+
+		<div class="nav_div">Welcome, Guest.</div>
+		<div class="nav_div">
+			<a onclick="showLogin();">Login</a> | <a href="register.html">Register</a>
+		</div>
+
+		<div id="divLogin"  style="display:none" >
+			<form action="#" method="post">
+				Username: <input type="text" name="username" class="form_field" /><br />
+				Password: <input type="password" name="password" class="form_field" /><br />
+				Remember me: <input type="checkbox" value="true" name="remember" /><br />
+				<input type="submit" value="Login" class="form_button" />
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function showLogin(){
+			document.getElementById('divLogin').style.display='block';
+		}
+	</script>
+
+</div>
+
+<div style="margin:-2px; overflow:auto; padding:0px; text-align:center">
+	<h1>The Mystical Journey</h1>
+
+	<div id="walking" style="background:url(tmj/images/walking_characters.png) no-repeat; height:64px; padding:0px; width:240px"></div>
+	<script type="text/javascript">
+		var y=0;
+		function animate_walking(){
+			y=(y+64)&255;
+			document.getElementById('walking').style.backgroundPosition='0px -'+y+'px';
+			setTimeout('animate_walking();',250);
+		}
+		animate_walking();
+	</script>
+
+	<table style="margin:auto; text-align:center">
+		<tr>
+			<td colspan="4" style="text-align:justify">
+				The Mystical Journey is the upcoming hybrid single-player/MMO RPG for the Nintendo DSi Browser.
+				Several short demos currently exist for the game, and as the release date nears, more content will spill into this area.<br /><br />
+				For an excerpt from the game&apos;s introduction, click <a href="tmj/tmj_book1.html">here</a>.
+				Scroll the screen to read; click to exit.
+			</td>
+		</tr>
+	</table>
+
+	<h1 class="light">Teasers</h1>
+	<div class="menu_section light">
+		<div class="icon">
+			<a href="tmj/tmj_teaser1.html"><img src="images/icons/icon_tmjteaser1.png" /></a><br />Teaser 1<br />Beginning
+		</div>
+		<div class="icon">
+			<a href="tmj/tmj_teaser2.html"><img src="images/icons/icon_tmjteaser2.png" /></a><br />Teaser 2<br />Storyline
+		</div>
+		<div class="icon">
+			<a href="tmj/tmj_teaser3.html"><img src="images/icons/icon_tmjteaser3.png" /></a><br />Teaser 3<br />Jasper
+		</div>
+		<div class="icon">
+			<a href="tmj/oldmanskunk/shop.html"><img src="images/icons/icon_oldmanskunk.png" /></a><br />Teaser 4<br />OMS Shop
+		</div>
+		<div class="icon">
+			<a href="tmj/tmj_teaser5.html"><img src="images/icons/icon_tmjteaser5.png" /></a><br />Teaser 5<br />Hoedr
+		</div>
+		<div class="icon">
+			<a href="tmj/tmj_teaser6.html"><img src="images/icons/icon_tmjteaser6.png" /></a><br />Teaser 6<br />Olmers
+		</div>
+	</div>
+
+	<h1 class="light">Other Content</h1>
+	<div class="menu_section light">
+		<div class="icon">
+			<a href="tmj/tmj_mt_hildar.html"><img src="images/icons/icon_tmjmthildar.png" /></a><br />Mt.Hildar<br />Demo
+		</div>
+		<div class="icon">
+			<a href="tmj/images/coliseum_map.png"><img src="images/icons/icon_tmjmthildarmap.png" /></a><br />Mt.Hildar<br />Map
+		</div>
+		<div class="icon">
+			<a href="tmj/tmj_npc_test.html"><img src="images/icons/icon_tmjnpctest.png" /></a><br />NPC Test
+		</div>
+		<div class="icon">
+			<a href="menu_tmj.html"><img src="images/icons/icon_tmjpvp.png" /></a><br />PvP<br />Demo
+		</div>
+		<div class="icon">
+			<a href="tmj/tmj_beastiary.html"><img class="icon" src="images/icons/icon_tmj_beastiary.png" /></a><br />Beastiary
+		</div>
+		<div class="icon">
+			<a href="tmj/tmj_characters.html"><img class="icon" src="images/icons/icon_tmj_characters.png" /></a><br />Character<br />Profiles
+		</div>
+		<div class="icon">
+			<a href="tmj/item_database.html"><img class="icon" src="images/icons/icon_tmj_items.png" /></a><br />Item<br />Database
+		</div>
+		<div style="clear:both; text-align:center"><a href="../external.html?link=http://sites.google.com/site/themysticaljourney/">Google Dev Wiki</a></div>
+	</div>
+
+
+	<div style="margin:5px; text-align:center">
+		<a href="index.html"><img class="icon" src="images/icons/icon_home.png" alt="Home" /></a>
+	</div>
+
+	<div style="margin:5px; text-align:center">
+		<div style="font-size:8px; text-align:justify">
+	Nintendo trademarks and copyrights are properties of Nintendo.
+	Opera is a product of Opera Software ASA.
+	This website is &copy;2009-2023 HullBreach Studios Ltd. All rights reserved.
+	Members are responsible for their own content.
+	No account information will be given to third-parties.
+</div>
+
+<div id="divAlertPopup" class="alerts_popup menu_section"></div>
+<script type="text/javascript">
+	var AlertPopupObj = new XMLHttpRequest();
+	function refreshMyPopupAlerts(){
+		AlertPopupObj.open('GET.html', 'includes/ajax.section.my_alert_popup.html', true);
+		AlertPopupObj.send(null);
+		AlertPopupObj.onreadystatechange = function(){
+			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
+				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
+				AlertPopupObj.abort();
+				return;
+			}
+			if(AlertPopupObj.readyState==4){
+				if(AlertPopupObj.responseText){
+					var divAlertPopup = document.getElementById('divAlertPopup'),
+						alerts = [];
+					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
+					if(alerts.length){
+						var alertString = '',
+							index = 0;
+						while(index<alerts.length){
+							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
+							index++;
+						}
+						divAlertPopup.innerHTML = alertString;
+						divAlertPopup.style.display = 'block';
+					}else{
+						divAlertPopup.style.display = 'none';
+					}
+				}
+				setTimeout(refreshMyPopupAlerts, 10000);
+			}
+		}
+	}
+	refreshMyPopupAlerts();
+</script>
+	</div>
+</div>
+</body>
+
+<!-- Mirrored from dsipaint.com/menu_tmj.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:02:01 GMT -->
+</html>

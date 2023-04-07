@@ -1,0 +1,19 @@
+HTTrack3.49-2 launched on Thu, 06 Apr 2023 18:46:37 at https://dsipaint.com/ +*.png +*.gif +*.jpg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(httrack -O /storage/emulated/0/HTTrack/Websites/DSiPaint -A25000k%Pnx%q0u1s2%s%u%fDaK0H0N0p7 https://dsipaint.com/ +*.png +*.gif +*.jpg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%l LANGUAGE_ISO,* )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+19:02:06	Error: 	"Not Found" (404) at link https://dsipaint.com/hullbreachstudios.com (from https://dsipaint.com/)
+19:02:06	Error: 	"Not Found" (404) at link https://dsipaint.com/GET (from https://dsipaint.com/)
+19:14:55	Error: 	"Not Found" (404) at link https://dsipaint.com/blog/GET (from https://dsipaint.com/blog/)
+19:27:16	Error: 	"Not Found" (404) at link https://dsipaint.com/forum/GET (from https://dsipaint.com/forum/)
+19:33:44	Warning: 	Found for https://dsipaint.com/games/savii_slots/
+19:33:44	Warning: 	File has moved from https://dsipaint.com/games/savii_slots/ to /menu_games.php
+19:33:58	Warning: 	Found for https://dsipaint.com/blog/?blog=52412
+19:33:58	Warning: 	File has moved from https://dsipaint.com/blog/?blog=52412 to view.php?id=52412
+19:35:47	Error: 	"Not Found" (404) at link https://dsipaint.com/halloween_2009.php (from https://dsipaint.com/menu_gameshows.php)
+19:35:47	Error: 	"Not Found" (404) at link https://dsipaint.com/winning_terms.html (from https://dsipaint.com/menu_gameshows.php)
+19:35:47	Error: 	"Not Found" (404) at link https://dsipaint.com/group/GET (from https://dsipaint.com/group/)

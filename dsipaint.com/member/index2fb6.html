@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<!-- Mirrored from dsipaint.com/member/?id=137730 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:06:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="3DSPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="3D Photo Gallery, 3DS Photo Gallery, Upload 3D Photos, Upload 3DS Photos, MPO, 3DSPaint, 3DS Opera SDK, Nintendo 3DS, 3DS, JavaScript, video games" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<link rel="stylesheet" href="../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-11']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+		<title>Profile for Draconid_Jo</title>
+		<script type="text/javascript">
+			'use strict';
+
+			function flag(obj, comment) {
+				var params = 'action=comment_flag&comment=' + comment;
+
+				if (confirm("Flag comment?")) {
+					xhrCall(params);
+					obj.style.display = 'none';
+				}
+				return false;
+			}
+			function remove_comment(obj, comment) {
+				var div = obj.parentNode.parentNode,
+						params = 'action=comment_delete&comment=' + comment;
+
+				if (confirm("Delete comment?")) {
+					xhrCall(params);
+					div.parentNode.removeChild(div);
+				}
+				return false;
+			}
+			function xhrCall(params) {
+				xhr.abort();
+				xhr.open('GET.html', '?id=137730&ajax=' + (new Date()).getTime() + '&' + params, true);
+				xhr.send(null);
+			}
+
+			function mousedown(e) {
+				context.beginPath();
+				context.moveTo(e.offsetX - 1, e.offsetY - 1);
+				painting = true;
+			}
+			function mousemove(e) {
+				if (painting) {
+					context.lineTo(e.offsetX - 1, e.offsetY - 1);
+					context.stroke();
+				}
+			}
+			function mouseup(e) {
+				painting = false;
+			}
+
+			function save() {
+				if (!saving) {
+					saving = true;
+					var data = 'id=137730&data=' + canvas.toDataURL('image/png');
+					console.log(data);
+					var xhrSave = new XMLHttpRequest();
+					xhrSave.open('POST.html', '../includes/ajax_comment_save.html', true);
+					xhrSave.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					xhrSave.setRequestHeader('Content-length', data.length);
+					xhrSave.setRequestHeader('Connection', 'close');
+					xhrSave.send(data);
+					xhrSave.onreadystatechange = function () {
+						if (xhrSave.readyState == 4 && xhrSave.responseText == 'true') {
+							location.reload();
+						}
+					};
+				}
+				return false;
+			}
+
+			var xhr = new XMLHttpRequest();
+
+			window.onload = function () {
+				var images = document.getElementsByName('body_images');
+				var maxwidth = 800;
+				if (document.domain.indexOf('3dspaint')) {
+					maxwidth = 300;
+				} else if (document.domain.indexOf('dsipaint')) {
+					maxwidth = 220;
+				}
+				for (var index in images) {
+					if (images[index].width > maxwidth) {
+						images[index].width = maxwidth;
+					}
+				}
+			}
+		</script>
+		<style type="text/css">
+			TD.profile_page{
+				background:#8f8;
+				border:1px outset #888;
+				color:#fff;
+				font-size:9pt;
+				text-align:center;
+			}
+			.button {
+				background: #fff;
+				border: 1px outset #888;
+				margin: 3px;
+				padding: 3px;
+				width: 10px;
+				height: 10px;
+			}
+			.admin TD, .admin TEXTAREA {
+				background:#fff !important;
+				color:#000 !important;
+			}
+		</style>
+		<style type="text/css">
+			body { background: url("../../3dspaint.com/images/upload_gallery/9548.jpg") center center / 100% fixed !important; }
+
+div { color: #98D8D8; text-shadow: #00D080 1px 1px 7px, #7038F8 -1px -1px 7px !important; background: transparent !important; border-color: transparent !important; text-align: center !important; font-family: "Tribal Dragon", "Snell Roundhand", cursive !important; font-style: normal !important; font-weight: normal !important; }
+
+.alerts_popup { animation-duration: 2s; background: transparent !important; font-weight: bold !important; animation-name: Aurorus !important; animation-iteration-count: infinite !important; }
+
+.alerts_popup::before { content: "There's a " !important; }
+
+.alerts_popup::after { content: "! Please read it ASAP!" !important; }
+
+img[src="/images/logo.png"] { content: url("../../i.imgur.com/tL3XADB.png") !important; width: 280px !important; }
+
+.nav_div { color: #98D8D8 !important; text-shadow: #00D080 1px 1px 7px, #7038F8 -1px -1px 7px !important; border-color: transparent !important; text-align: center !important; font-family: "Tribal Dragon", fantasy !important; font-style: normal !important; font-variant: small-caps !important; font-weight: bold !important; text-transform: capitalize !important; }
+
+h1 { color: #2DD080; text-shadow: #00D080 1px 1px 14px, #00D080 -1px -1px 14px !important; background: transparent !important; text-align: center !important; font-family: "Tribal Dragon", Luminari, fantasy !important; font-style: normal !important; font-variant: small-caps !important; border: hidden !important; }
+
+h1::before, h1::after { content: url("../../i.imgur.com/icXqXEC.gif"); }
+
+.head { text-shadow: #00D080 1px 1px 14px, #00D080 -1px -1px 14px !important; font-size: 18px !important;  font-family: kokuryu, fantasy !important; font-style: normal !important; font-weight: bold !important; animation-duration: 2s; animation-name: Aurorus !important; animation-iteration-count: infinite !important; }
+
+@keyframes Aurorus { 
+  0% { color: #2DD080; }
+  25% { color: #7038F8; }
+  50% { color: #3448F0; }
+  75% { color: #00FFFF; }
+  100% { color: #2DD080; }
+}
+
+.row { color: #2DD080; text-shadow: #00D080 1px 1px 14px, #00D080 -1px -1px 14px !important; border-color: transparent !important; font-family: "Tribal Dragon", "Snell Roundhand", cursive !important; font-style: normal !important; font-weight: bold !important; text-transform: capitalize !important; }
+.form_textarea { background: url("../../i.imgur.com/fksxjfH.jpg") center center !important; color: #2DD080; text-shadow: #00D080 1px 1px 10px, #00D080 -1px -1px 10px !important; font-family: "Snell Roundhand", cursive !important; font-style: normal !important; font-weight: bold !important; }
+
+.form_body { color: #98D8D8; background: transparent !important; border-color: transparent !important; text-align: center !important; text-shadow: #00D080 1px 1px 7px, #7038F8 -1px -1px 7px !important; font-family: "Tribal Dragon", fantasy !important; font-style: italic !important; font-weight: normal !important; }
+
+.form_button { background: #000000 !important; color: #FF0000 !important; text-shadow: #FF0000 1px 1px 7px, #FF0000 -1px -1px 7px !important; border-style: solid !important; border-color: #FFFF00 !important; border-width: 1px !important; box-shadow: #00D080 1px 1px 10px, #00D080 -1px -1px 10px !important; text-align: center center !important; border-radius: 25px !important;  font-family: "Tribal Dragon", fantasy !important; font-style: normal !important; font-variant: small-caps !important; font-weight: bold !important; }
+
+.spoiler_body { background-color: transparent !important; font-family: "Tribal Dragon", fantasy !important; font-style: italic !important; font-weight: normal !important; }
+
+.avatar { border-radius: 50px !important; height: 80px !important; width: 80px !important; border-color: #98D8D8 !important; border-style: solid !important; box-shadow: #00D080 1px 1px 10px, #7038F8 -1px -1px 10px !important; }
+
+.nav_avatar { border-radius: 20px !important; height: 32px !important; width: 32px !important; border-color: #98D8D8 !important; border-style: solid !important; border-width: 2px !important; box-shadow: #00D080 1px 1px 7px, #7038F8 -1px -1px 7px !important; }
+
+.form_textarea { background: url("../../i.imgur.com/fksxjfH.jpg") center center !important; color: #2DD080; text-shadow: #00D080 1px 1px 10px, #00D080 -1px -1px 10px !important; font-family: "Snell Roundhand", cursive !important; font-style: normal !important; font-weight: bold !important; }
+
+textarea { width: 220px !important; height: 220px !important; box-shadow: #7038F8 1px 1px 20px, #7038F8 -1px -1px 20px !important; }
+
+.zebra { color: #98D8D8; text-shadow: #00D080 1px 1px 7px, #7038F8 -1px -1px 7px !important; background: transparent !important; border-color: transparent !important; text-align: center !important;  font-family: "Snell Roundhand", cursive !important; font-style: normal !important; font-weight: normal !important; min-width: 99% !important; }
+
+.menu section { min-width: 99% !important; }
+
+.button_div { font-family: "Tribal Dragon", fantasy !important; font-style: normal !important; font-variant: small-caps !important; min-width: 99% !important; }
+
+.blog_right { color: #98D8D8; text-shadow: #00D080 1px 1px 7px, #7038F8 -1px -1px 7px !important; background: transparent !important; text-align: center !important;  font-family: "Snell Roundhand", cursive !important; font-style: normal !important; font-weight: bold !important; }
+
+.blog_right::after { content: " 👍" !important; font-family: "Snell Roundhand", cursive !important; font-style: normal !important; font-weight: bold !important; }
+
+.badge { font-family: "Tribal Dragon", Luminari, fantasy !important; font-style: normal !important; font-variant: small-caps !important; font-weight: bold !important; }
+
+a { color: #6890F0 !important; text-shadow: #6890F0 1px 1px 4px, #6890F0 -1px -1px 4px !important; font-weight: bold !important; }
+
+input:hover { background-color:#200040 !important; color: #2DD080; text-shadow: #00D080 1px 1px 7px, #00D080 -1px -1px 7px !important; !important; border: hidden !important; text-align: center !important; font-family: "Tribal Dragon", Luminari, fantasy !important; font-style: normal !important; font-weight: bold !important; }
+
+::selection { background-color:#200040 !important; color: #2DD080 !important; text-shadow: #00D080 1px 1px 7px, #00D080 -1px -1px 7px !important; font-weight: bold !important; }
+
+a:hover { background-color:#200040 !important; color: #00D080; font-weight: bold !important; }
+
+div.form_ { color: #98D8D8; background: transparent !important; border-color: transparent !important; text-align: center !important; text-shadow: #00D080 1px 1px 7px, #7038F8 -1px -1px 7px !important; font-family: "Tribal Dragon", fantasy !important; font-style: italic !important; font-weight: normal !important; }
+
+div.spoiler_ { background-color: transparent !important; font-family: "Tribal Dragon", fantasy !important; font-style: italic !important; font-weight: normal !important; }
+
+a[href="/blog/?author=137730&featured=false"] { color: transparent !important; font-size: 1px !important; text-shadow: transparent 0px 0px 0px, transparent -0px -0px 0px !important; }
+
+a[href="/blog/?author=137730&featured=false"]::before { content: "Blogs" !important; color: #6890F0 !important; text-shadow: #6890F0 1px 1px 4px, #6890F0 -1px -1px 4px !important; font-family: "Tribal Dragon", fantasy !important; font-style: normal !important; font-variant: small-caps !important; font-weight: bold !important; font-size: 12px !important; text-align: center !important; text-decoration: underline !important; }
+
+a[href="/poll/?author=137730&featured=false"] { color: transparent !important; font-size: 1px !important; text-shadow: transparent 0px 0px 0px, transparent -0px -0px 0px !important; }
+
+a[href="/poll/?author=137730&featured=false"]::before { content: "Polls" !important; color: #6890F0 !important; text-shadow: #6890F0 1px 1px 4px, #6890F0 -1px -1px 4px !important; font-family: "Tribal Dragon", fantasy !important; font-style: normal !important; font-variant: small-caps !important; font-weight: bold !important; font-size: 12px !important; text-align: center !important; text-decoration: underline !important; }
+
+a[href="/paint/gallery.php?member=137730"] { color: transparent !important; font-size: 1px !important; text-shadow: transparent 0px 0px 0px, transparent -0px -0px 0px !important; }
+
+a[href="/paint/gallery.php?member=137730"]::before { content: "3DSPaint Gallery" !important; color: #6890F0 !important; text-shadow: #6890F0 1px 1px 4px, #6890F0 -1px -1px 4px !important; font-family: "Tribal Dragon", fantasy !important; font-style: normal !important; font-variant: small-caps !important; font-weight: bold !important; font-size: 12px !important; text-align: center !important; text-decoration: underline !important; }
+ 
+a[href="/photo_gallery/member_gallery.php?member=137730"] { color: transparent !important; font-size: 1px !important; text-shadow: transparent 0px 0px 0px, transparent -0px -0px 0px !important; }
+
+a[href="/photo_gallery/member_gallery.php?member=137730"]::before { content: "3D Photo Gallery" !important; color: #6890F0 !important; text-shadow: #6890F0 1px 1px 4px, #6890F0 -1px -1px 4px !important; font-family: "Tribal Dragon", fantasy !important; font-style: normal !important; font-variant: small-caps !important; font-weight: bold !important; font-size: 12px !important; text-align: center !important; text-decoration: underline !important; }
+
+a[href="/tmj/member_tiles.php?member=137730"] { color: transparent !important; font-size: 1px !important; text-shadow: transparent 0px 0px 0px, transparent -0px -0px 0px !important; }
+
+a[href="/tmj/member_tiles.php?member=137730"]::before { content: "TMJ Tile Gallery" !important; color: #6890F0 !important; text-shadow: #6890F0 1px 1px 4px, #6890F0 -1px -1px 4px !important; font-family: "Tribal Dragon", fantasy !important; font-style: normal !important; font-variant: small-caps !important; font-weight: bold !important; font-size: 12px !important; text-align: center !important; text-decoration: underline !important; }
+
+a[href="/saviis/savii_gallery.php?member=137730"] { color: transparent !important; font-size: 1px !important; text-shadow: transparent 0px 0px 0px, transparent -0px -0px 0px !important; }
+
+a[href="/saviis/savii_gallery.php?member=137730"]::before { content: "Savii Gallery" !important; color: #6890F0 !important; text-shadow: #6890F0 1px 1px 4px, #6890F0 -1px -1px 4px !important; font-family: "Tribal Dragon", fantasy !important; font-style: normal !important; font-variant: small-caps !important; font-weight: bold !important; font-size: 12px !important; text-align: center !important; text-decoration: underline !important; }
+
+img[alt="Home"] { content: url("../../3dspaint.com/images/upload_gallery/16006.jpg") !important; }		</style>
+	</head>
+	<body style="background: url(../images/backgrounds/background6.png)">
+
+<div style="padding:2px; text-align:center">
+	<a href="../index.html"><img src="../images/logo.png" alt="Logo" /></a>
+</div>
+
+<div class="menu_section" style="padding:0px">
+
+
+	<div class="menu_section">
+		<div class="nav_avatar">
+			<a onclick="showLogin();"><img src="../avatars_site/0.png" alt="Login" title="Login" /></a>
+		</div>
+
+		<div class="nav_div">Welcome, Guest.</div>
+		<div class="nav_div">
+			<a onclick="showLogin();">Login</a> | <a href="../register.html">Register</a>
+		</div>
+
+		<div id="divLogin"  style="display:none" >
+			<form action="#" method="post">
+				Username: <input type="text" name="username" class="form_field" /><br />
+				Password: <input type="password" name="password" class="form_field" /><br />
+				Remember me: <input type="checkbox" value="true" name="remember" /><br />
+				<input type="submit" value="Login" class="form_button" />
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function showLogin(){
+			document.getElementById('divLogin').style.display='block';
+		}
+	</script>
+
+</div>
+
+		<h1>Profile for Draconid_Jo</h1>
+
+
+		<div class="menu_section">
+			<div class="head">
+				&quot;……想像力が 足りないよ —伝承者ヒガナ&quot;
+			</div>
+			<div class="row"><div>FIRST NAME</div>Joashu</div>
+			<div class="row"><div>BIRTHDAY</div>06 Jul 1994</div>
+			<div class="row"><div>MEMBER SINCE</div>28 Apr 2019</div>
+			<div class="row"><div>LAST LOGIN</div>06 Apr 2023</div>
+			<div class="row"><div>MOOD</div>Kerygmatic</div>
+			<div class="row"><div>DOING NOW</div></div>
+			<div class="row"><div>STANDING</div>Active</div>
+			<div class="row"><div>3DS CODE</div>1822-1300-7238</div>
+			<div class="row"><div>SWITCH CODE</div>(Not set)</div>
+			<div class="row"><div>NINT NETWK ID</div>Ashujo</div>
+		</div>
+
+
+		<h1>Biography</h1>
+		<div class="menu_section">
+			<div class="form_body" id="blog_body">
+
+				<a href="../../i.imgur.com/nBVowUR.gif" rel="nofollow"><img name="body_images" src="../../i.imgur.com/nBVowUR.gif" /></a><br /><br /><a href="../images/upload_gallery/15745.jpg"><img src="../images/upload_gallery/15745_thumb.jpg" alt="thumb"></a><br /><br /><blockquote><big>Steven Stone: You're the–!<br /><br />Joashu◇☃☀★J4: The <a href="../../external.html?link=https://m.bulbapedia.bulbagarden.net/wiki/Draconid_people" rel="nofollow">Draconid</a>, yup. Or you could just call me <span style="text-decoration:line-through">Zinnia</span> <a href="../../3dspaint.com/images/upload_gallery/10817.jpg" rel="nofollow">Joashu◇☃☀★J4</a>.</big></blockquote><br /><br /><a href="../images/upload_gallery/9454.jpg"><img src="../images/upload_gallery/9454_thumb.jpg" alt="thumb"></a><br /><br />こんにちは! I'm <a href="../../external.html?link=https://socialcu.be/users/profile?user=DraconidJoashu" rel="nofollow">DraconidJoashu</a> from <a href="../../external.html?link=https://socialcu.be/" rel="nofollow">SocialCu.be</a>, and I'm a hardcore gamer 🎮, ア ハードコア ウィアブー 🇯🇵, a scalie 🐲, and a Pokémon Grandmaster with <a href="../../external.html?link=https://3dspaint.com/blog?id=97997" rel="nofollow">over 23 years</a> (and tens of thousands of hours of gameplay time) of Pokémon Training experience! :)<br /><br />I'd like to thank my good friends <a href="index2b65.html" rel="nofollow">Gemini Guardian</a> and <a href="../../external.html?link=https://3dspaint.com/member?id=128972" rel="nofollow">banjo2</a> for styling this AWESOME <a href="../../external.html?link=https://m.bulbapedia.bulbagarden.net/wiki/Zinnia" rel="nofollow">Zinnia</a>+<a href="../../external.html?link=https://m.bulbapedia.bulbagarden.net/wiki/Rayquaza_(Pokémon)" rel="nofollow">Mega Rayquaza</a> themed profile of mine (and also for that <a href="../../i.imgur.com/nBVowUR.gif" rel="nofollow">welcome message</a> at the top); I'd also like to thank my good friend <a href="index96d6.html" rel="nofollow">GuiedGui</a> for sharing so much of his KanColle fanart collection with me (including some of the images used in this profile), as well as making it possible for me to use those customizable spoiler buttons below; and last but not least, I'd like to thank my good friend and fellow ツクナミ <a href="index00ce.html" rel="nofollow">cdog3789</a>, for sharing with me how to add all of these links to my profile back in 2019, as well as for just plain being AWESOME! :)<br /><br />Although I still remain optimistic that it can be fixed if/when we actually try to, <a href="../../external.html?link=https://3dspaint.com/blog/?id=99364" rel="nofollow">my Old 2DS is still broken</a>, and it has been for over a year now, and in the absence of me having another game system or other device to access Paint, <a href="../../external.html?link=https://3dspaint.com/blog?id=99548" rel="nofollow">my dad has been letting me</a> use an old tablet of his to do so.<br /><br />Still, I pop online as often as I can (although not nearly as often as I want to), so feel free to send me friend requests and/or group invites, and if you wish to join any of my own groups listed in the spoiler below, feel free to ask me for an invite to them, as well! :)<br /><br /><a href="../../external.html?link=https://3dspaint.com/blog?id=100331" rel="nofollow"><img name="body_images" src="../../3dspaint.com/images/upload_gallery/9846.jpg" /></a><br /><br />Oh, and if you're wondering what my signature here means, tap or click on the image above. :)<br /><br /><img name="body_images" src="../../www.easycounter.com/counter23f5.php" /><br /><br />The number of people who have visited this AWESOME profile of mine since 1/3/2023. :)<br /><br /><a href="../images/upload_gallery/12685.jpg"><img src="../images/upload_gallery/12685_thumb.jpg" alt="thumb"></a><br /><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Join Group" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"><a href="../images/upload_gallery/9479.jpg"><img src="../images/upload_gallery/9479_thumb.jpg" alt="thumb"></a><br /><big><a href="../group/index60a2.html" rel="nofollow">☆Ryuusei no Tami (流星の民)☆</a></big><br /><br />Ryuusei no Tami is currently the largest <span style="text-decoration:underline">active</span> group here on Paint, with over 100 members.<br />(R.I.P. <a href="../group/index8fa2.html" rel="nofollow">☆Online SDK</a>.)<br /><br />Like myself, this group is named after the <a href="../../external.html?link=https://m.bulbapedia.bulbagarden.net/wiki/Draconid_people" rel="nofollow">Draconid people</a> (known as the <span style="font-weight:bold">流星の民</span> in Japanese) from Pokémon Ω Ruby and α Sapphire Versions, but despite the Pokémon themed name and CSS styling, it is NOT a group intended exclusively for Pokémon fans, and it is merely a cool group for people to talk about whatever they want to talk about in, provided that they don't violate any of <a href="../group/index.html" rel="nofollow">my rules</a>.<hr /><a href="../images/upload_gallery/10738.jpg"><img src="../images/upload_gallery/10738_thumb.jpg" alt="thumb"></a><br /><big><a href="../group/index4558.html" rel="nofollow">Pokétopia (ポケトピア)</a></big><br /><br />Pokétopia is (by far) the largest Pokémon fan group here on Paint, and is for all fans of the Pokémon video games (including Pokémon GO), trading card game, anime series, manga, or anything else Pokémon! :)<br /><br />It is named after the island of <a href="../../external.html?link=https://m.bulbapedia.bulbagarden.net/wiki/Pokétopia" rel="nofollow">Pokétopia</a> from the Gen 4 Wii game <a href="../../external.html?link=https://m.bulbapedia.bulbagarden.net/wiki/Pokémon_Battle_Revolution" rel="nofollow">Pokémon Battle Revolution</a> (although I obviously gave some serious thought to naming it "<a href="../../external.html?link=https://m.bulbapedia.bulbagarden.net/wiki/Squirtle_Squad" rel="nofollow">The Squirtle Squad</a>", lol), and while hardcore Poké Maniacs like myself are welcome to join it, so too are casual Poké Fans, as long as they enjoy having friendly conversations with other people about Pokémon. :)<br /><br />Also, although you'll have to ask <a href="index51bf.html" rel="nofollow">Dedode</a>, <a href="index82bf.html" rel="nofollow">Lizzie14</a>, and <a href="indexd8d9.html" rel="nofollow">Twix245</a> for invites to them, I'd like to recommend their Pokémon groups here as well: <a href="../group/indexf9da.html" rel="nofollow">◆ Sableye's Secret Base ◆</a>, <a href="../group/index8180.html" rel="nofollow">Pok�fan club</a>, and<br /><a href="../group/index9fe9.html" rel="nofollow">Pokemon Fans</a>.<hr /><a href="../images/art_gallery/242618.png" rel="nofollow"><img name="body_images" src="../images/art_gallery/242618.png" /></a><br /><big><a href="../group/index9f73.html" rel="nofollow">Dragon Clan (ドラゴン クラン)</a></big><br /><br />Originally one of my good friend <a href="indexc02c.html" rel="nofollow">Tora-Kokoro</a>'s groups, this is a group for all those of us who love dragons, to share stories, pictures, and information about our draconic brethren! :)<br /><br />This group is still a WIP ATM, but I will share my draconic wisdom in the shoutbox here from time to time, and I plan on adding some dragon-themed group pages here eventually as well. :)<br />(Something to look forward to.)<hr /><a href="../images/upload_gallery/12263.jpg"><img src="../images/upload_gallery/12263_thumb.jpg" alt="thumb"></a><br /><big><a href="../group/indexf430.html" rel="nofollow">真正の日本好き 🎌</a></big><br /><br />真正の日本好き is a group <span style="text-decoration:underline">exclusively</span> for hardcore weeaboos and otakus.<br /><br />Although this group is still very much a WIP, I <span style="font-weight:bold">do</span> have a few group pages here (including an <a href="../group/index.html" rel="nofollow">anime list</a>), and discussions of all manner of "weebish" subjects take place in the shoutbox here, as well.<hr /><a href="../images/upload_gallery/9481.jpg"><img src="../images/upload_gallery/9481_thumb.jpg" alt="thumb"></a><br /><br />In addition to my accounts on here and on <a href="../../external.html?link=https://socialcu.be/users/profile?user=DraconidJoashu" rel="nofollow">Socialcu.be</a>, I also have an account on the kawaii image board website <a href="../../external.html?link=http://e-shuushuu.net/" rel="nofollow">E-shuushuu (絵収集)</a>, and my username over there is <a href="../../external.html?link=http://e-shuushuu.net/search/results/?imgposter=756902" rel="nofollow">Keishousha Joashu</a>. ^^<br />(Keishousha means "Successor" in Japanese BTW, which is yet another reference to my favorite Pokémon character <a href="../../external.html?link=https://m.bulbapedia.bulbagarden.net/wiki/Zinnia/Quotes#Pokémon_Omega_Ruby_and_Alpha_Sapphire" rel="nofollow">Zinnia</a>.)<hr /><a href="../images/upload_gallery/16942.jpg"><img src="../images/upload_gallery/16942_thumb.jpg" alt="thumb"></a><br /><br />I am also on both Discord and Twitter now (although I am not very used to either), and below are invites to my ☆Ryuusei no Tami (流星の民)☆ Discord server, the SDKPaint Community Discord server, the Unofficial DSI Paint Discord server, and also a link to my Twitter page:<br /><br /><big>☆Ryuusei no Tami (流星の民)☆ Discord Server invite:<br /><br /><a href="../../external.html?link=https://discord.gg/CVAFyaK48E" rel="nofollow">https://discord.gg/CVAFyaK48E</a><br /><br />SDKPaint Community Discord Server Invite:<br /><br /><a href="../../external.html?link=https://discord.gg/FPdVHV2" rel="nofollow">https://discord.gg/FPdVHV2</a><br /><br />Unofficial DSI Paint Server Invite:<br /><br /><a href="../../external.html?link=https://discord.gg/RnejXxZvez" rel="nofollow">https://discord.gg/RnejXxZvez</a><br /><br />Unofficial 3DSPaint Guilded Server Invite:<br /><br /><a href="../../external.html?link=https://guilded.gg/3dspaint" rel="nofollow">https://guilded.gg/3dspaint</a><br /><br />My Twitter Page:<br /><br /><a href="../../external.html?link=https://www.twitter.com/DraconidJoashu" rel="nofollow">https://www.twitter.com/DraconidJoashu</a></big><br /><br /><a href="../images/upload_gallery/15565.jpg"><img src="../images/upload_gallery/15565_thumb.jpg" alt="thumb"></a></div><br /><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Mix Records" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"> <a href="../images/upload_gallery/10817.jpg"><img src="../images/upload_gallery/10817_thumb.jpg" alt="thumb"></a><br /><br />In Gen 6, I have EVERY Pokémon in the National Pokédex (all 721), allowing me to breed any Pokémon that can be bred (including numerous ones with Hidden Abilities, as well as <a href="../../external.html?link=https://m.bulbapedia.bulbagarden.net/wiki/Phione_(Pokémon)" rel="nofollow">Phiones</a>), and I have all 807 <br />Pokémon available in Gen 7 as well. :)<br /><br />I don't have quite as much to offer in my Gen 4 and 5 games ATM, but I <span style="font-weight:bold">do</span> still have a reasonably complete Pokédex in them (and also the <a href="../../external.html?link=https://bulbapedia.bulbagarden.net/wiki/Pokerus" rel="nofollow">Pokérus</a>), and if you're interested in trading and/or battling me in Gen 6 or 7 (once my 2DS is working again) my 2DS Friend Code is <span style="font-weight:bold">1822-1300-7238</span>, and if you're interested in doing so in Gen 4 or 5 using <a href="../../external.html?link=https://www.youtube.com/watch?v=Sh0AZR-tKwM" rel="nofollow">Wiimmfi</a> (once my DS Lite is working again), the following are my current Friend Codes for those games:<br /><br /><a href="../images/upload_gallery/9456.jpg"><img src="../images/upload_gallery/9456_thumb.jpg" alt="thumb"></a><br />Joashu★ (Pokémon SoulSilver Version)<br />5331-7659-5349<br /><br />Ashujo☀ (Pokémon Platinum Version)<br />1463-6369-4874<br /><br />Jaoshu☃ (Pokémon Platinum Version)<br />5117-0175-8876<br /><br /><a href="../images/upload_gallery/9847.jpg"><img src="../images/upload_gallery/9847_thumb.jpg" alt="thumb"></a><br />Jaoshu☃ (Pokémon White Version 2)<br />2239-3894-9516<br /><br />Ashujo☀ (Pokémon White Version)<br />1077-0898-2934<br /><br /><a href="../../i.imgur.com/JEhG6ws.png" rel="nofollow"><img name="body_images" src="../../i.imgur.com/JEhG6ws.png" /></a><br /><br />Also, although I don't have the Gen 8 games yet (or even a Switch to play them on), I <span style="font-weight:bold">can</span> battle y'all on <a href="../../external.html?link=https://pokemonshowdown.com/" rel="nofollow">Pokémon Showdown</a> now (including Gen 8 battles), and if you're interested in battling me my username over there is "<a href="../../external.html?link=https://pokemonshowdown.com/users/DracovishJo" rel="nofollow">Dracovish_Jo</a>".<br />(Named after my favorite Gen 8 Pokémon, <a href="../../external.html?link=https://m.bulbapedia.bulbagarden.net/wiki/Dracovish_(Pokémon)" rel="nofollow">Dracovish</a>.)<br /><br /><a href="../images/upload_gallery/11365.jpg"><img src="../images/upload_gallery/11365_thumb.jpg" alt="thumb"></a> <a href="../images/upload_gallery/11948.jpg"><img src="../images/upload_gallery/11948_thumb.jpg" alt="thumb"></a></div><br /><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Pal Pad" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"><a href="../images/upload_gallery/9580.jpg"><img src="../images/upload_gallery/9580_thumb.jpg" alt="thumb"></a><br />Although I have a TON of friends here on Paint (and I'm <span style="text-decoration:underline">always</span> looking to make more), these are those few individuals whom I consider to be my "BFFs":<br /><br /><a href="indexfbea.html" rel="nofollow">acidAPPLE</a> (R.I.P.) 👻<br /><a href="index617c.html" rel="nofollow">aidansocool</a><br /><a href="indexc1dd.html" rel="nofollow">banjo2</a><br /><a href="indexba71.html" rel="nofollow">Bluedolphin</a><br /><a href="index00ce.html" rel="nofollow">cdog3789</a><br /><a href="index4d14.html" rel="nofollow">CMRocks</a> (R.I.P.) 💀<br /><a href="index349f.html" rel="nofollow">crocodile</a><br /><a href="indexfb6e.html" rel="nofollow">DCTheGamr</a><br /><a href="index2b65.html" rel="nofollow">Gemini Guardian</a> (R.I.P.) 👻<br /><a href="index96d6.html" rel="nofollow">GuiedGui</a><br /><a href="indexa4f2.html" rel="nofollow">heaven.is.a.joke</a><br /><a href="indexe9da.html" rel="nofollow">hiyamadz</a><br />ILikeBeans (R.I.P.) 💀<br />MIMtheHERO (R.I.P.) 💀<br /><a href="index8f11.html" rel="nofollow">MrPwong</a><br /><a href="index69a8.html" rel="nofollow">Peppercorn256</a> (R.I.P.) 💀<br />PieIsCool (R.I.P.) 💀<br /><a href="index74c3.html" rel="nofollow">popuko115</a><br /><a href="index385f.html" rel="nofollow">Rlad116</a><br /><a href="index7182.html" rel="nofollow">royal-rawr</a><br /><a href="index1d40.html" rel="nofollow">SCREECHiNG FLARE</a><br /><a href="indexef8b.html" rel="nofollow">Siling-La</a><br /><a href="indexa1c6.html" rel="nofollow">Silverbunny</a><br /><a href="index65d0.html" rel="nofollow">SkulHedFace</a> (R.I.P.) 💀<br /><a href="indexd709.html" rel="nofollow">StarLien7</a><br />Starwave (R.I.P.) 💀<br /><a href="indexc02c.html" rel="nofollow">Tora-Kokoro</a><br /><a href="index50aa.html" rel="nofollow">u.killer</a><br /><a href="indexaa42.html" rel="nofollow">UwUQueen</a> (R.I.P.) 👻<br /><a href="index8565.html" rel="nofollow">xpokee</a> (R.I.P.) 💀<br /><br />If you're not on this list don't feel too bad, as it is a far more exclusive list than its length might suggest.<br />(Not to mention that many of these people are no longer on Paint anymore, <span style="font-weight:bold">although I still consider them to be my best friends <span style="text-decoration:underline">forever</span></span>.)</div><br /><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Admin History" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"><a href="../images/upload_gallery/9478.jpg"><img src="../images/upload_gallery/9478_thumb.jpg" alt="thumb"></a><br /><br />7/11/2022: I was granted blogmin and pollmin privileges by <a href="index385f.html" rel="nofollow">Rlad116</a>, largely thanks to all of those who voted in <a href="../poll/index9c1f.html" rel="nofollow">this poll of mine</a>, and <a href="../blog/index15d8.html" rel="nofollow">this blog</a> written by my best friend <a href="indexef8b.html" rel="nofollow">Siling-La</a> in favor of me getting those jobs. :)</div><br /><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Who is Draconid_Jo?" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"><a href="../images/upload_gallery/9483.jpg"><img src="../images/upload_gallery/9483_thumb.jpg" alt="thumb"></a><br /><blockquote><big>"Who am I? That's a surprisingly difficult question. I couldn't become who I was supposed to be, so who does that make me now?"</big></blockquote><br /><p style="text-align:right"><big>—Lorekeeper Zinnia</big></p><br /><br />In human terms, I am a 28 year old straight cisgender (non-transgender) man who still lives with his <span style="text-decoration:line-through">parents</span> dad (my mom passed away recently), and that has lived and continues to live a very sheltered life with extremely limited freedoms. :(<br /><br />Still, that isn't quite as bad as it might sound, and I have gotten to play <a href="../../external.html?link=https://3dspaint.com/group/page.php?page=10389" rel="nofollow">countless different video games</a> over the years (that list is still a WIP), and also watch <a href="../../external.html?link=https://3dspaint.com/group/page.php?page=11165" rel="nofollow">many different anime series</a>. :)<br />(I don't get to play many video games these days, though…)<br /><br /><a href="../images/art_gallery/246664.png" rel="nofollow"><img name="body_images" src="../images/art_gallery/246664.png" /></a><br /><br />The very first video game that I ever played was <a href="../../external.html?link=https://en.m.wikipedia.org/wiki/Freddi_Fish" rel="nofollow">Freddi Fish</a>, which I first played when I was only 3 years old, and I have played a number of different video games on different Nintendo, Sega, and Sony consoles over the years, going back as far as the SNES and the Sega Genesis. :)<br />(It's been a LONG time since I've been able to play anything on a PC, though.)<br /><br /><a href="../images/upload_gallery/9610.jpg"><img src="../images/upload_gallery/9610_thumb.jpg" alt="thumb"></a><br /><br />Of course, if my profile hasn't already made it obvious, my favorite video game series is <span style="text-decoration:line-through">Moémon</span> Pokémon, which I have been playing for <a href="../../external.html?link=https://3dspaint.com/blog?id=97997" rel="nofollow">over 23 years</a>, up until <a href="../../external.html?link=https://3dspaint.com/blog/?id=99364" rel="nofollow">my 2DS broke</a> back in 2020, and my DS Lite broke earlier on in 2022. :(<br />(I can still battle on <a href="../../external.html?link=https://pokemonshowdown.com/" rel="nofollow">Pokémon Showdown</a> at least, though.)<br /><br /><a href="../images/upload_gallery/12523.jpg"><img src="../images/upload_gallery/12523_thumb.jpg" alt="thumb"></a><br /><br />I am also a recent convert to Christianity ✝, thanks to both my good friend <a href="../../external.html?link=https://3dspaint.com/member?id=138112" rel="nofollow">Siling-La</a> and my late mother, and while I have still never actually read the Bible (due to my complicated RL situation), I enjoy talking about my faith with anyone who wishes to do so, provided that they are polite and respectful about it. :)<br />(And if you'd like to read my testimony, it can be found <a href="../../external.html?link=https://3dspaint.com/group/page.php?page=10637" rel="nofollow">here</a>.)<br /><br /><a href="../images/upload_gallery/16051.jpg"><img src="../images/upload_gallery/16051_thumb.jpg" alt="thumb"></a><br /><br />I've always loved animals and nature, especially fish and reptiles such as sharks 🦈, turtles 🐢, crocodilians 🐊, and pretty much anything large, scaly, and prehistoric-looking, lol! :)<br /><br />I hope to have a pet <span style="text-decoration:line-through">shark</span> <span style="text-decoration:line-through">alligator gar</span> turtle someday (hopefully an alligator snapping turtle, but more likely a painted turtle), and although I haven't been able to read many books here, I have read quite a bit about proper herp and fish care, as well as books about sharks, dinosaurs, dragons, and other things that a little boy (or someone like me who never outgrew that sorta stuff) would be interested in. :)<br /><br /><a href="../images/upload_gallery/9488.jpg"><img src="../images/upload_gallery/9488_thumb.jpg" alt="thumb"></a><br /><br />Music wise, I'm a big fan of OSTs, particularly music from all of those video games and anime series that I'm into so much. :)<br /><br />My favorite song from a video game is <a href="../../external.html?link=https://www.youtube.com/watch?v=pSRdXrdFD3Y" rel="nofollow">Lorekeeper Zinnia's battle theme</a> from the Δ Episode of Pokémon Ω Ruby and α Sapphire Versions, although I also like Zinnia's 2 other theme songs a lot: <a href="../../external.html?link=https://www.youtube.com/watch?v=VfPPEZcXwdM" rel="nofollow">Those Who Inherit Eternity</a> (which I even wrote <a href="../../external.html?link=https://3dspaint.com/blog?id=97999" rel="nofollow">these lyrics</a> for), and <a href="../../external.html?link=https://www.youtube.com/watch?v=aaQHk9fx6Ng" rel="nofollow">The Lament of Falling Stars</a>. :)<br /><br /><a href="../images/upload_gallery/9538.jpg"><img src="../images/upload_gallery/9538_thumb.jpg" alt="thumb"></a><br /><br />My favorite anisong is <a href="../../external.html?link=https://www.youtube.com/watch?v=CMJZDp4VOjc" rel="nofollow">Snowstorm</a> ❄ by Rie Kugimiya, and another song of hers that I like quite a bit is <a href="../../external.html?link=https://www.youtube.com/watch?v=LKEV-afLOjI" rel="nofollow">Slow Motion</a>. :)<br /><br />Although it is still a WIP, you can also check out <a href="../../external.html?link=https://3dspaint.com/group/page.php?page=10083" rel="nofollow">my music profile</a> to get a better idea of what sort of music I like.<br />(Although I don't exactly get to just listen to music whenever I want to, unfortunately…)<br /><br /><a href="../images/upload_gallery/11984.jpg"><img src="../images/upload_gallery/11984_thumb.jpg" alt="thumb"></a><br /><br />Oh, and if you have any questions to ask me about anything else, I also made an <a href="../blog/index19e9.html" rel="nofollow">AMA Blog</a> here. :) </div><br /><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Face Reveal" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"> <a href="../../3dspaint.com/images/upload_gallery/11014.jpg" rel="nofollow"><img name="body_images" src="../../3dspaint.com/images/upload_gallery/11366.jpg" /></a><br /><br />Lol! This is just my Mii's face! :)<br />(My face doesn't look quite like his does…)</div><br /><br /><a href="../images/upload_gallery/9727.jpg"><img src="../images/upload_gallery/9727_thumb.jpg" alt="thumb"></a><br /><br /><big><span style="color:#00FFFF">"Let us all pray for a perfect multiverse. If we set aside false notions, such as the idea that existence is limited, and that certain things are "impossible", I know that a perfect multiverse not only can be achieved, but will be achieved, as it is the <span style="font-weight:bold">Inevitable Outcome</span> of such realizations."<br /><br /><p style="text-align:right">—Draconid Joashu</p></span></big><br /><a href="../images/upload_gallery/9455.jpg"><img src="../images/upload_gallery/9455_thumb.jpg" alt="thumb"></a>			</div>
+		</div>
+
+		<h1>Profile Pages</h1>
+		<div class="menu_section" style="width:200px">
+			<div class="button_div">
+				<a href="timeline2fb6.html">TIMELINE</a>
+			</div>
+			<div class="button_div">
+				<a href="comments2fb6.html">COMMENTS</a>
+			</div>
+			<div class="button_div">
+				<a href="../blog/indexef1e.html">BLOGS</a>
+			</div>
+			<div class="button_div">
+				<a href="../poll/indexef1e.html">POLLS</a>
+			</div>
+
+			<div class="button_div">
+				<a href="../saviis/savii_gallery941d.html">SAVII GALLERY</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page595a.html">My ãƒ’ã‚¬ãƒŠ Shuushuu</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pageb6b3.html">My ã‚¤ãƒ–ã‚­ Shuushuu</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagea977.html">My ãƒ­ã‚¶ãƒªã‚ªã¨ãƒãƒ³ãƒ‘ã‚¤ã‚¢ Shuushuu (mostly â½©é›ªã¿ãžã‚Œ)</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagee626.html">My MoÃ©mon Shuushuu (PokÃ©mon Gijinkas)</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pageb1ba.html">My PokÃ©mon Shuushuu</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page1708.html">My Miscellaneous Shuushuu</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagea305.html">Fly Meme (UPDATED)</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagecdb5.html">Manga Reading Experiment</a>
+			</div>
+
+		</div>
+
+
+<h1>Badges</h1>
+<div class="menu_section">
+
+
+        <div class="badge">
+            <a href="../blog/indexef1e.html"><img src="../images/badges/author4.png" /></a><br />Author        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/courier5.png" /></a><br />Courier        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/socialite6.png" /></a><br />Socialite        </div>
+
+    
+</div>
+
+		<h1>Last Blogs</h1>
+		<div class="menu_section">
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_t32.png" alt="T" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">9</div>
+					</div>
+
+					<a href="../blog/index575f.html">A Song of Life</a><br />
+					In Poetry and Lyrics<br />
+					On 14 Mar 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">7</div>
+					</div>
+
+					<a href="../blog/index166e.html">The Dusk of Time</a><br />
+					In Poetry and Lyrics<br />
+					On 14 Mar 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">17</div>
+					</div>
+
+					<a href="../blog/indexc608.html">Ryuu no Kokoro (ç«œã®å¿ƒ)</a><br />
+					In Poetry and Lyrics<br />
+					On 09 Jan 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">14</div>
+					</div>
+
+					<a href="../blog/indexa409.html">Kogoerusekai (å‡ãˆã‚‹ä¸–ç•Œ)</a><br />
+					In Poetry and Lyrics<br />
+					On 18 Dec 2022				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_t32.png" alt="T" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">6</div>
+					</div>
+
+					<a href="../blog/index99de.html">The Three Realms of Master of Death</a><br />
+					In Short Story<br />
+					On 17 Dec 2022				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_t32.png" alt="T" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">8</div>
+					</div>
+
+					<a href="../blog/index64b8.html">Master of Death Halloween Special: One Hell of a Birthday Party</a><br />
+					In Short Story<br />
+					On 23 Oct 2022				</div>
+
+			</div>
+
+			<h1>Comments</h1>
+			<div class="menu_section">
+				<form action="#" method="post">
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247403.png" alt="Avatar" class="avatar" />
+						<a href="indexfb6e.html">DCTheGamr</a><br />
+						06 Apr 2023 15:21						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">YES UR HERE AGAIN FINALLY <img src="../chatrooms/smilies/alien16.gif" /></div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						11 Mar 2023 17:49						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">yea</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						11 Mar 2023 17:35						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">by a little, try using 3dspaint to upload images, so they use less memory and can run on dsipaint</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						11 Mar 2023 17:27						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">ur profile takes a while to load on dsi & not all images load... nice pokeball bg tho, never knew u had that selected</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247403.png" alt="Avatar" class="avatar" />
+						<a href="indexfb6e.html">DCTheGamr</a><br />
+						10 Mar 2023 22:25						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">finished a new blog about discord TOS/Privacy policy being updated lol</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247388.png" alt="Avatar" class="avatar" />
+						<a href="index146f.html">IAMMICHAEL</a><br />
+						10 Mar 2023 12:09						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">idk wut the image is, its just a random fig i cant see it either lol</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247388.png" alt="Avatar" class="avatar" />
+						<a href="index146f.html">IAMMICHAEL</a><br />
+						10 Mar 2023 11:09						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">hiiiiii! <a href="../images/upload_gallery/969.html"><img src="../images/upload_gallery/969_thumb.html" alt="thumb"></a><br /></div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247388.png" alt="Avatar" class="avatar" />
+						<a href="index146f.html">IAMMICHAEL</a><br />
+						10 Mar 2023 11:09						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">hiiiiii! <a href="../images/upload_gallery/969.html"><img src="../images/upload_gallery/969_thumb.html" alt="thumb"></a><br /></div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247116.png" alt="Avatar" class="avatar" />
+						<a href="index0d57.html">ich_trink_cola</a><br />
+						10 Mar 2023 09:37						<div style="clear:both"></div>
+					</div>
+					<div class="zebra"><a href="../images/upload_gallery/17007.jpg"><img src="../images/upload_gallery/17007_thumb.jpg" alt="thumb"></a><br /><a href="../images/upload_gallery/17008.jpg"><img src="../images/upload_gallery/17008_thumb.jpg" alt="thumb"></a></div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						09 Mar 2023 13:20						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">One of the few standing profiles with cool CSS</div>
+				</div>
+			</form>
+		</div>
+
+		<div style="margin:5px; text-align:center">
+			<a href="../index.html"><img class="icon" src="../images/icons/icon_home.png" alt="Home" /></a>
+		</div>
+
+
+<div style="font-size:10px; text-align:center">
+	Nintendo 3DS is &trade; Nintendo Co. Ltd.
+	This website is &copy;2009-2023 HullBreach Studios. All rights reserved.
+	Members are responsible for their own content.
+	No account information will be given to third-parties without your consent.
+</div>
+
+<div id="divAlertPopup" class="alerts_popup menu_section"></div>
+<script type="text/javascript">
+	var AlertPopupObj = new XMLHttpRequest();
+	function refreshMyPopupAlerts(){
+		AlertPopupObj.open('GET.html', '../includes/ajax.section.my_alert_popup.html', true);
+		AlertPopupObj.send(null);
+		AlertPopupObj.onreadystatechange = function(){
+			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
+				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
+				AlertPopupObj.abort();
+				return;
+			}
+			if(AlertPopupObj.readyState==4){
+				if(AlertPopupObj.responseText){
+					var divAlertPopup = document.getElementById('divAlertPopup'),
+						alerts = [];
+					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
+					if(alerts.length){
+						var alertString = '',
+							index = 0;
+						while(index<alerts.length){
+							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
+							index++;
+						}
+						divAlertPopup.innerHTML = alertString;
+						divAlertPopup.style.display = 'block';
+					}else{
+						divAlertPopup.style.display = 'none';
+					}
+				}
+				setTimeout(refreshMyPopupAlerts, 10000);
+			}
+		}
+	}
+	refreshMyPopupAlerts();
+</script>
+	</body>
+
+<!-- Mirrored from dsipaint.com/member/?id=137730 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:09:29 GMT -->
+</html>

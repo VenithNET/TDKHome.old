@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<!-- Mirrored from dsipaint.com/member/?id=138112 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:05:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="3DSPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="3D Photo Gallery, 3DS Photo Gallery, Upload 3D Photos, Upload 3DS Photos, MPO, 3DSPaint, 3DS Opera SDK, Nintendo 3DS, 3DS, JavaScript, video games" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<link rel="stylesheet" href="../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-11']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+		<title>Profile for Siling-La</title>
+		<script type="text/javascript">
+			'use strict';
+
+			function flag(obj, comment) {
+				var params = 'action=comment_flag&comment=' + comment;
+
+				if (confirm("Flag comment?")) {
+					xhrCall(params);
+					obj.style.display = 'none';
+				}
+				return false;
+			}
+			function remove_comment(obj, comment) {
+				var div = obj.parentNode.parentNode,
+						params = 'action=comment_delete&comment=' + comment;
+
+				if (confirm("Delete comment?")) {
+					xhrCall(params);
+					div.parentNode.removeChild(div);
+				}
+				return false;
+			}
+			function xhrCall(params) {
+				xhr.abort();
+				xhr.open('GET.html', '?id=138112&ajax=' + (new Date()).getTime() + '&' + params, true);
+				xhr.send(null);
+			}
+
+			function mousedown(e) {
+				context.beginPath();
+				context.moveTo(e.offsetX - 1, e.offsetY - 1);
+				painting = true;
+			}
+			function mousemove(e) {
+				if (painting) {
+					context.lineTo(e.offsetX - 1, e.offsetY - 1);
+					context.stroke();
+				}
+			}
+			function mouseup(e) {
+				painting = false;
+			}
+
+			function save() {
+				if (!saving) {
+					saving = true;
+					var data = 'id=138112&data=' + canvas.toDataURL('image/png');
+					console.log(data);
+					var xhrSave = new XMLHttpRequest();
+					xhrSave.open('POST.html', '../includes/ajax_comment_save.html', true);
+					xhrSave.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					xhrSave.setRequestHeader('Content-length', data.length);
+					xhrSave.setRequestHeader('Connection', 'close');
+					xhrSave.send(data);
+					xhrSave.onreadystatechange = function () {
+						if (xhrSave.readyState == 4 && xhrSave.responseText == 'true') {
+							location.reload();
+						}
+					};
+				}
+				return false;
+			}
+
+			var xhr = new XMLHttpRequest();
+
+			window.onload = function () {
+				var images = document.getElementsByName('body_images');
+				var maxwidth = 800;
+				if (document.domain.indexOf('3dspaint')) {
+					maxwidth = 300;
+				} else if (document.domain.indexOf('dsipaint')) {
+					maxwidth = 220;
+				}
+				for (var index in images) {
+					if (images[index].width > maxwidth) {
+						images[index].width = maxwidth;
+					}
+				}
+			}
+		</script>
+		<style type="text/css">
+			TD.profile_page{
+				background:#8f8;
+				border:1px outset #888;
+				color:#fff;
+				font-size:9pt;
+				text-align:center;
+			}
+			.button {
+				background: #fff;
+				border: 1px outset #888;
+				margin: 3px;
+				padding: 3px;
+				width: 10px;
+				height: 10px;
+			}
+			.admin TD, .admin TEXTAREA {
+				background:#fff !important;
+				color:#000 !important;
+			}
+		</style>
+		<style type="text/css">
+			table,div,form,h1{background-color:black!important;}
+
+{border-color:gold!important;border-style:solid!important;}
+
+.head{font-size:20px!important;color:gold!important;font-family:Ink Free!important;color:#87CEFA!important;font-style:bold!important;}
+
+DIV {color:white!important;}
+
+A{color:#87CEFA!important;font-style:bold!important;font-family:Calibri!important;}
+
+DIV.navbar {!important;}
+ 
+,Form,Table,.comments,DIV{background-color:black!important;border-style:none!important;position:right!important;}
+
+h1{background:transparent!important;border-style:none!important;color:gold!important;}
+
+textarea{background:url(../../3dspaint.com/images/upload_gallery/12523.jpg)!important;background-position:center!important;border-style:hidden!important;color:white!important; text-shadow: -1px 0 golde, 0 1px black, 1px 0 red, 0 -1px blue;!important;}
+
+h1:before, h1:after{content:url(../../i.imgur.com/9FjeLpr.gif)!important;}
+
+.comments,.avatar{position:center!important;width:70px!important;height:70px!important;border-style:hidden!important;}
+
+p{color:gold!important;font-style:italic!important;}
+
+{background-position:fixed!important;}
+
+.form_button{background:black!important;border-color:gold!important;color:gold!important;}
+
+.alerts_popup:after{content: "! Please forward it to Siling-La!"!important;}
+
+#my_alert_popup:before,.alerts_popup:before,p.alerts_popup:after{content:url(../../i.imgur.com/9FjeLpr.gif);}
+
+#my_alert_popup{background:url(../../compote.slate.com/images/e215b527-a335-4674-89ee-3145892c8737.jpg)!important;color:white!important;border-width:4px!important;background-position:center!important;}
+
+A.IMG{!important;}
+
+IMG[src="/images/logo.png"]{content:url(../../3dspaint.com/images/upload_gallery/17107.jpg)!important;}
+IMG[src="/images/upload_gallery/17108.jpg"]{width:50px!important;}
+IMG[src="3dspaint.com/images/upload_gallery/17108.jpg"]{width:50px!important;}
+
+.blog_right{border-style:dashed!important;border-width:1px!important;border-color:gold!important;}
+
+IMG[alt="Home"]{content:url(../../3dspaint.com/images/upload_gallery/16006.jpg)!important;}
+
+a[href="/member?id=139888"]:before{content:"The Annoying "!important;color:red!important;}
+a[href="/member?id=139888"]{color:red!important;}
+
+img[src="/images/art_gallery/244158.png"]{content:url(../../3dspaint.com/images/upload_gallery/15594.jpg)!important;}		</style>
+	</head>
+	<body style="background: url(../images/backgrounds/background19.png)">
+
+<div style="padding:2px; text-align:center">
+	<a href="../index.html"><img src="../images/logo.png" alt="Logo" /></a>
+</div>
+
+<div class="menu_section" style="padding:0px">
+
+
+	<div class="menu_section">
+		<div class="nav_avatar">
+			<a onclick="showLogin();"><img src="../avatars_site/0.png" alt="Login" title="Login" /></a>
+		</div>
+
+		<div class="nav_div">Welcome, Guest.</div>
+		<div class="nav_div">
+			<a onclick="showLogin();">Login</a> | <a href="../register.html">Register</a>
+		</div>
+
+		<div id="divLogin"  style="display:none" >
+			<form action="#" method="post">
+				Username: <input type="text" name="username" class="form_field" /><br />
+				Password: <input type="password" name="password" class="form_field" /><br />
+				Remember me: <input type="checkbox" value="true" name="remember" /><br />
+				<input type="submit" value="Login" class="form_button" />
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function showLogin(){
+			document.getElementById('divLogin').style.display='block';
+		}
+	</script>
+
+</div>
+
+		<h1>Profile for Siling-La</h1>
+
+
+		<div class="menu_section">
+			<div class="head">
+				&quot;Be The Light!&quot;
+			</div>
+			<div class="row"><div>FIRST NAME</div>Siling-La</div>
+			<div class="row"><div>BIRTHDAY</div>03 Feb 2006</div>
+			<div class="row"><div>MEMBER SINCE</div>07 Jun 2019</div>
+			<div class="row"><div>LAST LOGIN</div>05 Apr 2023</div>
+			<div class="row"><div>MOOD</div>Kerygmatic</div>
+			<div class="row"><div>DOING NOW</div></div>
+			<div class="row"><div>STANDING</div>Active</div>
+			<div class="row"><div>3DS CODE</div>(Not set)</div>
+			<div class="row"><div>SWITCH CODE</div>(Not set)</div>
+			<div class="row"><div>NINT NETWK ID</div>Broken</div>
+		</div>
+
+
+		<h1>Biography</h1>
+		<div class="menu_section">
+			<div class="form_body" id="blog_body">
+
+				<a href="../../external.html?link=http://3dspaint.com/mymessagecomposer.php?recipient_id=138112" rel="nofollow">Message me</a> if you want to get to know me more or if you just want to hang out or need to talk to someone.<br /><br /><span style="font-size:12px">I am a 17 year-old guy</span><br /><br /><p style="text-align:center">I am a born-again Christian and am open to any questions about my faith. <br /><br /><br />I am also the owner of The (New) Bible Group, a group where Christians can come together to ask questions, get a verse of the day, discuss scripture and ask for prayer. If you would like an invite, let me know.</p><br /><br /><p style="text-align:center"><a href="../images/upload_gallery/17108.jpg"><img src="../images/upload_gallery/17108_thumb.jpg" alt="thumb"></a></p><br />Why TDK? Because I support all the effort and time that has been spent making a community that functions well and has so much to offer. Including <a href="../group/page3f95.html" rel="nofollow">this alternative blog/poll/YouTube vid/other featuring page</a> that provides a good system for when admins are inevitably inactive periodically. TDK has a lot to offer and there should be a lot of respect for the man that made it possible and works for us every day regardless of repeated slander: <a href="indexfb6e.html" rel="nofollow">@DCTheGamr</a><br /><br /><p style="text-align:center">In addition, I am the proud owner of <a href="../group/indexe8b3.html" rel="nofollow">The Figure Tag Archive</a> which is a group dedicated to archiving all figure tag images on this site.</p><br /><br />I love retro games! here are some of my favorites:<br /><br />Donkey Kong  -       <span style="color:gold">GB</span><br />Super Mario Land   -     <span style="color:gold">GBA</span><br />Super Mario Land 2: 6 Golden Coins  -      <span style="color:gold">GBA</span><br />Donkey Kong Country -       <span style="color:gold">GBA</span><br />Link's Awakening    -    <span style="color:gold">GB</span><br />Sonic   -     <span style="color:gold">Sega Genesis</span><br />Is Minecraft considered retro yet? :)<br /><br />I live in Spokane, Washington. (State, not DC)<br /><br />I enjoy chatting with people and just hanging out.<br /><br />I love writing poetry and songs. I guess it's just a way to let out the feelings I normally hide, or my way of praising God with the gift He's given me.<br /><br />I still build with LEGOs, and I enjoy it just as much, but I don't do it as often, and my creativity has dwindled down over the years.<br /><br />I love to read. My favorite book is The Holy Bible.<br /><br />I'm an electronics nerd. I take apart a lot of random things in order to fix them or learn how they work. I've gotten in trouble a few times when my parents have walked in on me though.<br /><br />I got to a green belt in Taekwondo, but I haven't gone to my dojam in almost a year because it currently is closed down. Independently, I have studied Karate and Taekwondo and have gained a fair knowledge of martial arts using weapons.<br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Weapons I have Mastered" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none">Saber<br />Rapier<br />Broadsword<br />Claymore<br />Staff<br />Spear<br />Javelin<br />Sling<br />Bow and arrows<br />Knives<br />Ball and chain<br />Mace<br />Battle Axe<br />And various shields<br /></div><br /><br />I also love animals. We have a LOT of pets:<br /><span style="text-decoration:line-through">1 Guinea pig, Pitter-Patch</span><br />2 horses, Jasper and PJ. RIP Chealsea. :(<br /><span style="text-decoration:line-through">12</span> <span style="text-decoration:line-through">11</span> <span style="text-decoration:line-through">10</span> <span style="text-decoration:line-through">7</span> <span style="text-decoration:line-through">5</span>Four chickens, Favorites: Precious and Kiwi<br /><span style="text-decoration:line-through">4</span> 3 cats, <span style="text-decoration:line-through">Moochi</span> (Rip, ily), Sushi, Coco, and Gnochi. RIP mango. I miss you.<br /><br />I love making jokes and laughing at myself. I love to hear other people's jokes too. (CLEAN ONES!)<br /><br />I don't own too many devices. Here is what I have:<br />Switch Lite (Ask for friend code)<br />Gameboy Advance SP<br />Xbox 360 (Now with Xbox Live. If you want to add me as your friend, let me know. My Gamertag is CalculatorD)<br />Plain old Wii. :)<br />A family 3ds (ask for friend code)<br /><br />I have grown to hate schoolwork. Not my school, but schoolwork.<br /><br />I am forever an American patriot!<br /><br />Because of our freedom I am glad I can speak freely about my Faith and my opinions. I hope everyone else will do the same.<br /><br />I'm a fan of The Legend of Zelda. As of right now, I've finished 4 games and have played all but Skyward Sword<br /><br /><br /><p style="text-align:center">Yes, I did the CSS and image/GIF creation on this profile myself. It's been a few years, but if anyone would like me to assist with their profiles, I'd be happy to help.</p><br /><br />I also recommend <a href="../../external.html?link=http://www.w3schools.com/css" rel="nofollow">W3Schools</a> for anyone wanting to learn CSS. This site works on 3ds (not sure about other platforms) and is a great free guide. I learned a lot from it a few years back and I think you will too.<br /><br /><span style="font-weight:bold"><big><span style="color:gold">Current status:</span> <span style="color:#87CEFA">Making my return.</span> </span></big><br /><br /><p style="text-align:center">Discord: Siling-La#0742<br />Guilded profile link: <a href="../../external.html?link=https://www.guilded.gg/profile/dOx3eNWm" rel="nofollow">https://www.guilded.gg/profile/dOx3eNWm</a><br />Email: Siling.La.3ds@gmail.com</p><br /><br />Or just check out my <a href="../../external.html?link=https://www.youtube.com/channel/UCi9e9MDYiSbgNUazV5D11zw" rel="nofollow">YouTube channel.</a><br />			</div>
+		</div>
+
+		<h1>Profile Pages</h1>
+		<div class="menu_section" style="width:200px">
+			<div class="button_div">
+				<a href="timelineef8b.html">TIMELINE</a>
+			</div>
+			<div class="button_div">
+				<a href="commentsef8b.html">COMMENTS</a>
+			</div>
+			<div class="button_div">
+				<a href="../blog/indexeeff.html">BLOGS</a>
+			</div>
+			<div class="button_div">
+				<a href="../poll/indexeeff.html">POLLS</a>
+			</div>
+
+			<div class="button_div">
+				<a href="../saviis/savii_gallery04dd.html">SAVII GALLERY</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page7717.html">FACE REVEAL!!</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagecbd7.html">Jaylene</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagedad9.html">Unicode Symbols!</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagead66.html">Cerberus Center</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page0747.html">556E7469746C6564</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagedcbd.html">Profile Picture History</a>
+			</div>
+
+		</div>
+
+
+<h1>Badges</h1>
+<div class="menu_section">
+
+
+        <div class="badge">
+            <a href="../blog/indexeeff.html"><img src="../images/badges/author3.png" /></a><br />Author        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/courier6.png" /></a><br />Courier        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/socialite6.png" /></a><br />Socialite        </div>
+
+    
+</div>
+
+		<h1>Last Blogs</h1>
+		<div class="menu_section">
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_rp32.png" alt="RP" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">2</div>
+					</div>
+
+					<a href="../blog/index2f3c.html">Cerberus Part 15</a><br />
+					In Short Story<br />
+					On 24 Mar 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_t32.png" alt="T" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">3</div>
+					</div>
+
+					<a href="../blog/index63ba.html">Cerberus Part 14</a><br />
+					In Short Story<br />
+					On 20 Mar 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">4</div>
+					</div>
+
+					<a href="../blog/indexebbf.html">Don't Wanna Let Go</a><br />
+					In Poetry and Lyrics<br />
+					On 04 Dec 2022				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_t32.png" alt="T" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">2</div>
+					</div>
+
+					<a href="../blog/index857b.html">Cerberus Part 13</a><br />
+					In Short Story<br />
+					On 27 Nov 2022				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">1</div>
+					</div>
+
+					<a href="../blog/index938e.html">Forbidden Love</a><br />
+					In Poetry and Lyrics<br />
+					On 12 Oct 2022				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">8</div>
+					</div>
+
+					<a href="../blog/index53ce.html">A Short Farewell</a><br />
+					In Current Events<br />
+					On 06 Oct 2022				</div>
+
+			</div>
+
+			<h1>Comments</h1>
+			<div class="menu_section">
+				<form action="#" method="post">
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247388.png" alt="Avatar" class="avatar" />
+						<a href="index146f.html">IAMMICHAEL</a><br />
+						30 Mar 2023 14:47						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">yo i sent u a friend request</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						27 Mar 2023 17:22						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">yea</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246575.png" alt="Avatar" class="avatar" />
+						<a href="index196c.html">Weeeheeep</a><br />
+						27 Mar 2023 13:57						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">I played it on technically both, since it was Wii virtual console that I played on</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						26 Mar 2023 19:37						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Yeah, your profile loads faster than mines</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246575.png" alt="Avatar" class="avatar" />
+						<a href="index196c.html">Weeeheeep</a><br />
+						26 Mar 2023 14:13						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Controls and difficulty were fine imo but I hated that when you bumped into like a slime on the map instead of doing some understandable knock back or something it put you in an entire miniboss battle</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246575.png" alt="Avatar" class="avatar" />
+						<a href="index196c.html">Weeeheeep</a><br />
+						25 Mar 2023 16:36						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Have you played it before? If not I don't exactly recommend it..</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						25 Mar 2023 13:54						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">ah ok, also ur profile works well on DSi<br /></div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						24 Mar 2023 17:16						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">ur profile is gud bc its dark, and theres no strain on anybodies eyes anymore (unless they use high contrast).</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						24 Mar 2023 17:15						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">ah, also thx</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246575.png" alt="Avatar" class="avatar" />
+						<a href="index196c.html">Weeeheeep</a><br />
+						24 Mar 2023 13:45						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Yeah that honestly sounds pretty accurate, I was a bit disappointed when I first played Zelda 2 (I'm fairly sure that was the first one I ever played, although a link between worlds may have been before that) because the map was kinda weird and somewhat of a "congratulations on getting to this place. Too bad you need a candle from across the map." Kind of game</div>
+				</div>
+			</form>
+		</div>
+
+		<div style="margin:5px; text-align:center">
+			<a href="../index.html"><img class="icon" src="../images/icons/icon_home.png" alt="Home" /></a>
+		</div>
+
+
+<div style="font-size:10px; text-align:center">
+	Nintendo 3DS is &trade; Nintendo Co. Ltd.
+	This website is &copy;2009-2023 HullBreach Studios. All rights reserved.
+	Members are responsible for their own content.
+	No account information will be given to third-parties without your consent.
+</div>
+
+<div id="divAlertPopup" class="alerts_popup menu_section"></div>
+<script type="text/javascript">
+	var AlertPopupObj = new XMLHttpRequest();
+	function refreshMyPopupAlerts(){
+		AlertPopupObj.open('GET.html', '../includes/ajax.section.my_alert_popup.html', true);
+		AlertPopupObj.send(null);
+		AlertPopupObj.onreadystatechange = function(){
+			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
+				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
+				AlertPopupObj.abort();
+				return;
+			}
+			if(AlertPopupObj.readyState==4){
+				if(AlertPopupObj.responseText){
+					var divAlertPopup = document.getElementById('divAlertPopup'),
+						alerts = [];
+					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
+					if(alerts.length){
+						var alertString = '',
+							index = 0;
+						while(index<alerts.length){
+							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
+							index++;
+						}
+						divAlertPopup.innerHTML = alertString;
+						divAlertPopup.style.display = 'block';
+					}else{
+						divAlertPopup.style.display = 'none';
+					}
+				}
+				setTimeout(refreshMyPopupAlerts, 10000);
+			}
+		}
+	}
+	refreshMyPopupAlerts();
+</script>
+	</body>
+
+<!-- Mirrored from dsipaint.com/member/?id=138112 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:05:33 GMT -->
+</html>

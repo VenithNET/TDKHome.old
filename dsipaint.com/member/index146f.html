@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<!-- Mirrored from dsipaint.com/member/?id=163960 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:03:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="3DSPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="3D Photo Gallery, 3DS Photo Gallery, Upload 3D Photos, Upload 3DS Photos, MPO, 3DSPaint, 3DS Opera SDK, Nintendo 3DS, 3DS, JavaScript, video games" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<link rel="stylesheet" href="../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-11']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+		<title>Profile for IAMMICHAEL</title>
+		<script type="text/javascript">
+			'use strict';
+
+			function flag(obj, comment) {
+				var params = 'action=comment_flag&comment=' + comment;
+
+				if (confirm("Flag comment?")) {
+					xhrCall(params);
+					obj.style.display = 'none';
+				}
+				return false;
+			}
+			function remove_comment(obj, comment) {
+				var div = obj.parentNode.parentNode,
+						params = 'action=comment_delete&comment=' + comment;
+
+				if (confirm("Delete comment?")) {
+					xhrCall(params);
+					div.parentNode.removeChild(div);
+				}
+				return false;
+			}
+			function xhrCall(params) {
+				xhr.abort();
+				xhr.open('GET.html', '?id=163960&ajax=' + (new Date()).getTime() + '&' + params, true);
+				xhr.send(null);
+			}
+
+			function mousedown(e) {
+				context.beginPath();
+				context.moveTo(e.offsetX - 1, e.offsetY - 1);
+				painting = true;
+			}
+			function mousemove(e) {
+				if (painting) {
+					context.lineTo(e.offsetX - 1, e.offsetY - 1);
+					context.stroke();
+				}
+			}
+			function mouseup(e) {
+				painting = false;
+			}
+
+			function save() {
+				if (!saving) {
+					saving = true;
+					var data = 'id=163960&data=' + canvas.toDataURL('image/png');
+					console.log(data);
+					var xhrSave = new XMLHttpRequest();
+					xhrSave.open('POST.html', '../includes/ajax_comment_save.html', true);
+					xhrSave.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					xhrSave.setRequestHeader('Content-length', data.length);
+					xhrSave.setRequestHeader('Connection', 'close');
+					xhrSave.send(data);
+					xhrSave.onreadystatechange = function () {
+						if (xhrSave.readyState == 4 && xhrSave.responseText == 'true') {
+							location.reload();
+						}
+					};
+				}
+				return false;
+			}
+
+			var xhr = new XMLHttpRequest();
+
+			window.onload = function () {
+				var images = document.getElementsByName('body_images');
+				var maxwidth = 800;
+				if (document.domain.indexOf('3dspaint')) {
+					maxwidth = 300;
+				} else if (document.domain.indexOf('dsipaint')) {
+					maxwidth = 220;
+				}
+				for (var index in images) {
+					if (images[index].width > maxwidth) {
+						images[index].width = maxwidth;
+					}
+				}
+			}
+		</script>
+		<style type="text/css">
+			TD.profile_page{
+				background:#8f8;
+				border:1px outset #888;
+				color:#fff;
+				font-size:9pt;
+				text-align:center;
+			}
+			.button {
+				background: #fff;
+				border: 1px outset #888;
+				margin: 3px;
+				padding: 3px;
+				width: 10px;
+				height: 10px;
+			}
+			.admin TD, .admin TEXTAREA {
+				background:#fff !important;
+				color:#000 !important;
+			}
+		</style>
+		<style type="text/css">
+			body {background-image:url(../images/upload_gallery/17215.jpg)!important;width:99%!important}
+input.form_button important;border:4px maroon solid;}
+
+.menu_section {margin:auto!important;background-color:#000!important;color:red!important;border:4px maroon solid!important;border-radius:4px;max-width:1200px!important}
+
+div.zebra, input#txtShout.form_field {background-image:url(../images/upload_gallery/17059.jpg)!important}
+
+div.button_div {background-color:black!important;border-radius:4px}
+
+textarea.form_textarea {background-image:url(../images/upload_gallery/17216.jpg)!important}
+
+IMG[src="/images/logo.png"]{content:url(../images/upload_gallery/17163.jpg)!important;height:45px;width:175px;}
+
+div.zebra {background-color:black!important;padding:8px!important;border:4px black solid!important;}
+
+h1 {background-color:red!important;color:maroon;width:70%!important;border:2px white solid;border-radius: 8px 8px 1px 1px!important;text-shadow:#FF00FF 1px 1px 7px, #ADD8E6 -1px -1px 7px !important}
+a {color:black;text-shadow:#00FF00 1px 1px 7px, #FF00FF -1px -1px 7px !important}
+input:hover, ::selection {background-color:red!important;color:maroon!important}
+a:hover {background-color:red!important;color:black!important}
+
+IMG[src="/images/art_gallery/247130.png"] {content:url(../images/upload_gallery/16697.jpg)!important;max-width:32px!important;max-height:32px!important}
+
+a[href="/member?id=150961"]::before {content:"「TDK」"!important;color:black!}
+a[href="/member?id=150961"] {color:maroon!important}		</style>
+	</head>
+	<body style="background: url(../images/backgrounds/background19.png)">
+
+<div style="padding:2px; text-align:center">
+	<a href="../index.html"><img src="../images/logo.png" alt="Logo" /></a>
+</div>
+
+<div class="menu_section" style="padding:0px">
+
+
+	<div class="menu_section">
+		<div class="nav_avatar">
+			<a onclick="showLogin();"><img src="../avatars_site/0.png" alt="Login" title="Login" /></a>
+		</div>
+
+		<div class="nav_div">Welcome, Guest.</div>
+		<div class="nav_div">
+			<a onclick="showLogin();">Login</a> | <a href="../register.html">Register</a>
+		</div>
+
+		<div id="divLogin"  style="display:none" >
+			<form action="#" method="post">
+				Username: <input type="text" name="username" class="form_field" /><br />
+				Password: <input type="password" name="password" class="form_field" /><br />
+				Remember me: <input type="checkbox" value="true" name="remember" /><br />
+				<input type="submit" value="Login" class="form_button" />
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function showLogin(){
+			document.getElementById('divLogin').style.display='block';
+		}
+	</script>
+
+</div>
+
+		<h1>Profile for IAMMICHAEL</h1>
+
+
+		<div class="menu_section">
+			<div class="head">
+				&quot;Your Friendly Neiborhood Sadist | CSS by DCTheGamr&quot;
+			</div>
+			<div class="row"><div>FIRST NAME</div>Your Fucking Mom</div>
+			<div class="row"><div>BIRTHDAY</div>05 Jan 2008</div>
+			<div class="row"><div>MEMBER SINCE</div>22 Dec 2022</div>
+			<div class="row"><div>LAST LOGIN</div>06 Apr 2023</div>
+			<div class="row"><div>MOOD</div>Wroth</div>
+			<div class="row"><div>DOING NOW</div></div>
+			<div class="row"><div>STANDING</div>Active</div>
+			<div class="row"><div>3DS CODE</div>(Not set)</div>
+			<div class="row"><div>SWITCH CODE</div>(Not set)</div>
+			<div class="row"><div>NINT NETWK ID</div>Idk wtf that is</div>
+		</div>
+
+
+		<h1>Biography</h1>
+		<div class="menu_section">
+			<div class="form_body" id="blog_body">
+
+				<img src="../saviis/savii_gallery/32605.png" style="border:1px inset #888; float:left; margin:3px" />
+				Hey yall, I felt like a change was needed in my bio since the other one didn't fully reflect my true aspects.Anyway, let's begin shall we?<br />I CUSS LIKE A SAILOR!I have an exceptionally dirty mind, but dont really mean any of it. I am a total nerd and am proud of it.<br /><br />I collect Stephen King books and Hotwheels(yes, at 15)I take college level courses since im home-schooled.Im not scared of the dark in the usual sense but fear the aspects it represents.I play chess and draw(Alot).<br /><br />I love anime but dont watch too much, I usually read the mangas. Im a horror fanatic and hate rom-coms and chik flicks. They dont portray true romance and give false hopes.<br /><br />Im <span style="color:lime"><big>BiSeXuAl</span></big> and support the <span style="color:red">L</span><span style="color:blue">G</span><span style="color:magenta">B</span><span style="color:yellow">T</span><span style="color:lime">Q</span> community. I'm single and a virgin.<br /><br />I have three cats: Oliver(naked), Kricket(black/white Siamese ragdoll mix), and Kermy(my pirate kitty). As a hobby, I come up with crazy theories on the origin of the universe, black holes, etc. I follow most Christian beliefs, but disagree w/some and do my own thing.<br /><br />I trust in God and believe in heaven, hell, satan, etc. I love all kinds of music but prefer Classic Rock, Grunge, Alternative. I hate Pop music and only dapple(?) with country music. I love Blink 182, Three Days Grace, Nirvana, and The Foo Fighters.<br /><br />My favorite color is Blue/Teal, and Gray. You know, I was thinking about including my type, but now im kinda thinking not...<br /><br />I believe in saving sex and all that until i know the girl(guy?)alot. I give a small first date, because I don't even know if its gonna work.<br /><br />ANYWAY, I think thats enough on me, just ask if you want to know anything. Im here, and am willing to answer your questions. :) <br /><hr /><span style="font-weight:bold">@DCTheGamr was here bitches :)</span><br /><br />Read my blogs and like them along with voting my art,plz!<br /><hr />Hello DCTheGamr here, I have received a message from Michael and here is what he had to say relating to him being on this website.<br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="His Message" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none">Sadly, some rules about my dsi have been put in place.After finishing this message, I have to put it downstairs:, since my moms worried about my insomniac behavior. Here you go:<br />1. I can only have it on the weekends<br />2. I cant have it past 3:00am<br />3. Tbh, I'm not allowed to have this site, but fuck it lol.<br />4. I can't bring it up to my room, unless its the weekends</div><br />Due to this, he will be less active. Thank you for understanding.			</div>
+		</div>
+
+		<h1>Profile Pages</h1>
+		<div class="menu_section" style="width:200px">
+			<div class="button_div">
+				<a href="timeline146f.html">TIMELINE</a>
+			</div>
+			<div class="button_div">
+				<a href="comments146f.html">COMMENTS</a>
+			</div>
+			<div class="button_div">
+				<a href="../blog/index7484.html">BLOGS</a>
+			</div>
+			<div class="button_div">
+				<a href="../poll/index7484.html">POLLS</a>
+			</div>
+
+			<div class="button_div">
+				<a href="../saviis/savii_galleryf350.html">SAVII GALLERY</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page4bc4.html">My peeps(super important individuals)</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page053b.html">Favorite songs</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagec4ec.html">Songs by No Restraint: Me</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page7eb9.html">Now you see me</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page7fab.html">My socials</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagef01e.html">random figs: WARNING, UKNOWN CONTENT.</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagef403.html">Coming out- 2/5/23</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagef4f4.html">hmmmm</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page9a02.html">Terrifying Revelations From SpongeBob</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pageb909.html">My Lil Lonely Dude</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagecd48.html">My True Language</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page1760.html">Daily Confssions</a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagef2d9.html">My Figures</a>
+			</div>
+
+		</div>
+
+
+<h1>Badges</h1>
+<div class="menu_section">
+
+
+        <div class="badge">
+            <a href="../blog/index7484.html"><img src="../images/badges/author1.png" /></a><br />Author        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/courier4.png" /></a><br />Courier        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/socialite4.png" /></a><br />Socialite        </div>
+
+    
+</div>
+
+		<h1>Last Blogs</h1>
+		<div class="menu_section">
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_t32.png" alt="T" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">5</div>
+					</div>
+
+					<a href="../blog/index805f.html">C.K.A.M. Child and Kidnapping Awarness Month </a><br />
+					In This Community<br />
+					On 30 Mar 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">3</div>
+					</div>
+
+					<a href="../blog/index1e40.html">Nebulus Pt2</a><br />
+					In Short Story<br />
+					On 05 Mar 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">5</div>
+					</div>
+
+					<a href="../blog/index7035.html">A New Insight into Old Music</a><br />
+					In Educational<br />
+					On 19 Feb 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_t32.png" alt="T" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">3</div>
+					</div>
+
+					<a href="../blog/indexe33e.html">Might of Dark Mite of Light</a><br />
+					In Poetry and Lyrics<br />
+					On 18 Feb 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_m32.png" alt="M" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">2</div>
+					</div>
+
+					<a href="../blog/index3f4f.html">PhotoShoot</a><br />
+					In Poetry and Lyrics<br />
+					On 18 Feb 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_t32.png" alt="T" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">4</div>
+					</div>
+
+					<a href="../blog/indexb362.html">Forgotten Psyche</a><br />
+					In Miscellaneous<br />
+					On 13 Feb 2023				</div>
+
+			</div>
+
+			<h1>Comments</h1>
+			<div class="menu_section">
+				<form action="#" method="post">
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247388.png" alt="Avatar" class="avatar" />
+						<a href="index146f.html">IAMMICHAEL</a><br />
+						06 Apr 2023 14:17						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">braacck obungaaaaa</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247388.png" alt="Avatar" class="avatar" />
+						<a href="index146f.html">IAMMICHAEL</a><br />
+						06 Apr 2023 12:01						<div style="clear:both"></div>
+					</div>
+					<div class="zebra"><a href="../images/upload_gallery/17211.jpg"><img src="../images/upload_gallery/17211_thumb.jpg" alt="thumb"></a><br /></div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247388.png" alt="Avatar" class="avatar" />
+						<a href="index146f.html">IAMMICHAEL</a><br />
+						06 Apr 2023 10:42						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">ook<br /></div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../avatars_site/9.png" alt="Avatar" class="avatar" />
+						<a href="index0587.html">AntiTikTokAuthority</a><br />
+						05 Apr 2023 17:47						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Join the Crusade Today! https://3dspaint.com/blog/view.php?id=100972</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247116.png" alt="Avatar" class="avatar" />
+						<a href="index0d57.html">ich_trink_cola</a><br />
+						05 Apr 2023 06:17						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">your <input type="button" class="form_button" style="width:auto;padding:1px 10px" value="uncensored" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"><a href="../images/upload_gallery/17217.html"><img src="../images/upload_gallery/17217_thumb.html" alt="thumb"></a></div> language</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247388.png" alt="Avatar" class="avatar" />
+						<a href="index146f.html">IAMMICHAEL</a><br />
+						01 Apr 2023 14:15						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Wut?</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						01 Apr 2023 14:13						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Find one thing, only ik where it is</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247388.png" alt="Avatar" class="avatar" />
+						<a href="index146f.html">IAMMICHAEL</a><br />
+						01 Apr 2023 14:12						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Kinda is ye. But thats ok so is mine <a href="indexaf5e.html">@JinxCade</a></div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						01 Apr 2023 14:11						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Basically my CSS is messy</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247388.png" alt="Avatar" class="avatar" />
+						<a href="index146f.html">IAMMICHAEL</a><br />
+						01 Apr 2023 13:48						<div style="clear:both"></div>
+					</div>
+					<div class="zebra"><a href="../images/upload_gallery/17185.jpg"><img src="../images/upload_gallery/17185_thumb.jpg" alt="thumb"></a><br /><a href="../images/upload_gallery/17185.jpg"><img src="../images/upload_gallery/17185_thumb.jpg" alt="thumb"></a><a href="../images/upload_gallery/17185.jpg"><img src="../images/upload_gallery/17185_thumb.jpg" alt="thumb"></a>[FIGURE17185][FIGURE17185]</div>
+				</div>
+			</form>
+		</div>
+
+		<div style="margin:5px; text-align:center">
+			<a href="../index.html"><img class="icon" src="../images/icons/icon_home.png" alt="Home" /></a>
+		</div>
+
+
+<div style="font-size:10px; text-align:center">
+	Nintendo 3DS is &trade; Nintendo Co. Ltd.
+	This website is &copy;2009-2023 HullBreach Studios. All rights reserved.
+	Members are responsible for their own content.
+	No account information will be given to third-parties without your consent.
+</div>
+
+<div id="divAlertPopup" class="alerts_popup menu_section"></div>
+<script type="text/javascript">
+	var AlertPopupObj = new XMLHttpRequest();
+	function refreshMyPopupAlerts(){
+		AlertPopupObj.open('GET.html', '../includes/ajax.section.my_alert_popup.html', true);
+		AlertPopupObj.send(null);
+		AlertPopupObj.onreadystatechange = function(){
+			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
+				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
+				AlertPopupObj.abort();
+				return;
+			}
+			if(AlertPopupObj.readyState==4){
+				if(AlertPopupObj.responseText){
+					var divAlertPopup = document.getElementById('divAlertPopup'),
+						alerts = [];
+					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
+					if(alerts.length){
+						var alertString = '',
+							index = 0;
+						while(index<alerts.length){
+							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
+							index++;
+						}
+						divAlertPopup.innerHTML = alertString;
+						divAlertPopup.style.display = 'block';
+					}else{
+						divAlertPopup.style.display = 'none';
+					}
+				}
+				setTimeout(refreshMyPopupAlerts, 10000);
+			}
+		}
+	}
+	refreshMyPopupAlerts();
+</script>
+	</body>
+
+<!-- Mirrored from dsipaint.com/member/?id=163960 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:04:19 GMT -->
+</html>

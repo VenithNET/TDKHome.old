@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dsipaint.com/menu_library.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:00:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta http-equiv="Content-Type" content="text/xml; charset=ISO-8859-1" />
+	<meta name="viewport" content="width=240">
+	<meta name="description" content="DSiPaint" />
+	<title>DSiPaint - Library Book Shelf</title>
+	<meta name="keywords" content="DSiPaint, DS Opera SDK, DSi Opera SDK, Nintendo DS, Nintendo DSi, DSi, JavaScript, video games, DS Chatroom, homebrew" />
+	<script type="text/javascript">
+		window.onload = function(){
+		}
+	</script>
+	<style type="text/css">
+		BODY {
+			margin:0px;
+		}
+		.frame {
+			background:url(library/images/wood.png) repeat-y 0px 10px;
+			left:0px;
+			margin-bottom:5px;
+			width:240px;
+		}
+		.cover {
+			float:left;
+			height:88px;
+			text-align:center;
+			width:120px;
+		}
+		.cover A {
+			text-decoration:none;
+		}
+		.cover A IMG {
+			border:1px solid #000;
+			height:60px;
+			margin-top:6px;
+		}
+	</style>
+</head>
+<body style="background: url(images/backgrounds/background0.png)">
+	<div class="frame">
+		<div style="height:92px; text-align:center">
+			<img src="library/images/library_logo.png" alt="Library Logo" />
+		</div>
+
+			<div class="cover">
+				<a href="library/book_reader4bfa.html"><img src="images/upload_gallery/10248_thumb.jpg" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_reader6406.html"><img src="images/upload_gallery/4972_thumb.html" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_reader8c88.html"><img src="images/upload_gallery/4200_thumb.jpg" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_readerf8ff.html"><img src="images/upload_gallery/3856_thumb.jpg" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_reader457d.html"><img src="images/upload_gallery/3645_thumb.jpg" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_reader1c92.html"><img src="images/upload_gallery/3549_thumb.jpg" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_readerd474.html"><img src="images/upload_gallery/3331_thumb.html" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_readerc4aa.html"><img src="images/upload_gallery/3326_thumb.html" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_reader8bdc.html"><img src="images/upload_gallery/3303_thumb.html" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_reader5ea3.html"><img src="images/upload_gallery/3294_thumb.jpg" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_reader6978.html"><img src="images/upload_gallery/2903_thumb.jpg" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_reader918c.html"><img src="images/upload_gallery/3250_thumb.html" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_reader5de8.html"><img src="images/upload_gallery/3040_thumb.jpg" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_readerce60.html"><img src="images/upload_gallery/3045_thumb.jpg" alt="" /></a>
+			</div>
+
+			<div class="cover">
+				<a href="library/book_readere67b.html"><img src="images/upload_gallery/3037_thumb.jpg" alt="" /></a>
+			</div>
+		<div style="clear:both"></div>
+	</div>
+	<div style="text-align:center; width:240px">
+		<a href="index.html"><img class="icon" src="images/icons/icon_home.png" alt="Home" /></a>
+		<div style="font-size:8px; text-align:justify">
+	Nintendo trademarks and copyrights are properties of Nintendo.
+	Opera is a product of Opera Software ASA.
+	This website is &copy;2009-2023 HullBreach Studios Ltd. All rights reserved.
+	Members are responsible for their own content.
+	No account information will be given to third-parties.
+</div>
+
+<div id="divAlertPopup" class="alerts_popup menu_section"></div>
+<script type="text/javascript">
+	var AlertPopupObj = new XMLHttpRequest();
+	function refreshMyPopupAlerts(){
+		AlertPopupObj.open('GET.html', 'includes/ajax.section.my_alert_popup.html', true);
+		AlertPopupObj.send(null);
+		AlertPopupObj.onreadystatechange = function(){
+			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
+				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
+				AlertPopupObj.abort();
+				return;
+			}
+			if(AlertPopupObj.readyState==4){
+				if(AlertPopupObj.responseText){
+					var divAlertPopup = document.getElementById('divAlertPopup'),
+						alerts = [];
+					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
+					if(alerts.length){
+						var alertString = '',
+							index = 0;
+						while(index<alerts.length){
+							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
+							index++;
+						}
+						divAlertPopup.innerHTML = alertString;
+						divAlertPopup.style.display = 'block';
+					}else{
+						divAlertPopup.style.display = 'none';
+					}
+				}
+				setTimeout(refreshMyPopupAlerts, 10000);
+			}
+		}
+	}
+	refreshMyPopupAlerts();
+</script>
+	</div>
+</body>
+
+<!-- Mirrored from dsipaint.com/menu_library.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:00:42 GMT -->
+</html>

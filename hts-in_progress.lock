@@ -1,0 +1,7 @@
+Mirror in progress since Thu, 06 Apr 2023 18:46:37 .. please wait!
+httrack -O /storage/emulated/0/HTTrack/Websites/DSiPaint -A25000k%Pnx%q0u1s2%s%u%fDaK0H0N0p7 https://dsipaint.com/ +*.png +*.gif +*.jpg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%l LANGUAGE_ISO,* 
+To pause the engine: create an empty file named 'hts-stop.lock'
+PID=25766
+UID=10442
+GID=10442
+START=1680821197

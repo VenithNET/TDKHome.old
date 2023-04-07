@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	
+<!-- Mirrored from dsipaint.com/paint/dsipaint_spriter.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:33:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="DSiPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="DSiPaint, DSi Opera SDK, Nintendo DSi, DSi, JavaScript, video games" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="stylesheet" href="../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-9']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+		<title>DSiPaint Spriter</title>
+		<script type="text/javascript">
+			var color = [0, 0, 0], saving = false, erasing = false, block = 1, frame = 0, mode = 0, copy = 0, canvas = new Array(9), palettecanvas = null, colordiv = null, statusdiv = null;
+
+			window.onload = function () {
+				for (var index = 9; --index >= 0; )
+					(canvas[index] = document.getElementById('canvas' + index).getContext('2d')).fillStyle = 'rgb(0,0,0)';
+				palettecanvas = document.getElementById('palette').getContext('2d');
+				colordiv = document.getElementById('color');
+				statusdiv = document.getElementById('status');
+				for (var temp_color = 64; --temp_color >= 0; ) {
+					palettecanvas.fillStyle = 'rgb(' + (temp_color << 2) + ',' + (temp_color << 2) + ',' + (temp_color << 2) + ')';
+					palettecanvas.fillRect(64, temp_color << 1, 12, 16);
+				}
+				for (var temp_color = 4096; --temp_color >= 0; ) {
+					palettecanvas.fillStyle = 'rgb(' + (((temp_color >> 8) & 15) << 4) + ',' + (((temp_color >> 4) & 15) << 4) + ',' + (((temp_color) & 15) << 4) + ')';
+					palettecanvas.fillRect((temp_color & 31) << 1, (temp_color >> 6) << 1, 2, 2);
+				}
+				statusdiv.innerHTML = 'Guest - SAVING DISABLED.';
+			};
+
+			function animate(cel) {
+				document.getElementById('canvas8').style.left = -(cel << 5) + 'px';
+				setTimeout('animate(' + ((cel + 1) & 7) + ');', 200);
+			}
+
+			function keep_alive() {
+				(KeepAlive = new XMLHttpRequest()).open('GET.html', '../includes/keepalive.html', true);
+				KeepAlive.send(null);
+				setTimeout(keep_alive(), 60000);
+			}
+
+			function paint() {
+				if ((mousex = event.clientX - 1) >= 0 && (mousey = event.clientY - 1) >= 0 && mousex < 129 && mousey < 127) {
+					temp_frame = frame;
+					if (mousex > 65) {
+						temp_frame = (temp_frame + 1) & 7;
+						mousex -= 65;
+					}
+					if ((mousex & 254) + (block << 1) > 63) {
+						mousex = 64 - (block << 1);
+					}
+					if ((mousey & 254) + (block << 1) > 127) {
+						mousey = 128 - (block << 1);
+					}
+					if (erasing) {
+						canvas[temp_frame].clearRect(mousex & 254, mousey & 254, block << 1, block << 1);
+						canvas[8].clearRect((temp_frame << 5) + (mousex >> 1), mousey >> 1, block, block);
+					} else {
+						canvas[temp_frame].fillRect(mousex & 254, mousey & 254, block << 1, block << 1);
+						canvas[8].fillRect((temp_frame << 5) + (mousex >> 1), mousey >> 1, block, block);
+					}
+				}
+			}
+
+			function save() {
+				if (!saving) {
+					saving = true;
+					document.getElementById('button_save').style.background = '#888';
+					statusdiv.innerHTML = 'Saving the sprite';
+					(SaveObj = new XMLHttpRequest()).open('POST.html', 'includes/ajax_dsipaint_spriter_save.html', true);
+					SaveObj.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					SaveObj.setRequestHeader('Content-length', 5 + (savestring = document.getElementById('canvas8').toDataURL('image/png')).length);
+					SaveObj.setRequestHeader('Connection', 'close');
+					SaveObj.send('data=' + savestring);
+					SaveObj.onreadystatechange = function () {
+						if (SaveObj.readyState == 4) {
+							statusdiv.innerHTML = SaveObj.responseText;
+							saving = false;
+							document.getElementById('button_save').style.background = '#00f';
+						}
+					}
+				}
+			}
+
+			function set_color() {
+				if ((mousey = window.event.clientY - 1) >= 0 && mousey < 128) {
+					if ((mousex = window.event.clientX - 162) >= 0 && mousex < 64) {
+						var temp_color = (mousex >> 1) + ((mousey >> 1) << 6);
+						color = [((temp_color >> 8) & 15) << 4, ((temp_color >> 4) & 15) << 4, ((temp_color) & 15) << 4];
+					} else {
+						color = [mousey << 1, mousey << 1, mousey << 1];
+					}
+					canvas[8].fillStyle = 'rgb(' + color.join(',') + ')';
+					statusdiv.innerHTML = 'Color set to (' + color.join(',') + ')';
+					colordiv.style.background = 'rgb(' + color.join(',') + ')';
+					erasing = false;
+				}
+			}
+
+			function draw(size) {
+				for (erasing = false, block = size, colordiv.style.background = 'rgb(' + color.join(',') + ')', index = 9; --index >= 0; )
+					canvas[index].fillStyle = 'rgb(' + color.join(',') + ')';
+			}
+			function erase(size) {
+				for (erasing = true, block = size, colordiv.style.background = '#fff', index = 9; --index >= 0; )
+					canvas[index].fillStyle = '#fff';
+			}
+			function set_mode(val) {
+				for (mode = val, document.getElementById('mode' + val).style.background = '#f00', index = 3; --index >= 0; )
+					document.getElementById('mode' + index).style.background = '#00f';
+			}
+			function copy_frame(val) {
+				copy = (val + frame) & 7;
+			}
+
+			function set_frame(val) {
+				frame = val & 7;
+				document.getElementById('canvas' + frame).style.left = '0px';
+				document.getElementById('canvas' + ((frame + 1) & 7)).style.left = '65px';
+				document.getElementById('frame' + frame).style.background = '#f00'
+				document.getElementById('frame' + ((frame + 1) & 7)).style.background = '#f00'
+				for (var index = 6; --index >= 0; ) {
+					document.getElementById('canvas' + ((frame + 2 + index) & 7)).style.left = '-70px';
+					document.getElementById('frame' + ((frame + 2 + index) & 7)).style.background = '#00f';
+				}
+			}
+
+			function paste_frame(obj, paste) {
+				obj.style.background = '#f00';
+				statusdiv.innerHTML = 'Pasting the cel';
+				paste = (paste + frame) & 7;
+				canvas[8].putImageData(canvas[8].getImageData(0, 0, 32, 64), paste << 5, 0);
+				canvas[paste].putImageData(canvas[copy].getImageData(0, 0, 64, 128), 0, 0);
+				statusdiv.innerHTML = 'Cel pasted';
+			}
+		</script>
+		<style type="text/css">
+			BODY {
+				background: #eee;
+				color: #002;
+				font-size: 8px;
+				margin: 0px;
+				overflow: hidden;
+			}
+			CANVAS {
+				background: #fff;
+				position: absolute;
+				top: 0px;
+			}
+			FORM {
+				margin: 0px;
+				padding: 0px;
+			}
+			INPUT {
+				background: #00f;
+				border: 2px outset #00f;
+				color: #fff;
+				font-size: 8px;
+				position: absolute;
+			}
+			DIV {
+				position: absolute;
+				padding: 0;
+			}
+			.button {
+				height: 16px;
+				padding:0px;
+				top: 130px;
+				width: 16px;
+			}
+			.button2 {
+				height: 16px;
+				letter-spacing: -1px;
+				padding: 0px;
+				top: 146px;
+				width: 32px;
+			}
+			.button3 {
+				font-size: 14px;
+				left: 135px;
+				height: 24px;
+				width: 24px;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas0" style="border:1px inset #888; left:0px" width="64" height="128" onmousemove="paint()"></canvas>
+		<canvas id="canvas1" style="border:1px inset #888; left:65px" width="64" height="128" onmousemove="paint()"></canvas>
+		<canvas id="canvas2" style="border:1px inset #888; left:-65px" width="64" height="128" onmousemove="paint()"></canvas>
+		<canvas id="canvas3" style="border:1px inset #888; left:-65px" width="64" height="128" onmousemove="paint()"></canvas>
+		<canvas id="canvas4" style="border:1px inset #888; left:-65px" width="64" height="128" onmousemove="paint()"></canvas>
+		<canvas id="canvas5" style="border:1px inset #888; left:-65px" width="64" height="128" onmousemove="paint()"></canvas>
+		<canvas id="canvas6" style="border:1px inset #888; left:-65px" width="64" height="128" onmousemove="paint()"></canvas>
+		<canvas id="canvas7" style="border:1px inset #888; left:-65px" width="64" height="128" onmousemove="paint()"></canvas>
+		<div style="background:#fff; border:1px solid #000; width:32px; height:64px; left:131px; top:0px; overflow:hidden">
+			<canvas style="left:0px" id="canvas8" width="256" height="64"></canvas>
+		</div>
+		<canvas id="palette" style="border:1px outset #888; left:166px" width="72" height="128" onclick="set_color()"></canvas>
+		<form onsubmit="return false;">
+			<input id="frame0" type="button" class="button" style="background:#f00; left:1px" value="1" onclick="set_frame(0);" />
+			<input id="frame1" type="button" class="button" style="background:#f00; left:17px" value="2" onclick="set_frame(1);" />
+			<input id="frame2" type="button" class="button" style="left:33px" value="3" onclick="set_frame(2);" />
+			<input id="frame3" type="button" class="button" style="left:49px" value="4" onclick="set_frame(3);" />
+			<input id="frame4" type="button" class="button" style="left:66px" value="5" onclick="set_frame(4);" />
+			<input id="frame5" type="button" class="button" style="left:82px" value="6" onclick="set_frame(5);" />
+			<input id="frame6" type="button" class="button" style="left:98px" value="7" onclick="set_frame(6);" />
+			<input id="frame7" type="button" class="button" style="left:114px" value="8" onclick="set_frame(7);" />
+			<input type="button" class="button2" style="left:1px" value="Copy" onclick="copy_frame(0);" />
+			<input type="button" class="button2" style="left:33px" value="Paste" onclick="paste_frame(this, 0);" />
+			<input type="button" class="button2" style="left:66px" value="Copy" onclick="copy_frame(1);" />
+			<input type="button" class="button2" style="left:98px" value="Paste" onclick="paste_frame(this, 1);" />
+			<input id="mode0" type="button" class="button3" style="background:#f00; top:80px" value="8" onclick="set_mode(0);" />
+			<input id="mode1" type="button" class="button3" style="top:105px" value="4" onclick="set_mode(1);" />
+			<input id="mode2" type="button" class="button3" style="top:130px" value="W" onclick="set_mode(2);" />
+			<input type="button" style="left:164px; top:158px; width:38px" id="button_save" disabled="disabled" value="Save" onclick="save();" />
+			<input type="button" style="left:202px; top:158px; width:38px" value="Exit" onclick="location.href = '../menu_dsipaint_spriter.html';" />
+		</form>
+		<div id="color" style="background:#000; border:1px outset #888; height:25px; left:226px; top:130px; width:12px"></div>
+		<div style="background:#000; border:4px solid #fff; height:2px; left:164px; top:134px; width:2px" onclick="draw(1)"></div>
+		<div style="background:#000; border:3px solid #fff; height:4px; left:176px; top:134px; width:4px" onclick="draw(2)"></div>
+		<div style="background:#000; border:2px solid #fff; height:6px; left:188px; top:134px; width:6px" onclick="draw(3)"></div>
+		<div style="background:#000; border:1px solid #fff; height:8px; left:200px; top:134px; width:8px" onclick="draw(4)"></div>
+		<div style="background:#000; height:10px; left:212px; top:134px; width:10px" onclick="draw(5)"></div>
+		<div style="background:#fff; border:4px solid #000; height:2px; left:164px; top:147px; width:2px" onclick="erase(1)"></div>
+		<div style="background:#fff; border:3px solid #000; height:4px; left:176px; top:147px; width:4px" onclick="erase(2)"></div>
+		<div style="background:#fff; border:2px solid #000; height:6px; left:188px; top:147px; width:6px" onclick="erase(3)"></div>
+		<div style="background:#fff; border:1px solid #000; height:8px; left:200px; top:147px; width:8px" onclick="erase(4)"></div>
+		<div style="background:#fff; height:10px; left:212px; top:147px; width:10px" onclick="erase(5)"></div>
+		<div style="height:10px; left:2px; top:162px; width:228px" id="status"></div>
+		<script type="text/javascript">
+			setTimeout('keep_alive();', 600000);
+			setTimeout('animate(0);', 250);
+		</script>
+	</body>
+
+<!-- Mirrored from dsipaint.com/paint/dsipaint_spriter.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:33:08 GMT -->
+</html>

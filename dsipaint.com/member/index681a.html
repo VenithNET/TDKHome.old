@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<!-- Mirrored from dsipaint.com/member/?id=1 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:02:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="3DSPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="3D Photo Gallery, 3DS Photo Gallery, Upload 3D Photos, Upload 3DS Photos, MPO, 3DSPaint, 3DS Opera SDK, Nintendo 3DS, 3DS, JavaScript, video games" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<link rel="stylesheet" href="../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-11']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+		<title>Profile for HullBreach</title>
+		<script type="text/javascript">
+			'use strict';
+
+			function flag(obj, comment) {
+				var params = 'action=comment_flag&comment=' + comment;
+
+				if (confirm("Flag comment?")) {
+					xhrCall(params);
+					obj.style.display = 'none';
+				}
+				return false;
+			}
+			function remove_comment(obj, comment) {
+				var div = obj.parentNode.parentNode,
+						params = 'action=comment_delete&comment=' + comment;
+
+				if (confirm("Delete comment?")) {
+					xhrCall(params);
+					div.parentNode.removeChild(div);
+				}
+				return false;
+			}
+			function xhrCall(params) {
+				xhr.abort();
+				xhr.open('GET.html', '?id=1&ajax=' + (new Date()).getTime() + '&' + params, true);
+				xhr.send(null);
+			}
+
+			function mousedown(e) {
+				context.beginPath();
+				context.moveTo(e.offsetX - 1, e.offsetY - 1);
+				painting = true;
+			}
+			function mousemove(e) {
+				if (painting) {
+					context.lineTo(e.offsetX - 1, e.offsetY - 1);
+					context.stroke();
+				}
+			}
+			function mouseup(e) {
+				painting = false;
+			}
+
+			function save() {
+				if (!saving) {
+					saving = true;
+					var data = 'id=1&data=' + canvas.toDataURL('image/png');
+					console.log(data);
+					var xhrSave = new XMLHttpRequest();
+					xhrSave.open('POST.html', '../includes/ajax_comment_save.html', true);
+					xhrSave.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					xhrSave.setRequestHeader('Content-length', data.length);
+					xhrSave.setRequestHeader('Connection', 'close');
+					xhrSave.send(data);
+					xhrSave.onreadystatechange = function () {
+						if (xhrSave.readyState == 4 && xhrSave.responseText == 'true') {
+							location.reload();
+						}
+					};
+				}
+				return false;
+			}
+
+			var xhr = new XMLHttpRequest();
+
+			window.onload = function () {
+				var images = document.getElementsByName('body_images');
+				var maxwidth = 800;
+				if (document.domain.indexOf('3dspaint')) {
+					maxwidth = 300;
+				} else if (document.domain.indexOf('dsipaint')) {
+					maxwidth = 220;
+				}
+				for (var index in images) {
+					if (images[index].width > maxwidth) {
+						images[index].width = maxwidth;
+					}
+				}
+			}
+		</script>
+		<style type="text/css">
+			TD.profile_page{
+				background:#8f8;
+				border:1px outset #888;
+				color:#fff;
+				font-size:9pt;
+				text-align:center;
+			}
+			.button {
+				background: #fff;
+				border: 1px outset #888;
+				margin: 3px;
+				padding: 3px;
+				width: 10px;
+				height: 10px;
+			}
+			.admin TD, .admin TEXTAREA {
+				background:#fff !important;
+				color:#000 !important;
+			}
+		</style>
+		<style type="text/css">
+			TEXTAREA { background:url(images/art_gallery/43481.html) bottom left no-repeat; opacity:.5 } .comments A { font-variant:small-caps; } BODY { background:url(../chatroom/images/badlaa.jpg) !important; }		</style>
+	</head>
+	<body style="background: url(../images/backgrounds/background19.png)">
+
+<div style="padding:2px; text-align:center">
+	<a href="../index.html"><img src="../images/logo.png" alt="Logo" /></a>
+</div>
+
+<div class="menu_section" style="padding:0px">
+
+
+	<div class="menu_section">
+		<div class="nav_avatar">
+			<a onclick="showLogin();"><img src="../avatars_site/0.png" alt="Login" title="Login" /></a>
+		</div>
+
+		<div class="nav_div">Welcome, Guest.</div>
+		<div class="nav_div">
+			<a onclick="showLogin();">Login</a> | <a href="../register.html">Register</a>
+		</div>
+
+		<div id="divLogin"  style="display:none" >
+			<form action="#" method="post">
+				Username: <input type="text" name="username" class="form_field" /><br />
+				Password: <input type="password" name="password" class="form_field" /><br />
+				Remember me: <input type="checkbox" value="true" name="remember" /><br />
+				<input type="submit" value="Login" class="form_button" />
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function showLogin(){
+			document.getElementById('divLogin').style.display='block';
+		}
+	</script>
+
+</div>
+
+		<h1>Profile for HullBreach</h1>
+
+
+		<div class="menu_section">
+			<div class="head">
+				&quot;I'm predestined to have free will.&quot;
+			</div>
+			<div class="row"><div>FIRST NAME</div>Danny</div>
+			<div class="row"><div>BIRTHDAY</div></div>
+			<div class="row"><div>MEMBER SINCE</div>24 Oct 2006</div>
+			<div class="row"><div>LAST LOGIN</div>06 Apr 2023</div>
+			<div class="row"><div>MOOD</div>Acephalous</div>
+			<div class="row"><div>DOING NOW</div></div>
+			<div class="row"><div>STANDING</div>Active</div>
+			<div class="row"><div>3DS CODE</div>1719-4451-1352</div>
+			<div class="row"><div>SWITCH CODE</div>SW-4795-6868-4378</div>
+			<div class="row"><div>NINT NETWK ID</div>HullBreach</div>
+		</div>
+
+
+		<h1>Biography</h1>
+		<div class="menu_section">
+			<div class="form_body" id="blog_body">
+
+				<img src="../saviis/savii_gallery/3.png" style="border:1px inset #888; float:left; margin:3px" />
+				<a href="../images/upload_gallery/66.jpg"><img src="../images/upload_gallery/66_thumb.jpg" alt="thumb"></a> Web developer of <a href="../index.html" rel="nofollow">DSiPaint</a>, <a href="../../external.html?link=https://3dspaint.com/" rel="nofollow">3DSPaint</a>, and <a href="../../external.html?link=https://hullbreachonline.com/" rel="nofollow">HB Online</a>. Co-founder of <a href="../../external.html?link=https://hullbreachstudios.com/" rel="nofollow">HullBreach Studios</a>, which has developed and published software for the Wii U, iOS, and Android I have a wife named Samantha (<a href="index0b30.html" rel="nofollow">SavantInamorata</a>), and we have seven children: Gabriella, Mitchell, Castiel (deceased), Samson, Andrew, Cambriel (deceased), and Roland.			</div>
+		</div>
+
+		<h1>Profile Pages</h1>
+		<div class="menu_section" style="width:200px">
+			<div class="button_div">
+				<a href="timeline681a.html">TIMELINE</a>
+			</div>
+			<div class="button_div">
+				<a href="comments681a.html">COMMENTS</a>
+			</div>
+			<div class="button_div">
+				<a href="../blog/indexfacd.html">BLOGS</a>
+			</div>
+			<div class="button_div">
+				<a href="../poll/indexfacd.html">POLLS</a>
+			</div>
+
+			<div class="button_div">
+				<a href="../saviis/savii_gallery8b91.html">SAVII GALLERY</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page025f.html">Shiny Stuff</a>
+			</div>
+
+		</div>
+
+
+<h1>Badges</h1>
+<div class="menu_section">
+
+
+        <div class="badge">
+            <a href="../blog/indexfacd.html"><img src="../images/badges/author5.png" /></a><br />Author        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/courier2.png" /></a><br />Courier        </div>
+
+    
+        <div class="badge">
+            <a href="../menu_dsipaint_spriter.html"><img src="../images/badges/digitizer0.png" /></a><br />Digitizer        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/mincosays.png" /></a><br />MincoSays        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/overlords.png" /></a><br />OverlorDS        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/socialite3.png" /></a><br />Socialite        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/wakaskunk.png" /></a><br />WakASkunk        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/yortzee.png" /></a><br />Yortzee        </div>
+
+    
+</div>
+
+		<h1>Last Blogs</h1>
+		<div class="menu_section">
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_rp32.png" alt="RP" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">4</div>
+					</div>
+
+					<a href="../blog/index2c19.html">Several Fixes for Groups</a><br />
+					In This Community<br />
+					On 06 Apr 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_rp32.png" alt="RP" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">11</div>
+					</div>
+
+					<a href="../blog/index37c0.html">Several minor fixes and enhancements</a><br />
+					In This Community<br />
+					On 27 Mar 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">12</div>
+					</div>
+
+					<a href="../blog/indexaea5.html">Several bug fixes</a><br />
+					In This Community<br />
+					On 29 Jan 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">12</div>
+					</div>
+
+					<a href="../blog/index2c88.html">Account Verification Bug Resolved, System Enhanced</a><br />
+					In This Community<br />
+					On 15 Jan 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">11</div>
+					</div>
+
+					<a href="../blog/indexa756.html">Blog Composer autosaving</a><br />
+					In This Community<br />
+					On 03 Dec 2022				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">8</div>
+					</div>
+
+					<a href="../blog/index4948.html">Server Migration</a><br />
+					In This Community<br />
+					On 21 Jun 2022				</div>
+
+			</div>
+
+			<h1>Comments</h1>
+			<div class="menu_section">
+				<form action="#" method="post">
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247403.png" alt="Avatar" class="avatar" />
+						<a href="indexfb6e.html">DCTheGamr</a><br />
+						06 Apr 2023 02:16						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Thats weird, just a minute ago I could create them and now once again I can't make more <br /><br />I made sure it wasn't just a limit or something by checking TDKComm which had less than TDKDCE yet it still couldnt make more</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247406.png" alt="Avatar" class="avatar" />
+						<a href="index83a3.html">Wesley388</a><br />
+						26 Mar 2023 19:44						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">badlaa xD</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/168343.png" alt="Avatar" class="avatar" />
+						<a href="indexd6b8.html">ShinyArceus67</a><br />
+						19 Feb 2023 09:44						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">hey hull it’s been forever. just stopping by to check things out. wanted to give you an enormous thank you for bringing us dsipaint. this site taught me how to make friends and saved me as an antisocial kid 10+ years ago. seriously can’t thank you enough.</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247116.png" alt="Avatar" class="avatar" />
+						<a href="index0d57.html">ich_trink_cola</a><br />
+						29 Jan 2023 17:27						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">id 1</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247156.png" alt="Avatar" class="avatar" />
+						<a href="indexadc1.html">MilliFoxii</a><br />
+						29 Jan 2023 16:55						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">I like the work and effort you put into this site, this site makes me feel complete. </div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247156.png" alt="Avatar" class="avatar" />
+						<a href="indexadc1.html">MilliFoxii</a><br />
+						29 Jan 2023 16:49						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">:O your online!</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						15 Jan 2023 23:50						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">And the website broke, I'm in light mode but its on dark mode for whatever reason. And then when I try to enable it, it says "You can only change caps in username"</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						15 Jan 2023 19:29						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Hey Nuggie Lost their account and their email is deactivated, they have a discord and are in the SDKPaint Discord Server Under Nuggie#4005</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247162.png" alt="Avatar" class="avatar" />
+						<a href="index04a7.html">theanonymousone</a><br />
+						31 Dec 2022 08:37						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">i lost the email and password for my old account 'therobloxmaster' can you please tell me the email, if not the password? thanx!</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						29 Dec 2022 18:26						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">What happens when somebody puts your name in their username, just asking</div>
+				</div>
+			</form>
+		</div>
+
+		<div style="margin:5px; text-align:center">
+			<a href="../index.html"><img class="icon" src="../images/icons/icon_home.png" alt="Home" /></a>
+		</div>
+
+
+<div style="font-size:10px; text-align:center">
+	Nintendo 3DS is &trade; Nintendo Co. Ltd.
+	This website is &copy;2009-2023 HullBreach Studios. All rights reserved.
+	Members are responsible for their own content.
+	No account information will be given to third-parties without your consent.
+</div>
+
+<div id="divAlertPopup" class="alerts_popup menu_section"></div>
+<script type="text/javascript">
+	var AlertPopupObj = new XMLHttpRequest();
+	function refreshMyPopupAlerts(){
+		AlertPopupObj.open('GET.html', '../includes/ajax.section.my_alert_popup.html', true);
+		AlertPopupObj.send(null);
+		AlertPopupObj.onreadystatechange = function(){
+			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
+				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
+				AlertPopupObj.abort();
+				return;
+			}
+			if(AlertPopupObj.readyState==4){
+				if(AlertPopupObj.responseText){
+					var divAlertPopup = document.getElementById('divAlertPopup'),
+						alerts = [];
+					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
+					if(alerts.length){
+						var alertString = '',
+							index = 0;
+						while(index<alerts.length){
+							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
+							index++;
+						}
+						divAlertPopup.innerHTML = alertString;
+						divAlertPopup.style.display = 'block';
+					}else{
+						divAlertPopup.style.display = 'none';
+					}
+				}
+				setTimeout(refreshMyPopupAlerts, 10000);
+			}
+		}
+	}
+	refreshMyPopupAlerts();
+</script>
+	</body>
+
+<!-- Mirrored from dsipaint.com/member/?id=1 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:03:17 GMT -->
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dsipaint.com/paint/dsipaint.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:29:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="DSiPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="DSiPaint, DSi Opera SDK, Nintendo DSi, DSi, JavaScript, video games" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="stylesheet" href="../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-9']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	<title>DSiPaint</title>
+	<script type="text/javascript">
+		var color=[0,0,0],saving=false,painting=true,block=1,canvas=null,context=null,colordiv=null,statusdiv=null;
+
+		window.onload = function(){
+			context=(canvas=document.getElementById('canvas')).getContext('2d');
+			context.lineCap='round';
+			context.lineJoin='round';
+			context.lineWidth=1;
+			context.fillStyle='#fff';
+			context.fillRect(0,0,160,160);
+
+			canvas.addEventListener('mousedown',mousedown,false);
+			canvas.addEventListener('mousemove',mousemove,false);
+			canvas.addEventListener('mouseup',mouseup,false);
+			canvas.addEventListener('mouseout',mouseup,false);
+
+			colordiv=document.getElementById('color');
+
+			document.getElementById("button_save").disabled = "disabled";
+			(statusdiv=document.getElementById("status")).innerHTML="Guest - SAVING DISABLED";		}
+
+		function mousedown(e){ context.beginPath(); context.moveTo(e.clientX-(block>>2), e.clientY-(block>>2)); painting=true; }
+		function mousemove(e){ if(painting){ context.lineTo(e.clientX-(block>>2), e.clientY-(block>>2)); context.stroke(); } }
+		function mouseup(e){ painting=false; }
+		function draw(size){ block=size; context.lineWidth=block; context.strokeStyle = 'rgb('+color.join(',')+')'; colordiv.style.background = 'rgb('+color.join(',')+')'; }
+		function erase(size){ block=size; context.lineWidth=block; context.strokeStyle = '#fff'; colordiv.style.background = '#fff';}
+
+		function save(auto){
+			if(!saving){
+				saving=true;
+				document.getElementById('button_save').style.background='#888';
+				statusdiv.innerHTML=auto?'Autosaving the painting':'Saving the painting';
+				(SaveObj=new XMLHttpRequest()).open('POST.html', 'includes/ajax_dsipaint_save.html', true);
+				SaveObj.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+				SaveObj.send('data='+document.getElementById('canvas').toDataURL('image/png'));
+				SaveObj.onreadystatechange=function(){
+					if(SaveObj.readyState==4){
+						statusdiv.innerHTML=SaveObj.responseText;
+						saving=false;
+						document.getElementById('button_save').style.background='#00f';
+					}
+				}
+			}
+		}
+
+		function set_color(){
+			if((mousey=window.event.clientY-1)>=0 && mousey<128){
+				if((mousex=window.event.clientX-162)>=0 && mousex<64){
+					var temp_color = (mousex>>1)+((mousey>>1)<<6);
+					color=[((temp_color>>8)&15)<<4,((temp_color>>4)&15)<<4,((temp_color)&15)<<4];
+				}else{
+					color=[mousey<<1,mousey<<1,mousey<<1];
+				}
+				context.strokeStyle = 'rgb('+color.join(',')+')';
+				statusdiv.innerHTML = 'Color set to ('+color.join(',')+')';
+				colordiv.style.background = 'rgb('+color.join(',')+')';
+			}
+		}
+	</script>
+	<style type="text/css">
+		BODY {
+			font-size: 8px;
+			margin: 0px;
+			overflow: hidden;
+		}
+		FORM { margin:0px; padding:0px; }
+		DIV {
+			padding:0px;
+		}
+		.button {
+			border: 2px outset #00f;
+			font-size: 8px;
+			height: 14px;
+			position: absolute;
+			text-align: center;
+			width: 34px;
+		}
+		.draw_brush {
+			background:#000;
+			position:absolute;
+			top:134px;
+		}
+		.erase_brush {
+			background:#fff;
+			position:absolute;
+			top:147px;
+		}
+	</style>
+</head>
+<body style="background: url(../images/backgrounds/background0.png)">
+	<div style="height:10px; left:2px; position:absolute; top:162px; width:228px" id="status">Creating GUI...</div>
+	<form action="#" method="post" onsubmit="return false;">
+	<input type="submit" class="button" style="left:166px; top:160px" id="button_save" onclick="save(false);" value="Save" />
+	<input type="submit" class="button" style="left:203px; top:160px" value="Exit" onclick="location.href='index.html';" />
+	</form>
+	<canvas id="canvas" style="background:#fff; border:1px inset #888; left:0px; position:absolute; top:0px" width="160" height="160"></canvas>
+	<div style="background:url(images/palette.png); border:1px outset #888; height:128px; left:162px; position:absolute; top:0px; width:76px" onclick="set_color()"></div>
+	<div id="color" style="background:#000; border:1px outset #888; height:27px; left:226px; position:absolute; top:130px; width:12px"></div>
+	<div class="draw_brush" style="border:4px solid #fff; height:2px; left:164px; width:2px" onclick="draw(1)"></div>
+	<div class="draw_brush" style="border:3px solid #fff; height:4px; left:176px; width:4px" onclick="draw(2)"></div>
+	<div class="draw_brush" style="border:2px solid #fff; height:6px; left:188px; width:6px" onclick="draw(4)"></div>
+	<div class="draw_brush" style="border:1px solid #fff; height:8px; left:200px; width:8px" onclick="draw(6)"></div>
+	<div class="draw_brush" style="height:10px; left:212px; width:10px" onclick="draw(10)"></div>
+	<div class="erase_brush" style="border:4px solid #000; height:2px; left:164px; width:2px" onclick="erase(1)"></div>
+	<div class="erase_brush" style="border:3px solid #000; height:4px; left:176px; width:4px" onclick="erase(2)"></div>
+	<div class="erase_brush" style="border:2px solid #000; height:6px; left:188px; width:6px" onclick="erase(4)"></div>
+	<div class="erase_brush" style="border:1px solid #000; height:8px; left:200px; width:8px" onclick="erase(6)"></div>
+	<div class="erase_brush" style="height:10px; left:212px; width:10px" onclick="erase(10)"></div>
+</body>
+
+<!-- Mirrored from dsipaint.com/paint/dsipaint.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:29:10 GMT -->
+</html>

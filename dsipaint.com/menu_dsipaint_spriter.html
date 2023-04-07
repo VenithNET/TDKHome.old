@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dsipaint.com/menu_dsipaint_spriter.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 22:49:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="DSiPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="DSiPaint, DSi Opera SDK, Nintendo DSi, DSi, JavaScript, video games" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="stylesheet" href="stylee993.css" type="text/css" />
+<link rel="stylesheet" href="lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-9']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	<title>DSiPaint Spriter (Beta)</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			setTimeout('animate(0);',200);
+		}
+
+		function animate(x){
+			for(index=document.getElementsByClassName('sprite_8').length; --index>=0;){
+				document.getElementsByClassName('sprite_8')[index].style.backgroundPosition=-(x<<5)+'px 0px';
+			}
+			for(index=document.getElementsByClassName('sprite_4').length; --index>=0;){
+				document.getElementsByClassName('sprite_4')[index].style.backgroundPosition=-((x&3)<<5)+'px 0px';
+			}
+			for(index=document.getElementsByClassName('sprite_w').length; --index>=0;){
+				document.getElementsByClassName('sprite_w')[index].style.backgroundPosition=-((x&3)<<6)+'px 0px';
+			}
+			setTimeout('animate('+((x+1)&7)+');',200);
+		}
+	</script>
+	<style type="text/css">
+		.sprite_4, .sprite_8 {
+			border: 1px inset #888;
+			float: right;
+			height: 64px;
+			padding: 0px;
+			width: 32px;
+		}
+		.sprite_w {
+			border: 1px inset #888;
+			float: right;
+			height: 64px;
+			padding: 0px;
+			width: 64px;
+		}
+	</style>
+</head>
+<body style="background: url(images/backgrounds/background0.png)">
+
+<div style="padding:2px; text-align:center">
+	<a href="index.html"><img src="images/logo.png" alt="Logo" /></a>
+</div>
+
+<div class="menu_section" style="padding:0px">
+
+
+	<div class="menu_section">
+		<div class="nav_avatar">
+			<a onclick="showLogin();"><img src="avatars_site/0.png" alt="Login" title="Login" /></a>
+		</div>
+
+		<div class="nav_div">Welcome, Guest.</div>
+		<div class="nav_div">
+			<a onclick="showLogin();">Login</a> | <a href="register.html">Register</a>
+		</div>
+
+		<div id="divLogin"  style="display:none" >
+			<form action="#" method="post">
+				Username: <input type="text" name="username" class="form_field" /><br />
+				Password: <input type="password" name="password" class="form_field" /><br />
+				Remember me: <input type="checkbox" value="true" name="remember" /><br />
+				<input type="submit" value="Login" class="form_button" />
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function showLogin(){
+			document.getElementById('divLogin').style.display='block';
+		}
+	</script>
+
+</div>
+
+	<h1>DSiPaint Spriter</h1>
+
+	<table style="margin:auto; text-align:center">
+		<tr>
+			<td colspan="4" style="text-align:justify">
+				DSiPaint Spriter is the HTML5-canvas painting application built just for the Nintendo DSi.
+				It allows members to paint artwork to save to PNG cel images for sharing.
+				Depending on the configuration of the save, it can be 4 frames, 8 frames, or 4 wide frames.
+			</td>
+		</tr>
+		<tr>
+			<td><a href="paint/dsipaint_spriter.html"><img class="icon" src="images/icons/icon_dsipaint_spriter.png" alt="DSiPaint" /><br />DSiPaint<br />Spriter</a></td>
+			<td></td>
+			<td colspan="2" style="text-align:right">
+				<a href="menu_dsipaint_spriter.html">
+					<div class="sprite_8" style="background:url(images/sprite_gallery/38485.png) no-repeat" /></div>
+					<div style="clear:right">zani40</div>
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<th>View</th>
+
+			<th colspan="3"></th>		</tr>
+		<tr>
+			<td><a href="paint/dsipaint_spriter_top10.html"><img class="icon" src="paint/images/icons/icon_dsipaint_top10.png" alt="DSiPaint Top 10" /><br />Top Art</a></td>
+
+			<td colspan="3"></td>		</tr>
+	</table>
+
+	<div style="margin:5px; text-align:center">
+		<a href="index.html"><img class="icon" src="images/icons/icon_home.png" alt="Home" /></a>
+	</div>
+
+<div style="font-size:8px; text-align:justify">
+	Nintendo trademarks and copyrights are properties of Nintendo.
+	Opera is a product of Opera Software ASA.
+	This website is &copy;2009-2023 HullBreach Studios Ltd. All rights reserved.
+	Members are responsible for their own content.
+	No account information will be given to third-parties.
+</div>
+
+<div id="divAlertPopup" class="alerts_popup menu_section"></div>
+<script type="text/javascript">
+	var AlertPopupObj = new XMLHttpRequest();
+	function refreshMyPopupAlerts(){
+		AlertPopupObj.open('GET.html', 'includes/ajax.section.my_alert_popup.html', true);
+		AlertPopupObj.send(null);
+		AlertPopupObj.onreadystatechange = function(){
+			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
+				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
+				AlertPopupObj.abort();
+				return;
+			}
+			if(AlertPopupObj.readyState==4){
+				if(AlertPopupObj.responseText){
+					var divAlertPopup = document.getElementById('divAlertPopup'),
+						alerts = [];
+					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
+					if(alerts.length){
+						var alertString = '',
+							index = 0;
+						while(index<alerts.length){
+							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
+							index++;
+						}
+						divAlertPopup.innerHTML = alertString;
+						divAlertPopup.style.display = 'block';
+					}else{
+						divAlertPopup.style.display = 'none';
+					}
+				}
+				setTimeout(refreshMyPopupAlerts, 10000);
+			}
+		}
+	}
+	refreshMyPopupAlerts();
+</script>
+
+</body>
+
+<!-- Mirrored from dsipaint.com/menu_dsipaint_spriter.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 22:49:15 GMT -->
+</html>

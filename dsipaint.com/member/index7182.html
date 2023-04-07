@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+<!-- Mirrored from dsipaint.com/member/?id=145053 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:05:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="3DSPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="3D Photo Gallery, 3DS Photo Gallery, Upload 3D Photos, Upload 3DS Photos, MPO, 3DSPaint, 3DS Opera SDK, Nintendo 3DS, 3DS, JavaScript, video games" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<link rel="stylesheet" href="../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-11']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+		<title>Profile for royal-rawr</title>
+		<script type="text/javascript">
+			'use strict';
+
+			function flag(obj, comment) {
+				var params = 'action=comment_flag&comment=' + comment;
+
+				if (confirm("Flag comment?")) {
+					xhrCall(params);
+					obj.style.display = 'none';
+				}
+				return false;
+			}
+			function remove_comment(obj, comment) {
+				var div = obj.parentNode.parentNode,
+						params = 'action=comment_delete&comment=' + comment;
+
+				if (confirm("Delete comment?")) {
+					xhrCall(params);
+					div.parentNode.removeChild(div);
+				}
+				return false;
+			}
+			function xhrCall(params) {
+				xhr.abort();
+				xhr.open('GET.html', '?id=145053&ajax=' + (new Date()).getTime() + '&' + params, true);
+				xhr.send(null);
+			}
+
+			function mousedown(e) {
+				context.beginPath();
+				context.moveTo(e.offsetX - 1, e.offsetY - 1);
+				painting = true;
+			}
+			function mousemove(e) {
+				if (painting) {
+					context.lineTo(e.offsetX - 1, e.offsetY - 1);
+					context.stroke();
+				}
+			}
+			function mouseup(e) {
+				painting = false;
+			}
+
+			function save() {
+				if (!saving) {
+					saving = true;
+					var data = 'id=145053&data=' + canvas.toDataURL('image/png');
+					console.log(data);
+					var xhrSave = new XMLHttpRequest();
+					xhrSave.open('POST.html', '../includes/ajax_comment_save.html', true);
+					xhrSave.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					xhrSave.setRequestHeader('Content-length', data.length);
+					xhrSave.setRequestHeader('Connection', 'close');
+					xhrSave.send(data);
+					xhrSave.onreadystatechange = function () {
+						if (xhrSave.readyState == 4 && xhrSave.responseText == 'true') {
+							location.reload();
+						}
+					};
+				}
+				return false;
+			}
+
+			var xhr = new XMLHttpRequest();
+
+			window.onload = function () {
+				var images = document.getElementsByName('body_images');
+				var maxwidth = 800;
+				if (document.domain.indexOf('3dspaint')) {
+					maxwidth = 300;
+				} else if (document.domain.indexOf('dsipaint')) {
+					maxwidth = 220;
+				}
+				for (var index in images) {
+					if (images[index].width > maxwidth) {
+						images[index].width = maxwidth;
+					}
+				}
+			}
+		</script>
+		<style type="text/css">
+			TD.profile_page{
+				background:#8f8;
+				border:1px outset #888;
+				color:#fff;
+				font-size:9pt;
+				text-align:center;
+			}
+			.button {
+				background: #fff;
+				border: 1px outset #888;
+				margin: 3px;
+				padding: 3px;
+				width: 10px;
+				height: 10px;
+			}
+			.admin TD, .admin TEXTAREA {
+				background:#fff !important;
+				color:#000 !important;
+			}
+		</style>
+		<style type="text/css">
+			body {background-color:black;background-image:url(../images/upload_gallery/16491.jpg)!important;word-wrap:break-word!important;width:99%!important;font-size:12px!important;line-height:14px!important}
+
+input.form_button {background-image:url(../images/upload_gallery/16492.jpg)!important;border:1px darkred solid;border-radius:1px 1px 1px 1px!important}
+
+div.menu_section {background-color:black!important;color:red!important;border:1px red solid;max-width:800px!important;border-radius:1px!important;}
+div#shout.zebra, input#txtShout.form_field {background-image:url(../images/upload_gallery/16060.jpg)!important}
+div.button_div {background-color:darkred!important;border-radius:1px}
+textarea#styling.form_textarea, textarea#.form_textarea, input.form_field {background-color:black!important;color:red!important}
+IMG[src="/images/logo.png"] {content:url(../images/upload_gallery/17057.jpg)!important;height:45px;width:175px;}
+div.spoiler_body {background-color:black!important}
+
+textarea.form_textarea {background-color:black!important;color:red;border:1px red solid!important}
+
+div.zebra {background-color:black!important;padding:8px!important;border:1px transparent solid!important;}
+
+h1 {background-color:black!important;color:red;border:1px transparent solid;border-radius:1px!important}
+a {color:red;font-weight:bold!important}
+input:hover, ::selection {background-color:red!important;color:black!important}
+a:hover {background-color:red!important;color:black!important}
+
+div#divAlertPopup {margin:auto!important;max-width:800px!important;}
+
+a[href^="https://dc-blog.neocities.org"] {color:lime!important}
+
+a[href="/member?id=145053"]:before {content:"Anarcho-Commie "!important;color:white!important}		</style>
+	</head>
+	<body style="background: url(../images/backgrounds/background19.png)">
+
+<div style="padding:2px; text-align:center">
+	<a href="../index.html"><img src="../images/logo.png" alt="Logo" /></a>
+</div>
+
+<div class="menu_section" style="padding:0px">
+
+
+	<div class="menu_section">
+		<div class="nav_avatar">
+			<a onclick="showLogin();"><img src="../avatars_site/0.png" alt="Login" title="Login" /></a>
+		</div>
+
+		<div class="nav_div">Welcome, Guest.</div>
+		<div class="nav_div">
+			<a onclick="showLogin();">Login</a> | <a href="../register.html">Register</a>
+		</div>
+
+		<div id="divLogin"  style="display:none" >
+			<form action="#" method="post">
+				Username: <input type="text" name="username" class="form_field" /><br />
+				Password: <input type="password" name="password" class="form_field" /><br />
+				Remember me: <input type="checkbox" value="true" name="remember" /><br />
+				<input type="submit" value="Login" class="form_button" />
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function showLogin(){
+			document.getElementById('divLogin').style.display='block';
+		}
+	</script>
+
+</div>
+
+		<h1>Profile for royal-rawr</h1>
+
+
+		<div class="menu_section">
+			<div class="head">
+				&quot;:l&quot;
+			</div>
+			<div class="row"><div>FIRST NAME</div> Calem</div>
+			<div class="row"><div>BIRTHDAY</div>29 May 2007</div>
+			<div class="row"><div>MEMBER SINCE</div>29 Jul 2020</div>
+			<div class="row"><div>LAST LOGIN</div>06 Apr 2023</div>
+			<div class="row"><div>MOOD</div>Idiomorphic</div>
+			<div class="row"><div>DOING NOW</div>[Private]</div>
+			<div class="row"><div>STANDING</div>Active</div>
+			<div class="row"><div>3DS CODE</div>1779-5713-1983</div>
+			<div class="row"><div>SWITCH CODE</div>(Not set)</div>
+			<div class="row"><div>NINT NETWK ID</div>Now haha WHY WOULD I TELL Y O U THAT</div>
+		</div>
+
+
+		<h1>Biography</h1>
+		<div class="menu_section">
+			<div class="form_body" id="blog_body">
+
+				<span style="font-weight:bold"> <big> Talor den Hir Crimae, Yi Fakno Devur</big> </span><br /><span style="font-weight:bold"> <big> Religon of the Burning Eyes, Live to consume. </big> </span><br /><br />------------------------<br /><br />Your local cutting board:<br />It's <span style="color:limegreen">Calem</span>.<br />(that statement gets <span style="color:white">truer</span> and  <span style="color:white"> truer</span> )<br />------------------<br /><br />I own the <span style="text-decoration:underline">DCIGO</span>. Ask about it if you wanna join it. It's open to everyone. <br /><br />--------------------<br /><br /><span style="font-weight:bold"> THINGS ABOUT ME  </span><br /><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Gender" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"> Transgender Male. </div><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Relationship" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"> Ew </div><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Age" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"> 15 :0 </div><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Friends" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"> DCTheGamr, crocodile2, Weeeheep, FakeRandomperson, Milly aka Millifoxii, Darkness, Draconid_Jo, Siling-La, hot.pockets (if i forgot you, lemme know) (if i don't add you in a week after you've reminded me, i'm not actually adding you, sorry :/) </div><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Hobbies" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"> Drawing, Chatting, Gaming (?), Writing, Storymaking/Worldbuilding, Doing ur mom </div> <br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Things U Should Know" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"> I'm not a furry (unlike my name may imply), I support lgbtq+, I'm a for-the-memes communist, I am very  honest and will state my opinion, but if ya need somebody I'll be there for ya, and I keep secrets to the grave. </div><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Contacts" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"> &gt;:/ </div><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Other shit" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"> I'm Metis, so basically, not white. I'm kinky and WILL make vore jokes/talk abt vore (I'm (so) sorry lu), and I did ur mom so I'm now legally your father </div><br /><br />--------------------<br /><br /><a href="../images/upload_gallery/15819.jpg"><img src="../images/upload_gallery/15819_thumb.jpg" alt="thumb"></a><br />:P<br /><br />-------------------- <br /><br />Remember guys, if green is your favorite color<br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="You're" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none"> a homosexual &gt;:] </div><br /> <br /><small>Weeeheep was here (:&lt;</small><br /><big>DCTheGamr was also here</big>			</div>
+		</div>
+
+		<h1>Profile Pages</h1>
+		<div class="menu_section" style="width:200px">
+			<div class="button_div">
+				<a href="timeline7182.html">TIMELINE</a>
+			</div>
+			<div class="button_div">
+				<a href="comments7182.html">COMMENTS</a>
+			</div>
+			<div class="button_div">
+				<a href="../blog/index7463.html">BLOGS</a>
+			</div>
+			<div class="button_div">
+				<a href="../poll/index7463.html">POLLS</a>
+			</div>
+
+			<div class="button_div">
+				<a href="../saviis/savii_gallery2b61.html">SAVII GALLERY</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page3445.html">ART DUMP </a>
+			</div>
+
+			<div class="button_div">
+				<a href="pagec80c.html">Hexcode colors</a>
+			</div>
+
+			<div class="button_div">
+				<a href="page3dde.html">The Antichrist of Paint</a>
+			</div>
+
+		</div>
+
+
+<h1>Badges</h1>
+<div class="menu_section">
+
+
+        <div class="badge">
+            <a href="../blog/index7463.html"><img src="../images/badges/author2.png" /></a><br />Author        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/courier5.png" /></a><br />Courier        </div>
+
+    
+        <div class="badge">
+            <a href="#"><img src="../images/badges/socialite6.png" /></a><br />Socialite        </div>
+
+    
+</div>
+
+		<h1>Last Blogs</h1>
+		<div class="menu_section">
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_t32.png" alt="T" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">5</div>
+					</div>
+
+					<a href="../blog/indexe020.html">Goddess of everything</a><br />
+					In Poetry and Lyrics<br />
+					On 23 Mar 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_t32.png" alt="T" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">4</div>
+					</div>
+
+					<a href="../blog/index1086.html">Explain to me</a><br />
+					In Poetry and Lyrics<br />
+					On 24 Feb 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_m32.png" alt="M" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">3</div>
+					</div>
+
+					<a href="../blog/indexbfb9.html">The Devil's Dance</a><br />
+					In Poetry and Lyrics<br />
+					On 12 Feb 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_m32.png" alt="M" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">4</div>
+					</div>
+
+					<a href="../blog/index8e2a.html">Bad things</a><br />
+					In Poetry and Lyrics<br />
+					On 07 Feb 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_e32.png" alt="E" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">5</div>
+					</div>
+
+					<a href="../blog/index53ee.html">Ode to a Mirrored Image</a><br />
+					In Poetry and Lyrics<br />
+					On 08 Jan 2023				</div>
+
+
+				<div class="zebra">
+					<img class="rating left" src="../images/rating_m32.png" alt="M" />
+
+					<div class="blog_right">
+						<div style="background:#8f0; border:1px solid #8f0">6</div>
+					</div>
+
+					<a href="../blog/indexc3ab.html">Tying ropes</a><br />
+					In Miscellaneous<br />
+					On 28 Dec 2022				</div>
+
+			</div>
+
+			<h1>Comments</h1>
+			<div class="menu_section">
+				<form action="#" method="post">
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../avatars_site/9.png" alt="Avatar" class="avatar" />
+						<a href="index0587.html">AntiTikTokAuthority</a><br />
+						05 Apr 2023 17:48						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Join The Crusade Against TikTok, Today! <br />https://3dspaint.com/blog/view.php?id=100972</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247406.png" alt="Avatar" class="avatar" />
+						<a href="index83a3.html">Wesley388</a><br />
+						03 Apr 2023 04:05						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">So is :l the meh face?</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247406.png" alt="Avatar" class="avatar" />
+						<a href="index83a3.html">Wesley388</a><br />
+						31 Mar 2023 03:21						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">So have you been alright?</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247403.png" alt="Avatar" class="avatar" />
+						<a href="indexfb6e.html">DCTheGamr</a><br />
+						27 Mar 2023 04:32						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">ROYAL-RAWR MADE ME GAAAAAAAAAAAAAY</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247359.png" alt="Avatar" class="avatar" />
+						<a href="indexef8b.html">Siling-La</a><br />
+						21 Mar 2023 04:30						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">You are?</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247359.png" alt="Avatar" class="avatar" />
+						<a href="indexef8b.html">Siling-La</a><br />
+						20 Mar 2023 20:31						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Oh. I had no clue it was called that.</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/247359.png" alt="Avatar" class="avatar" />
+						<a href="indexef8b.html">Siling-La</a><br />
+						20 Mar 2023 11:56						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Meteor hammer?<br /><br />*It was at this moment Siling-La saw the hundreds of birthday messages he neeeded to thank people for the next day*<br /><br />0_0</div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+						<a href="indexaf5e.html">JinxCade</a><br />
+						18 Mar 2023 15:10						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">I swear that's how much I put there </div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../avatars_site/9.png" alt="Avatar" class="avatar" />
+						<a href="index0587.html">AntiTikTokAuthority</a><br />
+						15 Mar 2023 19:51						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">Who's a @crocodile2? I'm to retar'ed to know much about anything really. </div>
+				</div>
+					<div>
+					<div class="zebra" style="padding:0px">
+						<img src="../images/art_gallery/246930.png" alt="Avatar" class="avatar" />
+						<a href="index7182.html">royal-rawr</a><br />
+						15 Mar 2023 04:21						<div style="clear:both"></div>
+					</div>
+					<div class="zebra">@crocodile2 fuck off before i get angy again &gt;:/ :]</div>
+				</div>
+			</form>
+		</div>
+
+		<div style="margin:5px; text-align:center">
+			<a href="../index.html"><img class="icon" src="../images/icons/icon_home.png" alt="Home" /></a>
+		</div>
+
+
+<div style="font-size:10px; text-align:center">
+	Nintendo 3DS is &trade; Nintendo Co. Ltd.
+	This website is &copy;2009-2023 HullBreach Studios. All rights reserved.
+	Members are responsible for their own content.
+	No account information will be given to third-parties without your consent.
+</div>
+
+<div id="divAlertPopup" class="alerts_popup menu_section"></div>
+<script type="text/javascript">
+	var AlertPopupObj = new XMLHttpRequest();
+	function refreshMyPopupAlerts(){
+		AlertPopupObj.open('GET.html', '../includes/ajax.section.my_alert_popup.html', true);
+		AlertPopupObj.send(null);
+		AlertPopupObj.onreadystatechange = function(){
+			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
+				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
+				AlertPopupObj.abort();
+				return;
+			}
+			if(AlertPopupObj.readyState==4){
+				if(AlertPopupObj.responseText){
+					var divAlertPopup = document.getElementById('divAlertPopup'),
+						alerts = [];
+					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
+					if(alerts.length){
+						var alertString = '',
+							index = 0;
+						while(index<alerts.length){
+							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
+							index++;
+						}
+						divAlertPopup.innerHTML = alertString;
+						divAlertPopup.style.display = 'block';
+					}else{
+						divAlertPopup.style.display = 'none';
+					}
+				}
+				setTimeout(refreshMyPopupAlerts, 10000);
+			}
+		}
+	}
+	refreshMyPopupAlerts();
+</script>
+	</body>
+
+<!-- Mirrored from dsipaint.com/member/?id=145053 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:05:55 GMT -->
+</html>

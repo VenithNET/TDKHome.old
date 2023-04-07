@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dsipaint.com/patrons.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:00:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="DSiPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="DSiPaint, DSi Opera SDK, Nintendo DSi, DSi, JavaScript, video games" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="stylesheet" href="stylee993.css" type="text/css" />
+<link rel="stylesheet" href="lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-9']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	<title>Patrons</title>
+</head>
+<body style="background: url(images/backgrounds/background0.png)">
+
+<div style="padding:2px; text-align:center">
+	<a href="index.html"><img src="images/logo.png" alt="Logo" /></a>
+</div>
+
+<div class="menu_section" style="padding:0px">
+
+
+	<div class="menu_section">
+		<div class="nav_avatar">
+			<a onclick="showLogin();"><img src="avatars_site/0.png" alt="Login" title="Login" /></a>
+		</div>
+
+		<div class="nav_div">Welcome, Guest.</div>
+		<div class="nav_div">
+			<a onclick="showLogin();">Login</a> | <a href="register.html">Register</a>
+		</div>
+
+		<div id="divLogin"  style="display:none" >
+			<form action="#" method="post">
+				Username: <input type="text" name="username" class="form_field" /><br />
+				Password: <input type="password" name="password" class="form_field" /><br />
+				Remember me: <input type="checkbox" value="true" name="remember" /><br />
+				<input type="submit" value="Login" class="form_button" />
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function showLogin(){
+			document.getElementById('divLogin').style.display='block';
+		}
+	</script>
+
+</div>
+
+<div class="menu_blank" style="text-align:center; display:block !important" id="section_patreon">
+	<a href="../external.html?link=https://www.patreon.com/bePatron?u=12259836"><img src="images/patreon.png" alt="Patreon" /></a>
+</div>
+
+<div class="menu_blank" style="text-align:center; display:block !important" id="section_paypal">
+	<form action="../external.html?link=https://www.paypal.com/donate" method="post" target="_top">
+	<input type="hidden" name="hosted_button_id" value="R5Z3VKDSH6EFC" />
+	<input type="image" src="images/btn_donate_SM.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+	</form>
+</div>
+
+	<h1>Spy Patrons</h1>
+	<div class="menu_section">
+		<div class="zebra" style="text-align:center">
+			<img src="images/badges/patron2big.gif" alt="Spy" /><br />
+			See pre-release content before anyone else		</div>
+		<div class="zebra">
+			<ul style="background:none">
+				<li style="text-align:left"><a href="member/indexd6bf.html">GuitarGodAnth</a></li>
+			</ul>
+		</div>
+	</div>
+	<h1>Architect Patrons</h1>
+	<div class="menu_section">
+		<div class="zebra" style="text-align:center">
+			<img src="images/badges/patron5big.gif" alt="Architect" /><br />
+			Spy, plus take part in the planning sessions for future updates to the community		</div>
+		<div class="zebra">
+			<ul style="background:none">
+				<li style="text-align:left"><a href="member/indexfa63.html">Agf4Nov1998</a></li>
+				<li style="text-align:left"><a href="member/index2928.html">atreyufan1500</a></li>
+				<li style="text-align:left"><a href="member/indexa47e.html">CapriceMontrer</a></li>
+				<li style="text-align:left"><a href="member/indexd123.html">Divine Crusader</a></li>
+				<li style="text-align:left"><a href="member/index6632.html">Ellarose</a></li>
+				<li style="text-align:left"><a href="member/index7fc4.html">HeroElKabong</a></li>
+				<li style="text-align:left"><a href="member/indexee90.html">Limxzero</a></li>
+				<li style="text-align:left"><a href="member/indexb722.html">nightfall9981</a></li>
+				<li style="text-align:left"><a href="member/index385f.html">Rlad116</a></li>
+				<li style="text-align:left"><a href="member/index7600.html">Star Shadow</a></li>
+			</ul>
+		</div>
+	</div>
+
+<div style="font-size:8px; text-align:justify">
+	Nintendo trademarks and copyrights are properties of Nintendo.
+	Opera is a product of Opera Software ASA.
+	This website is &copy;2009-2023 HullBreach Studios Ltd. All rights reserved.
+	Members are responsible for their own content.
+	No account information will be given to third-parties.
+</div>
+
+<div id="divAlertPopup" class="alerts_popup menu_section"></div>
+<script type="text/javascript">
+	var AlertPopupObj = new XMLHttpRequest();
+	function refreshMyPopupAlerts(){
+		AlertPopupObj.open('GET.html', 'includes/ajax.section.my_alert_popup.html', true);
+		AlertPopupObj.send(null);
+		AlertPopupObj.onreadystatechange = function(){
+			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
+				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
+				AlertPopupObj.abort();
+				return;
+			}
+			if(AlertPopupObj.readyState==4){
+				if(AlertPopupObj.responseText){
+					var divAlertPopup = document.getElementById('divAlertPopup'),
+						alerts = [];
+					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
+					if(alerts.length){
+						var alertString = '',
+							index = 0;
+						while(index<alerts.length){
+							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
+							index++;
+						}
+						divAlertPopup.innerHTML = alertString;
+						divAlertPopup.style.display = 'block';
+					}else{
+						divAlertPopup.style.display = 'none';
+					}
+				}
+				setTimeout(refreshMyPopupAlerts, 10000);
+			}
+		}
+	}
+	refreshMyPopupAlerts();
+</script>
+</body>
+
+<!-- Mirrored from dsipaint.com/patrons.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:00:53 GMT -->
+</html>

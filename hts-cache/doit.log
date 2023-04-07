@@ -1,0 +1,8 @@
+-O /storage/emulated/0/HTTrack/Websites/DSiPaint -A25000k%Pnx%q0u1s2%s%u%fDaK0H0N0p7 https://dsipaint.com/ +*.png +*.gif +*.jpg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%l LANGUAGE_ISO,*
+File generated automatically on Thu, 06 Apr 2023 18:46:37, do NOT edit
+
+To update a mirror, just launch httrack without any parameters
+The existing cache will be used (and modified)
+To have other options, retype all parameters and launch HTTrack
+To continue an interrupted mirror, just launch httrack without any parameters
+

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from dsipaint.com/blog/view.php?id=100938 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:05:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="3DSPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="3D Photo Gallery, 3DS Photo Gallery, Upload 3D Photos, Upload 3DS Photos, MPO, 3DSPaint, 3DS Opera SDK, Nintendo 3DS, 3DS, JavaScript, video games" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<link rel="stylesheet" href="../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-11']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+        <title>[AMA] The time I hacked my counties school system. By MattFromSpace</title>
+        <style type="text/css">
+            DIV.vote {
+                float:right;
+                font-size:12pt;
+                font-weight:bold;
+                padding-bottom:0px;
+                padding-top:0px;
+            }
+            .button {
+                background: #fff;
+                border: 1px outset #888;
+                margin: 3px;
+                padding: 3px;
+                width: 10px;
+                height: 10px;
+            }
+            .reply_block {
+                background:#ffd;
+                padding-left:3px;
+            }
+            .reply_block DIV {
+                padding-left:10px;
+            }
+        </style>
+    </head>
+    <body style="background: url(../images/backgrounds/background0.png)">
+
+		<div style="padding:2px; text-align:center">
+	<a href="../index.html"><img src="../images/logo.png" alt="Logo" /></a>
+</div>
+
+<div class="menu_section" style="padding:0px">
+
+
+	<div class="menu_section">
+		<div class="nav_avatar">
+			<a onclick="showLogin();"><img src="../avatars_site/0.png" alt="Login" title="Login" /></a>
+		</div>
+
+		<div class="nav_div">Welcome, Guest.</div>
+		<div class="nav_div">
+			<a onclick="showLogin();">Login</a> | <a href="../register.html">Register</a>
+		</div>
+
+		<div id="divLogin"  style="display:none" >
+			<form action="#" method="post">
+				Username: <input type="text" name="username" class="form_field" /><br />
+				Password: <input type="password" name="password" class="form_field" /><br />
+				Remember me: <input type="checkbox" value="true" name="remember" /><br />
+				<input type="submit" value="Login" class="form_button" />
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function showLogin(){
+			document.getElementById('divLogin').style.display='block';
+		}
+	</script>
+
+</div>
+
+        <h1>[AMA] The time I hacked my counties school system.</h1>
+
+		
+			<div class="menu_section" style="padding:0px">
+				<div class="form_heading">
+					<img id="imgRating" class="rating" style="float:right" src="../images/rating_t32.png" alt="T" />
+
+												<img src="../images/art_gallery/247340.png" alt="Avatar" class="avatar" />
+							
+					By <a href="../member/index9b32.html">MattFromSpace</a>
+					
+					
+					<br />
+					POSTED: 18 Mar 2023 11:46<br />
+
+					
+					CATEGORY: Technology<br />
+					
+
+						FEATURED: <span style="color:#0a0">Yes</span>						(<a href="../member/index2fb6.html">Draconid_Jo</a>)
+						<br>(<a href="#comments">Go to comments</a>)
+				</div>
+				<div class="form_body" id="blog_body">
+						There was a time quite a few years ago, were I hacked my counties school system when I was in HS. I barely made it out on time.<br /><br />The story begins:<br /><br />Early 2018:<br /><br />When I was in high school, I had a completely different and non scenical personality. I didn't realy care what I got myself into. Prior to the incident, I've destroyed a few school computers in middle school, but no one cared, and I never got in trouble. I didn't understand then and they knew I was reverted a few years mentally, so they gave the slack and turned a blind eye, but talked to my mother.<br /><br /><br />In high school I would typically cast NSFW, pirated movies, memes, etc onto the rokus using a VPN which I shared with everyone using my arch laptop and making hotspots using the command line. I gained a bit of underground fame across the school for this, and because everyone knew me for my arch window manager looking like a hacker movie terminal to the newbies.<br /><br />I can't remember the exact timeline this happened, but it was somewhere between in 2018:<br /><br />I ended up one day poking through the school filesystem, and I noticed a file. (I can't remember the name exactly, something like DOMAIN.TXT) I already had a windows server in a VM I used with two friends at the time on there old hardware. I knew what it could be, and I was right, it was the "MASTER DC(DOMAIN CONTROLLER) LOGIN!" No one SHOULD EVER EVER EVER be granted this account... The imaging process should of involved deleting it, as this was basically admin of the entire county school system. I tried logging into this account after writing it on a piece of paper then drawing all over it to keep it from being read, as I knew what could happen. I opened up the server manager, and saw all the domain controllers, all the users, everything, everyone. I couldn't believe it, I poked around for a bit not realizing they were recording the screen when anything logged into that user, and I knew I wouldn't of been caught if I made a VM with a randomized mac, and joined the domain with it. Instead I was a idiot, and deleted all the domain controllers, or literal internal school networks, instead of reporting the bug which could of got me money. The WiFi for my school, and many went out, and I knew I was in trouble. Everyone was looking at me, and I turned off the computer. Everyone knew what I did at that moment because I bragged like a idiot.<br /><br />Ask me for part 2 for the rest of the ordeal.				</div>
+				<div class="zebra">
+					<div style="text-align:center">
+												+4												-0					</div>
+					<div>
+
+														<a class="left" href="../member/index2fb6.html">
+																			<img src="../images/art_gallery/246735.png" alt="Avatar" class="avatar" />
+																		</a>
+																<a class="left" href="../member/index196c.html">
+																			<img src="../images/art_gallery/246575.png" alt="Avatar" class="avatar" />
+																		</a>
+																<a class="left" href="../member/indexaf5e.html">
+																			<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+																		</a>
+																<a class="left" href="../member/index1c40.html">
+																			<img src="../images/art_gallery/8.png" alt="Avatar" class="avatar" />
+																		</a>
+													</div>
+					<div style="clear:both"></div>
+				</div>
+			</div>
+			<a id="comments"></a>
+			<h1>Comments</h1>
+			<div class="menu_section">
+
+
+				
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430683"></a>
+
+                                <img src="../images/art_gallery/245931.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index9fdf.html">Leftist-Tachyon</a><br />
+            06 Apr 2023 00:52<br />
+
+                
+                <div class="zebra" id="comment[430683]" style="clear:both">
+
+fake and gay
+                    
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430686"></a>
+
+                                <img src="../images/art_gallery/244380.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index96d6.html">GuiedGui</a><br />
+            06 Apr 2023 01:33<br />
+
+                In reply to Leftist-Tachyon
+                <div class="zebra" id="comment[430686]" style="clear:both">
+
+fake and gay
+                    
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430687"></a>
+
+                                <img src="../images/art_gallery/247340.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index9b32.html">MattFromSpace</a><br />
+            06 Apr 2023 01:34<br />
+
+                In reply to GuiedGui
+                <div class="zebra" id="comment[430687]" style="clear:both">
+
+Thank you
+                    
+        </div>
+
+        
+                </div>
+
+            
+        </div>
+
+        
+                </div>
+
+            
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430685"></a>
+
+                                <img src="../images/art_gallery/247340.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index9b32.html">MattFromSpace</a><br />
+            06 Apr 2023 01:06<br />
+
+                In reply to Leftist-Tachyon
+                <div class="zebra" id="comment[430685]" style="clear:both">
+
+You can go ask the school if it happened you know.
+                    
+        </div>
+
+        
+                </div>
+
+            
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430684"></a>
+
+                                <img src="../images/art_gallery/247403.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/indexfb6e.html">DCTheGamr</a><br />
+            06 Apr 2023 00:53<br />
+
+                In reply to Leftist-Tachyon
+                <div class="zebra" id="comment[430684]" style="clear:both">
+
+lmao
+                    
+        </div>
+
+        
+                </div>
+
+            
+        </div>
+
+        
+                </div>
+
+            
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430609"></a>
+
+                                <img src="../images/art_gallery/244923.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/indexb6fe.html">UwuRuby</a><br />
+            21 Mar 2023 17:05<br />
+
+                
+                <div class="zebra" id="comment[430609]" style="clear:both">
+
+Schools just use plug and play applications for IT, no further tweaking. I could go into recovery mode on a macos using keybinds and install Linux if I wanted to 
+                    
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430610"></a>
+
+                                <img src="../images/art_gallery/247340.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index9b32.html">MattFromSpace</a><br />
+            21 Mar 2023 22:53<br />
+
+                In reply to UwuRuby
+                <div class="zebra" id="comment[430610]" style="clear:both">
+
+It wasn't something special, but they left the SMB open which I never let them know which has there office which has its provisions in it. B)
+                    
+        </div>
+
+        
+                </div>
+
+            
+        </div>
+
+        
+                </div>
+
+            
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430605"></a>
+
+                                <img src="../images/art_gallery/247340.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index9b32.html">MattFromSpace</a><br />
+            21 Mar 2023 12:29<br />
+
+                
+                <div class="zebra" id="comment[430605]" style="clear:both">
+
+There's the Documentary
+                    
+        </div>
+
+        
+                </div>
+
+            
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430604"></a>
+
+                                <img src="../images/art_gallery/247340.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index9b32.html">MattFromSpace</a><br />
+            21 Mar 2023 12:29<br />
+
+                
+                <div class="zebra" id="comment[430604]" style="clear:both">
+
+<a href="../../external.html?link=https://youtube.com/watch?v=o3YLpTWcclo&amp;feature=shares" rel="nofollow">https://youtube.com/watch?v=o3YLpTWcclo&feature=shares</a>
+                    
+        </div>
+
+        
+                </div>
+
+            
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430599"></a>
+
+                                <img src="../images/art_gallery/247340.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index9b32.html">MattFromSpace</a><br />
+            21 Mar 2023 12:27<br />
+
+                
+                <div class="zebra" id="comment[430599]" style="clear:both">
+
+I had to use them on Linux usb, or tether over usb and unplug the ethernet, as it was a network based fw, and proxies and DNS were rejected over it. Do NOT plug you're phone into any school computers now a days, as some schools use programs from other companies that AI scan devices without permission looking for anti LGBTQ content and illegal stuff, to report them. There's a vice documentary on YouTube about it.
+                    
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430603"></a>
+
+                                <img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/indexaf5e.html">JinxCade</a><br />
+            21 Mar 2023 12:28<br />
+
+                In reply to MattFromSpace
+                <div class="zebra" id="comment[430603]" style="clear:both">
+
+Darn, my school says they do, so far not true 
+                    
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430606"></a>
+
+                                <img src="../images/art_gallery/247340.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index9b32.html">MattFromSpace</a><br />
+            21 Mar 2023 12:29<br />
+
+                In reply to JinxCade
+                <div class="zebra" id="comment[430606]" style="clear:both">
+
+I learned from experience
+                    
+        </div>
+
+        
+                </div>
+
+            
+        </div>
+
+        
+                </div>
+
+            
+        </div>
+
+        
+                </div>
+
+            
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430598"></a>
+
+                                <img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/indexaf5e.html">JinxCade</a><br />
+            21 Mar 2023 12:25<br />
+
+                
+                <div class="zebra" id="comment[430598]" style="clear:both">
+
+I can also use VPNs on school hardware, I use opera which I got from <a href="../../external.html?link=https://filecroco.com/" rel="nofollow">here</a> which conveniently has a VPN built-in<br /><br />Oh and no, I cannot install opera from the normal source, the IT did a gud job on locking sum stuff<br /><br />I also found out how to log onto other users accounts because of a vulnerability in the system which would literally be the easiest thing to fix
+                    
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430600"></a>
+
+                                <img src="../images/art_gallery/247340.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index9b32.html">MattFromSpace</a><br />
+            21 Mar 2023 12:27<br />
+
+                In reply to JinxCade
+                <div class="zebra" id="comment[430600]" style="clear:both">
+
+Some companies pay bounties for finding things like that.
+                    
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430607"></a>
+
+                                <img src="../images/art_gallery/246575.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index196c.html">Weeeheeep</a><br />
+            21 Mar 2023 14:01<br />
+
+                In reply to MattFromSpace
+                <div class="zebra" id="comment[430607]" style="clear:both">
+
+I've been told before that I'm good at dodging school restrictions and that they'd reward me tons to help them find it all but I never went because I wanted to enjoy my cheats lol
+                    
+        </div>
+
+        
+                </div>
+
+            
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430601"></a>
+
+                                <img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/indexaf5e.html">JinxCade</a><br />
+            21 Mar 2023 12:28<br />
+
+                In reply to MattFromSpace
+                <div class="zebra" id="comment[430601]" style="clear:both">
+
+I'm in high school
+                    
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430602"></a>
+
+                                <img src="../images/art_gallery/247340.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index9b32.html">MattFromSpace</a><br />
+            21 Mar 2023 12:28<br />
+
+                In reply to JinxCade
+                <div class="zebra" id="comment[430602]" style="clear:both">
+
+I noticed.
+                    
+        </div>
+
+        
+                </div>
+
+            
+        </div>
+
+        
+                </div>
+
+            
+        </div>
+
+        
+                </div>
+
+            
+        </div>
+
+        
+                </div>
+
+            
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430591"></a>
+
+                                <img src="../images/art_gallery/246575.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index196c.html">Weeeheeep</a><br />
+            20 Mar 2023 21:58<br />
+
+                
+                <div class="zebra" id="comment[430591]" style="clear:both">
+
+First thing you always gotta do is delete important shit it's the law lmfao
+                    
+            <div class="form_heading" style="border-top:1px solid #888; margin-left:3px; padding:0px; text-align:left">
+                <a name="430597"></a>
+
+                                <img src="../images/art_gallery/247340.png" alt="Avatar" class="avatar" />
+                    
+                <a href="../member/index9b32.html">MattFromSpace</a><br />
+            21 Mar 2023 12:24<br />
+
+                In reply to Weeeheeep
+                <div class="zebra" id="comment[430597]" style="clear:both">
+
+That's not how the law works. LOL
+                    
+        </div>
+
+        
+                </div>
+
+            
+        </div>
+
+        
+                </div>
+
+            
+        </div>
+
+        
+			</div>
+
+			<div style="margin:5px; text-align:center">
+				<a href="../index.html"><img class="icon" src="../images/icons/icon_home.png" alt="Home" /></a>
+				<a href="index.html"><img class="icon" src="../images/icons/icon_back.png" /></a>
+			</div>
+
+			
+<div style="font-size:10px; text-align:center">
+	Nintendo 3DS is &trade; Nintendo Co. Ltd.
+	This website is &copy;2009-2023 HullBreach Studios. All rights reserved.
+	Members are responsible for their own content.
+	No account information will be given to third-parties without your consent.
+</div>
+
+<div id="divAlertPopup" class="alerts_popup menu_section"></div>
+<script type="text/javascript">
+	var AlertPopupObj = new XMLHttpRequest();
+	function refreshMyPopupAlerts(){
+		AlertPopupObj.open('GET.html', '../includes/ajax.section.my_alert_popup.html', true);
+		AlertPopupObj.send(null);
+		AlertPopupObj.onreadystatechange = function(){
+			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
+				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
+				AlertPopupObj.abort();
+				return;
+			}
+			if(AlertPopupObj.readyState==4){
+				if(AlertPopupObj.responseText){
+					var divAlertPopup = document.getElementById('divAlertPopup'),
+						alerts = [];
+					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
+					if(alerts.length){
+						var alertString = '',
+							index = 0;
+						while(index<alerts.length){
+							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
+							index++;
+						}
+						divAlertPopup.innerHTML = alertString;
+						divAlertPopup.style.display = 'block';
+					}else{
+						divAlertPopup.style.display = 'none';
+					}
+				}
+				setTimeout(refreshMyPopupAlerts, 10000);
+			}
+		}
+	}
+	refreshMyPopupAlerts();
+</script>
+
+    </body>
+
+<!-- Mirrored from dsipaint.com/blog/view.php?id=100938 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:06:00 GMT -->
+</html>
