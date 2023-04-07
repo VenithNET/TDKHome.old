@@ -1,0 +1,109 @@
+A {
+	color: #88f;
+}
+BODY {
+	color: #fff;
+	font-size: 10px;
+	height: 176px;
+	line-height: 12px;
+	margin: 0px;
+	width: 240px;
+}
+BUTTON.generic, INPUT.menu_button {
+	background: url(images/shiny_button.png) center center no-repeat;
+	border: none;
+	color: #444;
+	font-size: 8px;
+	height: 36px;
+	line-height: 11px;
+	margin: 3px;
+	text-shadow: 1px 1px 1px #000;
+	vertical-align: middle;
+	white-space: normal;
+	width: 107px;
+}
+BUTTON.menu {
+	background: url(images/button_wood_off.png);
+	border: 1px outset #802000;
+	color: #eee;
+	font-size: 10px;
+	line-height: 12px;
+	margin: 0px;
+	padding: 2px;
+	text-shadow: 1px 1px 1px #000;
+	width: 238px;
+}
+BUTTON.menu:active {
+	background: url(images/button_wood_on.png);
+	border: 1px inset #802000;
+}
+DIV.name {
+	font-size: 14px;
+	text-align: center;
+	text-shadow: 1px 0px 1px #444;
+}
+DIV.screen {
+	background: url(images/woodgrain.jpg);
+	border: 2px outset #432;
+	text-align: center;
+	width: 236px;
+}
+FORM {
+	margin: 0px;
+	padding: 0px;
+}
+H1.title {
+	background: #401000;
+	border: 1px outset #401000;
+	font-size: 16px;
+	margin: 2px;
+	padding: 3px;
+	text-align: center;
+	text-shadow: 1px 1px 1px #000;
+}
+H1.section {
+	color: #fff;
+	font-size: 16px;
+	margin: 4px;
+	padding: 0px;
+	text-shadow: 1px 1px 1px #000;
+}
+H2 {
+	margin: 2px;
+	margin-top: 10px;
+	text-shadow: 1px 0px 1px #eee;
+}
+H2.updates {
+	font-size: 14px;
+	margin: 4px;
+	padding: 0px;
+	text-shadow: 1px 1px 1px #000;
+}
+INPUT.generic {
+	background: url(images/shiny_button.png) center center no-repeat;
+	border: none;
+	color: #444;
+	font-size: 16px;
+	height: 36px;
+	margin: 3px;
+	text-shadow: 2px 2px 3px #000;
+	white-space: normal;
+	width: 107px;
+}
+
+IMG.avatar {
+	border: 1px inset #432;
+	height: 80px;
+	width: 80px;
+}
+IMG.mini_avatar {
+	border: 1px inset #888;
+	float: left;
+	height: 30px;
+	margin: 3px;
+	width: 30px;
+}
+TH {
+	text-align: left;
+	text-shadow: 1px 1px 1px #444;
+}
