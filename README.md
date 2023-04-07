@@ -11,4 +11,4 @@ To-do:
 - Lot's of testing.
 
 [![Discord](https://tinyurl.com/2p9xchfn)](https://discord.gg/znMAEfN7Xm)
-https://sdkpaint.github.io/DSiPaint-Assets/
+https://sdkpaint.github.io/DSiPaint/
