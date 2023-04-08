@@ -6,9 +6,9 @@ Archiving the legacy of the SDKPaint community.
 
 To-do:
 - Archive assets. ✓
-- Reverse engineer backend from archived assets.
-- Make a backend.
-- Lot's of testing.
+- Fix up assets. [99%]
+- Backend development. [0%]
+- Open testing phase. [0%]
 
 [![Discord](https://tinyurl.com/2p9xchfn)](https://discord.gg/znMAEfN7Xm)
 https://sdkpaint.github.io/DSiPaint/
