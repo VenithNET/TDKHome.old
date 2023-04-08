@@ -1,337 +1,0 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<!-- Mirrored from dsipaint.com/helpdesk/view.php?id=12586 by HTTrack Website Copier/3.x [XR&CO'2017], Sat, 08 Apr 2023 14:16:57 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta name="viewport" content="width=device-width" />
-<meta name="description" content="3DSPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
-<meta name="keywords" content="3D Photo Gallery, 3DS Photo Gallery, Upload 3D Photos, Upload 3DS Photos, MPO, 3DSPaint, 3DS Opera SDK, Nintendo 3DS, 3DS, JavaScript, video games" />
-<link rel="shortcut icon" href="../../external.html?link=https://dsipaint.com/favicon.ico" />
-<link rel="apple-touch-icon" href="../apple-touch-icon.html" />
-<link rel="stylesheet" href="../stylee993.css" type="text/css" />
-<link rel="stylesheet" href="../lighte993.css" type="text/css" />
-<script type="text/javascript">
-	function parse(json){
-		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
-	}
-
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-702344-11']);
-	_gaq.push(['_trackPageview']);
-	(function() {
-		var ga = document.createElement('script');
-		ga.type = 'text/javascript';
-		ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(ga, s);
-	})();
-</script>
-	<title>Help Desk Request - Styling section</title>
-	<script type="text/javascript">
-		'use strict';
-		var xhrKeepAlive = new XMLHttpRequest();
-
-		function keep_alive(){
-			xhrKeepAlive.open('GET.html', '../../external.html?link=https://dsipaint.com/includes/keepalive.php', true);
-			xhrKeepAlive.send(null);
-			setTimeout(keep_alive, 60000);
-		}
-		function mark_dupe(obj){
-			if(obj.checked){
-				document.getElementById('c_resolved').disabled=true;
-			}else{
-				document.getElementById('c_resolved').disabled=false;
-			}
-		}
-
-		window.onload = function(){
-			setTimeout(keep_alive, 60000);
-		}
-	</script>
-</head>
-<body style="background: url(../images/backgrounds/background0.png)">
-
-<div style="padding:2px; text-align:center">
-	<a href="../../external.html?link=https://dsipaint.com/"><img src="../images/logo.png" alt="Logo" /></a>
-</div>
-
-<div class="menu_section" style="padding:0px">
-
-
-	<div class="menu_section">
-		<div class="nav_avatar">
-			<a onclick="showLogin();"><img src="../avatars_site/0.png" alt="Login" title="Login" /></a>
-		</div>
-
-		<div class="nav_div">Welcome, Guest.</div>
-		<div class="nav_div">
-			<a onclick="showLogin();">Login</a> | <a href="../../external.html?link=https://dsipaint.com/register.php">Register</a>
-		</div>
-
-		<div id="divLogin"  style="display:none" >
-			<form action="#" method="post">
-				Username: <input type="text" name="username" class="form_field" /><br />
-				Password: <input type="password" name="password" class="form_field" /><br />
-				Remember me: <input type="checkbox" value="true" name="remember" /><br />
-				<input type="submit" value="Login" class="form_button" />
-			</form>
-		</div>
-	</div>
-	<script type="text/javascript">
-		function showLogin(){
-			document.getElementById('divLogin').style.display='block';
-		}
-	</script>
-
-</div>
-
-	<h1>Help Desk Request - Styling section</h1>
-	<div class="menu_section" style="margin-bottom:10px; padding:0px">
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-			By <a href="../../external.html?link=https://dsipaint.com/member?id=146682">Tora-Kokoro</a><br />
-			10 Jun 2021 04:32<br />
-			Category: New Feature		</div>
-		<div class="zebra">
-			I think it would be a super cool idea to have a gallery for profile styling.<br /><br />It should be an entire new section that's kind of like the paint gallery and photo gallery and groups mixed together.<br /><br />We'd create our own CSS styling for sample profiles (what I mean by that is like a regular ol profile, with with default stuff, like John Smith kinda default). It should be organized like groups as well, with custom titles, and it should also be organized by most recent (or maybe we can choose interchangeably, like most recent, most popular, A-Z, last updated, etc).<br /><br />In terms of group implications, we'd have a title text box, body text box, and CSS styling text box at the bottom of the sample profile. The body text box can be a description that would go in the "Biography" section of the sample profile.<br /><br />There should also be options to save as draft/hide from public, allow ratings and comments, and delete.<br /><br />Ratings and comments would be available (and optional), and it would go as a 1 - 10 rating (1 being bad, 10 being excellent, in terms of styling)... I thinking overall ratings should go on the sample profile too, maybe somewhere under that "Profile For BlahBlahBlah" tab. Commenting for added feedback, and that can go where normal profile comments go.<br /><br />These should be organized within the section (like groups), that would go something like thing:<br /><br /><hr /><br /><br /><span style="text-decoration:underline">My Styles</span><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Hide my styles" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none">This is a collapsible button</div><br /><br />Sample Style 1<br />Sample Style 2<br />Sample Style 3<br /><br />â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”<br /><br /><span style="text-decoration:underline">Create New</span><br />[ This is a textbox for titles ] <input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Create!" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none">Create button</div><br /><br />â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”<br /><br /><span style="text-decoration:underline">Public Styles</span><br />[ Sort by... ](dropdown menu)<br /><br />Sample Style A<br />(by @user1)<br />Sample Style B<br />(by @user2)<br />Sample Style C<br />(by @user3)<br /><br /><hr /><br /><br />The purpose is to share stylings with other members since I know there's always a user wanting a spiced up profile.<br /><br /><br /><br /><input type="button" class="form_button" style="width:auto;padding:1px 10px" value="Extra" onclick="if(this.nextSibling.style.display==''){this.nextSibling.style.display='none';}else{this.nextSibling.style.display='';}" /><div class="spoiler_body" style="display:none">Something I think would be awesome to do is to be able to send that styling to a user, and it would automatically be entered into their CSS styling in their settings. Of course, it would be sent as a voluntary invitation via notifications, where the receiver would be able to view the styling and preview it in their profile, then select "Yes" or "No" if they want that style. <br /><br />Just a thought</div>		</div>
-		<div class="zebra">
-			Resolved: No<br />
-			<label class="tag tag_default">New Feature</label>
-			<label class="tag tag_lowest">Lowest</label>
-			<label class="tag tag_default">0 hr</label>
-			<div class="clear_div"></div>
-		</div>
-	</div>
-
-	<h1>Responses</h1>
-	<div class="menu_section" style="margin-bottom:10px; padding:0px">
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a><br />
-			11 Jun 2021 03:10		</div>
-		<div class="zebra">
-			True, I'll shut up about it		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a><br />
-			11 Jun 2021 03:08		</div>
-		<div class="zebra">
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> OH IM DUMB<br /><br />Honestly dont think many people know it exists		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a><br />
-			11 Jun 2021 03:02		</div>
-		<div class="zebra">
-			Literally open up a webpage and see its entire source code.<br /><br />In Chrome, Ctrl + Shift + I.		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a><br />
-			11 Jun 2021 02:57		</div>
-		<div class="zebra">
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> idk what that is T~T		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a><br />
-			11 Jun 2021 02:56		</div>
-		<div class="zebra">
-			Ah, how about Inspect Element?		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a><br />
-			11 Jun 2021 02:53		</div>
-		<div class="zebra">
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> the only place it'd be visible is the textbox that only the owner can view? Like when you style a grouo		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a><br />
-			11 Jun 2021 02:38		</div>
-		<div class="zebra">
-			Sorry, I meant the one currently being used, or if it's displayed somewhere, which I think it is according to your suggestions, it can be copied.		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a><br />
-			11 Jun 2021 02:19		</div>
-		<div class="zebra">
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> which is why I'm saying, have the option to allow others to use it<br /><br />Can't copy it if they dont know the code		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a><br />
-			11 Jun 2021 02:16		</div>
-		<div class="zebra">
-			See, this is what I envision happening:<blockquote>Person 1: Hey, can I use your style?<br />Person 2: No.<br />Person 1: Screw you, I'm copying it anyway.</blockquote><br />Doesn't feel right to me.		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a><br />
-			11 Jun 2021 02:11		</div>
-		<div class="zebra">
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> still... at least give the option to let others use it or not		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a><br />
-			11 Jun 2021 02:05		</div>
-		<div class="zebra">
-			Are you saying this is an intellectual property thing? I guess, but something like this is exceedingly easily stolen, so I think something like Noncommercial Use, Share-Alike would be more fitting.		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a><br />
-			11 Jun 2021 01:52		</div>
-		<div class="zebra">
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> request to use so the owner would be able to consentingly grant permission to use it		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a><br />
-			11 Jun 2021 01:48		</div>
-		<div class="zebra">
-			Also, if a style is being displayed, why should it be requested to be used? It's literally copying a CSS file, and that can be done with any device with Inspect Element on it. It would make more sense to just let people copy, but attribute it at the bottom.<br /><br />(Also, priority and hour estimate bugs fixed :tada<img src="../chatrooms/smilies/alien1.html" />		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a><br />
-			11 Jun 2021 01:47		</div>
-		<div class="zebra">
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> yeah, that works as well, I never thought of that before		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a><br />
-			11 Jun 2021 01:40		</div>
-		<div class="zebra">
-			Are you proposing this as a solution to the point you brought up in the last sentence or so of your comment? If so, that could be a valid reason.<br /><br /><span style="text-decoration:line-through">But managing something like this is asldkfjalsdkfjlasdkfj</span>		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-				By <a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a><br />
-			10 Jun 2021 18:50		</div>
-		<div class="zebra">
-			Adding to the "extra" note: users should also be able to request to use a style. The owner would receive a notification and be able to grant or deny usage. If granted, that style would automatically be sent to the user who requested.<br /><br /><br />Also: I think somewhere below the already existing footer in the profiles should be a little note that says something like, "This profile was styled by: @User1", and it would be automatically written based on either a style you used or if you styled it yourself.<br /><br />The one little issue with that last sentence is that some users go into someone else's account (with their consent of course) and style from there, so I don't think that can be fixable.		</div>
-	</div>
-	<h1>History</h1>
-	<div class="menu_section" style="margin-bottom:10px; padding:0px;">
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> left a reply. <br />
-			11 Jun 2021 03:10		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a> left a reply. <br />
-			11 Jun 2021 03:08		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> left a reply. <br />
-			11 Jun 2021 03:02		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a> left a reply. <br />
-			11 Jun 2021 02:57		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> left a reply. <br />
-			11 Jun 2021 02:56		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a> left a reply. <br />
-			11 Jun 2021 02:53		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> left a reply. <br />
-			11 Jun 2021 02:38		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a> left a reply. <br />
-			11 Jun 2021 02:19		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> left a reply. <br />
-			11 Jun 2021 02:16		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a> left a reply. <br />
-			11 Jun 2021 02:11		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> left a reply. <br />
-			11 Jun 2021 02:05		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a> left a reply. <br />
-			11 Jun 2021 01:52		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> left a reply. <br />
-			11 Jun 2021 01:48		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a> left a reply. <br />
-			11 Jun 2021 01:47		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/244380.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=140519">@GuiedGui</a> left a reply. <br />
-			11 Jun 2021 01:40		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a> left a reply. <br />
-			10 Jun 2021 18:50		</div>
-		<div class="zebra">
-			<img src="../avatars_site/24.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=128972">@banjo2</a> set the priority. <br />
-			10 Jun 2021 04:53		</div>
-		<div class="zebra">
-			<img src="../images/art_gallery/245072.html" alt="Avatar" class="avatar" />
-			<a href="../../external.html?link=https://dsipaint.com/member?id=146682">@Tora-Kokoro</a> created this request. <br />
-			10 Jun 2021 04:32		</div>
-	</div>
-
-	<div style="margin:5px; text-align:center">
-		<a href="../../external.html?link=https://dsipaint.com/"><img class="icon" src="../images/icons/icon_home.html" alt="Home" /></a>
-		<a href="../../external.html?link=https://dsipaint.com/helpdesk"><img class="icon" src="../images/icons/icon_back.html" alt="Help Desk Home" /></a>
-	</div>
-
-
-<div style="font-size:10px; text-align:center">
-	Nintendo 3DS is &trade; Nintendo Co. Ltd.
-	This website is &copy;2009-2023 HullBreach Studios. All rights reserved.
-	Members are responsible for their own content.
-	No account information will be given to third-parties without your consent.
-</div>
-
-<div id="divAlertPopup" class="alerts_popup menu_section"></div>
-<script type="text/javascript">
-	var AlertPopupObj = new XMLHttpRequest();
-	function refreshMyPopupAlerts(){
-		AlertPopupObj.open('GET.html', '../../external.html?link=https://dsipaint.com/includes/ajax.section.my_alert_popup.php', true);
-		AlertPopupObj.send(null);
-		AlertPopupObj.onreadystatechange = function(){
-			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
-				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
-				AlertPopupObj.abort();
-				return;
-			}
-			if(AlertPopupObj.readyState==4){
-				if(AlertPopupObj.responseText){
-					var divAlertPopup = document.getElementById('divAlertPopup'),
-						alerts = [];
-					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
-					if(alerts.length){
-						var alertString = '',
-							index = 0;
-						while(index<alerts.length){
-							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
-							index++;
-						}
-						divAlertPopup.innerHTML = alertString;
-						divAlertPopup.style.display = 'block';
-					}else{
-						divAlertPopup.style.display = 'none';
-					}
-				}
-				setTimeout(refreshMyPopupAlerts, 10000);
-			}
-		}
-	}
-	refreshMyPopupAlerts();
-</script>
-
-</body>
-
-<!-- Mirrored from dsipaint.com/helpdesk/view.php?id=12586 by HTTrack Website Copier/3.x [XR&CO'2017], Sat, 08 Apr 2023 14:16:57 GMT -->
-</html>
