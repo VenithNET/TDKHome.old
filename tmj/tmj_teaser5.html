@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<!-- Mirrored from dsipaint.com/tmj/tmj_teaser5.php by HTTrack Website Copier/3.x [XR&CO'2017], Sat, 08 Apr 2023 13:10:58 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="DSiPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="DSiPaint, DSi Opera SDK, Nintendo DSi, DSi, JavaScript, video games" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="stylesheet" href="../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-9']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	<title>The Mystical Journey - Teaser 5</title>
+	<script type="text/javascript">
+		var x=0, y=0, script_step=0, cel=0, cels=[], fade=0, scroll=null, title=null, left=235, width=5;
+
+		script = [
+				{'command':'start'},
+				{'command':'move', 'x':0, 'y':0, 'absolute':true, 'cel':1},
+				{'command':'dialog', 'text':'HOEDR: Baldur was the second son of Odin, loved by all. Though I could not see his beauty, it shone through his grace.'},
+				{'command':'move', 'x':0, 'y':0},
+				{'command':'repeat', 'times':20},
+				{'command':'move', 'x':-1, 'y':0},
+				{'command':'repeat', 'times':40},
+				{'command':'dialog', 'text':''},
+				{'command':'move', 'x':-1, 'y':0},
+				{'command':'repeat', 'times':60},
+				{'command':'dialog', 'text':'HOEDR: I knew not at the time, but Loki, his adopted brother, was jealous...'},
+				{'command':'move', 'x':-1, 'y':0},
+				{'command':'repeat', 'times':20},
+				{'command':'move', 'x':0, 'y':0},
+				{'command':'repeat', 'times':40},
+				{'command':'dialog', 'text':''},
+				{'command':'move', 'x':0, 'y':0},
+				{'command':'repeat', 'times':10},
+
+				{'command':'move', 'x':0, 'y':-115, 'absolute':true, 'cel':2},
+				{'command':'move', 'x':0, 'y':1},
+				{'command':'repeat', 'times':10},
+				{'command':'dialog', 'text':'...and plotted to kill Baldur, with me as his pawn.'},
+				{'command':'move', 'x':0, 'y':1},
+				{'command':'repeat', 'times':64},
+				{'command':'dialog', 'text':''},
+				{'command':'move', 'x':0, 'y':1},
+				{'command':'repeat', 'times':20},
+
+				{'command':'move', 'x':0, 'y':0, 'absolute':true, 'cel':3},
+				{'command':'move', 'x':0, 'y':-1},
+				{'command':'repeat', 'times':9},
+				{'command':'dialog', 'text':'HOEDR: Loki fashioned a spear of mistletoe - Baldur\'s one weakness - and placed it in my hands.'},
+				{'command':'move', 'x':0, 'y':-1},
+				{'command':'repeat', 'times':40},
+				{'command':'dialog', 'text':''},
+				{'command':'move', 'x':0, 'y':-1},
+				{'command':'repeat', 'times':20},
+				{'command':'dialog', 'text':'HOEDR: He aimed...'},
+				{'command':'move', 'x':0, 'y':-1},
+				{'command':'repeat', 'times':30},
+
+				{'command':'dialog', 'text':'HOEDR: He aimed... and tossed'},
+				{'command':'move', 'x':0, 'y':0, 'absolute':true, 'cel':4},
+				{'command':'move', 'x':-10, 'y':0},
+				{'command':'repeat', 'times':27},
+
+				{'command':'move', 'x':0, 'y':0, 'absolute':true, 'cel':5},
+				{'command':'move', 'x':0, 'y':0},
+				{'command':'repeat', 'times':4},
+				{'command':'dialog', 'text':''},
+				{'command':'move', 'x':0, 'y':0},
+				{'command':'repeat', 'times':5},
+				{'command':'dialog', 'text':'The spear pierced Baldur\'s heart...'},
+				{'command':'move', 'x':0, 'y':0},
+				{'command':'repeat', 'times':20},
+				{'command':'move', 'x':0, 'y':-1},
+				{'command':'repeat', 'times':34},
+				{'command':'dialog', 'text':''},
+				{'command':'move', 'x':0, 'y':-1},
+				{'command':'repeat', 'times':5},
+
+				{'command':'move', 'x':0, 'y':0, 'absolute':true, 'cel':6},
+				{'command':'move', 'x':-1, 'y':0},
+				{'command':'repeat', 'times':19},
+				{'command':'dialog', 'text':'...and he fell, sent to the Halls of Hel for all time.'},
+				{'command':'move', 'x':-1, 'y':0},
+				{'command':'repeat', 'times':50},
+				{'command':'dialog', 'text':''},
+				{'command':'move', 'x':0, 'y':0},
+				{'command':'repeat', 'times':60},
+				{'command':'dialog', 'text':'<a href="../menu_tmj.php">[Exit]</a>'},
+
+				{'command':'exit'}
+			];
+
+		window.onload = function(){
+			cels=document.getElementsByClassName('cel');
+			scroll=document.getElementById('scroll');
+			title=document.getElementById('title');
+			setTimeout('fade_in()', 50);
+		}
+
+		function fade_in(){
+			if((fade+=.04)>=1){
+				setTimeout('scroll_over()', 3000);
+			}else{
+				title.style.opacity=fade;
+				setTimeout('fade_in()', 50);
+			}
+		}
+
+		function scroll_over(){
+			scroll.style.backgroundPosition=(left-235)+'px 0px';
+			title.style.width=left+'px';
+			if(left==235){
+				scroll.style.display='block';
+				cels[0].style.display='block';
+			}else{
+				scroll.style.width=width+'px';
+			}
+			if(left>=0){
+				scroll.style.left=left+'px';
+				left-=5;
+				if((width+=5)>40) width=40;
+			}else{
+				if((width-=5)==0){
+					scroll.style.display='none';
+					title.style.display='none';
+					setTimeout('run_script()', 50);
+					return;
+				}
+			}
+			setTimeout('scroll_over()', 50);
+		}
+
+		function run_script(){
+			if(script_step<script.length){
+				command=script[script_step];
+				script_step++;
+			}else{
+				return;
+			}
+			switch(command.command){
+				case 'dialog':
+					if(command.text){
+						document.getElementById('text_pane').style.display='block';
+						document.getElementById('text_pane').innerHTML=command.text;
+					}else{
+						document.getElementById('text_pane').style.display='none';
+					}
+					break;
+				case 'exit':
+					//location.href='../menu_tmj.php';
+					break;
+				case 'move':
+					if(command.absolute){
+						x=command.x;
+						y=command.y;
+					}else{
+						x+=command.x;
+						y+=command.y;
+					}
+					if(command.cel){
+						for(var i=0;i<cels.length;i++){
+							cels[i].style.display=((command.cel-1)==i?'block':'none');
+						}
+						cel=command.cel-1;
+					}
+					cels[cel].style.backgroundPosition=x+'px '+y+'px';
+					break;
+				case 'overlay':
+					break;
+				case 'repeat':
+					if(command.times){
+						script_step-=2;
+						command.times--;
+					}
+					break;
+				default:
+					break;
+			}
+			setTimeout('run_script()',50);
+		}
+	</script>
+	<style type="text/css">
+		A {
+			color:#fff;
+			font-weight:bold;
+		}
+		BODY {
+			background:#000;
+			margin:0px;
+		}
+		.cel, .overlay {
+			display:none;
+			height:166px;
+			left:0px;
+			position:absolute;
+			top:0px;
+			width:240px;
+		}
+		.text_pane {
+			background:url(images/gradients/blue_gradient.png) repeat-x;
+			border:2px ridge #888;
+			color:#fff;
+			display:none;
+			font-size:10px;
+			height:42px;
+			left:0px;
+			position:absolute;
+			line-height:14px;
+			overflow:hidden;
+			padding:2px;
+			text-align:left;
+			text-shadow:1px 1px 1px #000;
+			top:126px;
+			width:232px;
+		}
+	</style>
+</head>
+<body>
+	<div class="cel" style="background:url(images/cinema/baldur1.png) 0px 0px no-repeat"></div>
+	<div class="cel" style="background:url(images/cinema/baldur2.png) 0px 0px no-repeat"></div>
+	<div class="cel" style="background:url(images/cinema/baldur3.png) 0px 0px no-repeat"></div>
+	<div class="cel" style="background:url(images/cinema/baldur4.png) 0px 0px no-repeat"></div>
+	<div class="cel" style="background:url(images/cinema/baldur5.png) 0px 0px no-repeat"></div>
+	<div class="cel" style="background:url(images/cinema/baldur6.png) 0px 0px no-repeat"></div>
+	<div class="overlay" id="title" style="background:url(images/cinema/teaser5_title.png) 0px 0px no-repeat; display:block; opacity:0"></div>
+	<div class="overlay" id="scroll" style="background:url(images/cinema/baldur0.png) 0px 0px no-repeat; left:235px; width:5px"></div>
+	<div class="text_pane" id="text_pane"></div>
+</body>
+
+<!-- Mirrored from dsipaint.com/tmj/tmj_teaser5.php by HTTrack Website Copier/3.x [XR&CO'2017], Sat, 08 Apr 2023 13:11:06 GMT -->
+</html>

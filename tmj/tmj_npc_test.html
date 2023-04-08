@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<!-- Mirrored from dsipaint.com/tmj/tmj_npc_test.php by HTTrack Website Copier/3.x [XR&CO'2017], Sat, 08 Apr 2023 13:11:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="DSiPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="DSiPaint, DSi Opera SDK, Nintendo DSi, DSi, JavaScript, video games" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="stylesheet" href="../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-9']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	<title>The Mystical Journey - NPC Test</title>
+	<script type="text/javascript">
+		sprites = [];
+		for(index=0; index<6; index++){
+			sprites[index] = {mx:120, my:120, x:104, y:56, dx:0, dy:0, face:0, frame:0};
+		}
+
+		window.onload = function(){
+			animate();
+			randomize();
+		}
+
+		function randomize(){
+			for(index=sprites.length; --index>=0;){
+				sprites[index].mx = (11+Math.random()*168)|0;
+				sprites[index].my = (32+Math.random()*80)|0;
+			}
+			setTimeout('randomize()',2000);
+		}
+
+		function animate(){
+			for(index=sprites.length; --index>=0;){
+				sprites[index].dx=sprites[index].mx-sprites[index].x;
+				sprites[index].dy=sprites[index].my-sprites[index].y;
+
+				tempx = sprites[index].dx<0?-sprites[index].dx:sprites[index].dx;
+				tempy = sprites[index].dy<0?-sprites[index].dy:sprites[index].dy;
+
+				if(tempx>2 || tempy>2){
+					sprites[index].face = (tempx>tempy)?(sprites[index].dx>0?2:3):(sprites[index].dy>0?0:1);
+
+					switch(sprites[index].face){
+						case 0: sprites[index].y+=4; sprites[index].frame=sprites[index].y; break;
+						case 1: sprites[index].y-=4; sprites[index].frame=sprites[index].y; break;
+						case 2: sprites[index].x+=4; sprites[index].frame=sprites[index].x; break;
+						case 3: sprites[index].x-=4; sprites[index].frame=sprites[index].x; break;
+					}
+
+					var temp_sprite = document.getElementsByName('sprite')[index];
+					temp_sprite.style.left = sprites[index].x+'px';
+					temp_sprite.style.top = sprites[index].y+'px';
+					temp_sprite.style.zIndex = sprites[index].y;
+					temp_sprite.style.backgroundPosition = -(((sprites[index].frame>>3)&3)<<5)+'px '+(-sprites[index].face<<6)+'px';
+				}
+			}
+			setTimeout('animate()',40);
+		}
+	</script>
+	<style type="text/css">
+		BODY {
+			background: #000;
+			margin: 0px;
+			overflow: hidden;
+		}
+		.scene {
+			height: 176px;
+			left: 0px;
+			position: absolute;
+			top: 0px;
+			width: 240px;
+		}
+		.sprite {
+			background: no-repeat;
+			color: #fff;
+			font-size: 8px;
+			height: 64px;
+			left: 104px;
+			position: absolute;
+			text-align: center;
+			text-shadow: 1px 1px 1px #000;
+			top: 56px;
+			width: 32px;
+		}
+	</style>
+</head>
+<body>
+	<div class="scene" style="background:url(images/tilesets/teaser4-1.png); z-index:0" id="background"></div>
+	<div class="sprite" name="sprite" style="background-image:url(images/characters/jasper.png)">Jasper</div>
+	<div class="sprite" name="sprite" style="background-image:url(images/characters/hockfin.png)">Hock</div>
+	<div class="sprite" name="sprite" style="background-image:url(images/characters/yorick.png)">Yorick</div>
+	<div class="sprite" name="sprite" style="background-image:url(images/characters/brenda.png)">Brenda</div>
+	<div class="sprite" name="sprite" style="background-image:url(images/characters/villager1.png)">OldMan</div>
+	<div class="sprite" name="sprite" style="background-image:url(images/characters/villager2.png)">Girl</div>
+	<div class="scene" style="background:url(images/tilesets/teaser4-2.png); z-index:500" id="foreground"></div>
+</body>
+
+<!-- Mirrored from dsipaint.com/tmj/tmj_npc_test.php by HTTrack Website Copier/3.x [XR&CO'2017], Sat, 08 Apr 2023 13:11:30 GMT -->
+</html>

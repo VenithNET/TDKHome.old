@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from dsipaint.com/tmj/tmj_teaser1.php by HTTrack Website Copier/3.x [XR&CO'2017], Sat, 08 Apr 2023 13:10:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="DSiPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="DSiPaint, DSi Opera SDK, Nintendo DSi, DSi, JavaScript, video games" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<link rel="stylesheet" href="../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-9']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	<title>The Mystical Journey - Teaser 1</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			next_dialog();
+		}
+
+		var next=0;
+
+		var dialog=[];
+		dialog[0] = 'Welcome to The Mystical Journey. <a href="../../external.html?link=http://chainmailsales.com/virtuasoft/mystical/mystical.htm">TMJ</a> was an RPG demo originally written for MS-DOS and now being ported to the Nintendo DSi Browser as a full game. [NEXT]';
+		dialog[1] = 'The original game was based on the classic Final Fantasy series with an engine combining tile-based and scenery graphics. [NEXT]';
+		dialog[2] = 'The interface was completely configurable and allowed viewing of detailed statistics and inventory. [NEXT]';
+		dialog[3] = 'I am upgrading the tileset for locations, using photographs. Graphic artists will be needed to create characters. [NEXT]';
+		dialog[4] = 'Storyline progression will be created as episodic content, with new dungeons and villages coming every few weeks and level editors later. [NEXT]';
+		dialog[5] = 'Thank you for taking time to read about TMJ. Continuing past this point will return to the main menu. [NEXT]';
+
+		var image=[];
+		image[0] = 'images/demo0.png';
+		image[1] = 'images/demo1.png';
+		image[2] = 'images/demo2.png';
+		image[3] = 'images/demo3.png';
+		image[4] = 'images/demo4.png';
+		image[5] = '';
+
+		function next_dialog(){
+			if(next<dialog.length){
+				document.getElementById('text_pane').innerHTML = dialog[next];
+				document.getElementById('image_pane').src=image[next];
+				next++;
+
+			}else{
+				location.href='../menu_tmj.html';
+			}
+		}
+	</script>
+	<style type="text/css">
+		A {
+			color: #aaf;
+			outline: 0px;
+			text-decoration: none;
+		}
+		BODY {
+			background: #000;
+			margin: 0px;
+		}
+		IMG {
+			border: 2px ridge #888;
+			height: 100px;
+			left: 58px;
+			top: 8px;
+			width: 100px;
+		}
+		.action_pane {
+			border: 0px;
+			height: 112px;
+			padding: 4px;
+			text-align: center;
+			width: 232px;
+		}
+		.text_pane {
+			background: url(images/gradients/blue_gradient.png) repeat-x;
+			border: 2px ridge #888;
+			color: #fff;
+			font-size: 8px;
+			height: 48px;
+			line-height: 12px;
+			overflow: hidden;
+			padding: 2px;
+			text-align: left;
+			text-shadow: 1px 1px 1px #000;
+			width: 232px;
+		}
+	</style>
+</head>
+<body>
+	<div class="action_pane">
+		<img id="image_pane" />
+	</div>
+	<div class="text_pane" id="text_pane" onclick="next_dialog();"></div>
+	<a name="scroll" />
+</body>
+
+<!-- Mirrored from dsipaint.com/tmj/tmj_teaser1.php by HTTrack Website Copier/3.x [XR&CO'2017], Sat, 08 Apr 2023 13:10:40 GMT -->
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+
+<!-- Mirrored from dsipaint.com/tmj/oldmanskunk/shop.php by HTTrack Website Copier/3.x [XR&CO'2017], Sat, 08 Apr 2023 13:10:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width" />
+<meta name="description" content="DSiPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
+<meta name="keywords" content="DSiPaint, DSi Opera SDK, Nintendo DSi, DSi, JavaScript, video games" />
+<link rel="shortcut icon" href="../../favicon.ico" />
+<link rel="stylesheet" href="../../stylee993.css" type="text/css" />
+<link rel="stylesheet" href="../../lighte993.css" type="text/css" />
+<script type="text/javascript">
+	function parse(json){
+		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
+	}
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-702344-9']);
+	_gaq.push(['_trackPageview']);
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+	<title>Shop of Old Man Skunk</title>
+	<style type="text/css">
+		DIV, IMG, INPUT{
+			position:absolute;
+		}
+		A{
+			color:#004;
+		}
+		FORM{
+			margin:0px;
+			padding:0px;
+		}
+		.speech{
+			font-size:11px;
+			font-weight:bold;
+			height:70px;
+			left:80px;
+			line-height:14px;
+			text-align:justify;
+			top:5px;
+			width:150px;
+		}
+		.inventory{
+			height:60px;
+			left:5px;
+			overflow-y:scroll;
+			top:5px;
+			width:140px;
+		}
+	</style>
+	<script type="text/javascript">
+		var rad=0, emotion='default', old_step=-1, step=0, div_skunk=null, div_speech=null, img_speech=null, img_arrow=null, ajax=new XMLHttpRequest();
+
+		var script = [
+/*  0 */		{command:'default'},
+/*  1 */		{command:'talk',emotion:'talk',speech:'Oh noes, a customer!'},
+/*  2 */		{command:'pause',emotion:'laughing'},
+/*  3 */		{command:'talk',emotion:'talk',speech:'I guess I have to put up with n00bs to pay my bills, so what do you want?'},
+
+			/*Initial Menu*/
+/*  4 */		{command:'default'},
+/*  5 */		{command:'pause',emotion:'default'},
+/*  6 */		{command:'menu',choices:[['BUY LOOT',7],['SELL LOOT',17],['CRAFT LOOT',27],['LEAVE SHOP',36]]},
+
+			/*Buy Loot*/
+/*  7 */		{command:'blank'},
+/*  8 */		{command:'talk',emotion:'talk',speech:'You actually want to buy my cr... I mean here are my goods...'},
+/*  9 */		{command:'pause',emotion:'default'},
+/* 10 */		{command:'buy',emotion:'default'},
+
+			/*Bad Buy*/
+/* 11 */		{command:'talk',emotion:'yelling',speech:'Are you trying to shoplift my store?'},
+/* 12 */		{command:'pause',emotion:'angry'},
+/* 13 */		{command:'jump',step:8},
+
+			/*Good Buy*/
+/* 14 */		{command:'talk',emotion:'talk',speech:'Thank you! (Funny that you think you got a good deal.)'},
+/* 15 */		{command:'pause',emotion:'laughing'},
+/* 16 */		{command:'jump',step:8},
+
+			/*Sell Loot*/
+/* 17 */		{command:'blank'},
+/* 18 */		{command:'talk',emotion:'talk',speech:'What would you like to sell me?'},
+/* 19 */		{command:'pause',emotion:'default'},
+/* 20 */		{command:'sell',emotion:'default'},
+
+			/*Bad Sale*/
+/* 21 */		{command:'talk',emotion:'yelling',speech:'Are you trying to sell me bootleg goods?'},
+/* 22 */		{command:'pause',emotion:'angry'},
+/* 23 */		{command:'jump',step:18},
+
+			/*Good Sale*/
+/* 24 */		{command:'talk',emotion:'talk',speech:'Congratulations, you sold me that for next to nothing.'},
+/* 25 */		{command:'pause',emotion:'laughing'},
+/* 26 */		{command:'jump',step:18},
+
+			/*Craft Loot*/
+/* 27 */		{command:'blank'},
+/* 28 */		{command:'talk',emotion:'talk',speech:'Give me some loot, and I will give you some loot... but not today.'},
+/* 29 */		{command:'pause',emotion:'default'},
+/* 30 */		{command:'craft',emotion:'default'},
+/* 31 */		{command:'talk',emotion:'talk',speech:'Back in my day, we made everything by hand. Now you want me to do it for you. Lazy, kids these days.'},
+/* 32 */		{command:'pause',emotion:'laughing'},
+/* 33 */		{command:'jump',step:4},
+
+			/*Return to main menu*/
+/* 34 */		{command:'talk',emotion:'yelling',speech:'Um, why are you still here?'},
+/* 35 */		{command:'jump',step:4},
+
+			/*Leave the shop*/
+/* 36 */		{command:'blank'},
+/* 37 */		{command:'dead',emotion:'angry'},
+/* 38 */		{command:'talk',emotion:'yelling',speech:'Get out of my store!!!1!11One'},
+/* 39 */		{command:'pause',emotion:'angry'},
+/* 40 */		{command:'blank'},
+/* 41 */		{command:'link',link:'/menu_tmj.php'}
+		];
+
+		window.onload = function(){
+			div_skunk=document.getElementById('div_skunk');
+			div_speech=document.getElementById('div_speech');
+			img_speech=document.getElementById('img_speech');
+			img_arrow=document.getElementById('img_arrow');
+			bounce();
+			execute();
+		}
+
+		function bounce(){
+			var offset=0;
+			switch(emotion){
+				case 'talk':
+					offset-=((Math.random()*2>1)?180:0)+((Math.random()*20>19)?90:0);
+					break;
+				case 'angry':
+					offset-=360;
+					break;
+				case 'yelling':
+					offset-=360+((Math.random()*2>1)?90:0);
+					break;
+				case 'laughing':
+					offset-=540;
+					break;
+				default:
+					offset-=((Math.random()*20>19)?90:0);
+			}
+			div_skunk.style.top=(20+(1+(Math.sin(rad=(rad+.125)%6)))*2)+'px';
+			div_skunk.style.backgroundPosition = offset+'px 0px';
+			setTimeout('bounce();', 50);
+		}
+
+		function execute(){
+			if(step>=script.length) return;
+
+			if(old_step!=step){
+				old_step = step;
+
+				var command = script[step];
+
+				if(command.emotion) emotion=command.emotion;
+
+				switch(command.command){
+					case 'blank':
+						img_speech.style.display='none';
+						div_speech.innerHTML='';
+						step++;
+						break;
+					case 'end':
+						return;
+						break;
+					case 'pause':
+						img_arrow.style.display='block';
+						break;
+					case 'menu':
+						var menu='';
+						if(command.choices.length){
+							for(var i=0; i<command.choices.length; i++){
+								menu+='<a onclick="step='+command.choices[i][1]+';">'+command.choices[i][0]+'</a><br />';
+							}
+							div_speech.innerHTML=menu;
+						}
+						break;
+					case 'jump':
+						step=command.step;
+						break;
+					case 'talk':
+						img_speech.style.display='block';
+						div_speech.innerHTML=command.speech;
+						step++;
+						break;
+					case 'link':
+						location.href=command.link;
+						return;
+					case 'dead':
+						document.getElementById('img_shelving').src='images/shelving_red.png';
+						document.getElementById('img_counter').src='images/counter_red.png';
+						step++;
+						break;
+					case 'sell':
+						get_sell_inventory();
+						break;
+					case 'buy':
+						get_buy_inventory();
+						break;
+					case 'craft':
+						get_craft_inventory();
+						break;
+					default:
+						step++;
+				}
+			}
+			setTimeout('execute();', 1000);
+		}
+
+		function next_speech(){
+			img_arrow.style.display='none';
+			step++;
+		}
+
+		function get_sell_inventory(){
+			ajax.open('GET.html', 'includes/ajax.get_sell_inventory.html', true);
+			ajax.send(null);
+			ajax.onreadystatechange = function(){
+				if(ajax.readyState>2 && ajax.status>=400){
+					ajax.onreadystatechange = function(){ setTimeout('get_sell_inventory();', 100); }
+					ajax.abort();
+					return;
+				}
+				if(ajax.readyState==4){
+					if(ajax.responseText){
+						var string='<div class="inventory">';
+						try{
+							var post = eval(ajax.responseText);
+						}
+						catch(err){
+							var post = [];
+						}
+						for(i=post.length;--i>=0;){
+							string+='<a onclick="sell_inventory('+post[i].id+');">'+post[i].name+'</a> ('+post[i].price+'p)<br />';
+						}
+						string+='<br />*shrug* <a onclick="step=34;">Meh</a><br />';
+						string+='</div>';
+						img_speech.style.display='block';
+						div_speech.innerHTML=string;
+					}
+				}
+			}
+		}
+
+		function sell_inventory(item){
+			ajax.open('GET.html', 'includes/ajax.sell_inventoryb9ab.html'+item, true);
+			ajax.send(null);
+			ajax.onreadystatechange = function(){
+				if(ajax.readyState>2 && ajax.status>=400){
+					ajax.onreadystatechange = function(){ step=21; }
+					ajax.abort();
+					return;
+				}
+				if(ajax.readyState==4){
+					if(ajax.responseText){
+						try{
+							var post = eval(ajax.responseText);
+						}
+						catch(err){
+							var post = [];
+						}
+
+						if(post.length && post[0].status=='good'){
+							step=24;
+						}else{
+							step=21;
+						}
+					}
+				}
+			}
+		}
+
+		function get_buy_inventory(){
+			ajax.open('GET.html', 'includes/ajax.get_buy_inventory.html', true);
+			ajax.send(null);
+			ajax.onreadystatechange = function(){
+				if(ajax.readyState>2 && ajax.status>=400){
+					ajax.onreadystatechange = function(){ setTimeout('get_buy_inventory();', 100); }
+					ajax.abort();
+					return;
+				}
+				if(ajax.readyState==4){
+					if(ajax.responseText){
+						var string='<div class="inventory">';
+						try{
+							var post = eval(ajax.responseText);
+						}
+						catch(err){
+							var post = [];
+						}
+						for(i=post.length;--i>=0;){
+							string+='<a onclick="buy_inventory('+post[i].id+');">'+post[i].name+'</a> ('+post[i].price+'p)<br />';
+						}
+						string+='<br />*shrug* <a onclick="step=34;">Meh</a><br />';
+						string+='</div>';
+						img_speech.style.display='block';
+						div_speech.innerHTML=string;
+					}
+				}
+			}
+		}
+
+		function buy_inventory(item){
+			ajax.open('GET.html', 'includes/ajax.buy_inventoryb9ab.html'+item, true);
+			ajax.send(null);
+			ajax.onreadystatechange = function(){
+				if(ajax.readyState>2 && ajax.status>=400){
+					ajax.onreadystatechange = function(){ step=11; }
+					ajax.abort();
+					return;
+				}
+				if(ajax.readyState==4){
+					if(ajax.responseText){
+						try{
+							var post = eval(ajax.responseText);
+						}
+						catch(err){
+							var post = [];
+						}
+
+						if(post.length && post[0].status=='good'){
+							step=14;
+						}else{
+							step=11;
+						}
+					}
+				}
+			}
+		}
+
+		function get_craft_inventory(){
+			/*ajax.open('GET', 'includes/ajax.get_craft_inventory.php', true);
+			ajax.send(null);
+			ajax.onreadystatechange = function(){
+				if(ajax.readyState>2 && ajax.status>=400){
+					ajax.onreadystatechange = function(){ setTimeout('get_craft_inventory();', 100); }
+					ajax.abort();
+					return;
+				}
+				if(ajax.readyState==4){
+					if(ajax.responseText){
+						var string='<div class="inventory">';
+						try{
+							var post = eval(ajax.responseText);
+						}
+						catch(err){
+							var post = [];
+						}
+						for(i=post.length;--i>=0;){
+							string+='<a onclick="step++;">'+post[i].name+'</a> (10p)<br />';
+						}
+						string+='<br />*shrug* <a onclick="step=34;">Meh</a><br />';
+						string+='</div>';
+						img_speech.style.display='block';
+						div_speech.innerHTML=string;
+					}
+				}
+			}*/
+			step++;
+		}
+	</script>
+</head>
+<body>
+	<img id="img_shelving" src="images/shelving.png" style="left:0px; top:0px" />
+	<div id="div_skunk" style="background:url(images/oldskunk.png) no-repeat; height:130px; left:0px; top:20px; width:90px"></div>
+	<img id="img_counter" src="images/counter.png" style="left:0px; top:138px" />
+	<img id="img_speech" src="images/speech.png" style="display:none; left:75px; top:5px" />
+	<div id="div_speech" class="speech"></div>
+	<div style="left:0px; top:154px; width:210px; text-align:center">Follow Old Man Skunk on <a href="../../../external.html?link=http://twitter.com/#!/OldManSkunk">Twitter</a>!</div>
+	<form onsubmit="return false;">
+		<input type="image" id="img_arrow" src="images/arrow.png" style="display:none; left:203px; top:67px" onclick="next_speech(); return false;" />
+	</form>
+</body>
+
+<!-- Mirrored from dsipaint.com/tmj/oldmanskunk/shop.php by HTTrack Website Copier/3.x [XR&CO'2017], Sat, 08 Apr 2023 13:10:58 GMT -->
+</html>
