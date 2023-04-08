@@ -5,7 +5,7 @@
 Archiving the legacy of the SDKPaint community.
 
 To-do:
-- Archive assets. ✓
+- Archive assets. [✓]
 - Fix up assets. [99%]
 - Backend development. [0%]
 - Open testing phase. [0%]
