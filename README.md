@@ -5,7 +5,7 @@
 Archiving the legacy of the SDKPaint community.
 
 To-do:
-- Archive assets.
+- Archive assets. ✓
 - Reverse engineer backend from archived assets.
 - Make a backend.
 - Lot's of testing.
