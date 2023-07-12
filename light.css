@@ -1,0 +1,111 @@
+A {
+	color: #00f;
+}
+
+BODY {
+	background-color: #222;
+	color: #fff;
+}
+
+H1 {
+	background-color: #000;
+	color: #fff;
+}
+
+H2 {
+	background-color: #00f;
+	color: #fff;
+}
+
+LABEL.tag_default {
+	background-color: #333;
+	border-color: #999;
+}
+
+LABEL.tag_lowest {
+	background-color: #090;
+	border-color: #999;
+}
+
+LABEL.tag_low {
+	background-color: #4f4;
+	border-color: #999;
+}
+
+LABEL.tag_medium {
+	background-color: #cc0;
+	border-color: #999;
+}
+
+LABEL.tag_high {
+	background-color: #f80;
+	border-color: #999;
+}
+
+LABEL.tag_highest {
+	background-color: #f00;
+	border-color: #999;
+}
+
+.light {
+	background-color: #000;
+	color: #fff;
+}
+
+.zebra {
+	background-color: #111;
+	text-align: left;
+}
+
+.light .head {
+	background-color: #000 !important;
+	font-variant: all-caps;
+	text-align: center !important;
+}
+
+.error {
+	background-color: #f00 !important;
+	text-align: center;
+}
+
+.notice {
+	background-color: #00f !important;
+	text-align: center;
+}
+
+.menu_section {
+	background-color: #111;
+	border: 1px solid #333;
+	color: #fff;
+}
+
+.menu_section DIV.icon SPAN {
+	background-color: #333;
+	border: 1px outset #aaa;
+}
+
+.menu_section DIV.thumb IMG {
+	border: 2px inset #666;
+}
+
+.menu_section DIV.form_heading {
+	background-color: #900;
+}
+
+.form_field,
+.form_textarea {
+	background-color: #222;
+	color: #fff;
+}
+
+.spoiler_body {
+	background: #222;
+}
+
+.approved {
+	background-color: #090 !important;
+}
+
+.declined {
+	background-color: #f00 !important;
+}
