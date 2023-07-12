@@ -10,5 +10,5 @@ To-do:
 - Backend development. [Not Needed ATM.]
 - Open testing phase. [?]
 
-[![Discord](https://tinyurl.com/2p9xchfn)](https://discord.gg/znMAEfN7Xm)
+[![Discord](https://tinyurl.com/2p9xchfn)](https://discord.gg/znMAEfN7Xm) <br>
 https://sdkpaint.github.io/TDKPaint/
