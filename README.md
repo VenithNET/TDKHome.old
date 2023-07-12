@@ -6,7 +6,7 @@ Archiving the legacy of the SDKPaint community.
 
 To-do:
 - Get started. [✔️]
-- Fix up assets. [?]
+- Fix up assets. [85%]
 - Backend development. [Not Needed ATM.]
 - Open testing phase. [?]
 
