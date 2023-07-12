@@ -11,7 +11,7 @@
 <link rel="shortcut icon" href="images/icons/icon_dsipaint.png" />
 <link rel="stylesheet" href="style.css" type="text/css" />
 <link rel="stylesheet" href="light.css" type="text/css" />
-<style>
+	<style>
 /* ==UserStyle==
 @name		3DSPaint Darkmode Fix
 @namespace	3dspaint.com
@@ -19,7 +19,7 @@
 @description	Fixing 3DSPaint's darkmode where its broken! v1.1 has basically become more like a re-write of the entire code and stuff to work more properly on other pages.
 @author		Digital Cheese
 ==/UserStyle== */
-@-moz-document url-prefix("https://sdkpaint.github.io/TDKPaint/member_gallery.php") {
+@-moz-document url-prefix("https://sdkpaint.github.io/TDKPaint/photo_gallery/member_gallery.php") {
     tr {
         background:#222!important;
     }
@@ -37,7 +37,7 @@
         font-size:12px!important
     }
 }
-@-moz-document url-prefix("https://sdkpaint.github.io/TDKPaint/member_album.php") {
+@-moz-document url-prefix("https://sdkpaint.github.io/TDKPaint/photo_gallery/member_album.php") {
     table {
         background:#222!important;
         max-width:800px;
@@ -70,7 +70,7 @@
         background:#282828!important;
     }
 }
-@-moz-document url(https://sdkpaint.github.io/TDKPaint/menu_library.php), url("https://sdkpaint.github.io/TDKPaint/menu_library.php") {
+@-moz-document url(https://3dspaint.com/menu_library.php), url("https://dsipaint.com/menu_library.php") {
     div {margin:auto;}
 }
 @-moz-document url-prefix(https://sdkpaint.github.io/TDKPaint/tmj/), url-prefix("https://sdkpaint.github.io/TDKPaint/menu_tmj.php"), url-prefix("https://sdkpaint.github.io/TDKPaint/tmj/tmj_beastiary.php"), url-prefix("https://sdkpaint.github.io/TDKPaint/tmj/tmj_characters.php"), url-prefix("https://sdkpaint.github.io/TDKPaint/tmj/item_database.php") {
@@ -141,7 +141,7 @@
         background:#009!important
     }
 }
-@-moz-document url(https://sdkpaint.github.io/TDKPaint/myblogs.php), url("https://sdkpaint.github.io/TDKPaint/mylibrary.php"), url("https://sdkpaint.github.io/TDKPaint/myblogs.php") {
+@-moz-document url(https://3dspaint.com/myblogs.php), url("https://3dspaint.com/mylibrary.php"), url("https://dsipaint.com/myblogs.php") {
     table, tbody {
         background:#222!important;
         border:1px transparent solid!important;
@@ -358,7 +358,7 @@
         margin:auto!important
     }
 }
-    </style>
+	</style>
 	<script type="text/javascript">
 	function parse(json){
 		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
