@@ -1,0 +1,146 @@
+A {
+	color:#88f;
+}
+
+BODY {
+	background-color: #222;
+	color:#eee;
+}
+
+H1 {
+	background-color:#444;
+	color:#eee;
+}
+
+H2 {
+	background-color:#228;
+	color:#eee;
+}
+
+LABEL.tag_default {
+	background-color:#444;
+	border-color:#666;
+}
+LABEL.tag_lowest {
+	background-color:#080;
+	border-color:#666;
+}
+LABEL.tag_low {
+	background-color:#480;
+	border-color:#666;
+}
+LABEL.tag_medium {
+	background-color:#880;
+	border-color:#666;
+}
+LABEL.tag_high {
+	background-color:#840;
+	border-color:#666;
+}
+LABEL.tag_highest {
+	background-color:8f00;
+	border-color:#666;
+}
+
+.dark{
+	background-color:#444;
+	color:#eee;
+}
+.zebra:nth-child(odd) {
+	background-color:#282828;
+	text-align:left;
+}
+.zebra:nth-child(even) {
+	background-color:#222;
+	text-align:left;
+}
+.dark .head{
+	background-color:#003 !important;
+	font-weight:bold;
+	text-align:center !important;
+}
+
+.page {
+	background:#888;
+	border-color:#999;
+	color:#fff;
+}
+
+.error {
+	background-color:#800 !important;
+	text-align:center;
+}
+.notice {
+	background-color:#008 !important;
+	text-align:center;
+}
+
+.menu_section {
+	background-color:#222;
+	border:1px solid #000;
+	color:#eee;
+}
+.menu_section DIV.icon SPAN {
+	background-color:#222;
+	border:1px outset #aaa;
+}
+
+.menu_section DIV.thumb IMG {
+	border:1px inset #888;
+}
+
+.menu_section DIV.form_heading {
+	background-color:#226;
+}
+
+.form_field, .form_textarea {
+	background-color:#666;
+	color: #eee;
+}
+
+.spoiler_body {
+	background: #444;
+}
+
+/*CHATROOM*/
+#divChatUsers{
+	height:202px;
+	margin:0px 5px 0px 5px;
+	padding:0px;
+	overflow:hidden;
+	white-space:nowrap;
+	width:310px;
+}
+#divChatUsers DIV {
+	float:left;
+	font-size:10px;
+	height:12px;
+	margin:0;
+	overflow:hidden;
+	padding:0;
+	width:100px;
+}
+#popupProfile{
+	background:#ccc;
+	border:1px outset #ccc;
+	display:none;
+	font-size:10px;
+	height:180px;
+	left:19px;
+	line-height:12px;
+	opacity:.9;
+	overflow:hidden;
+	padding:1px;
+	position:absolute;
+	text-align:justify;
+	top:224px;
+	width:258px;
+}
+
+/*approved and declined*/
+.approved {
+	background-color:#060 !important;
+}
+.declined {
+	background-color:#600 !important;
+}
