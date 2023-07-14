@@ -1,74 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from dsipaint.com/menu_chatrooms.php by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 22:48:39 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta name="viewport" content="width=device-width" />
-<meta name="description" content="TDKPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
-<meta name="keywords" content="TDKPaint, DSi Opera SDK, Nintendo DSi, DSi, JavaScript, video games" />
-<link rel="shortcut icon" href="images/icons/icon_dsipaint.png" />
-<link rel="stylesheet" href="stylee993.css" type="text/css" />
-<link rel="stylesheet" href="lighte993.css" type="text/css" />
-<script type="text/javascript">
-	function parse(json){
-		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
-	}
-
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-702344-9']);
-	_gaq.push(['_trackPageview']);
-	(function() {
-		var ga = document.createElement('script');
-		ga.type = 'text/javascript';
-		ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(ga, s);
-	})();
-</script>
-	<title>Chatrooms Menu</title>
-	<script type="text/javascript">
-		'use strict';
-
-		function refresh_icons(){
-			xhrObj.open('GET.html', 'menu_chatrooms5663.html'+(new Date()).getTime()+'&action=getCounts', true);
-			xhrObj.send(null);
-			xhrObj.onreadystatechange = function(){
-				if(xhrObj.readyState>2 && xhrObj.status>=400){
-					xhrObj.abort();
-					setTimeout(refresh_icons, 60000);
-					return;
-				}
-				if(xhrObj.readyState==4){
-					if(xhrObj.responseText){
-						var counts,
-							i,
-							badge;
-						try{
-							counts = parse(xhrObj.responseText);
-						}catch(err){
-							counts = [];
-						}
-
-						for(i=counts.length; --i>=0; ){
-							badge = document.getElementById('badge_'+counts[i].name);
-							badge.firstChild.nodeValue = counts[i].value;
-						}
-					}
-					setTimeout(refresh_icons, 60000);
-				}
-			};
-		}
-
-		var xhrObj = new XMLHttpRequest();
-
-		window.onload = function(){
-			refresh_icons();
-		};
-	</script>
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDKPaint</title>
     <style>
         body {
             background-color: black;
@@ -125,28 +59,21 @@
     </style>
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
-	<div style="padding:2px; text-align:center">
-	<a href="index.html"><img src="images/logo.png" alt="Logo" /></a>
-</div>
-
-<div class="menu_section" style="padding:0px">
-
-
-	<div class="menu_section">
-		<div class="nav_avatar">
-			<a onclick="showLogin();"><img src="avatars_site/0.png" alt="Login" title="Login" /></a>
-		</div>
-
-		<div class="nav_div">Welcome, Guest.</div>
-		</div>
-	</div>
-	<script type="text/javascript">
-		function showLogin(){
-			document.getElementById('divLogin').style.display='block';
-		}
-	</script>
-
-</div>
+<body>
+    <center>
+        <a href="index.html" style="text-align: center; margin: auto;">
+            <img src="https://3dspaint.com/images/logo.png" alt="TDKPaint" title="TDKPaint">
+        </a>
+    </center>
+    <div class="menu" style="padding: 0!important;">
+        <div class="nav">
+            Welcome, TDK!<br>
+            <a href="https://3dspaint.com/" style="color: #f44;">3DSPaint Link</a>
+        </div>
+        <div class="nav2">
+            <img src="images/icons/icon_dc.png" alt="PFP" title="PFP" style="border: 1px gray solid; border-radius: 16px; width: 28px; height: 28px;">
+        </div>
+    </div>
 
 <h1>General Chatrooms</h1>
 <div class="menu_section">
