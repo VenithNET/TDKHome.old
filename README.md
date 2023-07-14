@@ -6,6 +6,7 @@ Continuing the legacy of the SDKPaint community.
 
 To-do:
 - Get started. [✔️]
+- Re-write assets. [89%]
 - Fix up assets. [99%]
 - Backend development. [Not Needed ATM.]
 - Open testing phase. [✔️]
