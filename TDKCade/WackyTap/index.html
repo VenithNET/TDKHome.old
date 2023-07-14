@@ -1,0 +1,374 @@
+<html>
+    
+<!-- Mirrored from dsiexplorer.awardspace.biz/WackyTap/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:29:54 GMT -->
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width" />
+        <title>DSiCade - Free Browser Games for your Nintendo DSi</title>
+        <style>
+          body { margin: 0px; }
+          #topscreen, #bottomscreen { width: 240px; height: 176px; overflow: hidden; }
+          #bottomscreen { padding-top: 77px; height: 99px; }
+          #title { position: absolute; left: 14px; top: 65px; }
+          #beta { position: absolute; left: 20px; top: 105px; font-size: 14px; font-family: sans-serif; font-weight: bold; font-style: italic; color: #DDDDDD; }
+          #ad { position: absolute; width: 240px; height: 60px; top: 193px; left: 0px; }
+          #navbar { position: absolute; width: 240px; height: 13px; padding-top: 2px; padding-bottom: 2px; top: 176px; left: 0px; background-color: black; }
+          #navbar a { margin-right: 10px; }
+          #leftnav { float: left; padding: 0px; border: 0px; margin-left: 1px; margin-right: 1px;}
+          #rightnav { float: right; padding: 0px; border: 0px; margin-left: 1px; margin-right: 1px;}
+          #container { width: 214px; height: 96px; overflow: hidden; margin-left: 1px; margin-right: 1px; }
+          .subcontainer { width: 214px; height: 96px; margin: 0px; }
+          .gamelink { background: url(images/bg.html) repeat-x; height: 24px; border: outset 2px; text-align: center; padding-top: 4px; }
+          .gamelink img { height: 20px; }
+        </style>
+
+
+<html>
+<head>
+<meta name="viewport" content="width=240">
+<title>Wacky Tap DSi! - MGuitarHero</title>
+<script src="../js/json2.js"></script>
+<script src="../js/highscores.js"></script>
+<script>
+    var hiscores = new HighScores("wackytap");
+
+    function showHighScores()
+    {
+        var popup = document.getElementById("popup");
+        var scores = hiscores.getScores();
+        var info = document.getElementById("infoarea");
+        var table;
+        var row;
+        var cell;
+
+        clearElement(info);
+
+        if(scores.length < 1)
+        {
+            info.appendChild(document.createTextNode("No scores are currently available."));
+        }
+
+        table = document.createElement("table");
+        table.border = "0";
+        table.cellSpacing = "0";
+        table.cellPadding = "0";
+        table.style.width = "190";
+        table.style.fontSize = "12px";
+        table.style.color = "white";
+        table.style.fontSize = "8pt";
+
+
+        for(var i=0; i<scores.length && i<20; i++)
+        {
+            row = table.insertRow(-1);
+            cell = row.insertCell(-1);
+            cell.appendChild(document.createTextNode((i+1)+". "));
+            cell = row.insertCell(-1);
+            cell.appendChild(document.createTextNode(scores[i].name));
+            cell = row.insertCell(-1);
+            cell.align = "right";
+            cell.style.width = "60px";
+            cell.appendChild(document.createTextNode(scores[i].score));
+        }
+
+        info.appendChild(table);
+        popup.style.display = "block";
+
+        scrollT(176);
+    }
+
+    function hidePopup()
+    {
+        var popup = document.getElementById("popup");
+
+        popup.style.display = "none";
+
+        scrollT(0);
+    }
+
+    function clearElement(element)
+    {
+        while(element.hasChildNodes()) element.removeChild(element.childNodes[0]);
+    }
+
+    function submitHighscore()
+    {
+        if(!window.highscoreDIV)
+        {
+            window.highscoreDIV = document.createElement("div");
+            window.highscoreDIV.className = "highscore";
+            
+            if(hiscores.isScoreHigher(score))
+            {
+                highscoreDIV.style.backgroundColor = "white";
+
+                var div = document.createElement("div");
+                div.style.lineHeight = "50px";
+                div.appendChild(document.createTextNode("New High Score"))
+                highscoreDIV.appendChild(div);
+
+                div = document.createElement("div");
+                div.style.lineHeight = "25px";
+                div.appendChild(document.createTextNode(score+" points"))
+                highscoreDIV.appendChild(div);
+
+                var name = document.createElement("input");
+                name.style.width = "140px";
+                name.maxlength = 16;
+                name.style.margin = "10px";
+                if(hiscores.getCachedName()) name.value = hiscores.getCachedName().substring(0, 16);
+
+                div = document.createElement("div");
+                div.appendChild(name)
+                highscoreDIV.appendChild(div);
+
+                var button = document.createElement("button");
+
+                div = document.createElement("div");
+                button.appendChild(document.createTextNode("Submit"));
+                button.style.margin = "10px";
+                div.appendChild(button)
+                highscoreDIV.appendChild(div);
+
+                button.onclick = function() {
+                    var high = new HighScore(name.value, score);
+
+                    high.timesPlayed = timesPlayed;
+                    high.respawns = respawns;
+
+                    hiscores.submitScore(high);
+
+                    document.body.removeChild(highscoreDIV);
+                    delete(window.highscoreDIV);
+                };
+            }
+
+            document.body.appendChild(highscoreDIV);
+        }
+    }
+</script>
+<style>
+body{ position:absolute; height: 352px; width: 235px; margin: 0px; }
+#gamebutton{ position:absolute; left:50px; top:50px;}
+#topscreen { padding: 15px; text-align: center; }
+#author { margin-bottom: 16px; margin-top: 0px; font-size: 8pt; }
+#refocus { margin: 5px; padding: 5px; width: 160px; font-size: 16pt; text-shadow: #FFFFFF 1px 1px 2px; }
+#scoreslink { margin-top: 10px; font-size: 8px; }
+#gamestatus button { font-size: 10pt; }
+#popup { position: absolute; left: 18px; top: 20px; width: 200px; height: 312px; border: 4px solid #FFFFAA; background-color: #000044; display: none; }
+#infoarea { margin: 5px; width: 190px; height: 278px; overflow: hidden; font-size: 8px; font-family: sans-serif; color: white; padding-top: 5px; }
+#buttonarea { margin: 5px; width: 190px; height: 14px; background-color: #222288; color: #DDDDDD; }
+#dismiss { float: left; text-align: center; width: 190px; font: 12px sans-serif; }
+.highscore { position: absolute; left: 0px; top: 0px; width: 240px; height: 176px; text-align: center; }
+</style>
+
+<script type='text/javascript'>
+var score = 0;
+var time = 60;
+var respawnTime=4;
+var respawnRate=1000;
+var timesPlayed=0;
+var respawns = 0;
+
+function disableEnterKey(e){
+var key;
+if(window.event){key=e.keyCode;}
+else if(e.which){key=e.which;}
+
+return (key!=13);
+}
+
+
+function start(){
+document.getElementById("gamebutton").style.display="none";
+document.getElementById("replay").style.display="none";
+document.getElementById("refocus").style.backgroundColor="rgb(0,255,0)";
+refocusCorrect();
+
+respawns = 0;
+}
+
+function gamestart(){
+score = 0;
+time = 60;
+respawnRate = 1000;
+scrollT(176);
+
+if(timesPlayed<1){document.getElementById("gs").blur();}else{document.getElementById("pa").blur();}
+refocusCorrect();
+var button = document.getElementById("gamebutton");
+button.style.left = 120 + "px";
+button.style.top = 264 + "px";
+button.style.display="block";
+button.style.backgroundColor="rgb(0,255,0)";
+button.style.color="#000000";
+
+document.getElementById("gamestatus").removeChild(document.getElementById("gamestatus").childNodes[0]);
+document.getElementById("gamestatus").appendChild(document.createTextNode("0 pts"));
+
+document.getElementById("replay").style.display="none";
+document.getElementById("time").appendChild(document.createTextNode("1:00"));
+
+setTimeout("getTime()",1000);
+setTimeout("respawnT()",respawnRate);
+}
+
+function buttonClicked()
+{
+var mybutton = document.getElementById("gamebutton");
+var x=Math.floor(Math.random()*190);
+var y=Math.floor(Math.random()*126)+176;
+
+scrollT(176);
+score = score+(100*(respawnTime+2));
+respawnRate -= (respawnRate > 750) ? 20 : (respawnRate > 500) ? 10 : 5;
+
+mybutton.style.left = x + 5 + "px";
+mybutton.style.top = y + 25 + "px";
+mybutton.style.color="#000000";
+updateStatus();
+respawnTime=4;
+
+mybutton.blur();
+refocusCorrect();
+}
+
+
+
+function updateStatus(){
+
+var gamestatus = document.getElementById("gamestatus");
+
+gamestatus.removeChild(gamestatus.childNodes[0]);
+gamestatus.appendChild(document.createTextNode(score+" pts"));
+
+}
+
+
+
+
+function getTime(){
+
+var timestate = document.getElementById("time");
+
+if(time>0){
+time = time - 1;
+setTimeout("getTime()",1000);
+
+}else{gameOver();}
+
+var timecpy = time;
+for(timecount=0; timecpy>=60; timecount++){
+timecpy = timecpy-60;
+}
+
+if(timecpy<10){ var additionalzero = "0";}else{ var additionalzero = "";}
+
+var newtime = timecount+":"+additionalzero+timecpy;
+
+timestate.removeChild(timestate.childNodes[0]);
+timestate.appendChild(document.createTextNode(newtime));
+}
+
+
+
+function respawnT(){
+if(respawnTime<0){respawn();}
+if(respawnTime<4){document.getElementById("gamebutton").style.color="#FFFFFF";}
+var button = document.getElementById("gamebutton");
+var redcolor = (Math.floor(((4-respawnTime)*255)/4));
+var greencolor = (Math.floor((respawnTime*255)/4));
+
+button.style.backgroundColor = "rgb("+redcolor+","+greencolor+",0)";
+
+respawnTime = respawnTime-1;
+if(time>0){setTimeout("respawnT()",respawnRate);}
+}
+
+
+
+function respawn(){
+var mybutton2 = document.getElementById("gamebutton");
+mybutton2.style.backgroundColor = "rgb(0,255,0)";
+mybutton2.style.color="#000000";
+var x=Math.floor(Math.random()*190);
+var y=Math.floor(Math.random()*126)+176;
+
+mybutton2.style.left = x + 5 + "px";
+mybutton2.style.top = y + 25 + "px";
+
+respawnTime=4;
+respawns++;
+}
+
+
+
+
+function gameOver(){
+//document.getElementById("gamebutton").onclick="";
+document.getElementById("gamebutton").style.display="none";
+document.getElementById("replay").style.display="block";
+time=60;
+respawnTime=4;
+document.getElementById("time").removeChild(document.getElementById("time").childNodes[0]);
+alert("Gameover, score of "+score+" pts!");
+scrollT(0);
+timesPlayed=timesPlayed+1;
+
+submitHighscore();
+}
+
+setTimeout("start()",0);
+
+function scrollT(scrollvar){
+if(scrollvar == 0) document.getElementById("scoreslink").style.visibility = "visible";
+else document.getElementById("scoreslink").style.visibility = "hidden";
+
+document.body.scrollTop=scrollvar;
+}
+setTimeout("scrollT(0)", 100);
+
+function refocusCorrect(){
+document.getElementById("refocus").focus();
+
+var redv = (Math.floor(Math.random()*180))+75;
+var greenv = (Math.floor(Math.random()*180))+75;
+var bluev = (Math.floor(Math.random()*180))+75;
+
+
+document.getElementById("refocus").style.backgroundColor = "rgb("+redv+","+greenv+","+bluev+")";
+
+}
+
+
+</script>
+
+
+</head>
+<body><center>
+       <div id="topscreen">
+            <img id="title" src="../dsielogo.png" alt="DSiExplorer">
+            
+        </div>
+
+<div id="bottomscreen">
+    <button id='refocus' onclick='refocusCorrect();'>WackyTap :D</button>
+    <div id="author">by MGuitarHero</div>
+    <div id='gamestatus'><button id='gs' onclick='gamestart();'>Begin Game</button></div>
+    <div id='time'></div>
+    <div id='replay'><button id='pa' onclick='gamestart();'>Play Again?</button></div>
+
+    <div id="scoreslink"><a href="#" onclick="showHighScores(); return false;">High Scores</a></div>
+</div>
+<button id='gamebutton' onclick='buttonClicked();' onKeyPress='return disableEnterKey(event)' >Tap!</button>
+<div id="popup">
+  <div id="infoarea"></div>
+  <div id="buttonarea" onclick="hidePopup();">
+    <div id="dismiss">Ok</div>
+  </div>
+</div>
+
+</body>
+
+<!-- Mirrored from dsiexplorer.awardspace.biz/WackyTap/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:29:54 GMT -->
+</html>

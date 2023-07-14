@@ -1,0 +1,11 @@
+<html>
+<head>
+<title>click the link below</title>
+<meta name="viewport" content="width=240">
+</head>
+<body>
+<a href="avascript:if(confirm('Your saved text is empty. Copy to clipboard(only works on DSi Homepage)?')) clipboard='empty';">CLICK HERE</a>
+-
+<a href="javascript:alert('click the link, add the ERROR PAGE to your favorites, edit the favorite. URL: add a j to the begining. NAME:Whatever you want. NOTE: when choosing copy to clipboard, it will show a page with your text. Press back to copy it to the clipboard.');">?</a>
+</body>
+</html>

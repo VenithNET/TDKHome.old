@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>wii - DSOffice</title>
+<meta name="viewport" content="width=240">
+<style>
+body { margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:231; height:154; padding-left:5px; }
+#title { position:absolute; left:2px; top:-1px; }
+#x { position:absolute; left:222px; top:2px; width:16px; height:16px; background-color:red; color:white; }
+#fullscreen { position:absolute; left:204px; top:2px; width:16px; height:16px; background-color:black; color:white; }
+a.x { text-decoration:none; color:white; }
+</style>
+</head>
+<body>
+<div id="title"><font size=3 color=white>wii - DSOffice</font></div>
+<div id=x><font size=2><center><a class="x" href=".">X</a></center></font></div>
+<div id=fullscreen><font size=2><center><a class="x" href="file.php?title=wii">+</a></center></font></div>
+<font size=3><center><u>wii</u></center></font><font size=1>www.amazon.com/Replacement-White-Nintendo-Wii-Console-Accessories/dp/B01BCY5BGU/ref=lp_14218861_1_10?s=videogames&ie=UTF8&qid=1478301267&sr=1-10
+<br>
+<br>
+<br>
+<br>HI SINDY<br><br><center><a href='editonline.php?title=wii'>EDIT</a></center></font>
+</body>
+</html>

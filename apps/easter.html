@@ -1,0 +1,274 @@
+<html> 
+<head>
+<title>Easter Date Calculator for 2011 and any year.</title>
+<meta name="viewport" content="width=240">
+<link rel="stylesheet" type="text/css" href="http://cache.blogads.com/147473454/feed.css" />
+</head> 
+<body bgcolor=yellow>
+<FONT SIZE="3">
+<CENTER>
+<FORM>
+<TABLE border=0 bgcolor=#D9D9E6 cellspacing=0 cellpadding=2>
+<TR ALIGN="center">
+	<TD><INPUT TYPE="button" VALUE="+" onclick=SetYear(1000) id=button1 name=button1></TD>
+	<TD><INPUT TYPE="button" VALUE="+" onclick=SetYear(100) id=button2 name=button2></TD>
+	<TD><INPUT TYPE="button" VALUE="+" onclick=SetYear(10) id=button3 name=button3></TD>
+	<TD><INPUT TYPE="button" VALUE="+" onclick=SetYear(1) id=button4 name=button4></TD>
+</TR>
+<TR ALIGN="center">
+	<TD><STRONG><FONT ID=Y4>y</FONT></STRONG></TD>
+	<TD><STRONG><FONT ID=Y3>e</FONT></STRONG></TD>
+	<TD><STRONG><FONT ID=Y2>a</FONT></STRONG></TD>
+	<TD><STRONG><FONT ID=Y1>r</FONT></STRONG></TD>
+</TR>
+<TR ALIGN="center">
+	<TD><INPUT TYPE="button" VALUE="-" onclick=SetYear(-1000) id=button5 name=button5></TD>
+	<TD><INPUT TYPE="button" VALUE="-" onclick=SetYear(-100) id=button6 name=button6></TD>
+	<TD><INPUT TYPE="button" VALUE="-" onclick=SetYear(-10) id=button7 name=button7></TD>
+	<TD><INPUT TYPE="button" VALUE="-" onclick=SetYear(-1) id=button8 name=button8></TD>
+</TR>
+</TABLE>
+</FORM>
+ 
+<TABLE bgcolor=#D9D9E6><TR ALIGN="center"><TD>
+	<STRONG ID=Easter1> If you see the word 'year' above,
+<FONT color=#800000>
+    <a href="http://users.chariot.net.au/~gmarts/eastnet.htm">click here</a>
+</FONT>
+ for a more basic version. </STRONG>
+
+</TD></TR></TABLE>
+</CENTER>
+</TD></TR></TABLE>
+<SCRIPT LANGUAGE="JavaScript1.3">
+// (C)opyright GM Arts 1997-1999
+ 
+//  GLOBAL VARIABLES
+//  ~~~~~~~~~~~~~~~~
+	var jDay = 0;
+	var jMonth = 0;
+	var oDay = 0;
+	var oMonth = 0;
+	var wDay = 0;
+	var wMonth = 0;
+	var eyear = 0;
+	
+//  STARTUP CODE
+//  ~~~~~~~~~~~~
+ 
+// check browser is version 4 or more
+	if (parseFloat(navigator.appVersion) < 4)
+		alert ("You may need to upgrade your browser to reliably use the Easter Date calculator");
+ 
+// display next Western Easter
+	var today = new Date();
+	eyear = today.getFullYear();
+	EasterWestern ();
+	
+	if (wMonth < today.getMonth() ||
+		(wMonth == today.getMonth() && wDay < today.getDate()))
+		eyear += 1;
+	
+	SetYear(0);
+// end of startup code
+ 
+//  FUNCTIONS
+//  ~~~~~~~~~
+function SetYear(adj)
+{
+	if (eyear + adj > 4099)
+		adj = 0;
+	if (eyear + adj < 326)
+		adj = 0;
+ 
+	eyear += adj;
+ 
+	// show year being calculated
+	Y4.innerText = IntDiv(eyear, 1000);
+	Y3.innerText = IntDiv(eyear % 1000, 100);
+	Y2.innerText = IntDiv(eyear % 100, 10);
+	Y1.innerText = eyear % 10;
+	
+	// reset vars
+	jDay = 0;
+	jMonth = 0;
+	oDay = 0;
+	oMonth = 0;
+	wDay = 0;
+	wMonth = 0;
+ 
+	//get relevant Easter dates
+	if ((eyear <= 325) || (eyear > 4099)) {
+		Easter1.innerText = "";
+		Easter2.innerText = "";
+		Easter3.innerText = "select a year from 326 to 4099";
+	}	
+ 
+	else {
+		EasterJulian();	// used for all calculations
+		if ((eyear > 325) && (eyear <= 1582)) {
+			Easter1.innerText =""
+				+ GetMonth(jMonth) + " " + GetOrdinal(jDay) + " in the Julian calendar ";
+			Easter2.innerText = "";
+			Easter3.innerText = "";
+		}
+		else {	// year is 1583 to 4099
+			EasterOrthodox (eyear, jDay, jMonth);
+			EasterWestern ();
+ 
+			Easter1.innerText =""
+				+ GetMonth(wMonth) + " " + GetOrdinal(wDay);
+ 
+			if (eyear <= 1922) { 
+				// clarify that this is a Gregorian date
+				// last known use of the Julian calendar was in 1922
+				Easter2.innerText ="Orthodox Easter Sunday date for " + eyear + ": "
+					+ GetMonth(oMonth) + " " + GetOrdinal(oDay) + " (in the Gregorian calendar) ";
+				Easter3.innerText =" which is the same day as "
+					+ GetMonth(jMonth) + " " + GetOrdinal(jDay)
+					+ " in the Julian calendar (for regions using that calender at the time) ";
+			}	
+			else {
+				Easter2.innerText ="Orthodox Easter Sunday date for " + eyear + ": "
+					+ GetMonth(oMonth) + " " + GetOrdinal(oDay);
+				Easter3.innerText =" which is the same day as "
+					+ GetMonth(jMonth) + " " + GetOrdinal(jDay)
+					+ " in the Julian calendar (no longer in use) ";
+			}
+		}
+	}
+}
+ 
+function IntDiv (num, dvsr)
+// performs integer division of num/dvsr - eg IntDiv(9,4)=2
+{
+	var negate = false;
+	var result = 0;
+	
+	if (dvsr == 0)
+		return null;
+	else {
+		if (num * dvsr < 0 )
+			negate = true;
+		if (num < 0)
+			num = -num;
+		if (dvsr < 0)
+			dvsr = -dvsr;
+		result = ((num - (num % dvsr)) / dvsr);
+		if (negate)
+			return -result;
+		else
+			return result;
+	}
+}
+ 
+function GetMonth(m)
+{
+	//switch is better, but not supported in JavaScript ver 1.0
+	if (m==3)
+		return ("March");
+	if (m==4)
+		return ("April");
+	if (m==5)
+		return ("May");
+}
+ 
+function GetOrdinal(d)
+{
+	var rmdr = 0;
+	rmdr = d % 10;
+ 
+	if (((d >= 4) && (d <= 20)) || (rmdr == 0) || (rmdr > 3))
+		return (d + "th");
+	else {
+		//switch is better, but not supported in JavaScript ver 1.0
+		if (rmdr==1)
+			return (d + "st");
+		if (rmdr==2)
+			return (d + "nd");
+		if (rmdr==3)
+			return (d + "rd");
+	}
+}
+ 
+function EasterJulian()
+{
+	var g = 0;
+	var i = 0;
+	var j = 0;
+	var p = 0;
+ 
+	g = eyear % 19;
+	i = (19 * g + 15) % 30;
+	j = (eyear + IntDiv(eyear, 4) + i) % 7;
+	p = i - j + 28;
+ 
+	jDay = p;
+	jMonth = 4;
+	if (p > 31)
+		jDay = p - 31;
+	else
+		jMonth = 3;
+}
+ 
+function EasterWestern()
+{
+	var g = 0;
+	var c = 0;
+	var h = 0;
+	var i = 0;
+	var j = 0;
+	var p = 0;
+ 
+	g = eyear % 19;
+	c = IntDiv(eyear, 100);
+	h = (c - IntDiv(c, 4) - IntDiv(8 * c + 13, 25) + 19 * g + 15) % 30;
+	i = h - IntDiv(h, 28) * (1 - IntDiv(h, 28) * IntDiv(29, h + 1) 
+		* IntDiv(21 - g, 11));
+	j = (eyear + IntDiv(eyear, 4) + i + 2 - c + IntDiv(c, 4)) % 7;
+	p = i - j + 28;
+ 
+	wDay = p;
+	wMonth = 4;
+	if (p > 31)
+		wDay = p - 31;
+	else
+		wMonth = 3;
+}
+ 
+function EasterOrthodox (yr, jDay, jMonth)
+/*	Even though the Julian calendar is no longer in use
+	Orthodox Easters are still based on this calendar
+	NOTE! JULIAN Easter Date must be calculated first!
+	This function converts Julian March and April
+	Easter Sunday dates to Gregorian calendar dates  */
+{
+	var extra = 0;
+	var tmp = 0;
+ 
+	oDay = 0;
+	oMonth = 0;
+ 
+	if ((yr > 1582) && (yr <= 4099)) {
+		extra = 10;
+		if (yr > 1600) {
+			tmp = IntDiv(yr, 100) - 16;
+			extra = extra + tmp - IntDiv(tmp, 4);
+		}
+		oDay = jDay + extra;
+		oMonth = jMonth;
+ 
+		if ((oMonth == 3) && (oDay > 31)) {
+			oMonth = 4;
+			oDay = oDay - 31;
+		}
+ 
+		if ((oMonth == 4) && (oDay > 30)) {
+			oMonth = 5;
+			oDay = oDay - 30;
+		}
+	}
+}
+</SCRIPT>
+</body>
+</html>

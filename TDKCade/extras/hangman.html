@@ -1,0 +1,172 @@
+<html>
+<head>
+<title>Hangman</title>
+<meta name="viewport" content="width=device-width"> 
+<script language="JavaScript">
+var words = new Array(
+"accept","account","achieve","across","action","actually","addition",
+"analysis","animal","announce","another","answer","anyone","anything",
+"audience","because","become","before","behind","believe","better",
+"central","century","certain","chance","change","charge","choice",
+"complete","concern","congress","consider","contain","continue","control",
+"defense","demand","describe","design","detail","develop","direct",
+"division","doctor","dollar","during","economic","effect","effort","either",
+"evidence","example","except","expect","explain","express","extend",
+"finger","finish","fiscal","follow","foreign","forget","former","freedom",
+"happen","herself","higher","himself","history","hospital","however",
+"instance","instead","interact","interest","involve","language","larger",
+"maintain","manager","manner","market","marriage","material","matter",
+"method","military","million","minute","modern","moment","morning",
+"nearly","normal","nothing","number","object","obtain","office","officer",
+"period","permit","person","personal","physical","picture","police",
+"prevent","private","probably","problem","process","produce","product",
+"question","rather","reaction","realize","really","reason","receive",
+"religion","remain","remember","remove","report","require","research",
+"section","select","series","serious","service","settle","several",
+"source","southern","special","specific","spring","square","station",
+"suddenly","suffer","suggest","summer","supply","support","suppose",
+"toward","trouble","usually","various","volume","weapon","western",
+"whether","window","within","without","wonder","worker","writer");
+
+var answer="",currentword="";
+var gamestatus=0;
+function Setup() {
+  if (!document.getElementById) return;
+  DrawAlphabet();
+  ChooseWord();
+  dispword=document.getElementById("theword");
+  for (i=0;i<answer.length;i++) {
+    currentword += "_";
+  }
+  dispword.innerHTML=currentword;
+}
+function DrawAlphabet() {
+  alpha=document.getElementById("alphabet");
+  for (i=65;i<91;i++) {
+    letter=String.fromCharCode(i);
+    node=document.createElement("A");
+    node.id=letter;
+    quoted="\"" + letter + "\"";
+    node.setAttribute("href","javascript:Guess("+quoted+");");
+    node.className="letter";
+    node.innerHTML=letter;
+    alpha.appendChild(node);
+  }
+}
+function ChooseWord() {
+  num=Math.floor(Math.random()*words.length);
+  answer=words[num].toUpperCase();
+}
+function Guess(letter) {
+  stat=document.getElementById("status");
+  alpha=document.getElementById("alphabet");
+  displetter=document.getElementById(letter);
+  node=document.createElement("span");
+  node.innerHTML=letter;
+  node.id=letter;
+  if (answer.indexOf(letter) != -1) {
+    AddLetter(letter);
+    stat.innerHTML="Correct!  Guess another letter.";
+    node.style.color="green";
+    alpha.replaceChild(node,displetter);
+    if (currentword==answer) GameOver("You Win! ");
+  } else {
+    stat.innerHTML="Incorrect!  Guess again!";
+    node.style.color="red";
+    alpha.replaceChild(node,displetter);
+    Hang();
+  }
+}
+function AddLetter(letter) {
+  dispword=document.getElementById("theword");
+  newword="";
+  for (i=0;i<answer.length;i++) {
+    if (answer.charAt(i)==letter)  newword += letter;
+      else newword += currentword.charAt(i);
+  }
+  currentword=newword;
+  dispword.innerHTML=currentword;
+}
+function Hang() {
+  gamestatus++;
+  newsrc="http://www.dsicade.com/Hangman/hangman" + gamestatus + ".gif";
+  document.images["hangman"].src=newsrc;
+  if (gamestatus==7) GameOver("Sorry! ");
+}
+function GameOver(text) {
+  stat=document.getElementById("status");
+  alpha=document.getElementById("alphabet");
+  dispword=document.getElementById("theword");
+  newlink=" <a href='javascript:location.reload();'>Click Here</a>";
+  newlink+=" to start a new game.";
+  stat.innerHTML="<b ID='gameover'>GAME OVER</b> - " + text + newlink;
+  dispword.innerHTML=answer;
+  for (i=65;i<91;i++) {
+    letter=String.fromCharCode(i);
+    oldnode=document.getElementById(letter);
+    if (oldnode.nodeName=="A") {
+      node=document.createElement("span");
+      node.innerHTML=letter;
+      node.className="letter";
+      alpha.replaceChild(node,oldnode);
+    } // end if
+  } // end for
+}
+</script>
+<style>
+#theword {font-size: 20px;
+     font-family: monospace;
+     font-weight: bold;
+     letter-spacing: 8px;}
+
+#alphabet {font-size: 7px;
+     font-weight: bold;
+     letter-spacing: 2px;
+     text-decoration: none;}
+
+#status {font-size: 7px;
+     font-weight: bold;
+     letter-spacing: 2px;
+     text-decoration: none;}
+
+#gameover {color: red; }
+
+A.letter {text-decoration: none;
+     color: blue;}
+
+.letter {color: silver;}
+
+#screen {
+position:absolute;
+left:0px;
+top:0px;
+width: 240px;
+height: 176px;
+overflow: hidden;
+}
+</style>
+</head>
+<body onload="Setup();">
+<div id="screen">
+<center>Hangman</center>
+<table>
+<tr>
+<td valign="top" colspan="2">
+  <span ID="alphabet"></span>
+</td>
+</tr>
+<tr>
+<td align="center" width="50%">
+  <img name="hangman" ID="hangman" src="http://www.dsicade.com/Hangman/hangman0.gif" width="80" height="105">
+</td>
+<td width="50">
+  <b ID="status">Guess a Letter Above.</b>
+</td></tr>
+<tr align="center" colspan="2">
+<td id="theword">
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>

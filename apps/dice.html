@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Dice Roller</title>
+<meta name="viewport" content="width=240">
+<style>body { margin-top:0px; margin-bottom:-10px; }</style>
+<!-- Original:  Michael Hensley (yelsneh@geocities.com) -->
+<!-- Web Site:  http://geocities.com/TimesSquare/Castle/6274 -->
+<!-- http://javascript.internet.com -->
+<SCRIPT>
+var die = 6;
+var dice = 2;
+function dice_roll(die, dice) {
+var roll = 0;
+for (loop=0; loop < dice; loop++) {
+// random number fix by George Johnston (cali_scripter@yahoo.com)
+roll = roll + Math.round(Math.random() * die) % die + 1;
+}
+document.form.text.value = roll;
+}
+</script>
+</head>
+<body>
+<center>
+<form name=form>
+<table border=1 cellpadding=3>
+<tr>
+<td colspan=2 align=middle><font size=2>sides per die</font></td>
+<td colspan=2 align=middle><font size=2># of dice</font></td>
+</tr>
+<tr>
+<td valign=top align=middle>
+<font size=2>
+<input type=radio name=sides onclick="die = 3">3
+<br><input type=radio name=sides onclick="die = 4">4 
+<br><input type=radio name=sides onclick="die = 5">5
+<br><input type=radio checked name=sides onclick="die = 6">6
+<br><input type=radio name=sides onclick="die = 8">8
+</font>
+</td>
+<td valign=top align=middle>
+<font size=2>
+<input type=radio name=sides onclick="die = 10">10
+<br><input type=radio name=sides onclick="die = 12">12
+<br><input type=radio name=sides onclick="die = 20">20
+<br><input type=radio name=sides onclick="die = 30">30
+<br><input type=radio name=sides onclick="die = 100">100
+</font>
+</td>
+<td valign=top align=middle>
+<font size=2>
+<input type=radio name=number onclick="dice = 1">1 
+<br><input type=radio checked name=number onclick="dice = 2">2
+<br><input type=radio name=number onclick="dice = 3">3
+<br><input type=radio name=number onclick="dice = 4">4
+<br><input type=radio name=number onclick="dice = 5">5
+</font>
+</td>
+<td valign=top align=middle>
+<font size=2>
+<input type=radio name=number onclick="dice = 6">6
+<br><input type=radio name=number onclick="dice = 7">7
+<br><input type=radio name=number onclick="dice = 8">8
+<br><input type=radio name=number onclick="dice = 9">9
+<br><input type=radio name=number onclick="dice = 10">10
+</font>
+</td>
+</tr>
+<tr>
+<td align=middle colspan=4>
+<font size=2>
+<input type=button value="Roll Dice" name=button onclick="dice_roll(die, dice)">
+<input type=text size=10 name=text>
+</font>
+</td>
+</tr>
+</table>
+</form>
+</center>
+</body>
+</html>

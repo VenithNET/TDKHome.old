@@ -1,0 +1,144 @@
+<html>
+<!-- Mirrored from dsiexplorer.awardspace.biz/Sudoku/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:29:55 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<meta name="viewport" content="width=device-width" /> 
+<title>Sudoku</title> 
+<link rel="stylesheet" type="text/css" href="scss.css">
+</head>
+
+<body style="overflow-y: auto;" onload="preload()" alink="#000000" bgcolor="#cdc09e" link="#000000" text="#000000" vlink="#000000">
+
+<div id="screen"><p id="title">Sudoku</p>
+
+<form>
+	<table>
+    	<tbody>
+
+        <tr>
+	        <td id="topleft"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(0);" type="text"></td>
+	        <td id="top"><input maxlength="1" value="5" readonly="readonly" type="text"></td>
+	        <td id="topright"><input maxlength="1" value="2" readonly="readonly" type="text"></td>
+	        <td id="top"><input maxlength="1" value="1" readonly="readonly" type="text"></td>
+	        <td id="top"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(4);" type="text"></td>
+	        <td id="topright"><input maxlength="1" value="3" readonly="readonly" type="text"></td>
+	        <td id="top"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(6);" type="text"></td>
+	        <td id="top"><input maxlength="1" value="8" readonly="readonly" type="text"></td>
+
+	        <td id="topright"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(8);" type="text"></td>
+        </tr>
+        <tr>
+	        <td id="left"><input maxlength="1" value="1" readonly="readonly" type="text"></td>
+	        <td><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(10);" type="text"></td>
+	        <td id="right"><input maxlength="1" value="6" readonly="readonly" type="text"></td>
+	        <td><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(12);" type="text"></td>
+	        <td><input maxlength="1" value="4" readonly="readonly" type="text"></td>
+	        <td id="right"><input maxlength="1" value="8" readonly="readonly" type="text"></td>
+
+	        <td><input maxlength="1" value="9" readonly="readonly" type="text"></td>
+	        <td><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(16);" type="text"></td>
+	        <td id="right"><input maxlength="1" value="3" readonly="readonly" type="text"></td>
+        </tr>
+        <tr>
+	        <td id="bottomleft"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(18);" type="text"></td>
+    	    <td id="bottom"><input maxlength="1" value="4" readonly="readonly" type="text"></td>
+	        <td id="bottomright"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(20);" type="text"></td>
+	        <td id="bottom"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(21);" type="text"></td>
+
+	        <td id="bottom"><input maxlength="1" value="6" readonly="readonly" type="text"></td>
+	        <td id="bottomright"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(23);" type="text"></td>
+	        <td id="bottom"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(24);" type="text"></td>
+	        <td id="bottom"><input maxlength="1" value="1" readonly="readonly" type="text"></td>
+	        <td id="bottomright"><input maxlength="1" value="5" readonly="readonly" type="text"></td>
+        </tr>
+        <tr>
+	        <td id="left"><input maxlength="1" value="2" readonly="readonly" type="text"></td>
+	        <td><input maxlength="1" value="6" readonly="readonly" type="text"></td>
+
+	        <td id="right"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(29);" type="text"></td>
+	        <td><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(30);" type="text"></td>
+	        <td><input maxlength="1" value="3" readonly="readonly" type="text"></td>
+	        <td id="right"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(32);" type="text"></td>
+	        <td><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(33);" type="text"></td>
+	        <td><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(34);" type="text"></td>
+	        <td id="right"><input maxlength="1" value="8" readonly="readonly" type="text"></td>
+        </tr>
+        <tr>
+
+	        <td id="left"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(36);" type="text"></td>
+	        <td><input maxlength="1" value="1" readonly="readonly" type="text"></td>
+	        <td id="right"><input maxlength="1" value="5" readonly="readonly" type="text"></td>
+	        <td><input maxlength="1" value="4" readonly="readonly" type="text"></td>
+	        <td><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(40);" type="text"></td>
+	        <td id="right"><input maxlength="1" value="2" readonly="readonly" type="text"></td>
+	        <td><input maxlength="1" value="3" readonly="readonly" type="text"></td>
+	        <td><input maxlength="1" value="6" readonly="readonly" type="text"></td>
+	        <td id="right"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(44);" type="text"></td>
+
+        </tr>
+        <tr>
+	        <td id="bottomleft"><input maxlength="1" value="7" readonly="readonly" type="text"></td>
+	        <td id="bottom"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(46);" type="text"></td>
+	        <td id="bottomright"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(47);" type="text"></td>
+	        <td id="bottom"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(48);" type="text"></td>
+	        <td id="bottom"><input maxlength="1" value="5" readonly="readonly" type="text"></td>
+	        <td id="bottomright"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(50);" type="text"></td>
+	        <td id="bottom"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(51);" type="text"></td>
+
+	        <td id="bottom"><input maxlength="1" value="4" readonly="readonly" type="text"></td>
+	        <td id="bottomright"><input maxlength="1" value="1" readonly="readonly" type="text"></td>
+        </tr>
+        <tr>
+	        <td id="left"><input maxlength="1" value="5" readonly="readonly" type="text"></td>
+	        <td><input maxlength="1" value="8" readonly="readonly" type="text"></td>
+	        <td id="right"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(56);" type="text"></td>
+	        <td><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(57);" type="text"></td>
+	        <td><input maxlength="1" value="1" readonly="readonly" type="text"></td>
+
+	        <td id="right"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(59);" type="text"></td>
+	        <td><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(60);" type="text"></td>
+	        <td><input maxlength="1" value="7" readonly="readonly" type="text"></td>
+	        <td id="right"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(62);" type="text"></td>
+        </tr>
+        <tr>
+	        <td id="left"><input maxlength="1" value="6" readonly="readonly" type="text"></td>
+	        <td><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(64);" type="text"></td>
+	        <td id="right"><input maxlength="1" value="1" readonly="readonly" type="text"></td>
+
+	        <td><input maxlength="1" value="3" readonly="readonly" type="text"></td>
+	        <td><input maxlength="1" value="2" readonly="readonly" type="text"></td>
+	        <td id="right"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(68);" type="text"></td>
+	        <td><input maxlength="1" value="8" readonly="readonly" type="text"></td>
+	        <td><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(70);" type="text"></td>
+	        <td id="right"><input maxlength="1" value="4" readonly="readonly" type="text"></td>
+        </tr>
+        <tr>
+	        <td id="bottomleft"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(72);" type="text"></td>
+
+	        <td id="bottom"><input maxlength="1" value="2" readonly="readonly" type="text"></td>
+	        <td id="bottomright"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(74);" type="text"></td>
+	        <td id="bottom"><input maxlength="1" value="6" readonly="readonly" type="text"></td>
+	        <td id="bottom"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(76);" type="text"></td>
+	        <td id="bottomright"><input maxlength="1" value="5" readonly="readonly" type="text"></td>
+	        <td id="bottom"><input maxlength="1" value="1" readonly="readonly" type="text"></td>
+	        <td id="bottom"><input maxlength="1" value="3" readonly="readonly" type="text"></td>
+	        <td id="bottomright"><input autocomplete="off" id="form0" maxlength="1" value="" onKeyUp="javascript:enter(80);" type="text"></td>
+        </tr>
+
+        </tbody>
+	</table>
+</form>
+
+
+
+
+
+
+<p id="msg">Level: easy</p><br><br><br><p id="menu"><a href="javascript:setup();" title="Set up new Sudoku">New</a> | <a href="javascript:setlevel();" title="Set difficulty level">Level: easy</a> | <a href="javascript:setcolor();" title="Set input color">Color: green</a> | <a href="javascript:setverify();" title="Toggle verify on/off">Verify: on</a></p></div>
+
+<script language="javascript" src="source.js" type="text/javascript">
+</script>
+</div>
+</body>
+<!-- Mirrored from dsiexplorer.awardspace.biz/Sudoku/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:29:56 GMT -->
+</html>

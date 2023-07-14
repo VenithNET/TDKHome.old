@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html>
+<head>
+<title>Random Squares</title>
+<meta name="viewport" content="width=240">
+<style>
+body { margin:0px; }
+
+.space-for-board { height: 140px; }
+.board {
+position: absolute;
+width: 140px;
+height: 140px;
+margin: 1em; /* An 'em' is the height the current font. */
+border: solid 2px gray;
+}
+
+.cell {
+position: absolute;
+width: 10px;
+height: 10px;
+}
+</style>
+<script language="JavaScript" type="text/javascript">
+function rand(min, max){
+return Math.floor( min + (1+max-min)*Math.random() );
+}
+
+function print(s){
+document.write(s + "\n");
+}
+
+function test_rand(){
+for (i=1; i<=20; i++){
+document.write( "rand(1,6) = " + rand(1,6) + "<br/>");
+}
+}
+
+function random_squares(howMany){
+min_offset = 0;
+max_offset = 130;
+for (i=1; i<=howMany; i++){
+x = rand(min_offset, max_offset);
+y = rand(min_offset, max_offset);
+red= rand(0,255);
+green = rand(0,255);
+blue= rand(0,255);
+style ="left:" + x + "px; ";
+style += "top:" + y + "px; ";
+style += "background:rgb(" + red + "," + green + "," + blue + ")";
+content = '';/* or use content=i to see numbered squares */
+print('<div class="cell" style="' + style + '">' + content + '</div>');
+}
+}
+</script>
+</head>
+<body>
+<div class="board">
+<script language="JavaScript"> random_squares(1200); </script>
+</div>
+<div class="space-for-board"></div>
+</body>
+</html>

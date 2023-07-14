@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>More Pages</title>
+<meta name="viewport" content="width=240">
+<style> 
+body { margin-left:1px; margin-top:1px; margin-right:1px; margin-bottom:0px; }
+#invis { visibility:hidden; position:absolute; left:0px; top:50px; width:240px; }
+</style>
+<script> 
+function func(){
+document.getElementById('invis').style.visibility='hidden';
+}
+function funct(){
+document.getElementById('invis').style.visibility='visible';
+}
+</script>
+</head>
+<body>
+<center>More Pages</center>
+<font size="2">
+<li><a href="/more/search.html">Search</a> (<a href="/more/cse.html">2.0</a>)</li>
+<li><a href="/more/faq.html">FAQ</a></li>
+<li><a href="/more/poll.html">Polls</a></li>
+<li><a href="/more/chatdemo.html">Chatroom</a></li>
+<li><a href="/more/dsoffice">DSOffice</a></li>
+<li><a href="javascript:funct();">Weather</a></li>
+<li><a href="/more/dsipc/">DSi PC</a></li>
+</font>
+<font size=3>
+<a href="index.html"><----</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="index3.html">----></a>
+</font>
+<div id="invis">
+<center>
+<font size=2 style="background:yellow">
+Weather
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="javascript:func();">X</a></font><br>
+<a href="http://www.findlocalweather.com/forecast/oh/api.html" target="_blank">
+<img src="http://www.findlocalweather.net/forecast.php?forecast=hourly&pands=api+oh&config=png&alt=hwilozone" border="0"  alt="weather"></a>
+</center>
+</div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!-----Improper URl Redirect---->
+<script>
+if (window.location.href == "http://dsihomepage.x10.mx/public_3ds/"){
+window.location="http://3ds.dsihomepage.x10.mx/";
+}
+</script>
+<script>alert("Hi, welocme to the 3DS\nHomepage where you can\nhave fun in the 3DS Browser.\nThere is lots of stuff like\ngames, apps, and 3D images.\nPlease complete our polls in\nthe more section to help\nimprove this site. Have fun!");</script>
+<html>
+<head>
+<title>3DS Homepage</title>
+<meta name="viewport" content="width=320">
+<style> 
+body { margin:0px; background:url(/img/blue.png); }
+#topscreen { width:320px; height:218px; overflow: hidden; }
+#bottomscreen { width:320px; height:212px; overflow: hidden; }
+</style>
+<script>
+function switchTo(what){
+if (what == "rules"){
+document.getElementById('content').innerHTML='<font size=2><li>You are expected to read/follow subrules for sections</li><li>You (obviously) can not hack this site</li><li>Rules are subject to change without notice</li></font>';
+document.getElementById('menu').innerHTML='<font size=4><a href="javascript:switchTo(\'disclaimer\');">DISCLAIMER</a> RULES</font>';
+}
+else{
+document.getElementById('content').innerHTML='<font size=2><li>I do not own Nintendo / Nintendo DSi.</li><li>DSi Homepage will not modify your system in any way.</li><li>I do not own all of the scripts on this site.</li></font>';
+document.getElementById('menu').innerHTML='<font size=4>DISCLAIMER <a href="javascript:switchTo(\'rules\');">RULES</a></font>';
+}
+}
+</script>
+<script> 
+var num=14;
+function func(){
+document.getElementById('div').innerHTML='<center><br><br><br><img src="http://dsihomepage.x10.mx/videos/Progress_Bar.gif" width=210 height=70></center>';
+funct();
+setInterval('funct()', 850 );
+}
+ 
+function funct(){
+num-=1;
+if (num == 0){window.location="/index.php";}
+}
+</script>
+<script> 
+var CurrentMsg = 'Hello';
+function update(msg){                     
+CurrentMsg = msg;                           
+document.messages.field.value = CurrentMsg;
+clearTimeout(timer);                           
+timer = setTimeout("idleMsg()",2500);        
+}
+function MakeArray(n) {                           
+this.length=n;                           
+for(var i = 1; i<= n; i++) {                                   
+this[i] = "";                
+}                           
+return(this);        
+}               
+var index = 1;           
+var notice_num = 20;                   
+var notices = new MakeArray(notice_num);        
+notices[1] = "Welcome to the 3DS Homepage!";
+notices[2] = "Ready to have some fun...";
+notices[3] = "...in the palm of your hand?";        
+notices[4] = "It's all 1 click away!";
+notices[5] = "Just click enter."; 
+notices[6] = "Just click enter.";
+notices[7] = "I said click enter!";
+notices[8] = "Well, what are you waiting for?";                  
+notices[9] = "Go ahead, click enter.";
+notices[10] = "Why won't you press enter?!?";
+notices[11] = "";
+notices[12] = "";
+notices[13] = "I'm still waiting";
+notices[14] = "PrEsS EnTeR!";
+notices[15] = "I QUIT!!!";
+notices[16] = "I QUIT!!!";
+notices[17] = "I QUIT!!!";
+notices[18] = "I QUIT!!!";
+notices[19] = "I QUIT!!!";
+notices[20] = "I QUIT!!!";
+notices[21] = "I QUIT!!!";
+notices[22] = "I QUIT!!!";
+notices[23] = "I QUIT!!!";
+notices[24] = "I QUIT!!!";
+notices[25] = "I QUIT!!!";
+notices[26] = "I QUIT!!!";
+notices[27] = "I QUIT!!!";
+notices[28] = "I QUIT!!!";
+notices[29] = "I QUIT!!!";
+notices[30] = "I QUIT!!!";
+notices[31] = "I QUIT!!!";
+notices[32] = "I QUIT!!!";
+var timer = setTimeout('idleMsg()',1500);                   
+function nochange() {
+document.messages.field.value = CurrentMsg;        
+}                   
+function idleMsg() {                           
+update(notices[index++]);                           
+if(index>notice_num) { 
+index=1; 
+   }  
+}
+</script>
+</head>
+<body>
+<div id=topscreen>
+<img src="/img/logo.png" width=320 hieight=218 alt="Welcome to the 3DS Homepage. Please turn download images on.">
+</div>
+<div id=bottomscreen>
+<div id="div"><center>
+<form name="messages" onSubmit="return false"> 
+<input type="text" name="field" size=40 value="Hello." onChange="nochange()"> 
+<div id="menu">
+<font size=4>
+<u>DISCLAIMER</u>
+<a href="javascript:switchTo('rules');">RULES</a>
+</font>
+</div>
+<div id="content"><font size=2>
+<li>I do not own Nintendo / Nintendo 3DS.</li>
+<li>3DS Homepage will not modify your system in any way.</li>
+<li>I do not own all of the scripts on this site.</li>
+</font></div>
+<input type="button" onclick="func();" value="Enter">
+</form>
+</center></div>
+<div id="preload" style="position:absolute; left:-90px; top:-90px;"><img src="http://dsihomepage.x10.mx/videos/Progress_Bar.gif"></div>
+</div>
+<script>document.body.scrollTop='218';</script>
+<IMG STYLE="position:absolute; TOP:400px; LEFT:0px;" SRC="/img/bookmark.png">
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <body style="background: url(images/16491.jpg)">    
+<!-- Mirrored from dsiexplorer.awardspace.biz/index2.php by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:29:35 GMT -->
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width" />
+        <link rel="shortcut icon" href="images/channels4_profile.jpg" />
+        <title>TDKCade - Explore the DS world!</title>
+        <style>
+          body { margin: 0px; }
+          #topscreen, #bottomscreen { width: 240px; height: 176px; overflow: hidden; }
+          #bottomscreen { padding-top: 77px; height: 99px; }
+          #title { position: absolute; left: 14px; top: 65px; }
+          #beta { position: absolute; left: 20px; top: 105px; font-size: 14px; font-family: sans-serif; font-weight: bold; font-style: italic; color: #DDDDDD; }
+          #ad { position: absolute; width: 240px; height: 60px; top: 193px; left: 0px; }
+          #navbar { position: absolute; width: 240px; height: 13px; padding-top: 2px; padding-bottom: 2px; top: 176px; left: 0px; background-color: black; }
+          #navbar a { margin-right: 10px; }
+          #leftnav { float: left; padding: 0px; border: 0px; margin-left: 1px; margin-right: 1px;}
+          #rightnav { float: right; padding: 0px; border: 0px; margin-left: 1px; margin-right: 1px;}
+          #container { width: 214px; height: 96px; overflow: hidden; margin-left: 1px; margin-right: 1px; }
+          .subcontainer { width: 214px; height: 96px; margin: 0px; }
+          .gamelink { background: url(images/bg.png) repeat-x; height: 24px; border: outset 2px; text-align: center; padding-top: 4px; }
+          .gamelink img { height: 20px; }
+        </style>
+        <script>
+          var navIndex = 0;
+          var navCount = 9;
+
+          function init()
+          {
+              document.body.scrollTop = 176;
+          }
+
+          function navigateLeft()
+          {
+              if(navIndex-1 < 0) return;
+
+              navIndex--;
+              document.getElementById("rightnav").style.opacity = 1.0;
+              document.getElementById("container").scrollTop = navIndex * 96;
+
+              if(navIndex-1 < 0)
+              {
+                  document.getElementById("leftnav").style.opacity = 0.5;
+              }
+          }
+
+          function navigateRight()
+          {
+              if(navIndex+1 >= navCount) return;
+
+              navIndex++;
+              document.getElementById("leftnav").style.opacity = 1.0;
+              document.getElementById("container").scrollTop = navIndex * 96;
+
+              if(navIndex+1 >= navCount)
+              {
+                  document.getElementById("rightnav").style.opacity = 0.5;
+              }
+          }
+        </script>
+
+    </head>
+    <body>
+        <div id="topscreen">
+            <img id="title" src="dsielogo.png" alt="DSiExplorer">
+            <div id="beta">v4.0</div>
+        </div>
+        <div id="bottomscreen">
+            <div id="navbar" align="center">
+
+              <a href="news.html"><img src="images/news-button.png" border="0"></a>
+              <a href="index.html"><img src="images/disclaimer-button.png" border="0"></a>
+        </div>
+            <div id="ad" align="center">
+              <table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr><td align="center">
+<img src="https://files.catbox.moe/d1q4m6.png">
+</td></tr>
+</table>
+            </div>
+            <img id="leftnav" style="opacity: 0.5" onclick="navigateLeft();" src="images/leftnav.png">
+
+            <img id="rightnav" onclick="navigateRight();" src="images/rightnav.png">
+            <div id="container">
+                <div class="subcontainer">
+                    <div class="gamelink"><a href="TouchMii/index.html#scrollDSi"><img src="images/touchmii.png" border="0" alt="Touch Mii"></a></div>
+                    <div class="gamelink"><a href="WarGames/index.html"><img src="images/wargames.png" border="0" alt="War Games"></a></div>
+                    <div class="gamelink"><a href="ShoutBox/index.html"><img src="images/shoutbox.png" border="0" alt="Shout Box!"></a></div>
+                </div>
+                <div class="subcontainer">
+				    <div class="gamelink"><a href="DOH/index.html"><img src="titles/doh.png" border="0" alt="Defend Our Home"></a></div>
+                    <div class="gamelink"><a href="BlockBreaker/index.html"><img src="images/blockbreaker.png" border="0" alt="Block Breaker"></a></div>
+                    <div class="gamelink"><a href="WackyTap/index.html"><img src="images/wackytap.png" border="0" alt="Wacky Tap"></a></div>
+                </div>
+                <div class="subcontainer">
+				    <div class="gamelink"><a href="Hangman/index.html"><img src="images/hangman.png" border="0" alt="Hangman"></a></div>
+                    <div class="gamelink"><a href="Sudoku/index.html"><img src="images/sudoku.png" border="0" alt="Sodoku"></a></div>
+                    <div class="gamelink"><a href="Puzzle/index.html"><img src="images/puzzle.png" border="0" alt="Puzzle"></a></div>
+                </div>
+			    <div class="subcontainer">
+                    <div class="gamelink"><a href="DSiCalc/index.html"><img src="titles/dsicalc.png" border="0" alt="DSiCalc"></a></div>
+                    <div class="gamelink"><a href="Phong/index.html"><img src="titles/phong.png" border="0" alt="Phong"></a></div>
+                    <div class="gamelink"><a href="Subdivide/index.html"><img src="titles/subdivide.png" border="0" alt="SubDivide"></a></div>
+                </div>
+                <div class="subcontainer">
+                    <div class="gamelink"><a href="Checkers/index.html"><img src="images/checkers.png" border="0" alt="Checkers"></a></div>
+                    <div class="gamelink"><a href="MathQuiz/index.html#bottomscreen"><img src="images/mathquiz.png" border="0" alt="Math Quiz"></a></div>
+                    <div class="gamelink"><a href="DSiPaintStudio/index.html"><img src="images/dsipaintstudio.png" border="0" alt="DSi Paint Studio"></a></div>
+                </div>
+                <div class="subcontainer">
+                    <div class="gamelink"><a href="Farg/index.html"><img src="titles/farg.png" border="0" alt="Farg"></a></div>
+                    <div class="gamelink"><a href="MysticalBall/index.html"><img src="titles/mysticalball.png" border="0" alt="Mystical Ball"></a></div>
+                    <div class="gamelink"><a href="SnackTime/index.html"><img src="titles/snacktime.png" border="0" alt="Snack Time"></a></div>
+                </div>
+                <div class="subcontainer">
+                    <div class="gamelink"><a href="Cavezor/index.html"><img src="titles/cavezor.png" border="0" alt="Cavezor"></a></div>
+                    <div class="gamelink"><a href="DsiMystery/dsipaint.com/games/dsimystery/index.html"><img src="DsiMystery/dsipaint.com/games/dsimystery/index_files/image2811.png" border="0" alt="DSiMystery"></a></div>
+                    <div class="gamelink"><a href="wakaskunk/dsipaint.com/games/wakaskunk/index.html"><img src="wakaskunk/dsipaint.com/games/wakaskunk/images/watermark.png" border="0" alt="Wak-A Skunk"></a></div>
+                </div>
+                <div class="subcontainer">
+		    <div class="gamelink"><a href="yortzee/dsipaint.com/games/yortzee/index.html"><img src="yortzee/dsipaint.com/games/yortzee/images/yorick.png" border="0" alt="Yortzee"></a></div>
+		    <div class="gamelink"><a href="MincoSays/dsipaint.com/games/minco_says/index.html"><img src="MincoSays/dsipaint.com/games/minco_says/images/minco.png" border="0" alt="Minco Says"></a></div>
+		</div>
+                <div class="subcontainer">
+		    <div class="gamelink"><a href="extras/index.html"><img src="images/extras.png" border="0" alt="Extras"></a></div>
+		</div>
+            </div>
+
+        </div>
+        <script>init();</script>
+    </body>
+
+<!-- Mirrored from dsiexplorer.awardspace.biz/index2.php by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:29:46 GMT -->
+</html>

@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>Tabs</title>
+<script type="text/javascript">  
+// =======================================================
+// Multiple onload function created by: Simon Willison
+// http://simonwillison.net/2004/May/26/addLoadEvent/
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      if (oldonload) {
+        oldonload();
+      }
+      func();
+    }
+  }
+}
+addLoadEvent(function() {
+  showPage1();
+});
+// =======================================================
+var tabone="http://www.google.com/";
+var tabtwo="http://www.google.com/";
+var tabthree="http://www.google.com/";
+var tabfour="http://www.google.com/";
+var tabfive="http://www.google.com/";
+var tabsix="http://www.google.com/";
+var tab="";
+function showPage1 () {
+showPage (document.getElementById ("experts/"));
+}
+function showPage(el) {
+var page;
+var div = document.getElementById("textDiv");
+if (el.id=="tabone"){page=tabone;tab="tabone"}
+else if (el.id=="tabtwo"){page=tabtwo;tab="tabtwo";}
+else if (el.id=="tabthree"){page=tabthree;tab="tabthree"}
+else if (el.id=="tabfour"){page=tabfour;tab="tabfour";}
+else if (el.id=="tabfive"){page=tabfive;tab="tabfive";}
+else if (el.id=="tabsix"){page=tabsix;tab="tabsix";}
+div.innerHTML = "<iframe src ='" + page +"' width='760px' height='460px' scrolling='auto'>";
+document.getElementById('url').value=page;
+}
+function go(){
+var page;
+var val=document.getElementById('url').value;
+if (tab == "tabone"){tabone=val;page=tabone;}
+else if (tab == "tabtwo"){tabtwo=val;page=tabtwo;}
+else if (tab == "tabthree"){tabthree=val;page=tabthree;}
+else if (tab == "tabfour"){tabfour=val;page=tabfour;}
+else if (tab == "tabfive"){tabfive=val;page=tabfive;}
+else if (tab == "tabsix"){tabsix=val;page=tabsix;}
+var div = document.getElementById("textDiv");
+div.innerHTML = "<iframe src ='" + page +"' width='760px' height='460px' scrolling='auto'>";
+}
+</script>
+</head>
+<body><div id=EchoTopic>
+<a href="#" id="tabone" onclick="showPage(this)">Tab 1</a> |
+<a href="#" id="tabtwo" onclick="showPage(this)">Tab 2</a> |
+<a href="#" id="tabthree" onclick="showPage(this)">Tab 3</a>|
+<a href="#" id="tabfour" onclick="showPage(this)">Tab 4</a>|
+<a href="#" id="tabfive" onclick="showPage(this)">Tab 5</a>|
+<a href="#" id="tabsix" onclick="showPage(this)">Tab 6</a><br>
+<input type=text id=url value="" size=99><input type=button value=GO onclick=go();><br>
+<div id=textDiv style="text-align:center;"></div>
+</div><!-- Default Insight Tag -->
+<script type="text/javascript"> 
+  var _bizo_data_partner_id = "131";
+</script>
+<script type="text/javascript"> 
+  var _bizo_p = (("https:" == document.location.protocol) ? "https://sjs." : "http://js.");
+  document.write(unescape("%3Cscript src='" + _bizo_p + "bizographics.com/convert_data.js?partner_id=" + _bizo_data_partner_id + "' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

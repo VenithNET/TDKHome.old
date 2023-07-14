@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>Mastermind</title>
+<meta name="viewport" content="width=240">
+<style>
+small { font-size:10px; }
+</style>
+<script language='JavaScript'>
+var nColumns = 4;
+var gameNumber = 1;
+var startTimeMillis;
+var timerIsRunning;
+var lastElapsedTime;
+var hiddenAnswer = [];     // what the user is trying to guess
+var guessTr = null;        // null => is no "Guess" row; game is not running.
+var lastGuess = [];        // what the user thinks is the answer.
+var oldGuesses = [];       // guessTr row history displayed on screen
+var messageTd;             // <td> block that holds user messages.
+var boardTable;            // table that holds guesses and buttons
+var blackLineTr;           // table row after guessTr
+colorImages  = ['redball.gif',    'blueball.gif',    'brownball.gif',
+                'greenball.gif',  'yellowball.gif',  'pinkball.gif' ];
+
+// --------------------------------------------------------
+function newGame(){
+    resetGame();
+    gameNumber++;
+    showMessage("<small>Starting the clock for game "+gameNumber+".</small>");
+    runTimer();
+}
+
+// --------------------------------------------------------
+function currentTime(){
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var s = d.getSeconds();
+    var ampm = (h>=12)?"pm":"am";
+    if (h>12) {h-=12;}
+    if (h==0) {h=12;}
+    if (m<10) {m="0"+m;}
+    if (s<10) {s="0"+s;}
+    return h+":"+m+":"+s+" "+ampm;
+}
+
+// --------------------------------------------------------
+// return a string like "01:22" giving min, since game began.
+function elapsedTimeAsString(){
+    var d = new Date();
+    var diff = d.getTime() - startTimeMillis;
+    var h = Math.floor( diff/3600000 );
+    var m = Math.floor( diff/60000 ) % 60;
+    var s = Math.floor( diff/1000. ) % 60;
+    if (h==0) {h="";} else {h=h+":";}
+    if (m<10) {m="0"+m;}
+    if (s<10) {s="0"+s;}
+    return ""+h+m+":"+s;
+}
+
+// --------------------------------------------------------
+// show the user the elapsed time and set lastElapsedTime
+function showTimer(){
+  lastElapsedTime = elapsedTimeAsString();
+  //defaultStatus = lastElapsedTime;
+  document.title = "Mastermind | Timer:"+lastElapsedTime;
+}
+
+// --------------------------------------------------------
+function runTimer(){
+     if (timerIsRunning){
+        showTimer();
+        setTimeout("runTimer()", 1000); // repeat every second
+     }
+}
+
+// --------------------------------------------------------
+function showMessage(aString){
+    messageTd.innerHTML = aString;
+}
+
+// --------------------------------------------------------
+function showAnswer(){
+    if ( guessTr == null ){
+        alert("The game is stopped and the answer is visible.\n" + 
+              "Click the 'New Game' link to start another.");
+        return;
+    }
+    if (confirm("Would you like to quit this game\n and see the answer?")){
+        for (var c=0; c<nColumns; c++){
+            getColumnNImage(c).src = colorImages[hiddenAnswer[c]];
+        }
+        guessTr.childNodes[2*nColumns-1].innerHTML = "<b>Answer</b>";
+        oldGuesses.push(guessTr);
+        guessTr = null;
+        timerIsRunning = false;
+        showMessage("The game is over.");
+    }
+}
+
+// --------------------------------------------------------
+// Tell the user what the rules are.
+function showHelp(){
+    showMessage( 
+"<small>" + 
+"You're trying to guess the correct sequence of colors.<p>" +
+"To make a guess, click one of the small circles at "+
+"the bottom in each column, and then click 'Guess' " +
+"to see if you're right." +
+"<p>After each guess you get some hints.  For each correct " +
+"color in the correct column, you'll see " + 
+"<img src='blackpixel.gif' height=8 width=8> , while for " +
+"each correct color in the wrong column, you'll see " +
+"<img src='greybox.gif' height=8 width=8>.<p>Colors " +
+"can't be counted in more than one hint, " +
+"so the maximum number of black and grey boxes for " +
+"a single guess is the same as the number of columns.<p>\n" + 
+"Peaking inside the computer to find the answer "+
+"is not allowed.  Otherwise, anything goes.  Good luck." + 
+"</small>"); 
+}
+
+// --------------------------------------------------------
+function init(){
+    boardTable  = document.getElementById('boardTable');
+    blackLineTr = document.getElementById('blackLineTr');
+    messageTd   = document.getElementById('messageTd');
+    document.getElementById('blackHorizontalTd').setAttribute('colspan',
+                                                              2*nColumns);
+    resetGame();
+    showMessage("<small>Game started at " + currentTime() + ".<br>" + 
+                "The clock's ticking;<br>" +
+                "click some colors and start guessing.</small>");
+    runTimer();
+
+    // --- initial annwer display ---     
+    // var notice = "Answer is ";
+    // for (var c=0; c<nColumns; c++){
+    //   notice += hiddenAnswer[c] + " ";
+    // }
+    // alert(notice);
+}
+    
+// --------------------------------------------------------
+function getRandom(n){
+    return Math.floor( n * Math.random() );
+}
+
+// --------------------------------------------------------
+function resetGame(){
+    while (oldGuesses.length>0){
+        boardTable.deleteRow( oldGuesses.pop().rowIndex );
+    }
+    for (var column=0; column<nColumns; column++){
+        lastGuess[column] = -1;
+        hiddenAnswer[column] = getRandom( colorImages.length );
+    }
+    timerIsRunning = true;
+    var d = new Date();
+    startTimeMillis = d.getTime();
+    createOrClearGuessTr();
+}
+
+// --------------------------------------------------------
+// This is called within a document.write() command from 
+// the .html page when it first loads.
+// It returns the <td>...</td> HTML for an array of 
+// button images that the user can click on to specify his guess.
+// Clicking on a button will call click(column,color), where
+//  column = (0,1,2,..,nColumns-1) ,  
+//  color = (0,...,colorImages.length-1)
+function getButtonArrayHTML(){
+    var result = "";
+    var blackLineHeight = colorImages.length * 19;
+    var whiteLineWidth  = nColumns * 22;
+    for (var column=0; column<nColumns; column++){
+        result += "<td align='center'><table>\n";
+        for (color in colorImages) {
+            result += "<tr><td><a href='javascript:click(" + column + 
+                "," + color + ")'><img src='" + colorImages[color] + 
+                "' border=0 width=16></a></td></tr>";
+        }
+        result += "</table></td>\n";
+        if (column<nColumns-1){
+            result += "<td><img height=" + blackLineHeight +" width=2 " + 
+                "src='blackpixel.gif' border=0></td>\n";
+        }
+    }
+    result += "<td align='right' valign='bottom'>"+
+              "<img src='whitepixel.gif' width="+whiteLineWidth+"></td>";
+              // + "<br><small>00:00</small></td>"
+    return result;
+}
+
+// --------------------------------------------------------
+// If the row where the user submits his guess isn't available, create it.
+// If it is there, initialize it.
+//   This function is the one that seems to have the biggest problems
+//   on various different browsers, particularly the issue of how to add
+//   rows to a table.  Here's how this one works, following (mostly) 
+//   the DOM spec (except for innerHTML, which I only call on tableData).
+//      * foo document.createElement('foo')        # to make TD's, TR's, etc.
+//      * tableData.innerHTML = ...                # to add images, links
+//      * tableRow.appendChild(tableData)          # put data in row
+//      * tbody = boardTable.getElementsByTagName('tbody')[0];   # get tbody
+//      * tbody.insertAfter(tableRow,otherRow)     # put row in table
+//   (whew!)
+function createOrClearGuessTr(){
+    if (guessTr != null){
+        for (var c=0; c<nColumns; c++){
+            // images are at indeces 0,2,4,...
+            guessTr.childNodes[2*c].childNodes[0].src = 'whitepixel.gif';
+        }
+        return;
+    }
+    guessTr = document.createElement('tr');
+    var td;
+    for (var column=0; column<nColumns; column++){
+        td = document.createElement('td');
+        td.innerHTML="<img src='whitepixel.gif' width=32 height=32 border=0>";
+        guessTr.appendChild(td);
+        if (column<nColumns-1){ 
+            td = document.createElement('td');
+            td.innerHTML="<img src='whitepixel.gif' border=0>";
+            guessTr.appendChild(td);
+        }
+    }
+    td = document.createElement('td');
+    td.innerHTML="<a href='javascript:checkGuess()'>Guess</a>&nbsp;";
+    td.align = "right";
+    guessTr.appendChild(td);
+    var tbody = boardTable.getElementsByTagName('tbody')[0];
+    tbody.insertBefore(guessTr, blackLineTr);
+}
+
+// --------------------------------------------------------
+// One of the image buttons was clicked; change the corresponding picture.
+function click(column,color){
+    if ( guessTr == null ){
+        alert("The game is stopped; you can't make guesses now.\n" + 
+              "Click 'New Game' to start another.");
+        return;
+    }
+    getColumnNImage(column).src = colorImages[color];
+    lastGuess[column] = color;
+}
+
+// --------------------------------------------------------
+// Return the image corresponding to the N'th column of the puzzle from guessTr
+function getColumnNImage(column){
+    return guessTr.childNodes[2*column].childNodes[0];
+}
+
+// --------------------------------------------------------
+// Show the user the hints by replacing the "Guess" link with
+// the given number of black and grey images.
+function drawAndPopGuessResult(black, grey){
+    guessTd = guessTr.childNodes[2*nColumns-1];
+    var htmlResult = "";
+    for (var i=0; i<black; i++){
+        htmlResult += "<img src='blackpixel.gif' height=8 width=8>" + 
+            "<img src='whitepixel.gif' width=4>";
+    }
+    for (var i=0; i<grey; i++){
+        htmlResult += "<img src='greybox.gif' height=8 width=8>" +
+            "<img src='whitepixel.gif' width=4>";
+    }
+    htmlResult += "<img src='whitepixel.gif' width=10>"+(oldGuesses.length+1);
+    guessTd.innerHTML = htmlResult;
+    oldGuesses.push(guessTr);
+    guessTr = null;
+}
+
+// --------------------------------------------------------
+function isAColumnEmpty(){
+    for (var c=0; c<nColumns; c++){
+        if ( lastGuess[c]<0 ){
+            alert(" Please pick a color for each column\n" + 
+                  " by clicking on the small circles\n" + 
+                  " before submitting your guess.");
+            return true;
+        }
+    }
+    return false;
+}
+
+// --------------------------------------------------------
+function checkGuess(){
+    if (isAColumnEmpty()) {return;}
+    var guessCopy  = [];
+    var answerCopy = [] ;
+    var nBlack = 0;
+    var nGrey  = 0;
+    // Make copies of the guesses and answers;
+    // it's easiest to do this counting by erasing ones we've counted.
+    for (var c=0; c<nColumns; c++){
+        guessCopy[c]  = lastGuess[c];
+        answerCopy[c] = hiddenAnswer[c];
+    }
+    // count number of black markers.
+    for (var c=0; c<nColumns; c++){
+        if ( answerCopy[c] == guessCopy[c] ){
+            nBlack++;
+            answerCopy[c] = -10;  // don't match this again
+            guessCopy[c] = -11;   // or this again.
+        }
+    }
+    // count number of grey markers
+    for (var ca=0; ca<nColumns; ca++){
+        for (var cg=0; cg<nColumns; cg++){
+            if ( answerCopy[ca] == guessCopy[cg] ){
+                nGrey++;
+                answerCopy[ca] = -10;  // don't match this again
+                guessCopy[cg] = -11;   // or this again.
+            }
+        }
+    }
+    drawAndPopGuessResult(nBlack, nGrey);
+    for (var c=0; c<nColumns; c++){
+        lastGuess[c] = -1;
+    }
+    if (nBlack == nColumns){         // was this guess correct?
+        timerIsRunning = false;
+        showTimer();                // display time and set lastElapsedTime.
+        showMessage("<b>Correct.</b><p>" + 
+                    "Number of guesses = "+ oldGuesses.length + "<br>" + 
+                    "Elapased time = " + lastElapsedTime );
+    }
+    else {
+        createOrClearGuessTr();
+    }       
+}
+</script>
+</head>
+<body bgcolor="white" onload="init()" style="margin:0px;">
+<center>
+<font size=2>
+<a href="javascript:newGame()">New Game</a> | 
+<a href="javascript:showAnswer()">Show Answer</a> | 
+<a href="javascript:showHelp()">Help</a>
+</font>
+<table style="border:1px solid black;" cellspacing=0 cellpadding=0 margin=0><tr><td>
+<table id='boardTable' border=0 cellspacing=0 cellpadding=0 margin=0>
+<tr id='blackLineTr'>
+<td colspan=8 align="center">
+<img src="blackpixel.gif" id="blackHorizontalTd" width = "100%" height=3 border=0>
+</td>
+</tr><tr>
+<script Language=JavaScript>
+document.write( getButtonArrayHTML() );
+</script>
+</tr>  
+</table>
+</td></tr>
+</table>
+<div id='messageTd'>&nbsp;</div>
+</center>
+</body>
+</html>

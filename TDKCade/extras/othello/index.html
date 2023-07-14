@@ -1,0 +1,938 @@
+<html>
+<head>
+<title>Othello/Reversi</title>
+<meta name="viewport" content="width=240">
+</head>
+<body bgcolor=lightgrey link=black vlink=black alink=white style="margin:0px;">
+<center>
+<script language="JavaScript"><!--
+ 
+// IE fixups
+ 
+function Push(This, That)
+{
+  This[This.length] = That; // This.push(That);
+}
+ 
+// Debugging code
+ 
+function isNumber(N)
+{
+  return typeof(N) == "number" && isFinite(N);
+}
+ 
+function Popup(Stuff)
+{
+  var popup = window.open("", "popup", "height=200,width=200");
+  with (popup.document) {
+    open();
+    if (typeof(Stuff) == "string") write(Stuff);
+    else for (var I = 0; I < Stuff.length; I++) write(Stuff[I], "\t");
+    close();
+  }
+}
+ 
+// Constants &c
+ 
+Blank = 0;
+ 
+// Global state & utilities
+ 
+StartBoard = [ 0,  0,  0,  0,  0,  0,  0,  0, // an 8x8 array of -1..1.
+               0,  0,  0,  0,  0,  0,  0,  0, // 2nd player is positive (purple)
+               0,  0,  0,  0,  0,  0,  0,  0,
+               0,  0,  0, +1, -1,  0,  0,  0,
+               0,  0,  0, -1, +1,  0,  0,  0,
+               0,  0,  0,  0,  0,  0,  0,  0,
+               0,  0,  0,  0,  0,  0,  0,  0,
+               0,  0,  0,  0,  0,  0,  0,  0 ];
+ 
+function CopyBoard(Board) // Returns an independent copy
+{
+  return Board.slice(0);
+}
+ 
+function Reset(Player)
+{
+  if (typeof Player == "undefined") Player = 1;
+ 
+  CurrentBoard  = CopyBoard(StartBoard);
+  CurrentMove   = 0; // NewGame will do CurrentMove++
+  CurrentPlayer = Player; // -1..1 - 0 ==> no game.
+                          // NewGame will do CurrentPlayer = -CurrentPlayer;
+}
+ 
+Reset(0); // Set/create CurrentXXX vars ....
+ 
+InputMode = false; // is false between games, or when the computer is thinking
+ 
+GameMode = 0; // Corresponds to document.Options.mode: 0 == human/computer
+              //                                       1 == computer/human
+              //                                       2 == human/human
+              //                                       3 == computer/computer
+ 
+Difficulty      = 0;     // Corresponds to document.Options.level
+GlobalLookAhead = 2;
+SetLookAhead    = false; // forward declaration
+ 
+// Message utilities
+ 
+function Message(M)
+{
+  document.Options.messages.value = ((M[0] != " ") ? " " : "") + M;
+}
+ 
+function FmtDD(DD) // format number to two chars, with left 0 pad
+{
+  var Result = DD.toString();
+  while (Result.length < 2 || Result.indexOf(".") == 1) Result = "0" + Result;
+  return Result;
+}
+ 
+function FmtMsecs(msecs)
+{
+  with (Math)
+  {
+    var Seconds = msecs / 1000;
+    if (Seconds < 60) return Seconds + " seconds";
+ 
+    var T = Seconds;
+    var Minutes = T / 60;
+        Seconds = round(T % 60 * 100) / 100;
+    if (Minutes < 60) return round(Minutes) + ":" + FmtDD(Seconds) + " minutes";
+ 
+        T       = Minutes
+    var Hours   = T / 60;
+        Minutes = T % 60;
+    return round(Hours) + ":" + FmtDD(round(Minutes)) + ":" + FmtDD(Seconds) + " hours";
+  }
+}
+ 
+// User settings
+ 
+function CurrentMode() // document.Options.mode, ie 0..3
+{
+  for (var Result = 0; Result < 4; Result++)
+    if (document.Options.mode[Result].checked) return Result;
+  alert("No playing mode selected");
+}
+ 
+function CurrentDifficulty() // document.Options.level, ie 0..2
+{
+  for (var Result = 0; Result < 3; Result++)
+    if (document.Options.level[Result].checked) return Result;
+  alert("No difficulty level selected");
+}
+ 
+// Position hashing fns
+ 
+function Hash(Row, Column)
+{
+  return (Row * 8) + Column;
+}
+ 
+function ExtractRow(Hash)
+{
+  return Hash >> 3;
+}
+ 
+function ExtractCol(Hash)
+{
+  return Hash & 0x7;
+}
+ 
+// Generate capture list
+ 
+Deltas = [ [-1, -1], [-1, +0], [-1, +1],   // 8 directions, 8 row/col deltas
+           [+0, -1],           [+0, +1],
+           [+1, -1], [+1, +0], [+1, +1] ];
+ 
+// could optimize this by generating DeltaRow/DeltaCol at load time
+ 
+function GenerateCaptureList(Row, Col, Board, Player)
+{
+  var Result = []; // Returns a list of positions (with the last one being currently blank), or []
+ 
+  if (! Player) Player = CurrentPlayer; // Default params
+  if (! Board)  Board  = CurrentBoard;
+ 
+  if (Board[Hash(Row, Col)] == 0 /*Blank*/) // Can only move onto blank squares
+  {
+    // Scan 8 directions to find captures
+    var Opponent, Index, DeltaRow, DeltaCol, SubList, ThisRow, ThisCol;
+ 
+    Opponent = -Player;
+    for (Index = 0; Index < 8; Index++)
+    {
+      DeltaCol = Deltas[Index];
+      DeltaRow = DeltaCol[0];
+      DeltaCol = DeltaCol[1];
+ 
+      SubList = [];
+      ThisRow = Row + DeltaRow;
+      ThisCol = Col + DeltaCol;
+      while (ThisRow >= 0 && ThisRow <= 7 && ThisCol >= 0 && ThisCol <= 7)
+      {
+        var ThisPosition = Hash(ThisRow, ThisCol);
+        var ThisSpace = Board[ThisPosition];
+        if (ThisSpace == Opponent) {
+          Push(SubList, ThisPosition ); // *Might* capture this opponent
+          ThisRow += DeltaRow;
+          ThisCol += DeltaCol;
+        }
+        else /* ThisSpace is Blank or Player */ {
+          if (ThisSpace == Player) Result = Result.concat(SubList); // Can capture all opponents to here
+          break; // Stop scanning on Blank or Player
+        }
+      }
+    }
+    if (Result.length > 0) Push(Result, Hash(Row, Col)); // Player would 'capture' this blank square
+  }
+  return Result;
+}
+ 
+// Square name/number utilities
+ 
+function Odd(Number)
+{
+  return (Number & 1) == 1;
+}
+ 
+/*
+  function SquareNumber(Name)
+  {
+    return [Number(Name[0]), Number(Name[1])];
+  }
+ 
+function HashPosition(Position)
+{
+  return Position[0] * 8 + Position[1];
+}
+ 
+function SquareName(Number)
+{
+  return Number[0].toString() + Number[1].toString();
+}
+*/
+ 
+function SquareImageName(Position)
+{
+//  return "-" + (Odd(Number[0]) == Odd(Number[1])) + ".gif";
+  return "-" + (Odd(ExtractRow(Position)) == Odd(ExtractCol(Position))) + ".gif";
+}
+ 
+function Capture(List, Board, Player)
+{
+  if (! Board)  Board  = CurrentBoard;  // Default parameters
+  if (! Player) Player = CurrentPlayer;
+ 
+  for (var I = 0; I < List.length; I++)
+    Board[ List[I] ] = Player;
+}
+ 
+function ShowCaptures(List)
+{
+  for (var I = 0; I < List.length; I++) {
+    var Position = List[I];
+    document.images[Position].src = "capture" + SquareImageName(Position);
+  }
+}
+ 
+function AllSquares()
+{
+  var Result = [];
+  for (var Row = 0; Row < 8; Row++)
+    for (var Col = 0; Col < 8; Col++) Push(Result, Hash(Row, Col));
+  return Result;
+}
+ 
+MarkList = [];
+ 
+function Refresh(List, ShowLast)
+{
+  var Position, Name;
+  var Last = List.length - 1;
+  for (var I = 0; I <= Last; I++)
+  {
+    Position = List[I];
+    switch ( CurrentBoard[Position] )
+    {
+      case +1: Name = "plus";  break
+      case -1: Name = "minus"; break;
+      default: Name = "blank"; break;
+    }
+    if (ShowLast && I == Last) {
+      Name = "last-" + Name;
+      var Now = new Date();
+      Push(MarkList, [new Date(Now.valueOf() + 1500), [Position]]);
+    }
+    document.images[Position].src = Name + SquareImageName(Position);
+  }
+}
+ 
+function Unmark()
+{
+  while (MarkList.length > 0) {
+    var First = MarkList[0];
+    var Timeout = First[0];
+    if (Timeout >= new Date()) return;
+    Refresh(First[1]);
+    MarkList = MarkList.slice(1); // MarkList.shift();
+  }
+}
+ 
+setInterval("Unmark()", 100);
+ 
+// Computer move
+ 
+function Rand(N) // Random integer from 0..N-1
+{
+  return Math.round(Math.random() * (N - 1));
+}
+ 
+Next = false; // Forward definition: is set as soon as NextPlayer is defined
+ 
+function AllPossibleMoves(Board, Player)
+{
+  var Result, Row, Col, Move;
+  Result = [];
+  for (Row = 0; Row < 8; Row++)
+    for (Col = 0; Col < 8; Col++) {
+      Move = GenerateCaptureList(Row, Col, Board, Player );
+      if (Move.length > 0) Push(Result, Move);
+    }
+  return Result;
+}
+ 
+function PieceCounts(Board)
+{
+  var GreenCount = 0;
+  var BlueCount  = 0;
+  for (var Index = 0; Index < 64; Index++)
+    switch ( Board[Index] )
+    {
+      case -1: GreenCount++; break;
+      case +1: BlueCount++;  break;
+    }
+   return [GreenCount, BlueCount];
+}
+ 
+CornerW     =        128;
+WeakCornerW =         -8; // -16; // bad to have, iff appr. corner still free
+GoodEdgeW   =         16;
+BadInW      =         -4; // bad news
+ 
+Infinity    = 0x7FFFFFFF;
+GameWon     =      10000; // Finite value, but better than any piece tally
+ 
+Corners     = [0, 7, 56, 63];
+WeakCorners = [[  1,  8,  9 ],   // top left
+               [  6, 14, 15 ],   // top right
+               [ 48, 49, 57 ],   // bottom left
+               [ 54, 55, 62 ]]; // bottom right
+GoodEdges   = [  2,  3,  4,  5,   // top
+                58, 59, 60, 61,   // bottom
+                23, 31, 39, 47,   // right
+                16, 24, 32, 20 ]; // left
+ 
+BadIns      = [ 10, 11, 12, 13,   // top
+                50, 51, 52, 53,   // bottom
+                22, 30, 38, 46,   // right
+                17, 25, 33, 41 ]; // left
+ 
+ExtraLookAheadCode = [
+                       1, 2, 1, 0,   0, 1, 2, 1,
+                       2, 3, 1, 1,   1, 1, 3, 2,
+                       1, 1, 0, 0,   0, 0, 1, 1,
+                       0, 1, 0, 0,   0, 0, 1, 0,
+ 
+                       0, 1, 0, 0,   0, 0, 1, 0,
+                       1, 1, 0, 0,   0, 0, 1, 1,
+                       2, 3, 1, 1,   1, 1, 3, 2,
+                       1, 2, 1, 0,   0, 1, 2, 1
+                     ];
+ 
+function ExtraLookAhead(Move, Depth)
+{
+  var Length = Move.length;
+  if (Length == 0) return 0;
+ 
+  var Position = Move[Length - 1];
+  var Code = ExtraLookAheadCode[Position];
+  with (Math) return min(Difficulty, max(0, Code - Depth));
+}
+ 
+function ScoreBoard(Board, Deadlock)
+{
+  var Counts = PieceCounts(Board);
+  var GreenCount = Counts[0];
+  var BlueCount  = Counts[1];
+  var Filled     = BlueCount + GreenCount;
+  var Balance    = BlueCount - GreenCount;
+ 
+      /* normal end */    /* early end *******************/
+  if (Filled   ==   64 || BlueCount == 0 || GreenCount == 0 || Deadlock) {
+    // Score a victory
+    var Result = GameWon + Balance;
+    if (GreenCount > BlueCount) Result = -Result;
+    return Result;
+  } else {
+    // Normal positional scoring
+      // Overall piece count becomes more important each quarter
+      var I, Result = Balance << (Filled >> 4);
+ 
+      // Check corners
+      for (I = 0; I < 4 /*Corners.length*/; I ++) {
+        var ThisSpace = Board[Corners[I]];
+        if (ThisSpace != 0) Result += ThisSpace * CornerW;
+        else {
+          var ThisWeak = WeakCorners[I];
+          for (var J = 0; J < 3 /*ThisWeak.length*/; J++)
+            Result += Board[ThisWeak[J]] * WeakCornerW;
+        }
+      }
+ 
+      // Apply GoodEdgeW and BadInW weights
+      for (I = 0; I < 16 /*GoodEdges.length*/; I++)
+        Result += Board[GoodEdges[I]] * GoodEdgeW +
+                  Board[BadIns[I]]    * BadInW;
+  }
+  return Result;
+}
+ 
+function MiniMax(Board, Move, Player, Depth, LookAhead, Alpha, Beta, Pass)
+// Evaluates the effect of Move on Board by looking at responses. Does NOT change Board.
+{
+  var NewBoard = CopyBoard(Board); // Copy the board
+  Capture(Move, NewBoard, Player); // Apply this move to it
+ 
+  LookAhead += ExtraLookAhead(Move, Depth);
+ 
+  if (LookAhead <= 1) return ScoreBoard(NewBoard) * Player;
+                             // ScoreBoard always looks at game from POV of +1 (second) player
+  else /* Consider opponent's responses */ {
+    // Generate opponent's responses
+    Depth++;
+    LookAhead--;
+    Player = -Player;
+    var Responses = AllPossibleMoves(NewBoard, Player);
+ 
+    // Score opponent's responses
+    var Length = Responses.length;
+    if (Length == 0) // opponent can't move
+      if (Pass) return -ScoreBoard(NewBoard, true) * Player; // game over: neither player can move
+      else      return -MiniMax(NewBoard, [], Player, Depth, LookAhead, -Beta, -Alpha, true);
+    for (var Index = 0; Index < Length; Index++) {
+      var ThisScore = MiniMax(NewBoard, Responses[Index], Player, Depth, LookAhead, -Beta, -Alpha);
+      if (ThisScore > Alpha) {
+        Alpha = ThisScore;
+        if (Alpha >= Beta) return -Alpha; // worse from opponent's POV; this state will never be reached
+      }
+      Responses[Index] = ThisScore;
+    }
+ 
+    // Return *opponent's* best score
+    var High = Responses[0]; // Score of first move
+    for (Index = 1; Index < Length; Index++) if (Responses[Index] > High) High = Responses[Index];
+ 
+    return -High; // Return the score from this player's POV
+  }
+}
+ 
+function ScoreMove(Move, Alpha, Beta)
+{
+  return MiniMax(CurrentBoard, Move, CurrentPlayer, 0, GlobalLookAhead, Alpha, Beta);
+}
+ 
+function CompareScores(A, B)
+{
+  // assumes A and B are [move, score] pairs
+  return B[1] - A[1]; // we want to sort from high score to low score
+}
+ 
+function MakeComputerMove()
+{
+  var StartTime = new Date();
+  SetLookAhead(); // Allow user to change GlobalLookAhead between moves
+ 
+  // Generate a list of all possible moves
+  var Moves = AllPossibleMoves();
+ 
+  // Score them
+  var Best  = -Infinity;
+  var Worst =  Infinity;
+  var Length = Moves.length;
+  for (var Index = 0; Index < Length; Index++) {
+    var ThisMove = Moves[Index];                           // get move list
+    var Considering = ThisMove.slice(ThisMove.length - 1); // current candidate
+    ShowCaptures(Considering);                             // show work (under NS, at least)
+    var ThisScore = ScoreMove(ThisMove, Best, Worst);      // score move
+    if (ThisScore > Best) Best = ThisScore;                // latch up alpha
+    Moves[Index] = [ThisMove, ThisScore];                  // save score
+    Refresh(Considering);                                  // unshow work
+    Unmark();                                              // setInterval isn't kicking in while we work ....
+  }
+ 
+  // Sort by score, high to low
+  Moves.sort(CompareScores);
+ 
+  // Count top scoring moves
+  var High  = Moves[0][1]; // Score of best move
+  var Count = 1;
+  for (Index = 1; Index < Length; Index++)
+    if (Moves[Index][1] == High) Count++; else break;
+ 
+  // Select (one of) the top scoring move(s)
+  var ThisMove = Moves[Rand(Count)][0];
+ 
+  // Make the selected move
+  Capture(ThisMove);       // Make move
+  Refresh(ThisMove, true); // Show move
+ 
+  Message(FmtMsecs((new Date()) - StartTime));
+ 
+  Next();                  // Switch players, check for available moves
+}
+ 
+ 
+// Game mechanics
+ 
+function CurrentColor(Player)
+{
+  if (! Player) Player = CurrentPlayer;
+  return (Player < 0) ? "Orange" : "Purple";
+}
+ 
+function SetDefaultStatus()
+{
+  if (InputMode) defaultStatus = CurrentColor() + "'s turn";
+  else if (CurrentPlayer == 0) defaultStatus = "";
+       else defaultStatus = "Computer is 'thinking'";
+}
+ 
+function IsComputerMove()
+{
+  return (GameMode == 0 && CurrentPlayer == 1)  || // human/computer, player 2
+         (GameMode == 1 && CurrentPlayer == -1) || // computer/human, player 1
+         (GameMode == 3);                          // computer/computer
+}
+ 
+function NextPlayer() // Switches players, checks for available moves
+{
+  status = "";
+  CurrentMove++;
+  InputMode     = false;
+  CurrentPlayer = - CurrentPlayer;     // This is the normal case
+  var Moves     = AllPossibleMoves();  // Can the next player move?
+  var CanMove   = Moves.length > 0;
+  if (!CanMove) /* Game *may* be over */ {
+    CurrentPlayer = - CurrentPlayer;   // Try the previous player again
+    Moves = AllPossibleMoves();
+    var GameOver = Moves.length == 0;
+    if (GameOver) {
+      CurrentPlayer = 0;
+      var Counts = PieceCounts(CurrentBoard);
+      var GreenCount = Counts[0];
+      var BlueCount  = Counts[1];
+      Message( (GreenCount == BlueCount) ?
+                    "Tied game!" :
+                    ((GreenCount > BlueCount) ? "Orange wins, " + GreenCount + " to " + BlueCount :
+                                                "Purple wins, " + BlueCount + " to " + GreenCount ));
+      CurrentPlayer = 0;
+      SetDefaultStatus();
+      return;
+    } else Message(CurrentColor(-CurrentPlayer) + " can't move.");
+  }
+ 
+  if (IsComputerMove()) setTimeout("MakeComputerMove()", 0);
+  else InputMode = true;
+ 
+  SetDefaultStatus();
+}
+ 
+Next = NextPlayer;
+ 
+// Event handlers
+ 
+var CaptureList = [];
+ 
+function Click()
+{
+  Message('');
+  if (InputMode && CaptureList.length > 0) {
+    Capture(CaptureList);       // Make move
+    Refresh(CaptureList, true); // Show move
+    NextPlayer();               // Switch players, check for available moves
+  }
+  return false; // Click handler needs to return false, to keep on page
+}
+ 
+function MouseEnter(Row, Col)
+{
+  var Result = "";
+ 
+  if (InputMode) {
+    CaptureList = GenerateCaptureList(Row, Col);
+    ShowCaptures(CaptureList);
+    Result = CurrentColor() +  " can " + ((CaptureList.length == 0) ? "not " : "") + "move here.";
+  } else CaptureList = [];
+ 
+  return Result;
+}
+ 
+function MouseLeave()
+{
+  Refresh(CaptureList);
+ 
+  return false;
+}
+ 
+// Reset code
+ 
+function SetLookAheadFn()
+{
+  // Where are we in the game?
+  var Counts = PieceCounts(CurrentBoard);
+  var Third = Math.floor((Counts[0] + Counts[1] - 4) / 20); // 0, 1, or 2
+ 
+  Difficulty = CurrentDifficulty();
+  switch (Difficulty)
+  {
+    case 0:  GlobalLookAhead = 2 + Math.min(2, Third);     break; // 2, 3, 3
+    case 1:  GlobalLookAhead = 2 + Math.min(2, Third * 2); break; // 2, 4, 4
+    case 2:  GlobalLookAhead = 2 + Third * 2;              break; // 2, 4, 6
+    default: alert("Unexpected difficulty setting");
+  }
+}
+ 
+SetLookAhead = SetLookAheadFn;
+ 
+function NewGame()
+{
+  if (!InputMode && CurrentPlayer != 0) window.alert("Can't restart while computer is thinking");
+  else {
+    Reset();
+    Message("");
+    Refresh(AllSquares());
+    GameMode   = CurrentMode();
+    SetLookAhead(); 
+    NextPlayer();   // Switch players, check for available moves
+  }
+}
+ 
+// --></script>
+ 
+<table cellspacing=0 cellpadding=0 border=0>
+<tr><td align=center valign=middle><table cellspacing=0 cellpadding=0 border=0>
+ 
+<tr><td><a href="" onMouseOver="status = MouseEnter(0,0); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(0,1); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(0,2); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(0,3); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(0,4); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(0,5); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(0,6); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(0,7); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td></tr>
+<tr><td><a href="" onMouseOver="status = MouseEnter(1,0); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(1,1); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(1,2); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(1,3); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(1,4); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(1,5); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(1,6); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(1,7); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td></tr>
+<tr><td><a href="" onMouseOver="status = MouseEnter(2,0); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(2,1); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(2,2); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(2,3); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(2,4); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(2,5); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(2,6); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(2,7); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td></tr>
+<tr><td><a href="" onMouseOver="status = MouseEnter(3,0); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(3,1); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(3,2); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(3,3); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="plus-true.gif"   height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(3,4); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="minus-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(3,5); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(3,6); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(3,7); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td></tr>
+<tr><td><a href="" onMouseOver="status = MouseEnter(4,0); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(4,1); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(4,2); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(4,3); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="minus-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(4,4); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="plus-true.gif"   height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(4,5); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(4,6); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(4,7); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td></tr>
+<tr><td><a href="" onMouseOver="status = MouseEnter(5,0); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(5,1); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(5,2); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(5,3); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(5,4); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(5,5); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(5,6); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(5,7); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td></tr>
+<tr><td><a href="" onMouseOver="status = MouseEnter(6,0); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(6,1); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(6,2); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(6,3); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(6,4); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(6,5); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(6,6); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(6,7); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td></tr>
+<tr><td><a href="" onMouseOver="status = MouseEnter(7,0); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(7,1); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(7,2); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(7,3); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(7,4); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(7,5); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(7,6); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-false.gif" height=20 width=20 alt=""></a></td>
+    <td><a href="" onMouseOver="status = MouseEnter(7,7); return true"
+                   onClick="return Click();"
+                   onMouseOut="return MouseLeave();"><img
+                   border=0 src="blank-true.gif"  height=20 width=20 alt=""></a></td></tr>
+ 
+</table>
+ 
+</td></tr><tr><td bgcolor=lightgrey align=left valign=top>
+<script language="JavaScript"><!--
+ 
+defaultStatus = "";
+ 
+function ModeClick(N) { document.Options.mode[N].click(); }
+ 
+function OverMode(N)  { return document.Options.mode[N].value; }
+ 
+function LevelClick(N) { document.Options.level[N].click(); }
+ 
+function OverLevel(N)  { return document.Options.level[N].value; }
+ 
+function Popup(Name)
+{
+  window.open(Name + '.html', Name, 'height=450,width=320,resizable,scrollbars');
+}
+ 
+//--></script>
+<form name="Options">
+ 
+<center><table cellspacing=0 cellpadding=0 border=0>
+<tr><td valign=top><font size=2><input type="radio" name="mode" checked value="Human/computer"></font></td>
+    <td valign=top><font size=2><a href="" onClick="ModeClick(0); return false;" onMouseOver="status = OverMode(0); return true">Orange <i>vs</i> DSi</a></font></td>
+    <td valign=top><font size=2><input type="radio" name="mode" value="Computer/human"></font></td>
+    <td valign=top><font size=2><a href="" onClick="ModeClick(1); return false;" onMouseOver="status = OverMode(1); return true">DSi <i>vs</i> purple</td></a></font></tr>
+<tr><td valign=top><font size=2><input type="radio" name="mode" value="Human/human"></font></td>
+    <td valign=top><font size=2><a href="" onClick="ModeClick(2); return false;" onMouseOver="status = OverMode(2); return true">Orange <i>vs</i> purple</a></font></td>
+    <td valign=top><font size=2><input type="radio" name="mode" value="Computer/computer"></font></td>
+    <td valign=top><font size=2><a href="" onClick="ModeClick(3); return false;" onMouseOver="status = OverMode(3); return true">DSi <i>vs</i> DSi</a></font></td>
+</tr></table>
+<table cellspacing=1 cellpadding=0 border=0><tr>
+ 
+<td width=33%><font size=2><input type="radio" name="level" value="Easy" checked><a href="" onClick="LevelClick(0); return false;" onMouseOver="status = OverLevel(0); return true">Easy</a></font></td>
+<td width=33%><font size=2><input type="radio" name="level" value="Medium"><a href="" onClick="LevelClick(1); return false;" onMouseOver="status = OverLevel(1); return true">Medium</a></font></td>
+<td width=33%><font size=2><input type="radio" name="level" value="Hard"><a href="" onClick="LevelClick(2); return false;" onMouseOver="status = OverLevel(2); return true">Hard</a></font></td>
+ 
+</tr></table> 
+<input type="button" name="button" value=" New game " onClick="NewGame()">
+<br>
+<input type="text" name="messages" size=25>
+</center>
+ 
+</form>
+</td></tr></table>
+</td></tr></table>
+</center>
+</body>
+<script language="JavaScript">
+NewGame();
+</script>
+</html>

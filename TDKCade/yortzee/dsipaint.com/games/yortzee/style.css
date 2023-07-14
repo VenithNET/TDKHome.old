@@ -1,0 +1,96 @@
+BODY {
+	color: #222;
+	font-size: 10px;
+	line-height: 10px;
+	margin: 2px;
+	width: 236px;
+}
+
+DIV {
+	height: 68px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	width: 68px;
+}
+
+.title {
+	font-size: 16px;
+	text-align: center;
+	text-shadow: 2px 2px 2px #444;
+	top: 5px;
+	width: 230px;
+}
+
+FORM {
+		margin: 0px;
+		padding: 0px;
+}
+
+.button {
+	background: #44f;
+	border: 2px outset #44f;
+	color: #fff;
+	font-size: 12px;
+	height: 18px;
+	position: absolute;
+	text-align: center;
+	width: 40px;
+}
+
+
+.yorick {
+	background: url(images/yorick.png);
+	height: 64px;
+	left: 193px;
+	top: 85px;
+	width: 32px;
+}
+
+TABLE.highscores {
+	border: 0px;
+	border-collapse: collapse;
+	left: 32px;
+	position: absolute;
+	top: 27px;
+	width: 176px;
+}
+
+TH {
+	text-align: left;
+	text-shadow: 1px 0px 1px #888;
+}
+
+TD {
+	background: #fff;
+	text-align: right;
+	width: 20px;
+}
+
+#die0, #die1, #die2, #die3, #die4 {
+	border: none;
+	color: #0c0;
+	height: 40px;
+	position: absolute;
+	text-shadow: 2px 0px 2px #040;
+	top: 20px;
+	width: 40px;
+}
+.die1 {
+	background: url(images/1.png) no-repeat;
+}
+.die2 {
+	background: url(images/2.png) no-repeat;
+}
+.die3 {
+	background: url(images/3.png) no-repeat;
+}
+.die4 {
+	background: url(images/4.png) no-repeat;
+}
+.die5 {
+	background: url(images/5.png) no-repeat;
+}
+.die6 {
+	background: url(images/6.png) no-repeat;
+}

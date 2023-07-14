@@ -1,0 +1,49 @@
+@charset "utf-8";
+a:link {color:#000000;text-decoration:none;}
+a:visited {color:#000000;text-decoration:none;}
+a:hover {color:#40bae6;text-decoration:none;}
+a:active {color:#000000;text-decoration:none;}
+body {
+background: #000000;
+margin: 0px;
+}
+#ts, #bs {
+width:240px;
+height:176px;
+overflow:hidden;
+}
+#ts{background:url('images/ts.png');}
+#bs{position:relative;top:0px;left:0px;background:url('images/bs_0.png'); }
+#hs{background-color:#b0c759;text-align:center;width:240px;height:352px;z-index:100;display:none;position:absolute;left:0px;top:0px;}
+#preload{position:relative;left:400px;}
+#c{width:240px;height:352px;}
+#n{margin:auto;width:232px;height:10px;text-align:center;}
+.tsd{height:20px;position:absolute;top:156px;left:0px;font-family:arial;font-weight:bold;color:#ffffff;}
+#tsd{position:absolute;top:0px;left:0px;display:none;}
+#score{left:58px;}
+#sshadow{left:60px;color:#000000;}
+#slabel{left:6px;}
+#slshadow{left:8px;color:#000000;}
+#lives{left:220px;}
+#lshadow{left:222px;color:#000000;}
+#llabel{left:171px;}
+#llshadow{left:173px;color:#000000;}
+/*game*/
+.g { position:absolute;top:0px;left:0px; }
+#player{width:45px;height:45px; background:url('images/game/player_0.png');}
+.frt{width:17px;height:17px;}
+.red{background:url('images/game/fruit_r.png');}
+.grn{background:url('images/game/fruit_g.png');}
+.blu{background:url('images/game/fruit_b.png');}
+.mnstr{background:url('images/game/fruit_m.png');}
+.sdw{background:url('images/game/fruit_s.png');}
+.drgnfly{left:300px;width:62;height:62;background:url('images/game/dragonfly_0.png');}
+.reward{width:32;height:18;}
+#p100{background:url('images/game/_100.png');}
+#p500{background:url('images/game/_500.png');}
+#p1000{background:url('images/game/_1000.png');}
+#ready{width:130px;height:32px;background:url('images/game/ready.png');top:72px;left:55px;}
+#go{width:64px;height:32px;background:url('images/game/go.png');top:72px;left:88px;}
+#menu{width:140px;top:2px;left:50px;}
+.mitem{width:140px;height:40px;background:url('images/game/button.png');text-align:center;line-height:38px;}
+td {background-color:#ffffff;font-size:10px;}

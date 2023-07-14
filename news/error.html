@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Select a month.</title>
+<meta name="viewport" content="width=240">
+<style>
+a { background-color:yellow; text-decoration:none; color:green; border:1px solid orange; }
+</style>
+</head>
+<body bgcolor=lightyellow text=green>
+<center>
+No news for this month. Select a month.<br><br>
+<script>
+var d=new Date();
+var m=d.getMonth();
+var y=d.getFullYear();
+y=y.toString().split(20)[1];
+writemonth();
+function writemonth(){
+document.write('<a href="'+m+'-'+y+'.html'+'">'+m+'/20'+y+'</a>\n');
+checkforanother();
+}
+function checkforanother(){
+m--;
+if (m != 0){
+if (m != 11){
+writemonth();
+}
+else if (y != 10){
+writemonth();
+}
+}
+else {
+if (y != 10){
+y--;
+m=12;
+writemonth();
+}
+}
+}
+</script>
+<a href="11-10.html">11/2010</a>
+</center>
+</body>
+</html>

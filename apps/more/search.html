@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Search</title>
+<meta name="viewport" content="width=240">
+<script>
+function search(){
+var x=document.getElementById('here').checked;
+if (x == true){searchhere();}
+else {searchweb();}
+}
+function searchhere(){
+var q=document.getElementById('box').value;
+window.location="http://www.google.com/search?client=ds&hl=en&rls=com.nintendo.ds:1+US&ie=utf8&oe=utf8&q=site:dsihomepage.x10.mx "+q+"";
+}
+function searchweb(){
+var q=document.getElementById('box').value;
+window.location="http://www.google.com/search?client=ds&hl=en&rls=com.nintendo.ds:1+US&ie=utf8&oe=utf8&q="+q+"";
+}
+</script>
+</head>
+<body bgcolor=lightgray>
+<input type="text" size="24" value="" id="box"><input type="button" value="GO" onclick="search();" id="bttn"><br>
+<center><font size="2">
+<input type="radio" id="here" checked>Here
+<input type="radio">Web
+</font></center>
+<font size="1">powered by <font color="blue">G</font><font color="red">O</font><font color="yellow">O</font><font color="blue">G</font><font color="green">L</font><font color="red">E</font>™ - <a href="/more/search2.html">YAHOO! version</a></font><br>
+</body>
+</html>

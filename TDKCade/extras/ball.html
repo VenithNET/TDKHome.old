@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Mystical Ball</Title>
+<meta name="viewport" content="width=device-width" />
+<style type="text/css">
+BODY {margin: 0px;}
+</style>
+<script language="javascript">
+var answers = ["Most certainly yes.","Absolutely not!","As I see it, yes","It is certain","It is decidedly so","Most likely","Outlook good","Signs point to yes","Without a doubt","Yes","Yes - definitely","You may rely on it","Reply hazy, try again","Ask again later","Better not tell you now","Cannot predict now","Concentrate and ask again","Don't count on it","My reply is no","My sources say no","Outlook not so good","Very doubtful", ];
+function random()
+	{
+	var random=Math.floor(Math.random()*answers.length)
+	var outcome;
+if (document.getElementById('question').value=="")
+{alert("Ask a question first!")}
+else
+{
+	if(random >= answers.length) outcome = "Reply hazy, try again.";
+	else outcome = answers[random];
+		outcome="Mystical Ball's answer: " + outcome
+		alert(outcome)
+document.getElementById('question').value='';
+}
+		}
+</script>
+</head>
+<body bgcolor=tomato>
+<div align=center style="font-size:16pt">
+<h3>Ask the Mystical Ball any question</h3>
+<form>
+<input type="text" name="question" id="question" value="" size="20">
+</form> 
+<input type="button" value="Ask" onClick="random();">
+</div>
+<br>
+<script>document.body.scrollTop = 176;</script>
+</body>
+</html>

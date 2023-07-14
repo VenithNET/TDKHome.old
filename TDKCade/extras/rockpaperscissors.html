@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>Rock, Paper, Scissors</title>
+<style>body { margin: 0px; }</style>
+<meta name="viewport" content="width=240">
+<!-- Suggestion by:  mi-cul@boya-kasha.co.uk -->
+<!-- Based on code by:  Maximilian Stocker (maxstocker@reallyusefulcomputing.com) -->
+<!-- Original:  Ronnie T. Moore -->
+<!-- Web Site:  The JavaScript Source -->
+<!-- http://javascript.internet.com -->
+<SCRIPT LANGUAGE="JavaScript"> 
+function playGame(choice) {
+with (document.game) {
+comp = Math.round((Math.random() * 2) + 1); 
+var choicename;
+if (comp == 1) choicename = "rock";
+if (comp == 2) choicename = "paper";
+if (comp == 3) choicename = "scissors";
+msg.value = 'Computer was ' + choicename + '. ';
+switch(choice) { // calculates score
+case 1 : // rock
+         if (comp == 1) {  draw.value++; msg.value += 'It is a tie.'; break; }
+         if (comp == 2) {  loss.value++;  msg.value += 'You lost!';     break; }
+         if (comp == 3) {  win.value++; msg.value += 'You won!';      break; }
+case 2 : // paper
+         if (comp == 1) {  win.value++;  msg.value += 'You won!';      break; }
+         if (comp == 2) {  draw.value++; msg.value += 'It is a tie.'; break; }
+         if (comp == 3) {  loss.value++; msg.value += 'You lost!';     break; }
+case 3 : // scissors
+         if (comp == 1) {  loss.value++;  msg.value += 'You lost!';     break; }
+         if (comp == 2) {  win.value++; msg.value += 'You won!';      break; }
+         if (comp == 3) {  draw.value++; msg.value += 'It is a tie.'; break; }
+      }
+   }
+}
+</script>
+</head>  
+<body>
+<center>
+<form name=game>
+<table border=1 cellpadding=1>
+<tr>
+<td align=center><font size="2">User:</td>
+<td align=center><font size="2"><a href="javascript:void(0);" onClick="playGame(1);">Rock</a></font></td>
+<td align=center><font size="2"><a href="javascript:void(0);" onClick="playGame(2);">Paper</a></font></td>
+<td align=center><font size="2"><a href="javascript:void(0);" onClick="playGame(3);">Scissors</a></font></td>
+</tr>
+<tr>
+<td colspan=4 align=center><input type=text name=msg size=30 readonly></td>
+</tr>
+<tr>
+<td colspan=4 align=center>
+<font size="2">
+<input type=text name=win readonly value="0" size="2"> Wins
+<input type=text name=loss readonly value="0" size="2"> Losses
+<input type=text name=draw readonly value="0" size="2"> Draws
+</font>
+</td>
+</tr>
+</table>
+</form>
+</center>
+</body>
+</html>

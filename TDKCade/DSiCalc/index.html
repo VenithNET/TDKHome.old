@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>DSiCalc by Vadersapien</title>
+<meta name="viewport" content="width=device-width">
+<style language='css'>
+body {
+	margin: 0px;
+    padding: 0px;
+    width: 240px;
+    height: 176px;
+    overflow: hidden;
+    border: 1px solid hidden;
+}
+
+img {
+    margin: 0px;
+    width: 240px;
+    height: 176px;
+}
+</style>
+</head>
+<body>
+<div style='position:absolute; left:4px; top:2px; width:234px; height:20px;'>
+<form name="Calc"><input type='text' name='Input' value = '' size = '30'></form>
+</div>
+<img src ='buttons.png' alt='Loading DSiCalc' usemap='#keyMap' border='0' />
+<div style="display:none;">
+<map name='keyMap'>
+<!--1st Column-->
+<area shape ='rect' coords ='4,27,46,47' onMouseDown='Calc.Input.value = eval(Calc.Input.value) * eval(Calc.Input.value)'/>
+<area shape ='rect' coords ='4,52,46,72' onMouseDown='Calc.Input.value += "7"'/>
+<area shape ='rect' coords ='4,78,46,98' onMouseDown='Calc.Input.value += "4"'/>
+<area shape ='rect' coords ='4,103,46,123' onMouseDown='Calc.Input.value += "1"'/>
+<area shape ='rect' coords ='4,128,46,148' onMouseDown='Calc.Input.value = ""'/>
+<!--2nd Column-->
+<area shape ='rect' coords ='52,27,94,47' onMouseDown='Calc.Input.value = Math.sqrt(Calc.Input.value)'/>
+<area shape ='rect' coords ='52,52,94,72' onMouseDown='Calc.Input.value += "8"'/>
+<area shape ='rect' coords ='52,78,94,98' onMouseDown='Calc.Input.value += "5"'/>
+<area shape ='rect' coords ='52,103,94,123' onMouseDown='Calc.Input.value += "2"'/>
+<area shape ='rect' coords ='52,128,94,148' onMouseDown='Calc.Input.value += "0"'/>
+<!--3rd Column-->
+<area shape ='rect' coords ='99,27,141,47' onMouseDown='Calc.Input.value += "("'/>
+<area shape ='rect' coords ='99,52,141,72' onMouseDown='Calc.Input.value += "9"'/>
+<area shape ='rect' coords ='99,78,141,98' onMouseDown='Calc.Input.value += "6"'/>
+<area shape ='rect' coords ='99,103,141,123' onMouseDown='Calc.Input.value += "3"'/>
+<area shape ='rect' coords ='99,128,141,148' onMouseDown='Calc.Input.value += "."'/>
+<!--4th Column-->
+<area shape ='rect' coords ='147,27,189,47' onMouseDown='Calc.Input.value += ")"'/>
+<area shape ='rect' coords ='147,52,189,97' onMouseDown='Calc.Input.value += "*"'/>
+<area shape ='rect' coords ='147,103,189,148' onMouseDown='Calc.Input.value += "+"'/>
+<!--5th Column-->
+<area shape ='rect' coords ='194,27,236,47' onMouseDown='Calc.Input.value = Calc.Input.value.substring(0, Calc.Input.value.length - 1)'/>
+<area shape ='rect' coords ='194,52,236,97' onMouseDown='Calc.Input.value += "/"'/>
+<area shape ='rect' coords ='194,103,236,148' onMouseDown='Calc.Input.value += "-"'/>
+<!--Calculate Button-->
+<area shape ='rect' coords ='4,152,236,172' onMouseDown='with(window.Math) { Calc.Input.value = eval(Calc.Input.value) }'/>
+</div>
+</body>
+</html>

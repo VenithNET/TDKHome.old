@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Stopwatch</title>
+<meta name="viewport" content="width=240">
+<style>
+body { margin: 0px; width: 240px; height: 176px; overflow: hidden; }
+</style>
+</head>
+<body>
+<HEAD>
+<style> 
+span
+{
+cursor:pointer;
+color:white;
+background:black;
+}
+</style> 
+<script> 
+var ms=0;
+var sc=0;
+var mn=0;
+function start(){
+document.forms[0].display.value=mn+":"+sc+":"+ms;
+go=setTimeout("start()",1);
+ms++;
+if(ms==40){ms=0;sc++;}
+if(sc==60){sc=0;mn++;}
+}
+function stop(){clearTimeout(go);}
+function reset(){window.location.reload();}
+function over1(test)
+{document.getElementById('over1').style.background=test}
+function out1(test)
+{document.getElementById('over1').style.background=test}
+function over2(test)
+{document.getElementById('over2').style.background=test}
+function out2(test)
+{document.getElementById('over2').style.background=test}
+function over3(test)
+{document.getElementById('over3').style.background=test}
+function out3(test)
+{document.getElementById('over3').style.background=test}
+</script>
+</HEAD>
+<BODY>
+<center>
+<span id="over1" onmouseover="over1('red')" onmouseout="out1('black')" onclick="start()">Start</span>
+<span id="over2" onmouseover="over2('red')" onmouseout="out2('black')" onclick="stop()">Stop</span>
+<span id="over3" onmouseover="over3('red')" onmouseout="out3('black')" onclick="reset()">Reset</span>
+<form>
+<input type="text" name="display"size="22"value="00:00:00"><font size="2">Millisconds are not accurate.</font>
+</form></center>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<html>
+<head>
+<title>Mancala</title>
+<meta name="viewport" content="width=240">
+<style>
+body { margin:0px; }
+td.littleBox{
+width:22px;
+height:32px;
+text-align:center;
+background-image:url(http://dsihomepage.x10.mx/img/small.png); 
+}
+td.collectionBin
+{
+width:22px;
+text-align:center;
+background-image:url(http://dsihomepage.x10.mx/img/large.png); 
+}
+#bg {
+background-color:rgb(128, 64, 0);
+width:240;
+height:70;
+position:absolute;
+top:0px;
+left:0px;
+z-index:-1;
+}
+#grey {
+width:1px;
+height:38px;
+background-color:rgb(128, 128, 128);
+position:absolute;
+top:15px;
+left:29px;
+z-index:2;
+}
+.brown {
+background-color:rgb(128, 64, 0);
+position:absolute;
+height:3px;
+width:12px;
+top:66px;
+}
+#b1 {
+left:10px;
+}
+#b2 {
+left:218px;
+}
+</style>
+<script type='text/javascript' src='http://mrcrowsgames.org/jquery.js'></script>
+<script type='text/javascript'>
+    // This code copyright 2009 by Phil Crow.  You may use it under the
+    // same terms as Perl 5.8.6, or at your option, any later version
+    // of Perl.  License terms available at http://dev.perl.org/licenses/
+    var helper = {
+        whoseTurn : 'Top',
+        nextTurn  : { Top : 'Bottom', Bottom : 'Top' },
+        legalStarts : {
+            Top    : { min : 1, max :  6 },
+            Bottom : { min : 8, max : 13 }
+        },
+        skips : {
+            Top : 14, Bottom : 7
+        }
+    };
+    $(function() {
+        $('.littleBox').click( function() {
+            var boxNo  = parseInt(this.id.replace( /box_/, '' ));
+            var legals = helper.legalStarts[ helper.whoseTurn ];
+            if ( boxNo >= legals.min && boxNo <= legals.max ) {
+                var contents = $(this).text();
+                if ( contents == 0 ) {
+                    alert( 'No pebbles there.' );
+                    return;
+                }
+                $(this).text( '0' );
+ 
+                var current       = boxNo + 1;
+                var skip          = helper.skips[ helper.whoseTurn ];
+                while ( contents > 0 ) {
+                    if ( current > 14 ) { current = 1; }
+                    if ( current != skip ) {
+                        var seeds = parseInt($( '#box_' + current ).text());
+                        seeds = seeds + 1;
+                        $( '#box_' + current ).text( seeds );
+                        contents = contents - 1;
+                    }
+                    current  = current + 1;
+                }
+ 
+                var collectionBin = legals.max + 1;
+                if ( current - 1 == collectionBin ) {
+                    alert( 'Free turn' );
+                }
+                else {
+                    helper.whoseTurn = helper.nextTurn[ helper.whoseTurn ];
+                }
+            }
+            else {
+                alert( 'Wrong side.' );
+            }
+        });
+    } );
+</script>
+</head>
+<body>
+<center>
+<table border='0' cellpadding='3' style="z-index:1;">
+<tr>
+<td id='box_7' class='collectionBin' rowspan='2'>0</td>
+<td id='box_6' class='littleBox'>3</td>
+<td id='box_5' class='littleBox'>3</td>
+<td id='box_4' class='littleBox'>3</td>
+<td id='box_3' class='littleBox'>3</td>
+<td id='box_2' class='littleBox'>3</td>
+<td id='box_1' class='littleBox'>3</td>
+<td id='box_14' class='collectionBin' rowspan='2'>0</td>
+</tr>
+<tr>
+<td id='box_8'  class='littleBox'>3</td>
+<td id='box_9'  class='littleBox'>3</td>
+<td id='box_10' class='littleBox'>3</td>
+<td id='box_11' class='littleBox'>3</td>
+<td id='box_12' class='littleBox'>3</td>
+<td id='box_13' class='littleBox'>3</td>
+</tr>
+</table>
+<div id="bg"></div>
+<div id="grey"></div>
+<div id="b1" class="brown"></div>
+<div id="b2" class="brown"></div>
+<font size=2>[2 players]</font>
+</center>
+</body>
+</html>

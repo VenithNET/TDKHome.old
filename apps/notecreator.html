@@ -1,0 +1,51 @@
+<!--              IMPORTANT MESSAGE: READ BELOW                  -->
+<!--Hi, you are probably here to see the source code of this     -->
+<!--so you can put it on your site. This is my script. I did not -->
+<!--get it from The Javascript Source or anything else like that.-->
+<!--I dont mind you copying my source code as long as you put a  -->
+<!--back to my site and make sure people know I made this script.-->
+<!--It took me a lot of time to make this and I don't someone to -->
+<!--just take it and call it theirs. Taking my code or any part  -->
+<!--of it and not crediting me is ILLEGAL. You may now continue. -->
+<html>
+<head>
+<title>Note Creator</title>
+<meta name="viewport" content="width=240">
+<style>
+body{margin:5px;}
+</style>
+</head>
+<body>
+<input type="text" id=titlebox size=30><br>
+<textarea cols=30 rows=7 id=box></textarea><br>
+<input type="button" value="save" onclick="sve();">
+<input type="button" value="save 2" onclick="beta();">
+<input type="button" value="clear" onclick="clr();">
+<input type="button" value="help" onclick="hlp();">
+<script>
+function sve(){
+var a=document.getElementById("box").value;
+var b=document.getElementById("titlebox").value;
+window.location="/apps/note.html?n="+b+"/%5C"+a;
+}
+function clr(){
+document.getElementById('box').value="";
+document.getElementById('titlebox').value="";
+}
+function hlp(){
+alert("General help: Enter the title in the top box. Enter the note in the bottom box. When you are done, click save and bookmark the page. For downloading to use offline click save 2...");
+alert("Help with downloading:click the save 2 button, then the link. It SHOULD be an error. Add it to your favorites, replace http://dsihomepage.x10.mx/apps/ with javascript:document.write(' and add '); to the end.");
+alert("Invalid characters: never type a / and \\ together or an equals sign.");
+}
+function beta(){
+//alert('hi');
+var q="'";
+var qt='"';
+var a=document.getElementById("box").value;
+var b=document.getElementById("titlebox").value;
+//window.location="avascript:document.write('<meta name=viewport content=width=240><title>'+b+'</title><font size=3><u><center>'+b+'</center></u></font><font size=2>'+a+'</font>');
+window.location='javascript:document.write("<meta name=viewport content=width=240><a href='+q+'<meta name=viewport content=width=240><title>'+b+'</title><font size=3><u><center>'+b+'</center></u></font><font size=2>'+a+'</font>'+q+'>Click me</a>");';
+}
+</script>
+</body>
+</html>

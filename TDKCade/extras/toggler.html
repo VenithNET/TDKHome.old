@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>Toggler</title>
+<meta name="viewport" content="width=240">
+<script language="javascript">
+var max = 3;
+var score = 0;
+var moves = 0;
+function press(form, button) {
+name = button.name;
+x = name.substring(0,1);
+y = name.substring(2,3);
+play(form, (x-1+1), (y-1+1));
+}
+function play(form, x, y) {
+moves++;
+toggle(form, x, y);
+toggle(form, x-1, y);
+toggle(form, x+1, y);
+toggle(form, x, y-1);
+toggle(form, x, y+1);
+if (score == 16) {
+if (moves == 4) { w = 'That\'s the best possible score!'; }
+else { w = 'See if you can do any better!'; }
+alert('You win after ' + moves + ' moves! \n' + w);}
+resetboard(form);
+}
+}
+function showrules() {
+alert('The goal of the game is to turn all the buttons from [X] to [.]. This is done by clicking buttons. When a button is clicked, its state is toggeled, but so is the state of four buttons around it, so plan carefully!');
+}
+function resetboard(form) {
+var i,j,button;
+for (i = 0; i < 4; i++) {
+for (j = 0; j < 4; j++) {
+button = getelement(form, i + '_' + j);	
+button.value='X';
+}
+}
+score = 0;
+moves = 0;
+}
+function getelement(form, name) {
+var k;
+var elements = form.elements;
+for (k = 0; k < elements.length; k++) {
+if (elements[k].name == name) return elements[k];
+}
+}
+function toggle(form, x, y) {
+if (x < 0 || y < 0 || x > max || y > max) {
+return;
+}
+name = x + '_' + y;
+button = getelement(form, name);
+a = button.value;
+button.value = '!!!';
+button.value = a;
+if (button.value == 'X') {
+button.value = '.';
+score ++;
+} else {
+button.value = 'X';
+score --;
+}
+}
+</script>
+</head>
+<body bgcolor="gray">
+<center>	
+<table border="0" cellspacing="0" cellpadding="1">
+<form>
+<tr>
+<td><input style="width:30px;" type="button" name="0_0" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="1_0" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="2_0" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="3_0" value="X" onclick="press(this.form, this);"></td>
+</tr>
+<tr>
+<td><input style="width:30px;" type="button" name="0_1" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="1_1" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="2_1" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="3_1" value="X" onclick="press(this.form, this);"></td>
+</tr>
+<tr>
+<td><input style="width:30px;" type="button" name="0_2" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="1_2" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="2_2" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="3_2" value="X" onclick="press(this.form, this);"></td>
+</tr>
+<tr>
+<td><input style="width:30px;" type="button" name="0_3" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="1_3" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="2_3" value="X" onclick="press(this.form, this);"></td>
+<td><input style="width:30px;" type="button" name="3_3" value="X" onclick="press(this.form, this);"></td>
+</tr>
+<tr>
+<td colspan="2">
+<input style="width:62px;" type="button" value="reset" onclick="resetboard(this.form);">
+</td>
+<td colspan="2">
+<input style="width:62px;" type="button" value="rules" onclick="showrules();">
+</td>
+</tr>
+</form>
+</table>
+</center>
+</body>
+</html>

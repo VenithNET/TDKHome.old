@@ -1,0 +1,719 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html> 
+ 
+<!-- Mirrored from dsiexplorer.awardspace.biz/TouchMii/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:29:47 GMT -->
+<head> 
+  <meta name="viewport" content="width=240" />
+  <!-- Copyright 2009 Jerason Banes. Contact: jbanes (AT) gmail (dot) com --> 
+  <title>Touch Mii</title> 
+  <script src="../js/json2.js"></script>
+  <script src="../js/highscores.js"></script>
+  <script> 
+    var GAME_OVER = 0;
+    var GAME_READY = 1;
+    var GAME_DISPLAY = 2;
+    var GAME_PLAYER = 3;
+    var GAME_LOSE = 4;
+ 
+    var GAME_MESSAGES = ["Tap here to start!", "Ready?", "Watch!", "Tap the lights in order", "Incorrect"];
+    var CORRECT_MESSAGES = ["Nice!", "Keep tappin'", "Sweet!", "Rock on!", "Way to go!"];
+    var SUCCEED_MESSAGES = [
+        "You did it? Err... great work!", "Haha! You... oh.", "Now for the next puzzle...", "I believe in you. Really.",
+        "The last guy didn't make it.", "So you think you're hot stuff?", "Wow, you nailed that one.", "How's the head?",
+        "Pay close attention...", "I won't stand for this!", "Whoa Deja Vu. Whoa Deja Vu.", "You have no chance. Make your time!",
+        "Fight on for great justice!", "Nice memory! Will it blend?", "The heat is on now.", "Now for something completely different."
+    ];
+    var FAILED_MESSAGE = [
+        "What's wrong? Can't take the pressure?", "You have failed your king and country!", "The only way to win is not to play.",
+        "I will destroy all humans!", "All your base are belong to me.", "You fail it.", "Ignorance is bliss. Close your DSi now.", 
+        "Game over, man. Game over."
+    ];
+    var ROLL_MESSAGE = [null,
+        ["...", "You rolled the score.", "What do you think...", "...you are doing?", "No more...", "...mister nice guy"],
+        ["What?!?!", "You did it again!", "Look at that score.", "It's over 200 now.", "Inconceivable!"],
+        ["Your head must...", "...seriously be hurting.", "How unfortunate.", "For you!"],
+        ["You win.", "There is obviously...", "...no way...", "...I can defeat you.", "I will leave that...", "...to the scoreboard."]
+    ];
+ 
+    var wiimoteKeys0 = [175, 177, 176, 178];
+    var wiimoteKeys1 = [177, 176, 178, 175];
+    var wiimoteKeys = [wiimoteKeys0, wiimoteKeys1];
+ 
+ 
+    var keyset0 = wiimoteKeys0;
+    var keyset1 = [38, 39, 40, 37];
+ 
+    var colors = ["green", "red", "blue", "yellow"];
+    var keyImages = ["simon_green", "simon_red", "simon_blue", "simon_yellow"];
+    var wiimoteImages = ["simon_wiimote_upright", "simon_wiimote_side"];
+    var scoreImages = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    var allImages = ["default", "title", "gameover"]; //"green", "red", "blue", "yellow"];
+    var preloadImages;
+ 
+    var gameState = GAME_OVER;
+    var funMessage = null;
+    var funIndex = null;
+    var lastRoll = 0;
+ 
+    var sequence = new Array();
+    var sequenceid = 1;
+    var score0 = 0;
+    var score1 = 0;
+    
+    var hiscores = new HighScores("touchmii");
+ 
+    function keyPressed(event)
+    {
+        var found = -1;
+ 
+        if(!(gameState == GAME_OVER || gameState == GAME_PLAYER)) return;
+ 
+        for(var i=0; i<4; i++)
+        {
+            if(keyset0[i] == event.keyCode) found = i;
+            if(keyset1[i] == event.keyCode) found = i;
+        }
+ 
+        if(found >= 0) 
+        {
+            document.getElementById("board").className = colors[found]; //.src = "images/"+keyImages[found]+".png";
+        }
+ 
+        if(gameState == GAME_OVER) return;
+ 
+        if(found != sequence[sequenceid] && gameState == GAME_PLAYER)
+        {
+            gameState = GAME_LOSE;
+            score0--;
+        }
+ 
+        sequenceid++;
+        score0++;
+        updateScore();
+ 
+        if(gameState != GAME_LOSE && sequenceid >= sequence.length)
+        {
+            gameState = GAME_READY;
+            sequenceid = 0;
+            score0 = sequence.length;
+ 
+            appendSequence();
+            updateMessage();
+            updateScore();
+ 
+            setTimeout("watch()", 1000);
+        }
+ 
+        event.preventDefault = true;
+        event.stopPropagation();
+    }
+ 
+    function keyReleased(event)
+    {
+        if(!(gameState == GAME_OVER || gameState == GAME_PLAYER || gameState == GAME_LOSE)) return;
+ 
+        document.getElementById("board").className = "default"; //.src = "images/simon_default.png";
+ 
+        if(gameState == GAME_LOSE)
+        {
+            updateMessage();
+ 
+            gameState = GAME_OVER;
+            setTimeout("updateMessage()", 3000);
+        }
+ 
+        event.preventDefault = true;
+        event.stopPropagation();
+    }
+    
+    function rollMessage()
+    {
+        updateMessage();
+        
+        if(funMessage) setTimeout(rollMessage, 1500);
+        else setTimeout(watch, 1500);
+    }
+    
+    function tapDown(color)
+    {
+        document.getElementById('board').className = colors[color]; //.src = "images/" + keyImages[color] + ".png";
+        
+        setTimeout(function(){setTimeout(tapUp, 250);}, 10);
+        
+        if(gameState != GAME_PLAYER) return;
+ 
+        if(color != sequence[sequenceid] && gameState == GAME_PLAYER)
+        {
+            funMessage = FAILED_MESSAGE;
+            
+            gameState = GAME_LOSE;
+            score0--;
+        }
+ 
+        sequenceid++;
+        score0++;
+        updateScore();
+ 
+        if(gameState != GAME_LOSE && sequenceid >= sequence.length)
+        {
+            gameState = GAME_READY;
+            sequenceid = 0;
+            //score0 = sequence.length;
+ 
+            funMessage = SUCCEED_MESSAGES;
+ 
+            if(Math.floor(score1/10) > lastRoll && Math.floor(score1/10) < ROLL_MESSAGE.length)
+            {
+                funMessage = ROLL_MESSAGE;
+                lastRoll = Math.floor(score1/10);
+            }
+ 
+            appendSequence();
+            updateMessage();
+            updateScore();
+ 
+            if(funMessage == ROLL_MESSAGE) setTimeout(rollMessage, 1500);
+            else setTimeout(function() { updateMessage(); setTimeout(watch, 1000); }, 1500);
+        }
+        else if(gameState != GAME_LOSE)
+        {
+            funMessage = CORRECT_MESSAGES;
+            updateMessage();
+        }
+    }
+    
+    function tapUp()
+    {
+        document.getElementById('board').className = "default"; //.src = "images/simon_default.png";
+        
+        if(gameState == GAME_LOSE)
+        {
+            updateMessage();
+ 
+            gameState = GAME_OVER;
+            
+            setTimeout(function() {document.getElementById("gameover").className = ""; updateMessage(); if(hiscores.isScoreHigher(getScore())) showScoreSubmit()}, 3000);
+        }
+    }
+ 
+    function hoverHelp()
+    {
+        document.getElementById("help").src = "images/simon_help_hover.html";
+    }
+ 
+    function unhoverHelp()
+    {
+        document.getElementById("help").src = "images/simon_help.png";
+    }
+ 
+    function selectHelp()
+    {
+        window.location.href = "help.html";
+ 
+        event.preventDefault = true;
+        event.stopPropagation();
+    }
+
+    function startGame()
+    {
+        if(gameState != GAME_OVER) return;
+        
+        document.getElementById("gameover").className = "hidden";
+ 
+        sequenceid = 0;
+        sequence = new Array();
+        gameState = GAME_READY;
+ 
+        score0 = 0;
+        score1 = 0;
+        lastRoll = 0;
+        
+        appendSequence();
+        updateMessage();
+        updateScore();
+ 
+        setTimeout("watch()", 1000);
+    }
+ 
+    function appendSequence()
+    {
+        var value = Math.floor((Math.random()*100)%4);
+ 
+        sequence[sequence.length] = value;
+    }
+ 
+    function watch()
+    {
+        document.getElementById("board").className = "default"; //.src = "images/simon_default.png";
+ 
+        gameState = GAME_DISPLAY;
+        updateMessage();
+ 
+        setTimeout("display(0)", 1000);
+    }
+ 
+    function display(index)
+    {
+        document.getElementById("board").className = colors[sequence[index]]; //).src = "images/"+keyImages[sequence[index]]+".png";
+ 
+        index++;
+ 
+        if(index < sequence.length)
+        {
+            setTimeout("displayOff("+index+")", 500);
+        }
+        else
+        {
+            setTimeout("endPause()", 1000);
+        }
+    }
+ 
+    function displayOff(index)
+    {
+        document.getElementById("board").className = "default"; //.src = "images/simon_default.png";
+ 
+        setTimeout("display("+index+")", 100);
+    }
+ 
+    function endPause()
+    {
+        document.getElementById("board").className = "default"; //.src = "images/simon_default.png";
+ 
+        gameState = GAME_PLAYER;
+        updateMessage();
+    }
+ 
+    function updateMessage()
+    {
+        var message = document.getElementById("message");
+        var text = document.createTextNode(GAME_MESSAGES[gameState]);
+        var index;
+        
+        if(funMessage == CORRECT_MESSAGES) message.className = "between";
+        else if(funMessage) message.className = "fun";
+        else if(gameState == GAME_PLAYER) message.className = "order";
+        else if(gameState == GAME_OVER) message.className = "tapme";
+        else message.className = "instruct";
+        
+        if(funMessage == ROLL_MESSAGE)
+        {
+            if(funIndex == null) funIndex = 0;
+            
+            text = document.createTextNode(funMessage[Math.floor(score1/10)][funIndex]);
+            funIndex++;
+            
+            if(funIndex >= funMessage[Math.floor(score1/10)].length)
+            {
+                funMessage = null;
+                funIndex = null;
+            }
+        }
+        else if(funMessage)
+        {
+            index = Math.floor(funMessage.length * Math.random());
+            text = document.createTextNode(funMessage[index]);
+            funMessage = null;
+        }
+            
+        while(message.childNodes.length > 0) message.removeChild(message.childNodes[0]);
+ 
+        message.appendChild(text);
+    }
+ 
+    function updateScore()
+    {
+        var image0 = document.getElementById("score0");
+        var image1 = document.getElementById("score1");
+ 
+        while(score0 > 9)
+        {
+            score1++;
+            score0 -= 10;
+        }
+ 
+        image0.className = scoreImages[score0];
+        image1.className = scoreImages[(score1 % 10)];
+    }
+ 
+    function setupHelp()
+    {
+        var div = document.createElement("div");
+        var image = document.createElement("img");
+ 
+        image.id = "help";
+        image.src = "images/simon_help.png";
+        image.border = 0;
+        image.addEventListener("mouseover", hoverHelp, false);
+        image.addEventListener("mouseout", unhoverHelp, false);
+        image.addEventListener("click", selectHelp, false);
+ 
+        div.style.position = "absolute";
+        div.style.left = (window.innerWidth-67-25)+"px";
+        div.style.top = (window.innerHeight-64-10)+"px";
+        div.style.width = "67px";
+        div.style.height = "64px";
+	div.style.textAlign = "center";
+	div.style.verticalAlign = "middle";
+ 
+        div.appendChild(image);
+ 
+        document.body.appendChild(div);
+    }
+ 
+    function setupScore()
+    {
+        var div = document.createElement("div");
+        var image1 = document.createElement("img");
+        var image2 = document.createElement("img");
+ 
+        image1.id = "score1";
+        image1.src = "images/simon_zero.html";
+        image1.border = 0;
+        image2.id = "score0";
+        image2.src = "images/simon_zero.html";
+        image2.border = 0;
+ 
+        div.style.position = "absolute";
+        div.style.left = (window.innerWidth-64-67-10-50)+"px";
+        div.style.top = (window.innerHeight-64-10)+"px";
+        div.style.width = "64px";
+        div.style.height = "64px";
+	div.style.textAlign = "center";
+	div.style.verticalAlign = "middle";
+ 
+        div.appendChild(image1);
+        div.appendChild(image2);
+ 
+        document.body.appendChild(div);
+        
+    }
+ 
+    function setupWiimote()
+    {
+        //setupHelp();
+        //setupScore();
+        updateMessage();
+        document.getElementById("container").addEventListener("click", startGame, false);
+    }
+ 
+    function load()
+    {
+        var preload = 0;
+        var percent;
+ 
+        var message = document.getElementById("message");
+        var text;
+        
+        if(String(window.location).indexOf("#scrollDSi") < 0) window.location = "#scrollDSi";
+ 
+        if(!preloadImages)
+        {
+           preloadImages = new Array();
+         
+           for(var i=0; i<allImages.length; i++)
+           {
+                preloadImages[i] = new Image();
+                preloadImages[i].src = "images/simon_"+allImages[i]+".png";
+           }
+        }
+
+        for(var i=0; i<allImages.length; i++)
+        {
+            if(preloadImages[i].complete) preload++;
+        }
+
+        percent = Math.floor(preload/allImages.length*100);
+        text = document.createTextNode("Loading... "+percent+"%");
+
+        while(message.childNodes.length > 0) message.removeChild(message.childNodes[0]);
+ 
+        message.appendChild(text);
+ 
+        if(preload < allImages.length) setTimeout("load()", 50);
+        else setupWiimote();
+    }
+ 
+    function showHighScores()
+    {
+        var scores = hiscores.getScores();
+        var info = document.getElementById("infoarea");
+        var table;
+        var row;
+        var cell;
+
+        clearElement(info);
+
+        document.getElementById("hiscores").className = "selected";
+        document.getElementById("instructions").className = "";
+
+        if(scores.length < 1)
+        {
+            info.appendChild(document.createTextNode("No scores are currently available."));
+            return;
+        }
+
+        table = document.createElement("table");
+        table.cellSpacing = "0";
+        table.cellPadding = "0";
+        table.border = "0";
+        table.style.width = "190";
+        table.style.fontSize = "8pt";
+        table.style.color = "black";
+
+
+        for(var i=0; i<scores.length && i<20; i++)
+        {
+            row = table.insertRow(-1);
+            cell = row.insertCell(-1);
+            cell.appendChild(document.createTextNode((i+1)+". "));
+            cell = row.insertCell(-1);
+            cell.appendChild(document.createTextNode(scores[i].name));
+            cell = row.insertCell(-1);
+            cell.align = "right";
+            cell.appendChild(document.createTextNode(scores[i].score));
+        }
+
+        info.appendChild(table);
+    }
+
+    function showInstructions()
+    {
+        var info = document.getElementById("infoarea");
+        var button = document.getElementById("hiscores");
+        var instructions = [
+          "Touch Mii is a game that challenges your memory. Simply tap the screen to start, then watch the sequence of lights.",
+          "Your job is to play back the sequence of lights in order by tapping each light.",
+          "Every round adds another light to the sequence of lights, gradually increasing the difficulty of the game. Each light you manage to play back in sequence will earn you a point on the scoreboard. ",
+          "Use A to toggle this window."
+        ];
+
+        clearElement(info);
+
+        for(var i=0; i<instructions.length; i++)
+        {
+            var p = document.createElement("p");
+            
+            p.style.textAlign = "justify";
+            p.style.paddingLeft = "5px";
+            p.style.paddingRight = "5px";
+            
+            if(i == 2) p.appendChild(document.createElement("br"));
+            
+            p.appendChild(document.createTextNode(instructions[i]));
+            info.appendChild(p);
+        }
+
+        document.getElementById("hiscores").className = "";
+        document.getElementById("instructions").className = "selected";
+    }
+
+    function getScore()
+    {
+        return (score1 * 10) + score0;
+    }
+
+    function showScoreSubmit()
+    {
+        var info = document.getElementById("infoarea");
+        var line;
+        var input;
+        var score = getScore();
+
+        clearElement(info);
+
+        line = document.createElement("div");
+        line.align = "center";
+        line.style.fontSize = "16px";
+        line.style.color = "black";
+        line.style.fontWeight = "bold";
+        line.appendChild(document.createTextNode("A new high score!"));
+        info.appendChild(line);
+
+        line = document.createElement("div");
+        line.align = "center";
+        line.style.fontSize = "20px";
+        line.style.color = "red";
+        line.style.fontWeight = "bold";
+        line.style.marginTop = "20px";
+        line.style.marginBottom = "20px";
+        line.appendChild(document.createTextNode(score));         
+        info.appendChild(line);
+
+        line = document.createElement("div");
+        line.align = "center";
+        line.style.fontSize = "16px";
+        line.style.color = "black";
+        line.style.fontWeight = "bold";
+        line.style.marginBottom = "75px";
+        line.appendChild(document.createTextNode("Enter your name below to submit your score."));
+        info.appendChild(line);
+
+        line = document.createElement("div");
+        input = document.createElement("input");
+        line.align = "center";
+        line.style.fontSize = "16px";
+        line.style.color = "black";
+        line.style.fontWeight = "bold";
+        line.style.marginBottom = "10px";
+        input.style.width = "120px";
+        input.id = "user";
+        input.maxLength = "16";
+
+        if(hiscores.getCachedName()) input.value = hiscores.getCachedName().substring(0, 16);
+
+        line.appendChild(input);
+        info.appendChild(line);
+
+        line = document.createElement("div");
+        input = document.createElement("button");
+        line.align = "center";
+        line.style.fontSize = "16px";
+        line.style.color = "black";
+        line.style.fontWeight = "bold";
+        input.onclick = submitScore;
+        input.appendChild(document.createTextNode("Submit"));
+        line.appendChild(input);
+        info.appendChild(line);
+
+        document.getElementById("popup").style.display = "block";
+    }
+
+    function submitScore()
+    {
+        var score = getScore();
+        var user = document.getElementById("user").value;
+        var high = new HighScore(user, score);
+
+        if(user.length < 1) return;
+
+        high.round = sequence.length + 1;
+
+        hiscores.submitScore(high);
+
+        showHighScores();
+    }
+
+    function clearElement(element)
+    {
+        while(element.hasChildNodes()) element.removeChild(element.childNodes[0]);
+    }
+
+    function showHidePopup(evt)
+    {
+        var popup = document.getElementById("popup");
+
+        if(evt.keyCode != 13) return;
+
+        evt.preventDefault();
+        evt.stopPropagation();
+
+        if(popup.style.display == "block")
+        {
+            popup.style.display = "none";
+            clearElement(document.getElementById("infoarea"));
+        }
+        else
+        {
+            popup.style.display = "block";
+
+            if(document.getElementById("hiscores").className == "selected") showHighScores();
+            else showInstructions();
+        }
+    }
+        
+    //document.addEventListener("keydown", keyPressed, true);
+    //document.addEventListener("keyup", keyReleased, true);
+    //document.addEventListener("keypress", keyPressed, true);
+    document.addEventListener("keypress", showHidePopup, false);
+ 
+    setTimeout("load()", 500);
+  </script> 
+  <style>
+    body { margin: 0px; }
+    #top_screen { width: 240px; height: 176px; overflow: hidden; }   
+    #container { width: 240px; height: 176px; overflow: hidden;}   
+    #title { margin: 5px; }
+    #message.tapme { position: absolute; width: 80px; left: 82px; top: 258px; font-size: 12px; font-family: sans-serif; text-align: center; font-weight: bold; }
+    #message.instruct { position: absolute; width: 160px; left: 40px; top: 65px; font-size: 16px; font-family: sans-serif; text-align: center;  font-weight: bold; }
+    #message.order { position: absolute; width: 160px; left: 40px; top: 55px; font-size: 16px; font-family: sans-serif; text-align: center;  font-weight: bold; }
+    #message.between { position: absolute; width: 160px; left: 40px; top: 65px; font-size: 16px; font-family: sans-serif; text-align: center; font-style: italic;}
+    #message.fun { position: absolute; width: 160px; left: 40px; top: 55px; font-size: 16px; font-family: sans-serif; text-align: center; font-style: italic;}
+    #gameover { position: absolute; left: 46px; top: 60px; opacity: 0.6; }
+    #gameover.hidden { display: none; }
+    
+    #scorebg { position: absolute; width: 240px; height: 32px; left: 1px; top: 139px; border-top: olive 1px solid; border-bottom: olive 1px solid; background-color: #140000; }
+    #score0 { position: absolute; width: 16px; height: 32px; right: 16px; top: 140px; }
+    #score1 { position: absolute; width: 16px; height: 32px; right: 32px; top: 140px; }
+    #score_text { position: absolute; right: 52px; top: 140px;}
+    
+    .default, .green, .red, .blue, .yellow { width: 210px; height: 150px; background: url(images/simon.png) no-repeat 0px 0px; } 
+    .default { background-position: 0px 0px; }
+    .green { background-position: 0px -150px; }
+    .red { background-position: 0px -300px; }
+    .blue { background-position: 0px -450px; }
+    .yellow { background-position: 0px -600px; }
+    
+    .zero,.one,.two,.three,.four,.five,.six,.seven,.eight,.nine { width: 8px; height: 16px; background: url(images/simon_digits_ds.png) no-repeat 0px 0px; }
+    .zero { background-position: 0px 0px; }
+    .one { background-position: -16px 0px; }
+    .two { background-position: -32px 0px; }
+    .three { background-position: -48px 0px; }
+    .four { background-position: -64px 0px; }
+    .five { background-position: -80px 0px; }
+    .six { background-position: -96px 0px; }
+    .seven { background-position: -112px 0px; }
+    .eight { background-position: -128px 0px; }
+    .nine { background-position: -144px 0px; }
+    
+    #popup { position: absolute; left: 18px; top: 20px; width: 200px; height: 312px; border: 4px solid #777777; background-color: #DDDDDD; display: none; }
+    #infoarea { margin: 5px; width: 190px; height: 278px; overflow: hidden; font-size: 8px; font-family: sans-serif; color: black; }
+    #buttonarea { margin: 5px; width: 190px; height: 14px; background-color: #FF8888; color: #DDDDDD; }
+    #hiscores, #instructions { float: left; text-align: center; width: 95px; height: 14px; font: 12px sans-serif; }
+    .selected { background-color: #882222; color: white; }
+  </style>
+
+ </head>
+ <body>
+  <map id="simon_map" name="simon_map">
+    <area shape="poly" coords="35,19,77,3,103,0,136,3,174,19,143,44,115,38,98,38,68,43" onclick="tapDown(0);" />
+    <area shape="poly" coords="182,25,207,58,209,75,206,93,183,123,149,101,170,85,174,75,171,62,151,47" onclick="tapDown(1);" />
+    <area shape="poly" coords="68,105,90,112,102,113,120,111,140,104,176,129,138,146,112,149,82,148,34,130"   onclick="tapDown(2);" />
+    <area shape="poly" coords="28,25,57,46,40,64,36,76,42,87,59,101,30,123,7,103,0,81,3,58"  onclick="tapDown(3);" />
+    <area shape="default" nohref="nohref" alt="" />
+  </map>
+
+  
+  <div id="top_screen" align="center">
+      <img id="title" src="images/simon_title.png" border="0">
+      <div id="scorebg">&nbsp;</div>
+      <div id="score0" class="zero"></div>
+      <div id="score1" class="zero"></div>
+      <img id="score_text" src="images/simon_score.png" border="0">
+      <img id="gameover" src="images/simon_gameover.png" border="0">
+  </div>
+  
+  <div id="container" align="center">
+
+   <a name="scrollDSi">&nbsp;</a> <br> 
+   <div id="board" class="default"><img src="images/trans.png" border="0" usemap="#simon_map"></div> 
+   <div id="message" class="tapme">&nbsp;</div> 
+  </div>
+  
+  <div id="popup">
+    <div id="infoarea"></div>
+    <div id="buttonarea">
+      <div id="hiscores" class="selected" onclick="showHighScores(); return false;">High Scores</div>
+      <div id="instructions" onclick="showInstructions(); return false;">Instructions</div>
+
+    </div>
+  </div>
+  
+  <!--div id="intro">
+   
+  </div-->
+ </body> 
+
+<!-- Mirrored from dsiexplorer.awardspace.biz/TouchMii/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:29:50 GMT -->
+</html>

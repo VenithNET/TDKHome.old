@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>welcome.txt - DSOffice</title>
+<meta name="viewport" content="width=240">
+<style>
+body { margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:231; height:154; padding-left:5px; }
+#title { position:absolute; left:2px; top:-1px; }
+#x { position:absolute; left:222px; top:2px; width:16px; height:16px; background-color:red; color:white; }
+#fullscreen { position:absolute; left:204px; top:2px; width:16px; height:16px; background-color:black; color:white; }
+a.x { text-decoration:none; color:white; }
+</style>
+</head>
+<body>
+<div id="title"><font size=3 color=white>welcome.txt - DSOffice</font></div>
+<div id=x><font size=2><center><a class="x" href=".">X</a></center></font></div>
+<div id=fullscreen><font size=2><center><a class="x" href="file.php?title=welcome.txt">+</a></center></font></div>
+<font size=3><center><u>welcome.txt</u></center></font><font size=1>Welcome to DSOffice!
+<br>
+<br>This site allows you to create your very own, virtual documents online!
+<br>
+<br>Creation of this site is unknown.
+<br>
+<br>This document was recreated, or rebooted by iKarTehFox.<br><br><center><a href='editonline.php?title=welcome.txt'>EDIT</a></center></font>
+</body>
+</html>

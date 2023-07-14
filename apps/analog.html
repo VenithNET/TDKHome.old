@@ -1,0 +1,157 @@
+<html>
+<head>
+<title>Analog Clock</title>
+<meta name="viewport" content="width=240">
+</head>
+<body bgcolor="#004080" text="#FFFFFF" onLoad="setTimeout('ClockAndAssign()',1000)">
+<div id="OffSet" style="position:absolute;width:60px;height:20px">
+<!--<form name="where">
+<select name="city" size="1" width="100" style="font-family:Arial;font-size:12px;width:100" onchange="lcl(this);nsixampm()"> 
+<option value="" selected>Ignore me</option>
+</select>
+</form>-->
+</div>
+<script language="JavaScript">
+ns=(document.layers);
+ns6=(document.getElementById&&!document.all);
+ie=(document.all);
+/*Alter clock here!********************
+Try to view in Netscape 4 & Explorer when 
+manually positioning the clock. There are 
+slight differences. N6 is same as IE!
+Top=(ns)? Netscape 4 : N6/IE ;
+Left=(ns)? Netscape 4 : N6/IE ;
+******************************************/
+Top=(ns)?90:90;
+Left=(ns)?67:120;
+Scroll=false;     //true or false. Top and Left void if true!
+civCol='#ffff00'; //numbers color.
+dotCol='#00ffff'; //dot color.
+hCol='#00ff00';   //hour hand color.
+mCol='#00cc00';   //minute hand color.
+sCol='#ff0080';   //second hand color.
+ampmCol='#006090';//am-pm color.
+//**Alter nothing below! Alignments will be lost!**
+h=3;
+m=4;
+s=5;
+civ='1 2 3 4 5 6 7 8 9 10 11 12';
+civ=civ.split(' ');
+n=civ.length;
+ClockHeight=30;
+ClockWidth=30;
+f12="<font face='Arial' size=1 color="+civCol+">";
+e=360/n;
+HandHeight=ClockHeight/4;
+HandWidth=ClockWidth/4;
+y=0;
+x=0;
+zone=0;
+isitlocal=true;
+ampm='';
+n6timer=null;
+if (!ns)
+document.write("<div id='disp' style='position:absolute;width:50px;height:20px;text-align:center'></div>");
+else
+document.write("<layer name='disp' top=0 left=0 width=50 height=20></layer>");
+for (i=0; i < n; i++){
+if (!ns)
+document.write('<div id="Civ'+i+'" style="position:absolute;width:15px;height:15px;text-align:center;color:#0000dd">'+f12+civ[i]+'</font></div>');
+else
+document.write('<layer name="Civ'+i+'" width=15 height=15><center>'+f12+civ[i]+'</font></center></layer>');
+}
+for (i=0; i < n; i++){
+if (!ns)
+document.write('<div id="D'+i+'" style="position:absolute;width:3px;height:3px;font-size:3px;background:'+dotCol+'"></div>');
+else
+document.write('<layer name="D'+i+'" bgcolor='+dotCol+' width=2 height=2></layer>');
+}
+for (i=0; i < h; i++){
+if (!ns)
+document.write('<div id="H'+i+'" style="position:absolute;width:3px;height:3px;font-size:2px;background:'+hCol+'"></div>');
+else
+document.write('<layer name="H'+i+'" bgcolor='+hCol+' width=2 height=2></layer>');
+}
+for (i=0; i < m; i++){
+if (!ns)
+document.write('<div id="M'+i+'" style="position:absolute;width:3px;height:3px;font-size:2px;background:'+mCol+'"></div>');
+else
+document.write('<layer name="M'+i+'" bgcolor='+mCol+' width=2 height=2></layer>');
+}
+for (i=0; i < s; i++){
+if (!ns)
+document.write('<div id="S'+i+'" style="position:absolute;width:3px;height:3px;font-size:2px;background:'+sCol+'"></div>');
+else
+document.write('<layer name="S'+i+'" bgcolor='+sCol+' width=2 height=2></layer>');
+}
+
+function lcl(z){
+zone=z.options[z.selectedIndex].value;
+isitlocal=(z.options[0].selected)?true:false;
+clearTimeout(n6timer);
+}
+var _d=(ns||ie)?'document.':'document.getElementById("';
+var _a=(ns||ns6)?'':'all.';
+var _n6r=(ns6)?'")':'';
+var _s=(ns)?'':'.style';
+var Dsp=eval(_d+_a+"disp"+_n6r+_s);
+var O=eval(_d+_a+"OffSet"+_n6r+_s);
+function ClockAndAssign(){
+now=new Date();
+ofst=now.getTimezoneOffset()/60;
+secs=now.getSeconds();
+sec=-1.57+Math.PI*secs/30;
+mins=now.getMinutes();
+min=-1.57+Math.PI*mins/30;
+hr=(isitlocal)?now.getHours():(now.getHours() + parseInt(ofst)) + parseInt(zone);
+hrs=-1.575+Math.PI*hr/6+Math.PI*parseInt(now.getMinutes())/360;
+if (hr < 0) hr+=24;
+if (hr > 23) hr-=24;
+ampm = (hr > 11)?"PM":"AM";
+statusampm = ampm.toLowerCase();
+
+hr2 = hr;
+if (hr2 == 0) hr2=12;
+(hr2 < 13)?hr2:hr2 %= 12;
+
+
+var Q1=hr2+':'+((mins < 10)?"0"+mins:mins)+':'+((secs < 10)?"0"+secs:secs)+' '+statusampm;
+var Q2=((hr < 10)?"0"+hr:hr)+':'+((mins < 10)?"0"+mins:mins)+':'+((secs < 10)?"0"+secs:secs);
+sy=(ie)?document.body.scrollTop+window.document.body.clientHeight-ClockHeight*2:window.pageYOffset+window.innerHeight-ClockHeight*2;
+sx=(ie)?document.body.scrollLeft+window.document.body.clientWidth-ClockWidth*2:window.pageXOffset+window.innerWidth-ClockWidth*3;
+y=(Scroll)?sy:Top;
+x=(Scroll)?sx:Left;
+Dsp.top=y-17;
+Dsp.left=x-24;
+O.top=y-80;
+O.left=(ns)?x-57:x-49;
+for (i=0; i < s; i++){var d1=eval(_d+_a+"S"+i+_n6r+_s);d1.top=y+(i*HandHeight)*Math.sin(sec);d1.left=x+(i*HandWidth)*Math.cos(sec)}
+for (i=0; i < m; i++){var d2=eval(_d+_a+"M"+i+_n6r+_s);d2.top=y+(i*HandHeight)*Math.sin(min);d2.left=x+(i*HandWidth)*Math.cos(min)}
+for (i=0; i < h; i++){var d3=eval(_d+_a+"H"+i+_n6r+_s);d3.top=y+(i*HandHeight)*Math.sin(hrs);d3.left=x+(i*HandWidth)*Math.cos(hrs)}
+for (i=0; i < n; i++){var d4=eval(_d+_a+"D"+i+_n6r+_s);d4.top=y+ ClockHeight*Math.sin(-1.0471+i*e*Math.PI/180);d4.left=x+ ClockWidth*Math.cos(-1.0471+i*e*Math.PI/180)}
+for (i=0; i < n; i++){var d5=eval(_d+_a+"Civ"+i+_n6r+_s);d5.top=y-6+ClockHeight*1.4*Math.sin(-1.0471+i*e*Math.PI/180);d5.left=x-6+ClockWidth*1.4*Math.cos(-1.0471+i*e*Math.PI/180)}
+if (ie)disp.innerHTML="<font face='Arial' size='6' color='"+ampmCol+"'>"+ampm+"</font>";
+if (ns){
+ Dsp.document.write("<font face='Arial' size='6' color='"+ampmCol+"'>"+ampm+"</font>");
+ Dsp.document.close();
+ }
+
+//***status=Q1 is 24hr. ***** status=Q2 is 12hr. ***
+
+window.status=Q1+'   '+Q2
+setTimeout('ClockAndAssign()',100);
+}
+//**N6 AM/PM flashes when included above. Make slower?
+function nsixampm(){
+ if (ns6){
+ document.getElementById("disp").innerHTML="<font face='Arial' size='6' color='"+ampmCol+"'>"+ampm+"</font>";
+ n6timer=setTimeout('nsixampm()',10000);
+ }
+}
+if (ns6)nsixampm();
+window.onresize=function(){
+if(ns){window.location.reload()}
+}
+</script>
+</body>
+</html>

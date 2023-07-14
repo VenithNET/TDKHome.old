@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>Square Root Calculator</title>
+<meta name="viewport" content="width=240">
+<script>
+function run_cal(){
+if (document.getElementById && document.createTextNode){
+ var numb1=document.getElementById("num1").value;
+ var n_tomatch = /^[0-9.]+$/;
+ var n_ismatch = n_tomatch.test(numb1);
+  if (n_ismatch) {
+    var the_ans=Math.sqrt(numb1);
+    document.getElementById("the2root").value=the_ans;
+    return false;
+  }
+  else{
+   alert("Please enter a valid number.");
+   return false;
+  }
+ }
+}
+</script>
+</head>
+<body bgcolor="skyblue">
+<center><font size=2>
+<form action="#" id="calc" name="calc" onsubmit="return run_cal();">
+Number: <input type="text" id="num1" name="num1" size="20">
+Square Root: <input type="text" id="the2root" name="the2root" size="16">
+<input type="reset" value="Clear">
+<input type="submit" value="Calculate">
+</form>
+</font></center>
+</body>
+</html>

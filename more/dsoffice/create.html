@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>Create document - DSOffice</title>
+<meta name="viewport" content="width=240">
+<style>
+body { margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:231; height:154; padding-left:5px; }
+#title { position:absolute; left:8px; top:20px; }
+#realtitle { position:absolute; left:2px; top:-1px; }
+#x { position:absolute; left:222px; top:2px; width:16px; height:16px; background-color:red; color:white; }
+a.x { text-decoration:none; color:white; }
+</style>
+</head>
+<body>
+<div id=realtitle><font size=3 color=white>Create document - DSOffice</font></div>
+<div id="title"><font size=3 color=white>title</font></div>
+<div id="x">
+<font size=2><center><a class="x" href=".">X</a></center></font>
+</div>
+<form action="doc.php" method="get">
+<center>
+<input type=text name="title" id="title" size=30><br>
+<textarea name="body" id="body" cols=30 rows=6></textarea><br>
+<input type=submit value=create>
+</center>
+</form>
+</body>
+</html>

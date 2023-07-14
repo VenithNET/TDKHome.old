@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Stop the clock</title>
+<meta name="viewport" content="width=240">
+<script>
+/* The JavaScript Source :: http://javascript.internet.com
+Created by: Kurtis Dinelle :: http://www.spamburger.net */
+playing=false;
+function startClock(){
+  if(playing==false) {
+    the_time=setInterval('document.game.timer.value++',1);
+  }
+  playing=true;
+}
+function stopClock() {
+  score=Math.abs(document.game.timer.value-500);
+  if(playing==true&&score<500) {
+    clearInterval(the_time);
+    alert('Your score is '+score+'.');
+    playing=false;
+    if(score==0) {
+      alert('Woo hoo! Perfect Score!');
+    }
+  document.game.timer.value=0;
+  }
+}
+function help(){
+  alert("Test your reflexes. The object is to stop the counter as close to 500 as possible. The lower your score, the better. Can you get a score of 0?");
+}
+</script>
+</head>
+<body bgcolor=yellowgreen>
+<center>
+<form name="game">
+<font size="2">-<a href="javascript:help();">Help</a>-</font><br>
+<input readonly type="text" name="timer" size="3" value="0"><br>
+<input type="button" value="Start" onclick="startClock()">
+<input type="button" value="Stop" onclick="stopClock()">
+</form>
+</center>
+</body>
+</html>

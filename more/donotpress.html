@@ -1,0 +1,352 @@
+<!--
+NOTICE:
+Original:http://www.85qm.de/up/BigRedButton.swf
+Must be viewed in a browser with flash installed.
+-->
+<html>
+<head>
+<title>DO NOT PRESS</title>
+<meta name="viewport" content="width=240">
+<style> 
+body { margin:0px; }
+#bottomscreen { width: 240px; height:176px; overflow: hidden; }
+button { border:0px outset transparent;background-color:transparent; }
+#o { display:inline; }
+#preload { position:absolute; top:-1000px; left:-1000px; }
+</style>
+<script>
+var i;
+var t;
+var x='<button><img src="/img/button.png" id="me" width="14" height="14"></button>';
+var y='<button><img src="/img/button.png" id="me" width="8" height="8"></button>';
+var n=1;
+function clickit(){
+if(n == 1) i="*Ahem*<br>DO NOT PRESS";
+else if(n == 2) i="...you pressed it again.<br>Okay punk, press it again.";
+else if(n == 3) i="Yeah, that's it.<br>Come on, one more time.";
+else if(n == 4) i="Again.";
+else if(n == 5) i="Do it.";
+else if(n == 6) i="<font size=2>Okay, now you've had your fill. Stop clicking.</font>";
+else if(n == 7) i="You see, this is why<br>we can't be friends.";
+else if(n == 8) i="You're just to selfish.";
+else if(n == 9) i="Grr... now you've asked for it.<br>Do NoT pReSs ThE bUtToN!";
+else if(n == 10) i="You seem to be immune to my mind control.";
+else if(n == 11) i="Time for Plan B. Press it. You know you want to.";
+else if(n == 12) changebutton("Mwahahaha! Now let's see you press it! LOSER!", "tinybutton.png");
+else if(n == 13) changebutton("...this displeases me.", "button.png");
+else if(n == 14) changebutton("<font size=2>HA! I have replaced the button with this penguin. Now what are you going to do?</font>", "penguinbutton.png");
+else if(n == 15) changebutton("...I hate you.", "button.png");
+else if(n == 16) i='In that "cut off your head with a toothbrush" kind of way.';
+else if(n == 17) i="Quick! What's that behind you?!";
+else if(n == 18) threebuttons("Which one is it? Not so smart now, are ya?", 3, "same");
+else if(n == 19) undobutton("You're a clever one. Time for Round 2.");
+else if(n == 20) round("You're a clever one. Time for Round 2.", 2);
+else if(n == 21) round("<font size=2>HAHAHAHAHAHA!</font>", 3);
+else if(n == 22) undobutton("...");
+else if(n == 23) i="Okay Okay. You can press the button. I don't care.";
+else if(n == 24) i="No really, I don't care anymore.";
+else if(n == 25) i="In fact, I lost interest a while ago.";
+else if(n == 26) i="I'm doing this just to entertain you.";
+else if(n == 27) i="Really.";
+else if(n == 28) i="Do you like cartoons?";
+else if(n == 29) i="...and paint?";
+else if(n == 30) i="Cartoons and Paint?";
+else if(n == 31) i="Well you should.";
+else if(n == 32) i="Pick a color.";
+else if(n == 33) i="Green. Perfect.";
+else if(n == 34) threebuttons("Press the red button.", 2, "different");
+else if(n == 35) threebuttons("Press the green button.", 3, "different");
+else if(n == 36) threebuttons("Press the blue button.", 3, "different");
+else if(n == 37) undobutton("See, you just can't trust me. Or can you?");
+else if(n == 38) i="You know, I'm glad we get to spend so much time together.";
+else if(n == 39) i="Doesn't it make you want to stop clicking big red buttons?";
+else if(n == 40) i="No seriously.";
+else if(n == 41) i="Look deep inside you.";
+else if(n == 42) i="Deeper.";
+else if(n == 43) i="DEEPER!";
+else if(n == 44) i="<font size=2>What if I told you that the next time you press the button, the world will explode?</font>";
+else if(n == 45) i="See. You could have been dead right there.";
+else if(n == 46) i="And there.";
+else if(n == 47) i="You know, eventually I'll stop letting you get away with this.";
+else if(n == 48) i="The world is going to explode and all you care about is pressing buttons";
+else if(n == 49) i="Okay, this time the world will explode. I guarantee.";
+else if(n == 50) i="BOOM!<br>You're dead.";
+else if(n == 51) i="That wasn't very smart now was it?";
+else if(n == 52) i="Everyone's dead. Even you.";
+else if(n == 53) i="I'm not. I'm just text.";
+else if(n == 54) i="But you're dead.";
+else if(n == 55) i="Ha! Dead-face!";
+else if(n == 56) i="Stop clicking.";
+else if(n == 57) i="Have I ever told you how much I hate you?";
+else if(n == 58) i="Well I do.";
+else if(n == 59) i="I'm gonna start talking upside down if you click one more time.";
+else if(n == 60) fliptext(1);
+else if(n == 61) fliptext(2);
+else if(n == 62) fliptext(3);
+else if(n == 63) i="";
+else if(n == 64) i="";
+else if(n == 65) i="You really are stubborn.";
+else if(n == 66) i="Stop clicking. Please.";
+else if(n == 67) i="PLEASE!!!!";
+else if(n == 68) i="I'll give you a nickle";
+else if(n == 69) i="Dime?";
+else if(n == 70) i="Quarter?";
+else if(n == 71) i="Aww come on! Just stop!";
+else if(n == 72) i="That does it! Time to unleash my master plan!";
+else if(n == 73) animatedbutton("BEHOLD! The awesome power of GIF animation!");
+else if(n == 74) undobutton("H8!");
+else if(n == 75) getfunky("Let's get funky!");
+else if(n == 76) undobutton("<font size=2>I'll bet you're starting to wonder why you've been doung this for do long.</font>");
+else if(n == 77) i="Like jeez, all you've been doing is clicking a red button.";
+else if(n == 78) i="How lame is that?";
+else if(n == 79) i="But there is a bonus to all this";
+else if(n == 80) i="But it's a secret.<br>So I can't tell you.";
+else if(n == 81) i="I got you going didn't I?";
+else if(n == 82) i="You should've seen the look on your face! HA!";
+else if(n == 83) i="But seriously, there is a secret. There's been one the whole time.";
+else if(n == 84) i="You've been busy clicking away at this big red button...";
+else if(n == 85) i="...when all the while a little white button wached your every move";
+else if(n == 86) i="MWAHAHAHAHAHA!";
+else if(n == 87) i="HAHAHA!";
+else if(n == 88) i="BWAHAA!";
+else if(n == 89) i="MWAAAAH!!";
+else if(n == 90) i="HAHA!";
+else if(n == 91) i="hehe!";
+else if(n == 92) i="lol";
+else if(n == 93) i="rofl";
+else if(n == 94) i="roflmao";
+else if(n == 95) i="roflmaoqxz";
+else if(n == 96) i="and so on and so forth";
+else if(n == 97) i="...";
+else if(n == 98) i="*whistles*";
+else if(n == 99) i="Look harder! It's right under your nose.";
+else if(n == 100) i="I know where it is.<br>But I'll never tell.";
+else if(n == 101) i="Or maybe I will...";
+else if(n == 102) i="But you gotta stop clicking the Big Red Button first!";
+else if(n == 103) i="Stop.";
+else if(n == 104) i="Now.";
+else if(n == 105) i="Fine, I won't tell you the secret";
+else if(n == 106) i="Go ahead. Try to find it yourself. You'll never find it.";
+else if(n == 107) i="Well you might... but the odds are against you.";
+else if(n == 108) i="~";
+else if(n == 109) i="What's your favorite letter?";
+else if(n == 110) i="Mine is the squiggly!";
+else if(n == 111) i="~";
+else if(n == 112) i="Find it yet?";
+else if(n == 113) i="No?";
+else if(n == 114) i="Then stop clicking and I'll tell you.";
+else if(n == 115) i="You know what?";
+else if(n == 116) intheo();
+else if(n == 117) undobutton("Has anyone ever slapped you?");
+else if(n == 118) i="Cuz I will.";
+else if(n == 119) i="Really I will.";
+else if(n == 120) i="It won't hurt though.";
+else if(n == 121) i="Cuz you're dead.";
+else if(n == 122) i="D-E-D";
+else if(n == 123) i="Remember? You went and blew up the entire planhet!";
+else if(n == 124) i="Thought I'd forget about that didn't you?";
+else if(n == 125) i="But an elephant never forgets!";
+else if(n == 126) i="...or something along those lines.";
+else if(n == 127) i="You killed everyone.";
+else if(n == 128) i="Sikko.";
+else if(n == 129) i="What would you're mother say?";
+else if(n == 130) i="That's right... feel bad.";
+else if(n == 131) i="The world is null and you're to blame.";
+else if(n == 132) i="I'd recommend suicide, but youre dead already.";
+else if(n == 133) i="So there's only one thing left that you can do...";
+else if(n == 134) i="Stop clicking the button.";
+else if(n == 135) i="Dude, you're dead. What are you gaining from this?";
+else if(n == 136) i="Okay, everytime you click, you get sent to a lower layer of hell.";
+else if(n == 137) i="Welcome to layer 2";
+else if(n == 138) i="3";
+else if(n == 139) i="4";
+else if(n == 140) i="5";
+else if(n == 141) i="6";
+else if(n == 142) i="7";
+else if(n == 143) i="8";
+else if(n == 144) i="9";
+else if(n == 145) i="BOOM!<br>You've exploded Hell.";
+else if(n == 146) i="I hope you're happy.";
+else if(n == 147) i="Heaven's gone too.<br>That's how smooth you are.";
+else if(n == 148) i="Now you're dead, and there's no heaven or hell.";
+else if(n == 149) i="How does it feel? You've condemned the world to limbo.";
+else if(n == 150) i="I once shot a man for being in limbo.";
+else if(n == 151) i="...or was he doing the limbo?";
+else if(n == 152) i="Meh, Tomato Tomahto.";
+else if(n == 153) i="This is getting boring isn't it?";
+else if(n == 154) i="But you can't stop!";
+else if(n == 155) i="You want to end this.<br>You want to leave you're DSi.";
+else if(n == 156) i="But you can't!";
+else if(n == 157) i="You need to see if there's a pot of gold at the end of the rainbow!";
+else if(n == 158) i="But I've already told you how to find the pot of gold";
+else if(n == 159) i="Follow the white rabbit.";
+else if(n == 160) i="..erm, button.";
+else if(n == 161) i="Remember the hidden button?";
+else if(n == 162) i="Or are youso self-centered you forgot about that too?";
+else if(n == 163) i="I could just keep you here all day if I wanted.";
+else if(n == 164) i="You're in my world now.";
+else if(n == 165) i="No matter how much you hate it, you have to press the button.";
+else if(n == 166) i="again...";
+else if(n == 167) i="and again...";
+else if(n == 168) i="and again.";
+else if(n == 169) i="You just keep hoping something good will come oit of this.";
+else if(n == 170) i="Sure I could tell you if I wanted to, but I'm not gonna.";
+else if(n == 171) i="You decided to keep clicking. So I'm gonna enjoy it.";
+else if(n == 172) i="I mean, there's nothing else to enjoy";
+else if(n == 173) i="You blew it all up remember?";
+else if(n == 174) i="You're probably wondering who I am";
+else if(n == 175) i="Well let me tell you a tale about myself";
+else if(n == 176) i="One day, I was walking home from work and I saw a small little house.";
+else if(n == 177) i="I knocked on the door out of curiosity to see if anyone was home.";
+else if(n == 178) i="The door opened.";
+else if(n == 179) i="But no one was there.";
+else if(n == 180) i="I went inside to check it out and found nothing...";
+else if(n == 181) i="...nothing but a little metal box.";
+else if(n == 182) i="So I opened it.";
+else if(n == 183) i="Inside the box was a layer of foam protectingit's contents";
+else if(n == 184) i="I removed the foam and there it was...";
+else if(n == 185) i="...";
+else if(n == 186) i="... ...";
+else if(n == 187) i="ZZZzzzzzz";
+else if(n == 188) i="zzzZZZzzz";
+else if(n == 189) i="ZZZzzzZZZ";
+else if(n == 190) i="Huh?";
+else if(n == 191) i="Oh! Right! The story!";
+else if(n == 192) i="So there I was, holding this little metal box im my hands.";
+else if(n == 193) i="The top was open and sitting inside was this...";
+else if(n == 194) i="Big Red Button.";
+else if(n == 195) i="And do you know what it said?";
+else if(n == 196) i="Oh I'll tell you what it said. It said...";
+else if(n == 197) beginagain();
+
+document.getElementById('text').innerHTML=i;
+n++;
+}
+
+function changebutton(info, url){
+document.getElementById('me').src="/img/"+url;
+i=info;
+document.getElementById('text').innerHTML=i;
+}
+
+function threebuttons(info, correct, colored){
+if (colored == "same"){
+t='<button';
+if (correct == 1) t+=' onclick="clickit();"';
+t+='><img src="/img/button.png" id="me" width="50" height="50"></button><button';
+if (correct == 2) t+=' onclick="clickit();"';
+t+='><img src="/img/button.png" id="me" width="50" height="50"></button><button';
+if (correct == 3) t+=' onclick="clickit();"';
+t+='><img src="/img/button.png" id="me" width="50" height="50"></button>';
+}
+
+if (colored == "different"){
+t='<button';
+if (correct == 1) t+=' onclick="clickit();"';
+t+='><img src="/img/bluebutton.png" id="me" width="50" height="50"></button><button';
+if (correct == 2) t+=' onclick="clickit();"';
+t+='><img src="/img/button.png" id="me" width="50" height="50"></button><button';
+if (correct == 3) t+=' onclick="clickit();"';
+t+='><img src="/img/greenbutton.png" id="me" width="50" height="50"></button>';
+}
+document.getElementById('main').innerHTML=t;
+i=info;
+document.getElementById('text').innerHTML=i;
+}
+
+function undobutton(info){
+t='<button onclick="clickit();"><img src="/img/button.png" id="me" width="120" height="120"></button>';
+document.getElementById('main').innerHTML=t;
+
+i=info;
+document.getElementById('text').innerHTML=i;
+}
+
+function round(info, which){
+if (which == 2){
+t=x+x+x+x+x+x+x+x+'<br>'+x+x+x+x+x+x+x+x+'<br>'+x+x
++'<button onclick="clickit();"><img src="/img/button.png" id="me" width="14" height="14"></button>'
++x+x+x+x+x+'<br>'+x+x+x+x+x+x+x+x+'<br>'+x+x+x+x+x+x+x+x;
+document.getElementById('main').innerHTML=t;
+}
+
+if (which == 3){
+t=y+y+y+y+y+y+y+y+'<br>'+y+y+y+y+y+y+y+y+'<br>'
++y+y+'<button onclick="clickit();"><img src="/img/button.png" id="me" width="8" height="8"></button>'+y+y+y+y+y+'<br>'+y+y+y+y+y+y+y+y+'<br>'+y+y+y+y+y+y+y+y+'<br>'
++y+y+y+y+y+y+y+y+'<br>'+y+y+y+y+y+y+y+y+'<br>'+y+y+y+y+y+y+y+y+'<br>'+y+y+y+y+y+y+y+y+'<br>'
++y+y+y+y+y+y+y+y+'<br>'+y+y+y+y+y+y+y+y+'<br>'+y+y+y+y+y+y+y+y+'<br>'+y+y+y+y+y+y+y+y+'<br>'
++y+y+y+y+y+y+y+y+'<br>'+y+y+y+y+y+y+y+y+'<br>'+y+y+y+y+y+y+y+y;
+document.getElementById('main').innerHTML=t;
+}
+
+i=info;
+document.getElementById('text').innerHTML=i;
+}
+
+function fliptext(num){
+i='<img src="/img/text'+num+'.png">';
+document.getElementById('text').innerHTML=i;
+}
+
+function animatedbutton(info){
+t='<button onclick="clickit();"><img src="/img/animatedbutton.gif" width=220 height=120></button>';
+document.getElementById('main').innerHTML=t;
+
+i=info
+document.getElementById('text').innerHTML=i;
+}
+
+function getfunky(info){
+t='<img src="/img/funkybutton.png" height=120></button><span style="position:absolute; left:160px; top:6px; width:19px; height:18px; background:transparent;" onclick="clickit();"></span>';
+document.getElementById('main').innerHTML=t;
+
+i=info
+document.getElementById('text').innerHTML=i;
+}
+
+function intheo(){
+i='POOF It\'s g<img src="/img/o.png" id="o" onclick="clickit();">ne!'
+document.getElementById('text').innerHTML=i;
+
+t='<button><img src="/img/blank.png" width="120" height="120"></button>'
+document.getElementById('main').innerHTML=t;
+}
+
+function beginagain(){
+i="DO NOT PRESS";
+document.getElementById('text').innerHTML=i;
+n=0;
+}
+</script>
+</head>
+<body>
+<div id="bottomscreen">
+<center>
+<table border=0 cellpadding=0 cellspacing=0 width=100% height=100%>
+<tr><td align="center" id="main">
+<button onclick="clickit();"><img src="/img/button.png" id="me" width="120" height="120"></button><br>
+</td></tr><tr height="100%"><td align="center" valign="middle">
+<span id="text">DO NOT PRESS</span>
+</td></tr></table>
+</table>
+</center>
+</div>
+<div id="preload">
+<img src="/img/penguinbutton.png">
+<img src="/img/greenbutton.png">
+<img src="/img/bluebutton.png">
+<img src="/img/tinybutton.png">
+<img src="/img/funkybutton.png">
+<img src="/img/animatedbutton.gif">
+<img src="/img/text1.png">
+<img src="/img/text2.png">
+<img src="/img/text3.png">
+<img src="/img/o.png">
+<img src="/img/blank.png">
+</div>
+</body>
+</html>
+<!--
+<img src="/img/.png">
+else if(n == ) i="";
+-->

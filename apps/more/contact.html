@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>Contact Me</title>
+<meta name="viewport" content="width=device-width">
+<style>
+#faq { visibility:hidden; width:96%; position:absolute; left:2%; top:2%; border:1px solid gray; background:lightgray; font-size:12px; z-index:100; }
+.q { border-top:1px solid darkgray; border-left:1px solid darkgray; border-right:1px solid darkgray; background:gray; width:20px; margin-left:5px; font-size:16px; margin-bottom:0px; margin-top:0px; }
+#rules { visibility:hidden; width:96%; position:absolute; left:2%; top:2%; border:1px solid gray; background:lightgray; font-size:12px; z-index:200; }
+.q { border-top:1px solid darkgray; border-left:1px solid darkgray; border-right:1px solid darkgray; background:gray; width:20px; margin-left:5px; font-size:16px; margin-bottom:0px; margin-top:0px; }
+.a { border-bottom:1px solid darkgray; border-left:1px solid darkgray; border-right:1px solid darkgray; background:gray; width:20px; margin-left:5px; font-size:16px; margin-bottom:0px; margin-top:0px; }
+.top { background:yellow; border-bottom:2px solid orange; border-left:2px solid orange; border-right:2px solid orange; }
+#commentbox { position:absolute; width:100%; top:0px; left:0px; z-index:-100; }
+#blocker { position:absolute; width:100px; height:30px; top:0px; left:0px; z-index:-50; background-color:white; }
+#blocker2 { position:absolute; width:20px; height:26px; top:150px; right:0px; z-index:50; background-color:white; }
+#blocker3 { position:absolute; width:115px; height:26px; top:150px; left:50px; z-index:50; background-color:white; }
+</style>
+<script>
+function showfaq(){
+document.getElementById('faq').style.visibility="visible";
+}
+function hidefaq(){
+document.getElementById('faq').style.visibility="hidden";
+}
+
+function showrules(){
+document.getElementById('rules').style.visibility="visible";
+}
+function hiderules(){
+document.getElementById('rules').style.visibility="hidden";
+}
+function onload(){
+if (navigator.userAgent.match(/Nintendo 3DS/i)){
+document.getElementById('blocker2').style.top="160px";
+document.getElementById('blocker2').style.height="20px";
+}
+//-----------------------\\
+if (navigator.userAgent.match(/Nintendo 3DS/i)){
+document.getElementById('blocker3').style.top="158px";
+document.getElementById('blocker3').style.left="59px";
+document.getElementById('blocker3').style.width="117px";
+}
+else if (navigator.userAgent.match(/Nintendo DSi/i)){
+document.getElementById('blocker3').style.top="140px";
+document.getElementById('blocker3').style.left="58px";
+document.getElementById('blocker3').style.width="122px";
+}
+}
+</script>
+</head>
+<body style="margin:0px;" onload="onload();">
+<div id="blocker"></div>
+<div id="blocker2" onclick="this.style.display='none';"></div>
+<div id="blocker3"></div>
+<div id="faq">
+<center style="font-size:16px;"><a href="javascript:hidefaq();">[X]</a></center>
+<span class="q">Q:</span> Can I be a Mod/Admin?<br>
+<span class="a">A:</span> No, this site has no Admins.<br>
+<br>
+<span class="q">Q:</span> The clock isn't working.<br>
+<span class="a">A:</span> Refresh the page.<br>
+<br>
+<span class="q">Q:</span> Error like 'Default Site Page'.<br>
+<span class="a">A:</span> Come back later.<br>
+<br>
+<span class="q">Q:</span> IE is broken.<br>
+<span class="a">A:</span> Open something else first, like paint.<br>
+<br>
+</div>
+<div id="rules">
+<center style="font-size:16px;"><a href="javascript:hiderules();">[X]</a></center>
+Type your nickname in the first box and your message in the second box. Then tap comment. NOTE: this is to contact me. <font color=red>This is not a chatroom.</font> However, I do allow the URL of your 3DS/DSi site(s). <font color="red">No comments about registering or any mean comments alloud.</font> Also, <font color="red">no stealing identities</font>, espically mine. No blank comments, either.
+</div>
+<center><span class="top">View <a href="javascript:showfaq();">FAQ</a> and <a href="javascript:showrules();">rules</a> first!</span></center>
+<div id="commentbox"><font size=2>
+<!-- customize labels of htmlcommentbox.com -->
+<script>
+// This code goes ABOVE the main HTML Comment Box code!
+// replace the text in the single quotes below to customize labels.
+hcb_user = {
+  //L10N
+  comments_header : 'Contact Me',
+  name_label : 'username',
+  content_label: 'message',
+  submit : 'send',
+  logout_link : '<img src="http://www.htmlcommentbox.com/static/images/door_out.png" alt="[logout]" class="hcb-icon"/>',
+  admin_link : '<img src="http://www.htmlcommentbox.com/static/images/door_in.png" alt="[login]" class="hcb-icon"/>',
+  no_comments_msg: '<p>No posts yet.</p>',
+  add: '(+) Send Message',
+  rss: '<img src="http://www.htmlcommentbox.com/static/images/feed.png" class="hcb-icon" alt="rss"/> ',
+  said: 'sent:',
+  prev_page:'<img src="http://www.htmlcommentbox.com/static/images/arrow_left.png" class="hcb-icon" alt="[prev]"/>',
+  next_page:'<img src="http://www.htmlcommentbox.com/static/images/arrow_right.png" class="hcb-icon" alt="[next]"/>',
+  showing:'showing',
+  to:'to',
+  website_label:'website (optional)',
+  email_label:'email',
+  anonymous:'(no name entered)',
+  mod_label:'(mod)',
+  subscribe:'email me replies',
+  
+  msg_thankyou:'<b>Thanks for your feedback!</b>',
+  msg_approval:'(this comment is not published until approved)',
+  msg_approval_required:'<b>Thanks for your feedback! Your message will appear once approved.</b>',
+  
+  err_bad_html:'Your message contained bad HTML.',
+  err_bad_email:'Please enter a valid email address.',
+  err_too_frequent:'You must wait a few seconds between posting comments.',
+  err_comment_empty:'No empty comments!',
+  
+  //SETTINGS
+  MAX_CHARS: 2048,
+  PAGE:'', // ID of the webpage to show comments for. defaults to the webpage the user is currently visiting.
+  RELATIVE_DATES:true // show dates in the form "X hours ago." etc.
+};
+</script>
+<!-- done customizing labels of htmlcommentbox.com -->
+<!-- begin htmlcommentbox.com -->
+ <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...</div>
+ <script type="text/javascript" language="javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={  };} (function(){s=document.createElement("script");s.setAttribute("type","text/javascript");s.setAttribute("src", "http://www.htmlcommentbox.com/jread?page="+escape((window.hcb_user && hcb_user.PAGE)||(""+window.location)).replace("+","%2B")+"&mod=%241%24wq1rdBcg%244XC62HTIOJpPpAAxmK.GL."+"&opts=414&num=10");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+<!-- end htmlcommentbox.com -->
+</font>
+<center><a href="http://3dsplaza.com/members/send_pm.php?to=quadrplax&subject=Homepage Network">Private Contact</a> at 3DS Plaza.</center>
+</div>
+</body>
+</html>

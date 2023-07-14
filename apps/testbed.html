@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>HTML Test Bed</title>
+<meta name="viewport" content="width=240">
+<style>
+body { margin:0px; margin-top:2px; background:lightgreen; } 
+#code { background-image:url(http://dsihomepage.x10.mx/img/slip.png); }
+</style>
+<script>
+function wtvtest(){
+temp = document.testbed.stn.value;
+preWindow = open("", "preWindow","status=yes, toolbar=yes, menubar=yes");
+preWindow.document.open();
+preWindow.document.write(temp);
+preWindow.document.close();
+};
+</script>
+</head>
+<body>
+<form name="testbed" onsubmit="wtvtest()">
+<center>
+<textarea name=stn cols=31 rows=9></textarea><br>
+<input type="reset" value="         clear        "><input type="submit" value="         test         ">
+</center>
+</form>
+</body>
+</html>

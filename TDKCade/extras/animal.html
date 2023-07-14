@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>Chineese Animal calculator</title>
+<meta name="viewport" content="width=240">
+<style>
+body {margin:0px;}
+</style>
+<script LANGUAGE="JavaScript">
+//davidgardner7@yahoo.com
+//http://javascriptkit.com
+function getpet () {
+var toyear = 1997;
+var birthyear = document.frm.inyear.value;
+var birthpet="?";
+x = (toyear - birthyear) % 12
+if ((x == 1) || (x == -11)){birthpet="Mouse"}
+else if (x == 0){birthpet="Ox"}
+else if ((x == 11) || (x == -1)){birthpet="Tiger"}
+else if ((x == 10) || (x == -2)){birthpet="Rabbit"}
+else if ((x == 9) || (x == -3)){birthpet="Dragon"}
+else if ((x == 8) || (x == -4)){birthpet="Snake"}
+else if ((x == 7) || (x == -5)){birthpet="Horse"}
+else if ((x == 6) || (x == -6)){birthpet="Sheep"}
+else if ((x == 5) || (x == -7)){birthpet="Monkey"}
+else if ((x == 4) || (x == -8)){birthpet="Chicken"}
+else if ((x == 3) || (x == -9))  {birthpet="Dog"}
+else if ((x == 2) || (x == -10))  {birthpet="Pig"}  
+document.frm.birth.value = birthpet;
+}
+</script>
+</head>
+<body bgcolor=purple>
+<font size="1" color=yellow>Enter your birth year, for example:1975, and click okay to see your chineese animal.</font>
+<form NAME="frm"><center><br>
+<input TYPE="text" SIZE="5" NAME="inyear" value="1975"><input TYPE="button" VALUE="OK" onClick="getpet()"> <br>
+<input TYPE="text" SIZE="10" NAME="birth"> </font>
+</center></form>
+</body>
+</html>

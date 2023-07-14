@@ -1,0 +1,333 @@
+<!--              IMPORTANT MESSAGE: READ BELOW                  -->
+<!--Hi, you are probably here to see the source code of this     -->
+<!--so you can put it on your site. This is my script. I did not -->
+<!--get it from The Javascript Source or anything else like that.-->
+<!--I dont mind you copying my source code as long as you put a  -->
+<!--back to my site and make sure people know I made this script.-->
+<!--It took me a lot of time to make this and I don't someone to -->
+<!--just take it and call it theirs. Taking my code or any part  -->
+<!--of it and not crediting me is ILLEGAL. You may now continue. -->
+
+<!--Version 1.0: 1/29/11: 
+everything that is not listed below
+-->
+<!--Version 1.1: 1/30/11:
+added clock and expand button to start bar
+new start button (old one is commented out)
+added spredsheet program
+fixed bug - when you closed and reopned ie, it would go back to google
+-->
+<!--Version 1.2: 1/31/11:
+created media player. Planing on creating desktop icon tomarrow.
+--did release tommarow--
+-->
+<!--Version 1.2.1: 8/10/11:
+new startbar image
+-->
+<html>
+<head>
+<title>DSi PC</title>
+<meta name="viewport" content="width=240">
+<style>
+body { margin:0px; width:240; height:176; overflow:hidden; background-color:000080; }
+#title { position:absolute; left:2px; top:-21px; }
+#x { position:absolute; left:220px; top:-18px; width:16px; height:16px; background-color:red; color:white; }
+#back { position:absolute; left:202px; top:-18px; width:16px; height:16px; background-color:black; color:white; }
+#close { position:absolute; left:117px; top:1px; width:16px; height:16px; background-color:red; color:white; }
+a.x { text-decoration:none; color:white; }
+a.faded { color:deepskyblue; }
+#notepad { position:absolute; top:0px; left:0px; margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:236; height:134; visibility:hidden; }
+
+#paint { position:absolute; top:0px; left:0px; margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:236; height:134; visibility:hidden; }
+
+#calculator { position:absolute; top:0px; left:0px; margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:231; height:134; padding-left:5px; visibility:hidden; }
+
+#run { position:absolute; top:0px; left:0px; margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:231; height:134; padding-left:5px; visibility:hidden; }
+
+#internetexplorer { position:absolute; top:0px; left:0px; margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:231; height:134; visibility:hidden; }
+
+#help { position:absolute; top:0px; left:0px; margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:231; height:134; padding-left:5px; visibility:hidden; }
+
+#internetexplorer { position:absolute; top:0px; left:0px; margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:236; height:134; visibility:hidden; }
+
+#spredsheet { position:absolute; top:0px; left:0px; margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:236; height:134; visibility:hidden; }
+
+#thespredsheet { margin:0px; background-color:ECE9D8; width:236; height:134; overflow:scroll; white-space:nowrap; }
+
+#mediaplayer { position:absolute; top:0px; left:0px; margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; width:236; height:134; visibility:hidden; }
+
+#startbar { position:absolute; top:155px; left:0px; height:21; width:240; background-color:blue; color:white; /*border:solid 1px black;*/ background-image:url(startbar.png); }
+
+#startmenu { position:absolute; top:6px; left:0px; margin:0px; margin-left:0px; margin-bottom:-10px; background-color:ECE9D8; border:2px solid blue; border-top:20px solid blue; height:125; width:100; visibility:hidden; }
+
+#allprograms { position:absolute; top:0px; left:104px; margin:0px; margin-left:0px; margin-bottom:-10px; background-color:white; border:1px solid black; height:151; width:134; visibility:hidden; }
+
+#notificationbar { background-color:lightblue; background-image:url(notificationbar.png); }
+</style>
+<script>
+function init ( ){
+  timeDisplay = document.createTextNode ( "" );
+  document.getElementById("clock").appendChild ( timeDisplay );
+}
+function updateClock ( ){
+  var currentTime = new Date ( ); 
+  var currentHours = currentTime.getHours ( );
+  var currentMinutes = currentTime.getMinutes ( );
+  var currentSeconds = currentTime.getSeconds ( ); 
+  currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+  currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds; 
+  var timeOfDay = ( currentHours < 12 ) ? "AM" : "PM"; 
+  currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours; 
+  currentHours = ( currentHours == 0 ) ? 12 : currentHours; 
+  var currentTimeString = currentHours + ":" + currentMinutes +  " " + timeOfDay;
+  document.getElementById("clock").firstChild.nodeValue = currentTimeString;
+}
+</script>
+<script>
+var num=0;
+function openProgram(program){
+document.getElementById(program).style.visibility="visible";
+}
+function closeProgram(program){
+document.getElementById(program).style.visibility="hidden";
+}
+function checkBar(){
+if (num == 0){
+document.getElementById('startmenu').style.visibility="visible";
+num=1;
+}
+else{
+document.getElementById('startmenu').style.visibility="hidden";
+document.getElementById('allprograms').style.visibility="hidden";
+num=0;
+}
+}
+function ie(){
+if (document.all.webbrowser.src == "") document.all.webbrowser.src="http://www.google.com/m";
+openProgram('internetexplorer');
+}
+</script>
+</head>
+<body onload="updateClock(); setInterval('updateClock()', 1000 );">
+<a href="javascript:openProgram('notepad');"><img border="0" src="notepad.png" width="44" height="52" alt="Notepad" /></a>
+<a href="javascript:openProgram('paint');"><img border="0" src="paint.png" width="44" height="52" alt="Paint" /></a>
+<a href="javascript:openProgram('calculator');"><img border="0" src="calculator.png" width="51" height="52" alt="Calculator" /></a>
+<a href="javascript:openProgram('run');"><img border="0" src="run.png" width="44" height="52" alt="Run" /></a>
+<a href="javascript:ie();"><img border="0" src="internetexplorer.png" width="44" height="52" alt="Internet Explorer" /></a>
+<a href="../dsoffice"><img border="0" src="dsoffice.png" width="44" height="52" alt="DSOffice" /></a>
+<a href="javascript:openProgram('spredsheet');"><img border="0" src="spredsheet.png" width="58" height="52" alt="Spredsheet" /></a>
+<a href="javascript:openProgram('mediaplayer');"><img border="0" src="mediaplayer.png" width="64" height="52" alt="Media Player" /></a>
+<div id=notepad>
+<div id="title"><font size=3 color=white>Notepad</font></div>
+<div id=x><font size=2><center><a class="x" href="javascript:closeProgram('notepad');">X</a></center></font></div>
+<textarea style="width:236; height:133;"></textarea>
+</div>
+<div id=paint>
+<div id="title"><font size=3 color=white>Paint - <a href="javascript:funct();" class="faded">clear</a></font></div>
+<div id=x><font size=2><center><a class="x" href="javascript:closeProgram('paint');">X</a></center></font></div>
+<canvas id="imageView" width="236" height="133">
+Your browser is incompatible with this paint application.
+</canvas>
+<script type="text/javascript">
+/* (c) 2009 ROBO Design http://www.robodesign.ro*/
+// Keep everything in anonymous function, called on window load.
+if(window.addEventListener) {
+window.addEventListener('load', function () {
+  var canvas, context, tool;
+  function init () {
+    // Find the canvas element.
+    canvas = document.getElementById('imageView');
+    if (!canvas) {
+      alert('Error: cannot find the canvas element!');
+      return;
+    }
+
+    if (!canvas.getContext) {
+      alert('Error: no canvas.getContext!');
+      return;
+    }
+    // Get the 2D canvas context.
+    context = canvas.getContext('2d');
+    if (!context) {
+      alert('Error: failed to getContext!');
+      return;
+    }
+
+    // Pencil tool instance.
+    tool = new tool_pencil();
+
+    // Attach the mousedown, mousemove and mouseup event listeners.
+    canvas.addEventListener('mousedown', ev_canvas, false);
+    canvas.addEventListener('mousemove', ev_canvas, false);
+    canvas.addEventListener('mouseup',   ev_canvas, false);
+  }
+    //clear canvas
+    //function funct(){
+    //alert("sucesfully called function");
+    //canvas = document.getElementById('imageView');
+    //canvas.width = canvas.width;
+    //}
+  // tracks the mouse 
+  function tool_pencil () {
+    var tool = this;
+    this.started = false;
+
+    // detect hold mouse
+    this.mousedown = function (ev) {
+        context.beginPath();
+        context.moveTo(ev._x, ev._y);
+        tool.started = true;
+    };
+    // draw function
+    this.mousemove = function (ev) {
+      if (tool.started) {
+        context.lineTo(ev._x, ev._y);
+        context.stroke();
+      }
+    };
+    // release mouse detection
+    this.mouseup = function (ev) {
+      if (tool.started) {
+        tool.mousemove(ev);
+        tool.started = false;
+      }
+    };
+  }
+
+  //determines the mouse position
+  function ev_canvas (ev) {
+    if (ev.layerX || ev.layerX == 0) { // Firefox
+      ev._x = ev.layerX;
+      ev._y = ev.layerY;
+    } else if (ev.offsetX || ev.offsetX == 0) { // Opera
+      ev._x = ev.offsetX;
+      ev._y = ev.offsetY;
+    }
+    // Call the event handler of the tool.
+    var func = tool[ev.type];
+    if (func) {
+      func(ev);
+    }
+  }
+  init();
+}, false); }
+    //clear canvas
+    function funct(){
+    canvas = document.getElementById('imageView');
+    canvas.width = canvas.width;
+    }
+</script>
+</div>
+<div id=calculator>
+<div id="title"><font size=3 color=white>Calculator</font></div>
+<div id=x><font size=2><center><a class="x" href="javascript:closeProgram('calculator');">X</a></center></font></div>
+<center><form name=f><input type=text name=b size=10><input type=button value="." onclick=document.f.b.value+="."><br><input type=button value=7 onclick=document.f.b.value+=7><input type=button value=8 onclick=document.f.b.value+=8><input type=button value=9 onclick=document.f.b.value+=9><input type=button value=/ onclick=document.f.b.value+="/"><br><input type=button value=4 onclick=document.f.b.value+=4><input type=button value=5 onclick=document.f.b.value+=5><input type=button value=6 onclick=document.f.b.value+=6><input type=button value=* onclick=document.f.b.value+="*"><br><input type=button value=1 onclick=document.f.b.value+=1><input type=button value=2 onclick=document.f.b.value+=2><input type=button value=3 onclick=document.f.b.value+=3><input type=button value=- onclick=document.f.b.value+="-"><br><input type=button value=C onclick=document.f.b.value=""><input type=button value=0 onclick=document.f.b.value+=0><input type=button value== onclick="document.f.b.value=eval(document.f.b.value)"><input type=button value=+ onclick=document.f.b.value+="+"><br><input type=button value=M+ onclick=m+=document.f.b.value><input type=button value=M- onclick=m-=document.f.b.value><input type=button value=MC onclick=m=""><input type=button value=MR onclick=document.f.b.value+=m></form></center>
+</div>
+<div id=run>
+<div id="title"><font size=3 color=white>Run</font></div>
+<div id=x><font size=2><center><a class="x" href="javascript:closeProgram('run');">X</a></center></font></div>
+<font size=2>Enter name of the program you wish to open (no spaces, all lowercase) and click 'Run'
+<input type="text" size="24" id="apple"><input type="button" value="Run" onclick="javascript:run();">
+</font>
+<script>
+function run(){
+closeProgram('run');
+openProgram(document.getElementById('apple').value);
+}
+</script>
+</div>
+<div id=internetexplorer>
+<div id="title"><font size=3 color=white>Internet Explorer</font></div>
+<div id=x><font size=2><center><a class="x" href="javascript:closeProgram('internetexplorer');">X</a></center></font></div>
+<input type="text" id="urlbox" size="21" value="http://www.google.com/m"><input type="button" value="GO" onclick="visitPage();"><input type="button" value="#" onclick="fillWindow();"><br>
+<iframe src='' name='webbrowser' width='234px' height='110px' scrolling='auto' style='border:solid 1px'></iframe>
+<script>
+function visitPage(){
+var url=document.getElementById('urlbox').value;
+document.all.webbrowser.src=url;
+}
+function fillWindow(){
+window.location=document.all.webbrowser.src;
+}
+</script>
+</div>
+<div id=help>
+<div id="title"><font size=3 color=white>Help</font></div>
+<div id=x><font size=2><center><a class="x" href="javascript:closeProgram('help');">X</a></center></font></div>
+<center>DSi PC<br>
+<font size=1>V. 1.0</font><br></center>
+<font size=2>
+<li>Operates just like Windows XP.</li>
+<li>Submit a bug/help item in the <a href="../box.html">contact me</a> section of this site</li>
+</font>
+</div>
+<div id=spredsheet>
+<div id="title"><font size=3 color=white>Spredsheet</font></div>
+<div id=x><font size=2><center><a class="x" href="javascript:closeProgram('spredsheet');">X</a></center></font></div>
+<div id=thespredsheet><font size=2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;H
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;J<br>
+01<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+02<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+03<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+04<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+05<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+06<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+07<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+08<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+09<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+10<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+11<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+12<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+13<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+14<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+15<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+16<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+17<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+18<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+19<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+20<input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><input type=text size=8><br>
+</font></div>
+</div>
+<div id=mediaplayer>
+<div id="title"><font size=3 color=white>Media Player</font></div>
+<div id=x><font size=2><center><a class="x" href="javascript:closeProgram('mediaplayer');">X</a></center></font></div>
+<div id=back><font size=2><center><a class="x" href="javascript:history.go(-1)"><</a></center></font></div>
+<iframe src='media.html' name='mediabrowser' width='236px' height='134px' scrolling='auto' style='border:solid 0px'></iframe>
+</div>
+<div id="startmenu">
+<div id="title"><font size=3 color=white>DSi PC</font></div>
+<a href="javascript:closeProgram('startmenu');num=0;openProgram('run');"><img border="0" src="runbar.png" width="100" height="25" alt="Run..." /></a>
+<a href="javascript:closeProgram('startmenu');num=0;openProgram('help');"><img border="0" src="help.png" width="100" height="25" alt="Help!" /></a>
+<a href="."><img border="0" src="logoff.png" width="100" height="25" alt="Log off" /></a>
+<a href="../index2.html"><img border="0" src="shutdown.png" width="100" height="25" alt="Shut Down" /></a>
+<a href="javascript:openProgram('allprograms');"><img border="0" src="all.png" width="100" height="25" alt="All Programs" /></a>
+</div>
+<div id="allprograms">
+<div id=close><font size=2><center><a class="x" href="javascript:closeProgram('allprograms');">X</a></center></font></div>
+<font size=2>
+<a href="javascript:num=0;closeProgram('allprograms');closeProgram('startmenu');openProgram('notepad');">Notepad</a><br>
+<a href="javascript:num=0;closeProgram('allprograms');closeProgram('startmenu');openProgram('paint');">Paint</a><br>
+<a href="javascript:num=0;closeProgram('allprograms');closeProgram('startmenu');openProgram('calculator');">Calculator</a><br>
+<a href="javascript:num=0;closeProgram('allprograms');closeProgram('startmenu');openProgram('run');">Run</a><br>
+<a href="javascript:num=0;closeProgram('allprograms');closeProgram('startmenu');ie();">Internet Explorer</a><br>
+<a href="../dsoffice">DSOffice</a><br>
+<a href="javascript:num=0;closeProgram('allprograms');closeProgram('startmenu');openProgram('spredsheet');">Spredsheet</a><br>
+<a href="javascript:num=0;closeProgram('allprograms');closeProgram('startmenu');openProgram('mediaplayer');">Media Player</a><br>
+</font>
+</div>
+<div id=startbar>
+<a href="javascript:checkBar();" class="x"><img border="0" src="start.png" width="69" height="21" alt="Start" style="position:absolute; top:0px;" /><!--&nbsp;<img border="0" src="win.png" width="16" height="16" alt="win" style="position:absolute; top:3px;" />&nbsp;&nbsp;&nbsp;&nbsp;Start )--></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img border="0" src="divide.png" height="21" alt="|" style="position:absolute; top:0px;" /><span id="notificationbar">&nbsp;<span id="clock">&nbsp;</span></span>
+</div>
+</body>
+</html>

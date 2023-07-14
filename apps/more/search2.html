@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>Search</title>
+<meta name="viewport" content="width=240">
+<script> 
+function search(){
+var x=document.getElementById('here').checked;
+if (x == true){searchhere();}
+else {searchweb();}
+}
+function searchhere(){
+var q=document.getElementById('box').value;
+window.location="http://search.yahoo.com/search?fr=ond_wii1_off&type=ds&vs=http%3A%2F%2Fdsihomepage.x10.mx%2F&p="+q+"";
+}
+function searchweb(){
+var q=document.getElementById('box').value;
+window.location="http://search.yahoo.com/search?fr=ond_wii1_off&type=ds&p="+q+"";
+}
+</script>
+</head>
+<body bgcolor=lightgray>
+<input type="text" size="24" value="" id="box"><input type="button" value="GO" onclick="search();" id="bttn"><br>
+<center><font size="2">
+<input type="radio" id="here" checked>Here
+<input type="radio">Web
+</font></center>
+<font size="1">powered by <font color="red">YAHOO!<sup>®</sup></font> - <a href="/more/search3.html">Bing version</a></font><br>
+</body>
+</html>

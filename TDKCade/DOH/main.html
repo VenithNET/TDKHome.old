@@ -1,0 +1,828 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Defend Our Home (D.O.H.)</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=240" />
+    <script src="/js/json2.js"></script>
+    <script src="/js/highscores.js"></script>
+    <script src="/js/sprites.js"></script>
+    <script>
+        var ANGLES = [[-3, -1], [-2, -2], [-1, -3], [1, -3], [2, -2], [3, -1]];
+        var time = 0;
+        var timer = 0;
+        var total = 0;
+        var destroyed = 0;
+        var pills = [];
+        var hits = [];
+        var damaged = [];
+
+        var dud;
+        
+        var score = 0;
+        var level = 0;
+        var lastLife = 0;
+
+        var balls = [{
+            x: 99,
+            y: 157,
+            stuck: true,
+            dirx: 2,
+            diry: -2,
+            speed: 4
+        }];
+
+        var paddle = {
+            x: 89,
+            y: 160,
+            width: 21,
+            height: 5,
+            lives: 3,
+            ammo: 0,
+            type: 0,
+            render: true
+        };
+        
+        var shots = [];
+
+        var blocks;
+        var blocksx = 15;
+        var blocksy = 30;
+
+        var colors = ["green", "yellow", "lilac", "orange", "red", "cyan", "brown", "purple", "gray", "gold"];
+
+        var sprites = [];
+        var list = ["bg", "paddle1", "paddle2", "paddle3", "ball", "b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10", "hit", "pr1", "pr2", "pr3", "pr4", "pr5", "pr6", "pr7", "pp1", "pp2", "pp3", "pp4", "pp5", "pp6", "pp7", "pb1", "pb2", "pb3", "pb4", "pb5", "pb6", "pb7", "py1", "py2", "py3", "py4", "py5", "py6", "py7", "pg1", "pg2", "pg3", "pg4", "pg5", "pg6", "pg7", "pc1", "pc2", "pc3", "pc4", "pc5", "pc6", "pc7", "shot", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+        var canvas;
+        var ctx;
+        
+        var background;
+        var ctx2;
+        var dirty = new DirtyRectangleManager();
+        
+        var hiscores = new HighScores("doh");
+        
+        var x = 0;
+        var y = 0;
+        
+        function init()
+        {
+            var data;
+            
+            background = document.createElement("canvas");
+            background.width = sprites[0].width;
+            background.height = sprites[0].height;
+            
+            renderBG();
+            
+            ctx2 = background.getContext("2d");
+            ctx2.fillStyle = "white";
+            ctx2.fillRect(0, 0, 240, 176);
+            
+            data = ctx.getImageData(0, 0, 240, 176);
+            ctx2.putImageData(data, 0, 0);
+
+            dirty.add({x: paddle.x, y: paddle.y, width: paddle.width, height: paddle.height});
+
+            nextLevel();
+
+            document.getElementById("loading").parentNode.removeChild(document.getElementById("loading"));
+        }
+
+        function nextLevel()
+        {
+            //Delete shots
+            shots.length = 0;
+
+            //Delete pills
+            pills.length = 0;
+
+            //Clear areas to clean up
+            dirty.clear();
+            damaged.length = 0;
+
+            //Delete extra balls
+            while(balls.length > 1) balls.pop();
+
+            //Stick the first one
+            balls[0].stuck = true;
+            balls[0].y = 157;
+            balls[0].x = balls[0].x = paddle.x + Math.floor(paddle.width/2);
+            balls[0].dirx = 2;
+            balls[0].diry = -2;
+            balls[0].speed = 4;
+
+            //Reset paddle
+            paddle.ammo = 0;
+            paddle.y = 160;
+            paddle.width = 21;
+            paddle.height = 5;
+            paddle.type = 0;
+
+            renderBG();
+            paddle.render = true;
+
+            loadLevel((level%10)+1);
+            level++;
+
+            renderScore();
+            renderLevel();
+            renderLives();
+        }
+        
+        function lifeLost()
+        {
+            //for(var i=0; i<pills.length; i++) dirty.add({x: pills[i].x, y: pills[i].y, width: 11, height: 5});
+            
+            pills.length = 0;
+            balls = [{
+                x: paddle.x + Math.floor(paddle.width/2),
+                y: 157,
+                stuck: true,
+                dirx: 2,
+                diry: -2,
+                speed: 4
+            }];
+            
+            pillCaught(-1);
+            paddle.lives--;
+            renderLives();
+        }
+        
+        function submitHighscore()
+        {
+            if(!window.highscoreDIV)
+            {
+                window.highscoreDIV = document.createElement("div");
+                window.highscoreDIV.className = "highscore";
+                
+                if(!hiscores.isScoreHigher(score))
+                {
+                    highscoreDIV.style.color = "white";
+                    highscoreDIV.style.lineHeight = "176px";
+                    highscoreDIV.appendChild(document.createTextNode("Game Over"));
+                    
+                    setTimeout("window.location = 'index.html'", 5000);
+                }
+                else
+                {
+                    highscoreDIV.style.backgroundColor = "white";
+                    
+                    var div = document.createElement("div");
+                    div.style.lineHeight = "50px";
+                    div.appendChild(document.createTextNode("New High Score"))
+                    highscoreDIV.appendChild(div);
+                    
+                    div = document.createElement("div");
+                    div.style.lineHeight = "25px";
+                    div.appendChild(document.createTextNode(score+" points"))
+                    highscoreDIV.appendChild(div);
+                    
+                    var name = document.createElement("input");
+                    name.style.width = "140px";
+                    name.maxlength = 16;
+                    name.style.margin = "10px";
+                    if(hiscores.getCachedName()) name.value = hiscores.getCachedName().substring(0, 16);
+                    
+                    div = document.createElement("div");
+                    div.appendChild(name)
+                    highscoreDIV.appendChild(div);
+                    
+                    var button = document.createElement("button");
+                    
+                    div = document.createElement("div");
+                    button.appendChild(document.createTextNode("Submit"));
+                    button.style.margin = "10px";
+                    div.appendChild(button)
+                    highscoreDIV.appendChild(div);
+                    
+                    button.onclick = function() {
+                        var high = new HighScore(name.value, score);
+                        
+                        high.level = level;
+                        high.playTime = time;
+                        
+                        hiscores.submitScore(high);
+                        
+                        window.location = "index.html?showScores";
+                    };
+                }
+               
+                document.body.appendChild(highscoreDIV);
+            }
+        }
+
+        function loadLevel(level)
+        {
+            var data;
+            var screen = document.getElementById("bottomscreen");
+            var request = new XMLHttpRequest();
+
+            request.open("GET", "l"+level+".json", false);
+            request.send(null);
+
+            if(request.status != 200) alert("Error: Unable to load level "+level);
+
+            data = eval("("+request.responseText+")");
+
+            total = 0;
+            destroyed = 0;
+            blocksx = data.blocksx;
+            blocksy = data.blocksy;
+            blocks = [];
+
+            for(var y=0; y<data.blocks.length; y++)
+            {
+                blocks[y] = [];
+
+                for(var x=0; x<data.blocks[y].length; x++)
+                {
+                    if(data.blocks[y].charAt(x) == " ")
+                    {
+                        blocks[y][x] = null;
+                    }
+                    else
+                    {
+                        blocks[y][x] = {x: (x * 15 + blocksx), y: (y * 7 + blocksy), gridx: x, gridy: y};
+                        blocks[y][x].type = Number(data.blocks[y].charAt(x));
+                        blocks[y][x].life = (blocks[y][x].type > 7) ? ((blocks[y][x].type == 8) ? 2 : 99) : 1;
+
+                        sprites[5+blocks[y][x].type].render(blocks[y][x].x, blocks[y][x].y);
+
+                        if((blocks[y][x].type < 9)) total++;
+                    }
+                }
+            }
+        }
+
+        function load(index)
+        {
+            sprites[index] = new Sprite("images/"+list[index]+".img.b64", canvas);
+        }
+
+        function render()
+        {
+            dirty.render();
+
+            while(hits.length > 0)
+            {
+                var hit = hits.pop();
+                sprites[5+hit.type].render(hit.x, hit.y);
+            }
+
+            while(damaged.length > 0)
+            {
+                var dmg = damaged.pop();
+                sprites[5+dmg.type].render(dmg.x, dmg.y);
+            }
+
+            for(var i=0; i<balls.length; i++)
+            {
+                if(balls[i].y >= 200)
+                {
+                    if(balls.length > 1)
+                    {
+                        balls.splice(i, 1);
+                        i--;
+                        continue;
+                    }
+                    else
+                    {
+                        //paddle.lives--;
+                        //renderLives();
+                        lifeLost();
+                    }
+                }
+
+                renderBall(balls[i]);
+            }
+            
+            renderPills();
+            renderShots();
+
+            sprites[paddle.type+1].render(paddle.x, paddle.y);
+            if(paddle.render) paddle.render = false;
+
+            if(destroyed >= total)
+            {
+                nextLevel();
+            }
+
+            time++;
+        }
+
+        function renderScore()
+        {
+            var temp = score;
+            var count = 0;
+            var x = 229;
+            
+            if(score-lastLife >= 250)
+            {
+                lastLife += 250;
+                paddle.lives++;
+                renderLives();
+            }
+
+            while(temp > 0 && count < 5)
+            {
+                ctx.fillStyle = "white";
+                ctx.fillRect(x, 28, 8, 16);
+
+                sprites[59 + (temp%10)].render(x, 28);
+
+                count++;
+                x -= 9;
+                temp = Math.floor(temp / 10);
+            }
+        }
+
+        function renderLevel()
+        {
+            var temp = level;
+            var count = 0;
+            var x = 229;
+
+            while(temp > 0 && count < 5)
+            {
+                ctx.fillStyle = "white";
+                ctx.fillRect(x, 73, 8, 16);
+
+                sprites[59 + (temp%10)].render(x, 73);
+
+                count++;
+                x -= 9;
+                temp = Math.floor(temp / 10);
+            }
+        }
+
+        function renderLives()
+        {
+            var temp = paddle.lives;
+            var count = 0;
+            var x = 229;
+
+            while(temp > 0 && count < 5)
+            {
+                ctx.fillStyle = "white";
+                ctx.fillRect(x, 118, 8, 16);
+
+                sprites[59 + (temp%10)].render(x, 118);
+
+                count++;
+                x -= 9;
+                temp = Math.floor(temp / 10);
+            }
+        }
+
+        function renderBall(ball)
+        {
+            var gridx;
+            var gridy;
+            var block;
+
+            if(timer < time) ball.speed = 4;
+
+            if(!ball.stuck)
+            {
+                for(var i=0; i<ball.speed; i++)
+                {
+                    ball.x += ball.dirx;
+                    ball.y += ball.diry;
+                    block = null;
+
+                    if(ball.x >= 177 || ball.x <= 15)
+                    {
+                        if(ball.x >= 177) ball.x -= (ball.x - 177);
+                        else ball.x += (15 - ball.x);
+                        
+                        //ball.x -= ball.dirx;
+                        ball.dirx = -ball.dirx;
+                    }
+
+                    if(ball.y <= 8)
+                    {
+                        ball.y += (8 - ball.y); //ball.diry;
+                        ball.diry = -ball.diry;
+                    }
+
+                    if((ball.y >= 157 && ball.y < 165) && (paddle.x < ball.x+3 && paddle.x > ball.x-paddle.width))
+                    {
+                        var dist = Math.floor((ball.x - paddle.x) / (paddle.width / ANGLES.length));
+
+                        if(dist < 0) dist = 0;
+                        if(dist > 5) dist = 5;
+
+                        ball.dirx = ANGLES[dist][0];
+                        ball.diry = ANGLES[dist][1];
+                    }
+
+                    if(ball.y >= blocksy && ball.y <= blocksy + (blocks.length * 7)-3)
+                    {
+                        var testx = (ball.dirx > 0) ? testDirection(ball, 4, 2) : testDirection(ball, -1, 2);
+                        var testy = (ball.diry > 0) ? testDirection(ball, 2, 4) : testDirection(ball, 2, -1);
+                        var block = (ball.dirx > ball.diry) ? (testx || testy) : (testy || testx);
+
+                        
+                        if(block)
+                        {
+                            if(testx == testy)
+                            {
+                                var altx = (ball.dirx < 0) ? testDirection(ball, 4, 2) : testDirection(ball, -1, 2);
+                                var alty = (ball.diry < 0) ? testDirection(ball, 2, 4) : testDirection(ball, 2, -1);
+                                
+                                if(!altx && alty) ball.dirx = -ball.dirx;
+                                else if(altx && !alty) ball.diry = -ball.diry;
+                                else
+                                {
+                                    ball.dirx = -ball.dirx;
+                                    ball.diry = -ball.diry;
+                                }
+                            }
+                            else
+                            {
+                                if(block == testy) ball.diry = -ball.diry;
+                                if(block == testx) ball.dirx = -ball.dirx;
+                            }
+                            
+                            block.life--;
+                
+                            if(!block.life && Math.floor(Math.random() * 1000)%4 == 0)
+                            {
+                                var pill = {
+                                    x: block.x + 1,
+                                    y: block.y + 2,
+                                    frame: 0,
+                                    type: Math.floor(Math.random() * 6000) % 6
+                                };
+
+                                while((destroyed < total/2 || level%10 == 0) && pill.type == 4) pill.type = Math.floor(Math.random() * 6000) % 6;
+
+                                pills.push(pill);
+                            }
+
+                            if(block.life)
+                            {
+                                sprites[15].render(block.x, block.y);
+                                hits.push(block);
+                            }
+                            else
+                            {
+                                destroyed++;
+
+                                score += block.type + 1;
+                                renderScore();
+
+                                dirty.add({x: block.x, y: block.y, width: 15, height: 7});
+                                blocks[block.gridy][block.gridx] = null;
+                            }
+                            
+                            break;
+                        }
+                        else if(gridy < blocks.length)
+                        {
+                            dirty.add({x: gridx * 15 + blocksx, y: gridy * 7 + blocksy, width: 15, height: 7});
+                        }
+                    }
+                }
+            }
+
+            sprites[4].render(ball.x, ball.y);
+            dirty.add({x: ball.x, y: ball.y, width: 3, height: 3});
+        }
+        
+        function testDirection(ball, offx, offy)
+        {
+            gridx = Math.floor((ball.x+offx-blocksx)/15);
+            gridy = Math.floor((ball.y+offy-blocksy)/7);
+
+            if(gridy < blocks.length && blocks[gridy] && (block = blocks[gridy][gridx]))
+            {
+                return block;
+            }
+            
+            return null;
+        }
+        
+        function renderBG()
+        {
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, 240, 176);
+
+            sprites[0].render(0, 0);
+        }
+
+        function renderPills()
+        {
+            var pill;
+
+            for(var i=0; i<pills.length; i++)
+            {
+                pill = pills[i];
+
+                pill.frame = (pill.frame+1)%7;
+                pill.y += 3;
+
+                if(pill.y >= 170)
+                {
+                    pills.splice(i, 1);
+                    i--;
+                }
+                else if(pill.y > 155 && (paddle.x < pill.x+11 && paddle.x > pill.x-paddle.width+1))
+                {
+                    pills.splice(i, 1);
+                    i--;
+
+                    pillCaught(pill);
+                }
+                else
+                {
+                    sprites[pill.type*7+pill.frame+16].render(pill.x, pill.y);
+                }
+
+                dirty.add({x: pill.x, y: pill.y, width: 11, height: 5});
+
+                if(pill.y > blocksy)
+                {
+                    var gridx = Math.floor((pill.x+1-blocksx)/15);
+                    var gridy = Math.floor((pill.y+1-blocksy)/7);
+
+                    if(blocks[gridy] && blocks[gridy][gridx]) damaged.push(blocks[gridy][gridx]);
+                    if(blocks[gridy+1] && blocks[gridy+1][gridx]) damaged.push(blocks[gridy+1][gridx]);
+                }
+            }
+        }
+
+        function pillCaught(pill)
+        {
+            timer = 0;
+
+            paddle.render = true;
+
+            if(pill.type != 2 && pill.type != 0)
+            {
+                dirty.add({x: paddle.x, y: paddle.y, width: paddle.width, height: paddle.height});
+                
+                paddle.ammo = 0;
+                paddle.width = 21;
+                paddle.height = 5;
+                paddle.x += Math.floor((paddle.width - 21)/2);
+                paddle.y = 160;
+                paddle.type = 0;
+            }
+
+            if(pill.type == 2)
+            {
+                dirty.add({x: paddle.x, y: paddle.y, width: paddle.width, height: paddle.height});
+
+                paddle.ammo = 0;
+                paddle.width = 27;
+                paddle.height = 5;
+                paddle.x -= Math.floor((27 - paddle.width)/2);
+                paddle.y = 160;
+                paddle.type = 2;
+            }
+            else if(pill.type == 0)
+            {
+                dirty.add({x: paddle.x, y: paddle.y, width: paddle.width, height: paddle.height});
+
+                paddle.ammo += 20;
+                paddle.width = 22;
+                paddle.height = 9;
+                paddle.x -= Math.floor((22 - paddle.width)/2);
+                paddle.y = 156;
+                paddle.type = 1;
+            }
+            else if(pill.type == 1)
+            {
+                for(var i=0; i<balls.length; i++) balls[i].speed = 2;
+                timer = time + 450;
+            }
+            else if(pill.type == 3)
+            {
+                score += 25;
+                renderScore();
+            }
+            else if(pill.type == 4)
+            {
+                nextLevel();
+                return;
+            }
+            else if(pill.type == 5)
+            {
+                multiball();
+            }
+        }
+
+        function renderShots()
+        {
+            var gridx;
+            var gridy;
+            var gridHeight = blocksy + (blocks.length * 7)-2
+            var block;
+            var shot;
+
+            for(var i=0; i<shots.length; i++)
+            {
+                shot = shots[i];
+                
+                for(var j=0; j<3; j++)
+                {
+                    shots[i].y -= 4;
+
+                    if(shots[i].y >= blocksy && shots[i].y < gridHeight)
+                    {
+                        gridx = Math.floor((shot.x+1-blocksx)/15);
+                        gridy = Math.floor((shot.y-blocksy)/7);
+
+                        if(gridy < blocks.length && (block = blocks[gridy][gridx]) && block.type < 9)
+                        {
+                            destroyed++;
+                            dirty.add({x: block.x, y: block.y, width: 15, height: 7});
+                            //block.div.parentNode.removeChild(block.div);
+                            blocks[gridy][gridx] = null;
+
+                            //shots[i].sprite.parentNode.removeChild(shots[i].sprite);
+                            dirty.add({x: shot.x, y: shot.y, width: 3, height: 5});
+                            shots.splice(i, 1);
+                            i--;
+
+                            if(destroyed >= total)
+                            {
+                                nextLevel();
+                                return;
+                            }
+
+                            j=4;
+                        }
+                        else if(block)
+                        {
+                            shots.splice(i, 1);
+                            i--;
+                            j=4;
+                            
+                            damaged.push(block);
+                        }
+                        else if(gridy < blocks.length)
+                        {
+                            dirty.add({x: gridx * 15 + blocksx, y: gridy * 7 + blocksy, width: 15, height: 7});
+                        }
+                    }
+                }
+
+                sprites[58].render(shot.x, shot.y);
+                dirty.add({x: shot.x, y: shot.y, width: 3, height: 5});
+
+                if(shot.y < 15)
+                {
+                    shots.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        function createShot()
+        {
+            var shot1 = { x: paddle.x, y: 152 };
+            var shot2 = { x: paddle.x+paddle.width-3, y: 152 };
+
+            shots.push(shot1);
+            shots.push(shot2);
+        }
+
+        function multiball()
+        {
+            var start = (balls[0].x < 0) ? 0 : 3;
+            var last = 0;
+            var ball;
+
+            while(balls.length < 3)
+            {
+                for(var i=0; i<balls.length; i++)
+                {
+                    if(balls[i].dirx == ANGLES[start][0])
+                    {
+                        start = (start+1)%ANGLES.length;
+                        i = last;
+                    }
+                }
+
+                ball = {
+                    x: balls[0].x,
+                    y: balls[0].y,
+                    stuck: false,
+                    dirx: ANGLES[start][0],
+                    diry: ANGLES[start][1],
+                    speed: 4
+                };
+                
+                last = start;
+                
+                if(balls[0].diry > 0) ball.diry = -ball.diry;
+                
+                balls.push(ball);
+                start++;
+            }
+        }
+
+        function run()
+        {
+            if(sprites.length < list.length)
+            {
+                canvas = document.getElementById("canvas");
+                ctx = canvas.getContext("2d");
+
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, 0, 240, 176);
+
+                load(sprites.length);
+                
+                if(sprites.length == list.length && !background) init();
+            }
+            else if(paddle.lives < 1)
+            {
+                submitHighscore();
+            }
+            else
+            {
+                render();
+            }
+        }
+
+        function DirtyRectangleManager()
+        {
+            var stack = [];
+
+            this.add = function(rect) {
+                stack.push(rect);
+            };
+
+            this.render = function() {
+                var rect;
+
+                while(stack.length > 0)
+                {
+                    rect = stack.pop();
+
+                    ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+                    ctx.putImageData(ctx2.getImageData(rect.x, rect.y, rect.width, rect.height), rect.x, rect.y);
+                }
+            };
+
+            this.clear = function() {
+                stack.length = 0
+            };
+        }
+
+        function onMouseMove(evt)
+        {
+            if(!paddle.render)
+            {
+                dirty.add({x: paddle.x, y: paddle.y, width: paddle.width, height: paddle.height});
+                paddle.render = true;
+            }
+
+            paddle.x = evt.clientX - 14;
+
+            if(paddle.x < 15) paddle.x = 15;
+            if(paddle.x+paddle.width > 180) paddle.x = 180-paddle.width;
+
+            if(balls[0].stuck) balls[0].x = paddle.x + Math.floor(paddle.width/2);
+
+            evt.preventDefault();
+            evt.cancelBubble = true;
+        }
+
+        function onKeyPress(evt)
+        {
+            if(balls[0].stuck) balls[0].stuck = false;
+
+            if(paddle.ammo > 0)
+            {
+                createShot();
+                paddle.ammo -= 2;
+
+                if(paddle.ammo <= 0) pillCaught({type: -1});
+            }
+
+            evt.preventDefault();
+            evt.cancelBubble = true;
+        }
+
+        document.addEventListener("mousemove", onMouseMove, false);
+        document.addEventListener("keydown", onKeyPress, false);
+        document.addEventListener("click", onKeyPress, false);
+    </script>
+    <style>
+      body { margin: 0px; }
+      #loading { position: absolute; left: 112px; top: 80px; }
+      .highscore { position: absolute; left: 0px; top: 0px; width: 240px; height: 176px; text-align: center; }
+    </style>
+  </head>
+  <body onload="setInterval(run, 60);">
+    <div id="bottomscreen">
+      <canvas id="canvas" width="240" height="176"></canvas>
+    </div>
+    <img id="loading" src="images/loading.gif">
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<html>
+<head>
+<title>Converter</title>
+<meta name="viewport" content="width=240">
+<style>body { font-size:8px; margin:0px; text-align:center; width:240px; margin-top:10px; }</style>
+<script language="javascript"> 
+function sand(){
+var sand;
+var val;
+var check;
+sand=document.getElementById('box').value;
+val=document.getElementById('sel').value;
+check=document.getElementById('check').checked;
+if(val==1){
+ check==1?
+res=sand/3+' ft':
+res=sand*3+' yd';
+}
+if(val==2){
+ check==1?
+res=sand/2.54+' in':
+res=sand*2.54+' cm';
+}
+if(val==3){
+ check==1?
+res=sand/1.609344+' mi':
+res=sand*1.609344+' km';
+}
+if(val==4){
+ check==1?
+res=sand/0.9144+' yd':
+res=sand*0.9144+' m';
+}
+if(val==5){
+ check==1?
+res=sand/8+' c':
+res=sand*8+' fl.oz';
+}
+if(val==6){
+ check==1?
+res=sand/8.3267384+' c':
+res=sand*8.3267834+' fl.oz';
+}
+if(val==7){
+ check==1?
+res=sand*4+' qt':
+res=sand/4+' gal';
+}
+if(val==8){
+ check==1?
+res='$'+sand/0.64+' (Result may vary.)':
+res='Â£'+sand*0.64+' (Result may vary.)';
+}
+if(val==9){
+ check==1?
+res='$'+sand/82.80+' (Result may vary.)':
+res='Â¥'+sand*82.80+' (Result may vary.)';
+}
+if(val==10){
+ check==1?
+res='$'+sand/0.76+' (Result may vary.)':
+res='â&#130;¬'+sand*0.76+' (Result may vary.)';
+} 
+if(val==11){
+ check==1?
+res=(sand*9)/5+32+' °F':
+res=(sand-32)*5/9+' °C';
+}
+if(val==12){
+ check==1?
+res=sand*16+' oz':
+res=sand/16+' lb';
+}
+document.getElementById('show').innerHTML = res;
+if (val == 8 || val == 9 || val == 10){
+document.getElementById('show').innerHTML += '<br><br>See <a href="money.html">Money Converter</a> for more money conversions';
+}
+}
+</script>
+</head>
+<body bgcolor=deepskyblue>
+<form method="post" >
+<input type="number" size="5" name="sandbox" id="box" onChange="sand()" value="0">
+<select id="sel" onChange="sand()">
+<option disabled style="background:yellow">----length/distance----</option>
+<option value="1">Feet to Yards</option>
+<option value="2">Inch to Centemeter</option>
+<option value="3">Mile to Kilometer</option>
+<option value="4">Yard to Meter</option>
+<option disabled style="background:yellow">--------volume--------</option>
+<option value="5">Cup to US Fl. Ounce</option>
+<option value="6">Cup to Imperial fl. oz</option>
+<option value="7">Quarts to Gallons</option>
+<option disabled style="background:yellow">---------money--------</option>
+<option value="8">US Dollar to UK Pound</option>
+<option value="9">US Dollar to JP Yen</option>
+<option value="10">US Dollar to Euro</option>
+<option disabled style="background:yellow">------temperature-----</option>
+<option value="11">Fahrenheit to Celsius</option>
+<option disabled style="background:yellow">--------weight--------</option>
+<option value="12">Ounces to Pounds</option>
+</select><br>
+<input type="checkbox" id="check" onChange="sand()" value="" />Reverse
+</form>
+<div id="show"></div>
+</body>
+</html>

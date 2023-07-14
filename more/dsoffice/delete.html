@@ -1,0 +1,11 @@
+<meta name="viewport" content="width=240">
+<script>
+var a=prompt('Enter file to delete');
+var x=a.substr(0,1);
+if (x == "."){
+alert("Nice try! you can't delete my files, hacker!");
+}
+else{
+window.location="delete.php?title="+a;
+}
+</script>

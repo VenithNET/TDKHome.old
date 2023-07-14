@@ -1,0 +1,30 @@
+#theword {font-size: 20px;
+     font-family: monospace;
+     font-weight: bold;
+     letter-spacing: 8px;}
+
+#alphabet {font-size: 7px;
+     font-weight: bold;
+     letter-spacing: 2px;
+     text-decoration: none;}
+
+#status {font-size: 7px;
+     font-weight: bold;
+     letter-spacing: 2px;
+     text-decoration: none;}
+
+#gameover {color: red; }
+
+A.letter {text-decoration: none;
+     color: blue;}
+
+.letter {color: silver;}
+
+#screen {
+position:absolute;
+left:0px;
+top:0px;
+width: 240px;
+height: 176px;
+overflow: hidden;
+}

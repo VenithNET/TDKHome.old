@@ -1,0 +1,11 @@
+<title>Edit document - DSOffice</title>
+<style>body { margin:0px; margin-top:5px; }</style>
+<meta name="viewport" content="width=240">
+<form action="saveonline.php" method="post">
+<center>
+<font size=2>Name: </font><input tyle=text id=title name=title value="test" size=24><br>
+<TEXTAREA NAME="save" COLS=30 ROWS=7>
+test</textarea><br>
+<input type=submit value=save>
+</center>
+</form>

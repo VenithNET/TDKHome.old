@@ -1,0 +1,219 @@
+<!-- Whack a mole gane origanal source: http://home.earthlink.net/~mafriedman/game.html -->
+<html>
+<head>
+<title>Whack-a-Mole</title>
+<meta name="viewport" content="width=240">
+<style>
+body { margin:1px; background-color:4CFF00; }
+#preload { position:absolute; left:-40px; top:-40px; visibility:hidden; }
+</style>
+<script language="javascript"> 
+var score=0;
+var total=0;
+
+function a(){
+//alert(document.images['a'].src);
+if (document.images['a'].src=="http://dsihomepage.x10.mx/games/mole/up.png"){
+document.images['a'].src='hit.png';
+score++;
+add();
+}
+else{
+document.images['a'].src='x.png';
+score--;
+add();
+}
+}
+function b(){
+if (document.images['b'].src=="http://dsihomepage.x10.mx/games/mole/up.png"){
+document.images['b'].src='hit.png';
+score++;
+add();
+}
+else{
+document.images['b'].src='x.png';
+score--;
+add();
+}
+}
+function c(){
+if (document.images['c'].src=="http://dsihomepage.x10.mx/games/mole/up.png"){
+document.images['c'].src='hit.png';
+score++;
+add();
+}
+else{
+document.images['c'].src='x.png';
+score--;
+add();
+}
+}
+function d(){
+if (document.images['d'].src=="http://dsihomepage.x10.mx/games/mole/up.png"){
+document.images['d'].src='hit.png';
+score++;
+add();
+}
+else{
+document.images['d'].src='x.png';
+score--;
+add();
+}
+}
+function e(){
+if (document.images['e'].src=="http://dsihomepage.x10.mx/games/mole/up.png"){
+document.images['e'].src='hit.png';
+score++;
+add();
+}
+else{
+document.images['e'].src='x.png';
+score--;
+add();
+}
+}
+function f(){
+if (document.images['f'].src=="http://dsihomepage.x10.mx/games/mole/up.png"){
+document.images['f'].src='hit.png';
+score++;
+add();
+}
+else{
+document.images['f'].src='x.png';
+score--;
+add();
+}
+}
+function g(){
+if (document.images['g'].src=="http://dsihomepage.x10.mx/games/mole/up.png"){
+document.images['g'].src='hit.png';
+score++;
+add();
+}
+else{
+document.images['g'].src='x.png';
+score--;
+add();
+}
+}
+function h(){
+if (document.images['h'].src=="http://dsihomepage.x10.mx/games/mole/up.png"){
+document.images['h'].src='hit.png';
+score++;
+add();
+}
+else{
+document.images['h'].src='x.png';
+score--;
+add();
+}
+}
+function i(){
+if (document.images['i'].src=="http://dsihomepage.x10.mx/games/mole/up.png"){
+document.images['i'].src='hit.png';
+score++;
+add();
+}
+else{
+document.images['i'].src='x.png';
+score--;
+add();
+}
+}
+function add(){
+document.getElementById('score').value=score;
+document.getElementById('total').value=total;
+}
+</script>
+</head>
+<body onload="up()">
+<center>
+<a href="Javascript:a()">
+<img src="down.png"name="a"border="0"></a>
+<a href="Javascript:b()">
+<img src="down.png"name="b"border="0"></a>
+<a href="Javascript:c()">
+<img src="down.png"name="c"border="0"></a><br>
+<a href="Javascript:d()">
+<img src="down.png"name="d"border="0"></a>
+<a href="Javascript:e()">
+<img src="down.png"name="e"border="0"></a>
+<a href="Javascript:f()">
+<img src="down.png"name="f"border="0"></a><br>
+<a href="Javascript:g()">
+<img src="down.png"name="g"border="0"></a>
+<a href="Javascript:h()">
+<img src="down.png"name="h"border="0"></a>
+<a href="Javascript:i()">
+<img src="down.png"name="i"border="0"></a>
+</a><br>
+<font size=2>
+Score: <input type="text" size="3" readonly value=0 id=score> out of <input type=text size=3 readonly value=0 id=total>
+</font>
+</center>
+<script language="javascript"> 
+function up(){
+document.images['a'].src='down.png';
+document.images['b'].src='down.png';
+document.images['c'].src='down.png';
+document.images['d'].src='down.png';
+document.images['e'].src='down.png';
+document.images['f'].src='down.png';
+document.images['g'].src='down.png';
+document.images['h'].src='down.png';
+document.images['i'].src='down.png';
+ind = Math.floor(Math.random() * 9);
+if (ind==1){
+document.images['a'].src='up.png';
+total++;
+add();
+}
+if (ind==2){
+document.images['b'].src='up.png';
+total++;
+add();
+}
+if (ind==3){
+document.images['c'].src='up.png';
+total++;
+add();
+}
+if (ind==4){
+document.images['d'].src='up.png';
+total++;
+add();
+}
+if (ind==5){
+document.images['e'].src='up.png';
+total++;
+add();
+}
+if (ind==6){
+document.images['f'].src='up.png';
+total++;
+add();
+}
+if (ind==7){
+document.images['g'].src='up.png';
+total++;
+add();
+}
+if (ind==8){
+document.images['h'].src='up.png';
+total++;
+add();
+}
+if (ind==9){
+document.images['i'].src='up.png';
+total++;
+add();
+}
+window.setTimeout('up();','800');
+}
+</script>
+<div id="preload">
+<img src="hit.png"name="i"border="0"><br>
+<img src="x.png"name="i"border="0">
+</div>
+</body>
+</html>

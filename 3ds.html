@@ -1,0 +1,46 @@
+<script>
+if (navigator.userAgent.match(/Nintendo 3DS/i)){
+if (confirm("You are currently using a 3DS Would you like to go to 3DS Homepage instead?")){
+window.location="http://3ds.dsihomepage.x10.mx/";
+}
+}
+</script>
+<html>
+<head>
+<title>3DS Stuff</title>
+<meta name="viewport" content="width=240">
+<style>
+body { font-size:10px; }
+div { border:1px solid gray; background:lightgray; font-size:16px; }
+a { text-decoration:none; }
+</style>
+<script>
+function mii(){
+document.getElementById('body').innerHTML='<style>body { margin:0px; }</style><iframe width=240 height=352 frameborder=0 border=0 src="http://3ds.dsihomepage.x10.mx/mii/all.php"></iframe><script>document.body.scrollTop=176;<\/script>';
+}
+function friend(){
+document.getElementById('body').innerHTML='<style>body { margin:0px; }</style><iframe width=240 height=176 frameborder=0 border=0 src="/friends/createonline.php"></iframe>';
+}
+function sysupdate(){
+document.getElementById('body').innerHTML='<font size=2>Please preform a system update when you get your unit, even right this very second there is an update that comes with a free video. Comming in late May, in a system update, is the WEB BROWSER, system transfer, DSiWare, and eShop.</font>';
+}
+function specifications(){
+document.getElementById('body').innerHTML='<style>body { margin:0px; }</style><iframe width=240 height=352 frameborder=0 border=0 src="/more/3ds.html"></iframe><script>document.body.scrollTop=176;<\/script>';
+}
+function homepage(){
+window.location="http://3ds.dsihomepage.x10.mx/";
+}
+</script>
+</head>
+<body id=body>
+<div><center><a href="javascript:mii();">Mii codes</a></center></div>
+<br>
+<div><center><a href="javascript:friend();">Friend codes</a></center></div>
+<br>
+<div><center><a href="javascript:sysupdate();">System update</a></center></div>
+<br>
+<div><center><a href="javascript:specifications();">Specifications</a></center></div>
+<br>
+<div><center><a href="javascript:homepage();">3DS Homepage</a></center></div>
+</body>
+</html>

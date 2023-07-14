@@ -1,0 +1,663 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  
+<!-- Mirrored from dsiexplorer.awardspace.biz/WarGames/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:29:50 GMT -->
+<head>
+    <title>War Games DSi - Defend Your Cities!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <script src="../js/json2.js"></script>
+    <script src="../js/highscores.js"></script>
+
+    <script>
+        var GAME_OVER = 0;
+        var DISPLAY_TEXT = 1;
+        var PLAYING = 3;
+        var LEVEL_COMPLETE = 4;
+        
+        var WIDTH = 240;
+        var HEIGHT = 176;
+        var FPS = 10;
+        var BASE_SIZE = 18;
+        var EXPLOSION = 20;
+        
+        var PI_2 = Math.PI * 2;
+        var BASE_BOTTOM = HEIGHT-BASE_SIZE/2;
+        
+        var baseAlive = [true,true,true,true,true,true];
+        var points;
+        var stepx;
+        
+        var level = 0;
+        var score = 0;
+        var lastExtra = 0;
+        var fire = null;
+        var fireSize = 0;
+        var state = GAME_OVER;
+        var spacing = Math.floor((WIDTH-(BASE_SIZE*baseAlive.length)-BASE_SIZE)/(baseAlive.length-1)) + BASE_SIZE;
+        var spacingCenter = (spacing+BASE_SIZE);
+        var spacingLeft = (spacing+BASE_SIZE);
+        
+        var timer;
+        var text;
+        
+        var hiscores = new HighScores("wargames");
+        
+        function init()
+        {
+            setScroll();
+            
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            
+            canvas.addEventListener("mousedown", mousePressed, false);
+            
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            for(var i=0; i<baseAlive.length; i++) baseAlive[i] = true;
+            
+            drawBases(ctx);
+            
+            if(!timer) timer = setInterval(run, 50);
+        }
+        
+        function initLevel() 
+        {
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            
+            points = new Array(level);
+            stepx = new Array(level);
+            left = level * 8;
+            
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            drawBases(ctx);
+        }
+        
+        function displayText()
+        {
+            var message;
+            
+            if(!text) return;
+            if(text.start && text.start+text.length > new Date().getTime()) return;
+            
+            if(text.start)
+            {
+                if(text.func) text.func();
+                text = text.next;
+                
+                message = document.getElementById("messages");
+                message.style.display = "none";
+                
+                return;
+            }
+            
+            message = document.getElementById("messages");
+            clearElement(message);
+            message.appendChild(document.createTextNode(text.text));
+            message.style.display = "block";
+            
+            text.start = new Date().getTime();
+        }
+        
+        function gameOver()
+        {
+            var title = document.getElementById("title");
+            var messages = document.getElementById("messages");
+            
+            if(fire != null)
+            {
+                fire = null;
+                level = 0; 
+                score = 0;
+                lastExtra = 0;
+                
+                initLevel();
+                
+                state = LEVEL_COMPLETE;
+                
+                //title.style.display = "none";
+                messages.style.display = "none";
+            }
+            else if(messages.style.display != "block")
+            {   
+                clearElement(messages);
+                messages.appendChild(document.createTextNode("Game Over"));
+                
+                title.style.display = "block";
+                messages.style.display = "block";
+            }
+        }
+        
+        function run()
+        {
+            var canvas = document.getElementById("canvas");
+            var g = canvas.getContext("2d");
+
+            switch(state)
+            {
+                case PLAYING:
+                    computeFrame(g);
+                    break;
+                    
+                case LEVEL_COMPLETE:
+                    levelComplete();
+                    break;
+                    
+                case GAME_OVER:
+                    gameOver();
+                    break;
+                    
+                case DISPLAY_TEXT:
+                    displayText();
+                    break;
+            }
+        }
+        
+        function levelComplete()
+        {
+            var basesLeft = 0;
+            var found = false;
+            
+            for(var i=0; i<baseAlive.length; i++)
+            {
+                if(baseAlive[i]) basesLeft++;
+            }
+            
+            if(level > 0)
+            {
+                centerText("Level Complete!", 2000);
+                centerText("Bonus "+basesLeft+" x 1000!", 2000, function() 
+                { 
+                    addScore(basesLeft * 1000); 
+                    checkExtraLife(); 
+                    
+                    centerText("Level "+(level+1), 2000, function() {state = PLAYING; level++; updateLevel(); initLevel(); });
+                });
+            }
+            else
+            {
+                addScore(0); //Refresh score
+                centerText("Level "+(level+1), 2000, function() {state = PLAYING; level++; updateLevel(); initLevel(); });
+            }
+        }
+        
+        function checkExtraLife()
+        {
+            var count = Math.floor((score-lastExtra)/10000);
+            var earned = 0;
+
+            if(count > 0)
+            {
+                for(var i=0; i<baseAlive.length; i++)
+                {
+                    if(!baseAlive[i] && earned < count) 
+                    {
+                        baseAlive[i] = true;
+                        earned++;
+                    }
+                }
+
+                if(earned > 0) 
+                {
+                    centerText("You earned an extra city!", 2000);
+                    lastExtra += earned*10000;
+                }
+            }
+        }
+        
+        function computeFrame(g)
+        {
+            checkCollisions(g);
+            checkLevel();
+            
+            g.fillStyle = "white";
+            
+            for(var i=0; i<points.length; i++)
+            {
+                if(!points[i])
+                {
+                    if(left == 0) 
+                    {
+                        state = LEVEL_COMPLETE;
+                    }
+                    else
+                    {
+                        points[i] = {x: Math.floor((Math.random()*WIDTH)), y: 0};
+                        stepx[i] = ((Math.floor(Math.random()*WIDTH)) - points[i].x) / (HEIGHT - points[i].y);
+
+                        left--;
+                    }
+                }
+                else
+                {
+                    for(var j=0; j<4; j++)
+                    {
+                        g.fillRect(Math.floor(points[i].x), points[i].y, 1, 1);
+
+                        points[i].x += stepx[i];
+                        points[i].y++;
+
+                        if(points[i].y > HEIGHT-10) 
+                        {
+                            eraseTrail(g, i);
+                            points[i] = null;
+                            break;
+                        }
+                    }
+                } 
+            }
+            
+            if(fire != null)
+            {
+                g.beginPath();
+                g.fillStyle = "orange";
+                g.arc(fire.x, fire.y, fireSize, 0, PI_2, false);
+                g.fill();
+
+                fireSize += 2;
+
+                if(fireSize > EXPLOSION)
+                {
+                    g.fillStyle = "black";
+                    g.arc(fire.x, fire.y, fireSize, 0, PI_2, false);
+                    g.fill();
+
+                    fire = null;
+                }
+            }
+        }
+        
+        function centerText(msg, time, func)
+        {
+            var msgObj = {text: msg, length: time, func: func};
+            var last = text;
+
+            if(!text)
+            {
+                text = msgObj;
+            }
+            else
+            {
+                while(last && last.next) last = last.next;
+                
+                last.next = msgObj;
+            }
+            
+            state = DISPLAY_TEXT;
+        }
+        
+        function drawBases(g)
+        {
+            var x = 2 + BASE_SIZE;
+            
+            for(var i=0; i<baseAlive.length; i++)
+            {
+                if(baseAlive[i])
+                {
+                    g.beginPath();
+                    g.fillStyle = "white";
+                    g.arc(x, BASE_BOTTOM, BASE_SIZE, 0, PI_2, false);
+                    g.fill();
+                    
+                    g.beginPath();
+                    g.fillStyle = "blue";
+                    g.arc(x, BASE_BOTTOM, BASE_SIZE-3, 0, PI_2, false);
+                    g.fill();
+                }
+                
+                x += spacing;
+            }
+
+            g.fillStyle = "blue";
+            g.fillRect(0, HEIGHT-10, WIDTH, 10);
+            g.fillStyle = "white";
+            g.fillRect(0, HEIGHT-10, WIDTH, 2);
+        }
+        
+        function eraseTrail(g, i)
+        {
+            g.fillStyle = "black";
+
+            while(points[i].y >= 0)
+            {
+                g.fillRect(Math.floor(points[i].x), points[i].y, 1, 1);
+
+                points[i].x -= stepx[i];
+                points[i].y--;
+            }
+
+            g.fillRect(0, 0, WIDTH, 1);
+        }
+
+        function addScore(points)
+        {
+            var element = document.getElementById("score");
+            
+            score += points;
+            
+            clearElement(element);
+            element.appendChild(document.createTextNode(score));
+        }
+        
+        function updateLevel()
+        {
+            var element = document.getElementById("level");
+            
+            clearElement(element);
+            element.appendChild(document.createTextNode(level));
+        }
+
+        function insideCircle(x, y, cx, cy, radius)
+        {
+            var distx = Math.abs(cx-x);
+            var disty = Math.abs(cy-y);
+            var dist;
+            
+            if(distx > radius || disty > radius) return false;
+            
+            dist = Math.sqrt(distx*distx + disty*disty);
+            
+            return (dist <= radius);
+        }
+
+        function checkCollisions(g)
+        {
+            var x;
+            
+            for(var i=0; i<points.length; i++)
+            {
+                if(fire != null && points[i] != null && insideCircle(points[i].x, points[i].y, fire.x, fire.y, fireSize))
+                {
+                    eraseTrail(g, i);
+                    points[i] = null;
+                    addScore(100);
+                }
+                
+                x = 2 + BASE_SIZE;
+
+                for(var j=0; j<baseAlive.length; j++)
+                {
+                    if(baseAlive[j] && points[i] != null && insideCircle(points[i].x, points[i].y, x, BASE_BOTTOM, BASE_SIZE))
+                    {
+                        eraseTrail(g, i);
+
+                        baseAlive[j] = false;
+                        points[i] = null;
+
+                        g.beginPath();
+                        g.fillStyle = "black";
+                        g.fillRect(x-BASE_SIZE, BASE_BOTTOM-BASE_SIZE-1, BASE_SIZE*2, BASE_SIZE);
+                    }
+                    
+                    x += spacing;
+                }
+            }
+        }
+        
+        function checkLevel()
+        {
+            var alive = false;
+
+            for(var i=0; i<baseAlive.length; i++)
+            {
+                if(baseAlive[i]) alive = true;
+            }
+
+            if(!alive)
+            {
+                centerText("All your cities are destroyed!", 2000, function() { resetGame(); });
+            }
+        }
+        
+        function resetGame()
+        {
+            state = GAME_OVER; 
+            //level = 0;
+            fire = null;
+            
+            for(var i=0; i<baseAlive.length; i++) baseAlive[i] = true;
+
+            if(hiscores.isScoreHigher(score)) showScoreSubmit();
+            
+            //initLevel();
+        }
+    
+        function mousePressed(e)
+        {
+            if(fire == null)
+            {
+                fireSize = 1;
+                fire = {x: e.offsetX, y: e.offsetY};
+            }
+            
+            document.body.scrollTop = HEIGHT;
+        }
+        
+        function setScroll(evt)
+        {
+            if(evt)
+            {
+                evt.preventDefault();
+                evt.stopPropagation();
+            }
+          
+            document.body.scrollTop = HEIGHT;
+        }
+        
+        function showHighScores()
+        {
+            var scores = hiscores.getScores();
+            var info = document.getElementById("infoarea");
+            var table;
+            var row;
+            var cell;
+            
+            clearElement(info);
+            
+            document.getElementById("hiscores").className = "selected";
+            document.getElementById("instructions").className = "";
+            
+            if(scores.length < 1)
+            {
+                info.appendChild(document.createTextNode("No scores are currently available."));
+                return;
+            }
+            
+            table = document.createElement("table");
+            table.border = "0";
+            table.cellSpacing = "0";
+            table.cellPadding = "0";
+            table.style.width = "190";
+            table.style.fontSize = "12px";
+            table.style.color = "white";
+            table.style.fontSize = "8pt";
+            
+            
+            for(var i=0; i<scores.length && i<20; i++)
+            {
+                row = table.insertRow(-1);
+                cell = row.insertCell(-1);
+                cell.appendChild(document.createTextNode((i+1)+". "));
+                cell = row.insertCell(-1);
+                cell.appendChild(document.createTextNode(scores[i].name));
+                cell = row.insertCell(-1);
+                cell.align = "right";
+                cell.style.width = "60px";
+                cell.appendChild(document.createTextNode(scores[i].score));
+            }
+            
+            info.appendChild(table);
+        }
+        
+        function showInstructions()
+        {
+            var info = document.getElementById("infoarea");
+            var button = document.getElementById("hiscores");
+            var instructions = [
+              "War Games is a challenging arcade game for the Nintendo DSi.",
+              "You have six bases located at the bottom of the screen. Missile trails will appear at the top of the screen. Your job is to tap the screen in an effort to destroy the incoming missiles.",
+              "When you tap the screen, an explosion will appear. If a missile touches the explosion, it will be destroyed. Missiles are worth 100 points.",
+              "After each level, you will get a 1000 point bonus for each base remaining."
+            ];
+            
+            clearElement(info);
+            
+            for(var i=0; i<instructions.length; i++)
+            {
+                var p = document.createElement("p");
+                p.appendChild(document.createTextNode(instructions[i]));
+                info.appendChild(p);
+            }
+            
+            document.getElementById("hiscores").className = "";
+            document.getElementById("instructions").className = "selected";
+        }
+        
+        function showScoreSubmit()
+        {
+            var info = document.getElementById("infoarea");
+            var line;
+            var input;
+            
+            clearElement(info);
+            
+            line = document.createElement("div");
+            line.align = "center";
+            line.style.fontSize = "16px";
+            line.style.color = "white";
+            line.style.fontWeight = "bold";
+            line.appendChild(document.createTextNode("A new high score!"));
+            info.appendChild(line);
+            
+            line = document.createElement("div");
+            line.align = "center";
+            line.style.fontSize = "20px";
+            line.style.color = "red";
+            line.style.fontWeight = "bold";
+            line.style.marginTop = "20px";
+            line.style.marginBottom = "20px";
+            line.appendChild(document.createTextNode(score));         
+            info.appendChild(line);
+            
+            line = document.createElement("div");
+            line.align = "center";
+            line.style.fontSize = "16px";
+            line.style.color = "white";
+            line.style.fontWeight = "bold";
+            line.style.marginBottom = "75px";
+            line.appendChild(document.createTextNode("Enter your name below to submit your score."));
+            info.appendChild(line);
+            
+            line = document.createElement("div");
+            input = document.createElement("input");
+            line.align = "center";
+            line.style.fontSize = "16px";
+            line.style.color = "white";
+            line.style.fontWeight = "bold";
+            line.style.marginBottom = "10px";
+            input.style.width = "120px";
+            input.id = "user";
+            input.maxLength = "16";
+
+            if(hiscores.getCachedName()) input.value = hiscores.getCachedName().substring(0, 16);
+            
+            line.appendChild(input);
+            info.appendChild(line);
+                        
+            line = document.createElement("div");
+            input = document.createElement("button");
+            line.align = "center";
+            line.style.fontSize = "16px";
+            line.style.color = "white";
+            line.style.fontWeight = "bold";
+            input.onclick = submitScore;
+            input.appendChild(document.createTextNode("Submit"));
+            line.appendChild(input);
+            info.appendChild(line);
+            
+            document.getElementById("popup").style.display = "block";
+        }
+        
+        function submitScore()
+        {
+            var user = document.getElementById("user").value;
+            var high = new HighScore(user, score);
+            
+            if(user.length < 1) return;
+            
+            high.level = level;
+
+            hiscores.submitScore(high);
+            
+            showHighScores();
+        }
+        
+        function clearElement(element)
+        {
+            while(element.hasChildNodes()) element.removeChild(element.childNodes[0]);
+        }
+        
+        function showHidePopup(evt)
+        {
+            var popup = document.getElementById("popup");
+            
+            if(evt.keyCode != 13) return;
+            
+            evt.preventDefault();
+            evt.stopPropagation();
+            
+            if(popup.style.display == "block")
+            {
+                popup.style.display = "none";
+                clearElement(document.getElementById("infoarea"));
+            }
+            else
+            {
+                popup.style.display = "block";
+                
+                if(document.getElementById("hiscores").className == "selected") showHighScores();
+                else showInstructions();
+            }
+        }
+        
+        document.addEventListener("scroll", setScroll, false);
+        document.addEventListener("keypress", showHidePopup, false);
+    </script>
+    <style>
+      body { margin: 0px; background-color: black; }
+      #topscreen { height: 176px; }
+      #title { position: absolute; left: 41px; top: 74px; }
+      #messages { position: absolute; width: 240px; left: 0px; top: 240px; font-size: 12px; font-family: sans-serif; color: white; text-align: center; background-color: black;}
+      #scoreDisplay { position: absolute; left: 12px; top: 158px; font-size: 14px; font-family: sans-serif; color: white; }
+      #levelDisplay { position: absolute; right: 12px; top: 158px; font-size: 14px; font-family: sans-serif; color: white; }
+      #popup { position: absolute; left: 18px; top: 20px; width: 200px; height: 312px; border: 4px solid #FFFFAA; background-color: #000044; display: none; }
+      #infoarea { margin: 5px; width: 190px; height: 278px; overflow: hidden; font-size: 8px; font-family: sans-serif; color: white; padding-top: 5px; }
+      #buttonarea { margin: 5px; width: 190px; height: 14px; background-color: #222288; color: #DDDDDD; }
+      #hiscores, #instructions { float: left; text-align: center; width: 95px; font: 12px sans-serif; }
+      .selected { background-color: #8888FF; color: white; }
+    </style>
+  </head>
+  <body onload="init();">
+    <div id="topscreen"></div>
+    <canvas id="canvas" width="240" height="176"></canvas>
+    <img id="title" src="images/wargames.png">
+    <div id="messages">Game Over</div>
+
+    <div id="scoreDisplay">Score: <span id="score">0</span></div>
+    <div id="levelDisplay">Level: <span id="level">1</span></div>
+    <div id="popup">
+      <div id="infoarea"></div>
+      <div id="buttonarea">
+        <div id="hiscores" class="selected" onclick="showHighScores(); return false;">High Scores</div>
+
+        <div id="instructions" onclick="showInstructions(); return false;">Instructions</div>
+      </div>
+    </div>
+  </body>
+
+<!-- Mirrored from dsiexplorer.awardspace.biz/WarGames/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:29:50 GMT -->
+</html>

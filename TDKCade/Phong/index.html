@@ -1,0 +1,265 @@
+<html>
+<head>
+<title>Phong by The2Banned2One</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="viewport" content="width=device-width">
+<style>
+body { margin: 0px; }
+#bottomscreen { width: 240px; height: 176px; overflow:hidden}
+</style>
+<style type="text/css">
+#pongTable {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 232px;
+	height: 168px;
+	border: 4px solid #CCC;
+	background-color: #F3F3F3;
+	z-index: 1;
+}
+#playerOne {
+	position: absolute;
+	top: 10px;
+	left: 15px;
+	width: 10px;
+	height: 35px;
+	background-color: #777;
+	z-index: 2;
+}
+#playerTwo {
+	position: absolute;
+	top: 10px;
+	left: 390px;
+	width: 10px;
+	height: 35px;
+	background-color: #777;
+	z-index: 2;
+}
+#ball {
+	position: absolute;
+	top: 10px;
+	left: 210px;
+	width: 7px;
+	height: 7px;
+	clip: rect(0px 7px 7px 0px);
+	background-color: #555;
+	z-index: 2;
+	display: none;
+}
+#click {
+	position: absolute;
+	top: 75px;
+	left: 0px;
+	width: 240px;
+	text-align: center;
+	font-family: Tahoma;
+	font-size: 10px;
+	z-index: 3;
+}
+#scores {
+	position: absolute;
+	top: 158px;
+	left: 8px;
+	width: 224px;
+	font-family: Tahoma;
+	font-size: 11px;
+	z-index: 3;
+}
+</style>
+
+<script type="text/javascript">
+
+/***********************************************
+* DHTML Phong script- © nathan (http://www.n-son.com/)
+* Permission granted to DynamicDrive.com to feature script
+* This notice must stay intact for use
+* Visit http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+var ballAng;
+var speed = 5;
+var ping = 6;
+var pong = 0;
+var mouseSpeed;
+var tempY = 0;
+var lastMove = 0;
+
+var ball;
+var ballx = 0;
+var bally = 0;
+
+var playerOne;
+var p1x = 15;
+var p1y = 68;
+
+var playerTwo;
+var p2x = 217;
+var p2y = 68;
+
+function init() {
+    ball =  document.getElementById("ball");
+    playerOne = document.getElementById("playerOne");
+    playerTwo = document.getElementById("playerTwo");
+    
+	document.getElementById("click").style.display = "none";
+	document.getElementById("ball").style.display = "block";
+    
+    ballx = 210;
+    bally = 160;
+    ball.style.left = ballx+"px";
+    ball.style.top = bally+"px";
+        
+	document.onmouseup = null;
+	document.onmousemove = mouseMoved;
+    
+	ballAng = Math.round( Math.random() * 100 ) + 130;
+	moveDaBall = setInterval(moveBall, 50);
+}
+
+function mouseMoved(e)
+{
+	e = (e)?e:event;
+    lastMove = e.clientY;
+}
+
+function movePaddle() {
+    
+	if( tempY ) {
+		mouseSpeed = Math.round((lastMove - tempY) * 1.5);
+		if( mouseSpeed == 0 ) mouseSpeed = 1;
+	}
+    
+    p1y = lastMove - 18;
+    if( p1y < 4 || p1y > 139 ) {
+        if( p1y < 4 ) {
+            p1y = 4;
+        } else {
+            p1y = 139;
+        }
+    }
+    playerOne.style.top = p1y + "px";
+	tempY = lastMove;
+}
+function moveBall() {
+	var ballX = ballx;
+	var ballY = bally;
+	var playOneX = p1x;
+	var playOneY = p1y;
+	var playTwoX = p2x;
+	var playTwoY = p2y;
+    
+    movePaddle();
+    
+	if( ballY >= (playOneY - 5) && ballY <= (playOneY + 35 + 5) && ballX >= playOneX && ballX <= (playOneX + 10) ) {
+		if( pong == 3 ) {
+			ping++;
+			pong = 0;
+		} else {
+			pong++;
+		}
+        ballx = playOneX + 10;
+		ball.style.left = ballx + "px";
+		ballAng = 180 - ballAng - mouseSpeed;
+	}
+	if( ballY >= (playTwoY - 5) && ballY <= (playTwoY + 35 + 5) && ballX >= playTwoX && ballX <= (playTwoX + 10) ) {
+		if( pong == 3 ) {
+			ping++;
+			pong = 0;
+		} else {
+			pong++;
+		}
+        ballx = playTwoX;
+		ball.style.left = bally + "px";
+		ballAng = 180 - ballAng;
+	}
+	if( ballY < 15 || ballY > 171 ) {
+        bally = (ballY < 15) ? 15 : 171;
+		ball.style.top = bally+"px";
+		ballAng = 360 - ballAng;
+	}
+	if( ballX <= 14 || ballX >= 233 ) {
+        ballx = (ballX <=14) ? 14 : 233;
+		ball.style.left = ballx + "px";
+        
+		if( ballX <= 14 ) {
+			endPoint(document.getElementById("twoScore"));
+		} else {
+			endPoint(document.getElementById("oneScore"));
+		}
+	}
+	moveAI( ballY );
+	moveObjAtAngle( ball, ballAng, ping);
+}
+function moveObjAtAngle( obj, ang, dist ) {
+        ballx = ballx + ( dist * Math.cos( ang * (Math.PI/180) ) );
+        bally = bally - ( dist * Math.sin( ang * (Math.PI/180) ) );
+		obj.style.left = ballx + "px";
+		obj.style.top  = bally + "px";
+}
+function moveAI( y ) {
+	var AI = playerTwo;
+	y = y - 10;
+	y = p2y + ((y - p2y) / speed);
+	if( y < 4 || y > 139 ) {
+		if( y < 4 ) {
+			y = 4;
+		} else {
+			y = 139;
+		}
+	}
+    p2y = y;
+	AI.style.top = y +"px";
+}
+function endPoint(place) {
+	clearInterval(moveDaBall);
+	ping = 6;
+	pong = 0;
+	document.onmouseup = init;
+	document.getElementById("click").innerHTML = "tap to continue";
+	place.innerHTML = parseInt(place.innerHTML) + 1;
+	if( parseInt(place.innerHTML) > 20 ) {
+		if( place.id == "oneScore" ) {
+			endGame(1);
+		} else {
+			endGame(0);
+		}
+	}
+	document.getElementById("click").style.display = "inline";
+}
+function endGame(win) {
+	document.onmouseup = restartGame;
+	if( win ) {
+		document.getElementById("click").innerHTML = "<strong>you won!</strong><br /> tap to start over";
+	} else {
+		document.getElementById("click").innerHTML = "<strong>you lose</strong><br /> tap to start over";
+	}
+}
+function restartGame() {
+	document.getElementById("oneScore").innerHTML = 0;
+	document.getElementById("twoScore").innerHTML = 0;
+	init();
+}
+document.onmouseup = init;
+</script>
+
+</head>
+<body>
+
+<div id="bottomscreen">
+<div id="pongTable">
+	<div style="float: right; width: 50%; height: 100%; border-left: 2px dashed #DDD;"> </div>
+</div>
+<div id="playerOne" style="left: 15px; top: 68px"> </div>
+<div id="playerTwo" style="left: 217px; top: 68px"> </div>
+<div id="ball" style="left: 210px; top: 160px"> </div>
+<div id="click">tap to start</div>
+<div id="scores">
+	<span style="float: left;" id="oneScore">0</span>
+	<span style="float: right;" id="twoScore">0</span>
+</div>
+</div>
+</div>
+</body>
+</html>
+ 

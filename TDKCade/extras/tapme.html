@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>Tap Me</title>
+<meta name="viewport" content="width=240">
+<style> 
+body { margin: 0px; }
+#topscreen, #bottomscreen { width: 240px; height: 176px; overflow: hidden; }
+#conash3D0 {
+display:none;
+}
+</style>
+<script type="text/javascript"> 
+function setCookie(c_name,value,expiredays)
+{
+var exdate=new Date();
+exdate.setDate(exdate.getDate()+expiredays);
+document.cookie=c_name+ "=" +escape(value)+
+((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
+}
+function click() {
+if (game_started == true) {
+	score++;
+	document.getElementById('score').innerHTML = score;
+}
+else {
+	if (game_over == false) {
+		var randnumb=Math.floor(Math.random()*101);
+		setCookie('gameid',randnumb,1);
+		document.getElementById('gameid').value = randnumb;
+		score++;
+		document.getElementById('score').innerHTML = score;
+		game_started = true;
+		document.getElementById('button').src='/img/tapme.png';
+		CreateTimer("time", 30);
+		}
+	else {}
+}
+}
+      function CreateTimer(TimerID, Time) {
+          Timer = document.getElementById(TimerID);
+          TotalSeconds = Time;
+         
+          UpdateTimer();
+          window.setTimeout("Tick()", 1000);
+      }
+       
+      function Tick() {
+    if (TotalSeconds <= 0) {
+        var y=confirm("Time's up! Your score was "+score+" taps! Do you want to play again?");
+        if (y == true){
+        window.location.reload();
+        }
+        else{
+        window.location="/games/";
+        }
+        return;
+    }
+	TotalSeconds -= 1;
+    UpdateTimer();
+	window.setTimeout("Tick()", 1000);
+      }
+	  
+      function UpdateTimer() {
+          var Seconds = TotalSeconds;
+         
+          var Days = Math.floor(Seconds / 86400);
+          Seconds -= Days * 86400;
+       
+          var Hours = Math.floor(Seconds / 3600);
+          Seconds -= Hours * (3600);
+       
+          var Minutes = Math.floor(Seconds / 60);
+          Seconds -= Minutes * (60);
+       
+          //var TimeStr = ((Days > 0) ? Days + " days " : "") + LeadingZero(Hours) + ":" + LeadingZero(Minutes) + ":" + LeadingZero(Seconds)
+       
+          var TimeStr = ((Days > 0) ? Days + " days " : "") + LeadingZero(Seconds)
+
+          Timer.innerHTML = TimeStr;
+      }
+       
+      function LeadingZero(Time) {
+       
+          return (Time < 10) ? "0" + Time : + Time;
+       
+      } 
+ 
+</script>
+</head>
+<body>
+<script type="text/javascript"> 
+document.body.scrollTop = 176;
+var game_started = false;
+var game_over = false;
+var score = 0;
+var Timer;
+var TotalSeconds;
+</script>
+<div id="topscreen">
+<center>
+<!--<img id="logo" src="images/logo.png" border="0"><br>-->
+<center><font size="3"><u>TAP ME</u></font></center>
+See how many times you can tap the button in 30 seconds.<br><br><br><br>
+Taps: <span id="score">0</span><br>
+Time Remaining: <span id="time"></span><br>
+</center>
+</div>
+<div id="bottomscreen">
+<center>
+<br>
+<img id="button" src="/img/tapme.png" onclick="click()" /><br><br>
+<span id="submit" style="display: none;">
+<form method="POST" action="submit.php">
+<input type="hidden" name="s1" id="s1"></input>
+<input type="hidden" name="gameid" id="gameid"></input>
+</form>
+</span>
+</center>
+</div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+BODY {
+	color: #222;
+	font-size: 12px;
+	line-height: 10px;
+	margin: 2px;
+	width: 236px;
+}
+
+.title {
+	font-size: 16px;
+	text-align: center;
+	text-shadow: 2px 2px 2px #444;
+	top: 5px;
+	width: 230px;
+}
+
+.round {
+	left: 151px;
+	position: absolute;
+	top: 40px;
+}
+
+.score {
+	left: 156px;
+	position: absolute;
+	top: 55px;
+}
+
+.tries {
+	left: 160px;
+	position: absolute;
+	top: 70px;
+}
+
+.notice {
+	color: #fff;
+	font-size: 12px;
+	left: 10px;
+	position: absolute;
+	text-align: center;
+	text-shadow: 1px 1px 1px #000;
+	top: 92px;
+	width: 136px;
+}
+
+FORM {
+		margin: 0px;
+		padding: 0px;
+}
+
+.button {
+	background: #44f;
+	border: 2px outset #44f;
+	color: #fff;
+	font-size: 12px;
+	height: 18px;
+	position: absolute;
+	text-align: center;
+	width: 40px;
+}
+
+
+.minco {
+	background: url(images/minco.png);
+	height: 64px;
+	left: 160px;
+	position: absolute;
+	top: 90px;
+	width: 32px;
+}
+
+TABLE.highscores {
+	background: #fff;
+	border: 0px;
+	border-collapse: collapse;
+	left: 32px;
+	position: absolute;
+	top: 27px;
+	width: 176px;
+}
+
+IMG.great {
+	display: none;
+	left: 170px;
+	position: absolute;
+	top: 85px;
+}
+IMG.wrong {
+	display: none;
+	left: 170px;
+	position: absolute;
+	top: 85px;
+}
+
+.yellow_dark, .yellow_light,
+.blue_dark, .blue_light, 
+.red_dark, .red_light, 
+.green_dark, .green_light {
+	border: none;
+	height: 68px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	width: 68px;
+}
+
+.yellow_dark {
+	background: url(images/yellow_dark.png);
+	left: 10px;
+	top: 35px;
+}
+.yellow_light {
+	background: url(images/yellow_light.png);
+	left: 8px;
+	top: 33px;
+}
+
+.blue_dark {
+	background: url(images/blue_dark.png);
+	left: 10px;
+	top: 103px;
+}
+.blue_light {
+	background: url(images/blue_light.png);
+	left: 8px;
+	top: 105px;
+}
+
+.red_dark {
+	background: url(images/red_dark.png);
+	left: 78px;
+	top: 35px;
+}
+.red_light {
+	background: url(images/red_light.png);
+	left: 80px;
+	top: 33px;
+}
+
+.green_dark {
+	background: url(images/green_dark.png);
+	left: 78px;
+	top: 103px;
+}
+.green_light {
+	background: url(images/green_light.png);
+	left: 80px;
+	top: 105px;
+}

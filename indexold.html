@@ -1,0 +1,98 @@
+<html>
+<head>
+<title>DSi Homepage</title>
+<meta name="viewport" content="width=240">
+<!--search engine data-->
+<meta name="description" content="The DSi Homepage is a great site for the DSi Browser with games, apps, videos, and more!">
+<meta name="keywords" content="dsihomepage, DSi Homepage, dsi homepage, DSiHomepage, Dsi Homepage, DSi homepage, DSi Sites, dsi sites, DSi Site, dsi site, dsi compatible site, what are some dsi compatible sites, What are some DSi compatible sites?, DSi Browser Games, dsi browser games, dsi tube, dsitube, DSi Tube, DSiTube, DSiPaint, DSiUniverse, DS Opera SDK, Nintendo DS, Nintendo DSi, DSi, JavaScript, video games, DSi Chatroom, homebrew, Nintendo WiFi, Nintendo, nintendo, dsi, DSi, free, online, games, download, dsiware">
+<!--google webmasters tools verification-->
+<meta name="google-site-verification" content="vKcNTMyZVxvkrM_EbxDTsG8X6vQxZuuNt-Na3ldZxPw" />
+<!--style sheet-->
+<style> 
+body { margin:0px; color:white; background:url('/img/topbg.png'); }
+#topscreen, #bottomscreen { width: 240px; height:176px; overflow: hidden; }
+#timedate { color:black; position:absolute; left:30px; top:258px; }
+#quadrplax { color:yellow; position:absolute; left:0px; top:160px; background-color:black; width:240; }
+#counter { position:absolute; left:160px; top:161px; }
+#users { position:absolute; left:102px; top:165px; }
+#freetrafic { position:absolute; left:0px; top:175px; }
+</style>
+<!--BG changer-->
+<script language="JavaScript">
+function checkEnter(event){
+var code = event.keyCode;
+if (code==13)
+var hex=prompt("Enter a color to change BG.","");
+document.body.style.background=hex;
+}
+</script>
+<!--.TK code-->
+<script>if (window != top) top.location.href = location.href;</script>
+<!--Check DSi code-->
+<script>
+if((navigator.userAgent.match(/Nintendo DSi/i))||(navigator.userAgent.match(/483; U; en-GB/i))){}
+else{
+alert("This site is made for use with a Nintendo DSi. You are currently not using a Nintendo DSi, so some of this sites content might be incompatible with your system.");
+}
+</script>
+<!--Clock code-->
+<script type="text/javascript"> 
+function init ( )
+{
+  timeDisplay = document.createTextNode ( "" );
+  document.getElementById("clock").appendChild ( timeDisplay );
+}
+function updateClock ( )
+{
+  var currentTime = new Date ( );
+  var currentHours = currentTime.getHours ( );
+  var currentMinutes = currentTime.getMinutes ( );
+  var currentSeconds = currentTime.getSeconds ( );
+  currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+  currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+  var timeOfDay = ( currentHours < 12 ) ? "AM" : "PM";
+  currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+  currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+  var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+  document.getElementById("clock").firstChild.nodeValue = currentTimeString;
+}
+</script>
+</head>
+<body onload="updateClock(); setInterval('updateClock()', 1000 );" onkeypress="checkEnter(event)">
+<div id="topscreen">
+<center><img border="0" src="/img/logo.PNG" width="215" height="160" alt="DSi Homepage" /></center>
+</div>
+<div id="bottomscreen">
+<img src ='/img/menu.png' usemap='#iconsmap' border='0' />
+<map name='iconsmap'>
+<area shape ='rect' coords ='240,1,170,18' oNclick="window.location = '/more/'">
+<area shape ='rect' coords ='20,20,70,70' oNclick="window.location = '/games/'">
+<area shape ='rect' coords ='95,20,145,70' oNclick="window.location = '/extensions.html'">
+<area shape ='rect' coords ='168,20,218,70' oNclick="window.location = '/apps/'">
+<area shape ='rect' coords ='21,100,72,152' oNclick="window.location = '/videos/'">
+<area shape ='rect' coords ='95,100,145,152' oNclick="window.location = '/links.html'">
+<area shape ='rect' coords ='168,100,218,152' oNclick="window.location = '/news/'">
+</map>
+</div>
+<div id="timedate">
+<font size="2">
+<script type="text/javascript"> var a=new Date();var m=a.getMonth() + 1;var d=a.getDate();var y=a.getFullYear();document.write(m+"/"+d+"/"+y);</script>&#65372;<span id="clock">&nbsp;</span>
+</font>
+</div>
+<div id="quadrplax"><font size="2">
+By: quadrplax
+</font></div>
+<div id="counter">
+<img src="http://whosread.com/counter/06ja54.gif" alt="online counter" width="80" height="15" border="0" />
+</div>
+<div id="users">
+<a href="http://www.hitwebcounter.com/">
+<img src="http://hitwebcounter.com/counter/counter.php?page=151514&style=0007&nbdigits=7&type=ip&initCount=0" title="Free Web Counter" Alt="Free Web Counter"   border="0" >
+</a> 
+</div>
+<div id="freetrafic">
+<!-- Start Wintendows.com Backlinks code. Do NOT edit. --><a target="_blank" href="http://backlinks.wintendows.com/" title="Free Auto Backlinks"><img border="0" alt="Free Auto Backlinks" src="http://backlinks.wintendows.com/backlinkbutton.gif" /></a><!-- End Wintendows.com Backlinks code. -->
+</div>
+<script>document.body.scrollTop = 176;</script>
+</body>
+</html>

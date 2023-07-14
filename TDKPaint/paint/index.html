@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<!-- Mirrored from dsiexplorer.awardspace.biz/DSiPaintStudio/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:29:59 GMT -->
+<head>
+
+	<meta http-equiv="Content-Type" content="text/xml; charset=ISO-8859-1" />
+	<meta name="viewport" content="width=240">
+	<meta name="description" content="DSiPaint Demo" />
+	<title>DSi Paint Studio</title>
+	<meta name="keywords" content="DSiPaint, DS Opera SDK, DSi Opera SDK, Nintendo DS, Nintendo DSi, DSi, JavaScript, video games, DS Chatroom, homebrew" />
+	<script type="text/javascript">
+		var color=[0,0,0], erasing=false, block=1;
+		var drawingcanvas=null, palettecanvas=null, colordiv=null, statusdiv=null;
+
+		window.onload = function(){
+			drawingcanvas=document.getElementById('canvas').getContext('2d');
+			palettecanvas=document.getElementById('palette').getContext('2d');
+			colordiv=document.getElementById('color');
+			statusdiv=document.getElementById('status');
+			drawingcanvas.fillStyle = 'rgb(255,255,255)';
+			drawingcanvas.fillRect(0,0,160,160);
+			drawingcanvas.fillStyle = 'rgb(0,0,0)';
+			for(var temp_color=512;--temp_color>=0;){
+				palettecanvas.fillStyle='rgb('+(((temp_color>>6)&7)<<5)+','+(((temp_color>>3)&7)<<5)+','+(((temp_color)&7)<<5)+')';
+				palettecanvas.fillRect((temp_color&15)<<2,(temp_color>>4)<<2,4,4);
+			}
+			for(var temp_color=8;--temp_color>=0;){
+				palettecanvas.fillStyle='rgb('+(temp_color<<5)+','+(temp_color<<5)+','+(temp_color<<5)+')';
+				palettecanvas.fillRect(64,temp_color<<4,12,16);
+			}
+			statusdiv.innerHTML='Welcome to DSi Paint Studio!';
+		}
+		
+		function paint(){
+			if((mousex=event.clientX-1)>=0 && (mousey=event.clientY-1)>=0 && mousex<=159 && mousey<=159){
+				if(erasing){
+					drawingcanvas.clearRect(mousex^1,mousey^1,block<<1,block<<1);
+				}else{
+					drawingcanvas.fillRect(mousex^1,mousey^1,block<<1,block<<1);
+				}
+			}
+		}
+		
+		function set_color(){
+			if((mousey=window.event.clientY-1)>=0 && mousey<128){
+				if((mousex=window.event.clientX-162)>=0 && mousex<64){
+					var temp_color = (mousex>>2)+((mousey>>2)<<4);
+					color=[((temp_color>>6)&7)<<5,((temp_color>>3)&7)<<5,((temp_color)&7)<<5];
+				}else{
+					color=[(mousey>>4)<<5,(mousey>>4)<<5,(mousey>>4)<<5];
+				}
+				drawingcanvas.fillStyle = 'rgb('+color[0]+','+color[1]+','+color[2]+')';
+				statusdiv.innerHTML = 'Color set to ('+color[0]+','+color[1]+','+color[2]+')';
+				colordiv.style.background = 'rgb('+color[0]+','+color[1]+','+color[2]+')';
+				erasing=false;
+			}
+		}
+		
+		function draw(size){
+			erasing=false;
+			block=size;
+			drawingcanvas.fillStyle = 'rgb('+color[0]+','+color[1]+','+color[2]+')';
+			colordiv.style.background = 'rgb('+color[0]+','+color[1]+','+color[2]+')';
+		}
+		function erase(size){
+			erasing=true;
+			block=size;
+			drawingcanvas.fillStyle = 'rgb(255,255,255)';
+			colordiv.style.background = 'rgb(255,255,255)';
+		}
+	</script>
+
+	<style type="text/css">
+		BODY {
+			background: url("images/plating.html");
+			color: #002;
+			font-size: 8px;
+			margin: 0px;
+			overflow: hidden;
+		}
+		.button {
+			background: #00f;
+			border: 2px outset #00f;
+			color: #fff;
+			font-size: 8px;
+			height: 11px;
+			position: absolute;
+			text-align: center;
+			width: 28px;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" style="background:#fff; border:1px inset #888; left:0px; position:absolute; top:0px" width="160" height="160" onmousemove="paint()"></canvas>
+	<canvas id="palette" style="border:1px outset #888; left:162px; position:absolute; top:0px" width="76" height="128" onclick="set_color()"></canvas>
+	<div id="color" style="background:#000; border:1px outset #888; height:27px; left:226px; position:absolute; top:130px; width:12px"></div>
+	<div style="background:#000; border:4px solid #ddd; height:2px; left:164px; position:absolute; top:134px; width:2px" onclick="draw(1)"></div>
+	<div style="background:#000; border:3px solid #ddd; height:4px; left:176px; position:absolute; top:134px; width:4px" onclick="draw(2)"></div>
+	<div style="background:#000; border:2px solid #ddd; height:6px; left:188px; position:absolute; top:134px; width:6px" onclick="draw(3)"></div>
+
+	<div style="background:#000; border:1px solid #ddd; height:8px; left:200px; position:absolute; top:134px; width:8px" onclick="draw(4)"></div>
+	<div style="background:#000; height:10px; left:212px; position:absolute; top:134px; width:10px" onclick="draw(5)"></div>
+	<div style="background:#fff; border:4px solid #ddd; height:2px; left:164px; position:absolute; top:147px; width:2px" onclick="erase(1)"></div>
+	<div style="background:#fff; border:3px solid #ddd; height:4px; left:176px; position:absolute; top:147px; width:4px" onclick="erase(2)"></div>
+	<div style="background:#fff; border:2px solid #ddd; height:6px; left:188px; position:absolute; top:147px; width:6px" onclick="erase(3)"></div>
+	<div style="background:#fff; border:1px solid #ddd; height:8px; left:200px; position:absolute; top:147px; width:8px" onclick="erase(4)"></div>
+	<div style="background:#fff; height:10px; left:212px; position:absolute; top:147px; width:10px" onclick="erase(5)"></div>
+	<div class="button" style="left:167px; top:160px" onclick="location.href='http://dsipaint.com/';">Full</div>
+
+	<div class="button" style="left:203px; top:160px" onclick="history.back()">Back</div>
+	<div style="height:10px; left:2px; position:absolute; top:162px; width:228px" id="status"></div>
+</body>
+
+<!-- Mirrored from dsiexplorer.awardspace.biz/DSiPaintStudio/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Jul 2023 21:30:00 GMT -->
+</html>

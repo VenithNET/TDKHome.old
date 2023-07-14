@@ -1,0 +1,109 @@
+<!--
+<html>
+<head>
+<title>Calculator</title>
+<meta name="viewport" content="width=240">
+</head>
+<body bgcolor=crimson>
+<div id="topscreen" style="width: 220px; border-color:black; border-style:outset; border-width:2px; height: 150">
+<center>
+<form name="calculator">
+<table border="outset" cellpadding="0" border-color="black" bgcolor="black" cellspacing="0" width="24">
+<tr>
+<td>
+<input type="text" size="28" length="310" value="" name="ans" style="background:white;color:black;">
+</td>
+</tr>
+</table>
+<p><table border="0" cellpadding="1" bordercolor="#FFFFFF" cellspacing="0" width="220" bgcolor="crimson">
+<tr>
+<td align="center">
+<input type="button" value="  7  " name="seven" onClick="document.calculator.ans.value+='7'">
+ 
+</td>
+<td align="center">
+<input type="button" value="  8  " name="eight" onClick="document.calculator.ans.value+='8'">
+</td>
+<td align="center">
+<input type="button" value="  9  " name="nine" onClick="document.calculator.ans.value+='9'">
+</td>
+<td align="center">
+<input type="button" value="  &divide;  " name="divide" onClick="document.calculator.ans.value+='/'">
+</td>
+</tr>
+<tr>
+<td align="center">
+<input type="button" value="  4  " name="four" onClick="document.calculator.ans.value+='4'">
+</td>
+<td align="center">
+<input type="button" value="  5  " name="five" onClick="document.calculator.ans.value+='5'">
+ 
+</td>
+<td align="center">
+<input type="button" value="  6  " name="six" onClick="document.calculator.ans.value+='6'">
+</td>
+<td align="center">
+<input type="button" value="  x  " name="multiply" onClick="document.calculator.ans.value+='*'">
+</td>
+</tr>
+<tr>
+<td align="center">
+<input type="button" value="  1  " name="one" onClick="document.calculator.ans.value+='1'">
+</td>
+<td align="center">
+<input type="button" value="  2  " name="two" onClick="document.calculator.ans.value+='2'">
+</td>
+<td align="center">
+<input type="button" value="  3  " name="three" onClick="document.calculator.ans.value+='3'">
+ 
+</td>
+<td align="center">
+<input type="button" value="  -  " name="subtract" onClick="document.calculator.ans.value+='-'">
+</td>
+</tr>
+<tr>
+<td align="center">
+<input type="button" value="  C  " name="clear" onClick="document.calculator.ans.value=''">
+</td>
+<td align="center">
+<input type="button" value="  0  " name="zero" onClick="document.calculator.ans.value+='0'">
+</td>
+<td align="center">
+<input type="button" value="  =  " name="equal" 
+  onClick="document.calculator.ans.value=eval(document.calculator.ans.value)">
+</td>
+<td align="center">
+<input type="button" value="  +  " name="add" onClick="document.calculator.ans.value+='+'">
+</td>
+</tr>
+</table>
+</form>
+</div>	 
+</center>
+</div>
+</body>
+</html>
+-->
+<html>
+<head>
+<title>Calculator</title>
+<meta name="viewport" content="width=240">
+</head>
+<body>
+<script>
+var l="";
+var m="";
+function w(){
+l=Length(document.f.b.value);document.f.b.value.substr(0,l-1);
+}
+</script>
+<center><form name=f>
+<input type=text name=b size=10><input type=button value="." onclick=document.f.b.value+="."><br>
+<input type=button value=7 onclick=document.f.b.value+=7><input type=button value=8 onclick=document.f.b.value+=8><input type=button value=9 onclick=document.f.b.value+=9><input type=button value="&divide;" onclick=document.f.b.value+="/"><br>
+<input type=button value=4 onclick=document.f.b.value+=4><input type=button value=5 onclick=document.f.b.value+=5><input type=button value=6 onclick=document.f.b.value+=6><input type=button value=X onclick=document.f.b.value+="*"><br>
+<input type=button value=1 onclick=document.f.b.value+=1><input type=button value=2 onclick=document.f.b.value+=2><input type=button value=3 onclick=document.f.b.value+=3><input type=button value=- onclick=document.f.b.value+="-"><br>
+<input type=button value=C onclick=document.f.b.value=""><input type=button value=0 onclick=document.f.b.value+=0><input type=button value== onclick="document.f.b.value=eval(document.f.b.value)"><input type=button value=+ onclick=document.f.b.value+="+"><br>
+<input type=button value=M+ onclick=m+=document.f.b.value><input type=button value=M- onclick=m-=document.f.b.value><input type=button value=MC onclick=m=""><input type=button value=MR onclick=document.f.b.value+=m>
+</form></center>
+</body>
+</html>

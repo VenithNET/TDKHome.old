@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Tools - Dictonary</title>
+<meta name="viewport" content="width=240">
+<script>
+function funct(){
+window.location="http://m.dictionary.com/?q="+document.getElementById('word').value+"&submit-result-SEARCHD=Search";
+}
+</script>
+</head>
+<body bgcolor=gray>
+<center><u>Dictonary</u></center>
+<font size=2>
+Word: <input type=text size=18 id=word><input type=button value=GO onclick="funct();">
+
+<center><a href="avascript:var t=prompt('Enter word.');window.location='http://m.dictionary.com/?q='+t+'&submit-result-SEARCHD=Search';">Download this tool</a> | <a href="/more/tools">back</a></center>
+</font>
+</body>
+</html>

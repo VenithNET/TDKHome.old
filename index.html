@@ -1,187 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TDKPaint</title>
-    <style>
-        body {
-            background-color: black;
-            margin: 0;
-            font-size: 12px;
-            line-height: normal;
-            word-wrap: break-word !important;
-            font-family: sans-serif;
-            color: white !important;
-        }
-        .menu {
-            background: #232323;
-            margin: auto;
-            max-width: 800px;
-            overflow: auto;
-            border: 1px solid black;
-            border-radius: 4px;
-            padding: 4px;
-        }
-        .nav {
-            max-width: 100px;
-            float: left;
-            margin: 3px 3px 3px 8px;
-        }
-        .nav2 {
-            max-width: 64px;
-            float: right;
-            margin: 2px;
-        }
-        .ico {
-            float: left;
-            text-align: center;
-            font-size: 10px;
-        }
-        .ico img {
-            border-radius: 16px;
-        }
-        .align-left {
-            text-align: left;
-        }
-        h1 {
-            background: #444;
-            max-width: 800px !important;
-            text-align: center;
-            margin: auto;
-            border: 1px outset #888;
-            border-radius: 32px;
-            font-size: 18px;
-        }
-        img {
-            max-width: 99%;
-            height: auto;
-        }
-    </style>
-    <link rel="stylesheet" href="style.css" type="text/css">
+<title>DSi Homepage</title>
+<meta name="viewport" content="width=240">
+<!--search engine data-->
+<meta name="description" content="The DSi Homepage is a great site for the DSi Browser with games, apps, videos, and more!">
+<meta name="keywords" content="dsihomepage, DSi Homepage, dsi homepage, DSiHomepage, Dsi Homepage, DSi homepage, DSi Sites, dsi sites, DSi Site, dsi site, dsi compatible site, what are some dsi compatible sites, What are some DSi compatible sites?, DSi Browser Games, dsi browser games, dsi tube, dsitube, DSi Tube, DSiTube, DSiPaint, DSiUniverse, DS Opera SDK, Nintendo DS, Nintendo DSi, DSi, JavaScript, video games, DSi Chatroom, homebrew, Nintendo WiFi, Nintendo, nintendo, dsi, DSi, free, online, games, download, dsiware">
+<!--google webmasters tools verification-->
+<meta name="google-site-verification" content="vKcNTMyZVxvkrM_EbxDTsG8X6vQxZuuNt-Na3ldZxPw" />
+<!--style sheet-->
+<style> 
+body { margin:0px; color:white; background:url('/img/blue.png'); font-family: "TWL_NTLG-PGothic-DB", sans-serif; }
+#topscreen, #bottomscreen { width: 240px; height:176px; overflow: hidden; }
+#timedate { color:white; position:absolute; left:0px; top:246px; width:240px; }
+#quadrplax { color:yellow; position:absolute; left:0px; top:160px; background-color:black; width:240; }
+#counter { position:absolute; left:0px; top:162px; }
+#users { position:absolute; left:190px; top:164px; }
+#more { position:absolute; left:200px; top:174px; }
+a { text-decoration:none; color:white; }
+</style>
+<!--BG changer-->
+<script language="JavaScript">
+function checkEnter(event){
+var code = event.keyCode;
+if (code==13)
+var hex=prompt("Enter a color to change BG.","");
+document.body.style.background=hex;
+}
+</script>
+<!--.TK code-->
+<script>
+if (window != top){
+var str=window.location.href;
+var txt=str.split("?")[1];
+if (txt != "no"){
+top.location.href = location.href;
+}
+}
+</script>
+<!--Check DSi code-->
+<script>
+if((navigator.userAgent.match(/Nintendo DSi/i))||(navigator.userAgent.match(/483; U; en-GB/i))){}
+else{
+alert("This site is made for use with a Nintendo DSi. You are currently not using a Nintendo DSi, so some of this sites content might be incompatible with your system.");
+}
+</script>
+<!--Clock code-->
+<script type="text/javascript"> 
+function init ( )
+{
+  timeDisplay = document.createTextNode ( "" );
+  document.getElementById("clock").appendChild ( timeDisplay );
+}
+function updateClock ( )
+{
+  var currentTime = new Date ( );
+  var currentHours = currentTime.getHours ( );
+  var currentMinutes = currentTime.getMinutes ( );
+  var currentSeconds = currentTime.getSeconds ( );
+  currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+  currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+  var timeOfDay = ( currentHours < 12 ) ? "AM" : "PM";
+  currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+  currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+  var currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+  document.getElementById("clock").firstChild.nodeValue = currentTimeString;
+}
+</script>
+<!--Clipboard test-->
+<script src="clipboard.js"></script>
 </head>
-<body>
-    <center>
-        <a href="index.html" style="text-align: center; margin: auto;">
-            <img src="https://3dspaint.com/images/logo.png" alt="TDKPaint" title="TDKPaint">
-        </a>
-    </center>
-    <div class="menu" style="padding: 0!important;">
-        <div class="nav">
-            Welcome, TDK!<br>
-            <a href="https://3dspaint.com/" style="color: #f44;">3DSPaint Link</a>
-        </div>
-        <div class="nav2">
-            <img src="images/icons/icon_dc.png" alt="PFP" title="PFP" style="border: 1px gray solid; border-radius: 16px; width: 28px; height: 28px;">
-        </div>
-    </div>
-    <br>
-    <h1>General Sections</h1>
-    <br>
-    <div class="menu">
-        Welcome to the unofficial archive of 3DSPaint/DSiPaint along with some other content we've found that happens to be related to the SDKCommunity. We occasionally update this archive to add new content.
-        <br><br>
-        <div class="ico">
-            <a href="paint/index.html">
-                <img src="images/icons/icon_tdkpaint.png" alt="TDKPaint">
-            </a><br>
-            TDKPaint
-        </div>
-        <div class="ico">
-            <a href="https://midnight.pub/">
-                <img src="images/icons/icon_blogs.png" alt="Blogs">
-            </a><br>
-            Blogs
-        </div>
-        <div class="ico">
-            <a href="menu_chatrooms.html">
-                <img src="images/icons/icon_chat_rooms.png" alt="Chatrooms">
-            </a><br>
-            🚧Chatrooms🚧
-        </div>
-        <div class="ico">
-            <a href="group/index.html">
-                <img src="images/icons/icon_groups.png" alt="Groups">
-            </a><br>
-            🚧Groups🚧
-        </div>
-        <div class="ico">
-            <a href="menu_helpdesk.html">
-                <img src="images/icons/icon_help_desk.png" alt="Helpdesk">
-            </a><br>
-            🚧Helpdesk🚧
-        </div>
-        <div class="ico">
-            <a href="menu_polls.html">
-                <img src="images/icons/icon_polls.png" alt="Polls">
-            </a><br>
-            🚧Polls🚧
-        </div>
-        <div class="ico">
-            <a href="menu_links.html">
-                <img src="images/icons/icon_links.png" alt="Affiliate Links">
-            </a><br>
-            🚧Affiliate Links🚧
-        </div>
-        <div class="ico">
-            <a href="https://sdkpaint.github.io/TDKCade/">
-                <img src="images/icons/icon_games.png" alt="TDKCade">
-            </a><br>
-            TDKCade
-        </div>
-    </div>
-    <h1>Related</h1>
-    <div class="menu">
-        <div class="ico">
-            <a href="https://gdir.telae.net/">
-                <img src="images/icons/icon_hullbreach.png" alt="HB Online">
-            </a><br>
-            G-Maps
-        </div>
-        <div class="ico">
-            <a href="http://frogfind.com/">
-                <img src="images/icons/icon_frogfind.png" alt="3DSPaint">
-            </a><br>
-            FrogFind
-        </div>
-        <div class="ico">
-            <a href="https://lite.cnn.com/">
-                <img src="images/icons/icon_cnn_lite.png" alt="CNN Lite">
-            </a><br>
-            CNN Lite
-        </div>
-        <div class="ico">
-            <a href="https://text.npr.org/">
-                <img src="images/icons/icon_npr_lite.png" alt="NPR Lite">
-            </a><br>
-            NPR Lite
-        </div>
-    </div>
-    <h1>Apps</h1>
-    <div class="menu">
-        <div class="ico">
-            <a href="https://ichi.city/">
-                <img src="images/icons/icon_ichi.gif" alt="ICHI.CITY HOSTING">
-            </a><br>
-            ICHI.CITY HOSTING
-        </div>
-        <div class="ico">
-            <a href="https://subreply.com/">
-                <img src="images/icons/icon_subreply.png" alt="Subreply">
-            </a><br>
-            Subreply
-        </div>
-        <div class="ico">
-            <a href="https://weloverss.com">
-                <img src="images/icons/icon_feed.png" alt="RSS Reader">
-            </a><br>
-            RSS Reader
-        </div>
-        <div class="ico">
-            <a href="http://triniate.com/">
-                <img src="images/icons/icon_project_triniate.png" alt="Project Triniate">
-            </a><br>
-            Project Triniate
-        </div>
-    </div>
+<body onload="updateClock(); setInterval('updateClock()', 1000 );" onkeypress="checkEnter(event); askme();">
+<div id="topscreen">
+<center><img border="0" src="/img/logo.PNG" width="215" height="160" alt="DSi Homepage" /></center>
+</div>
+<div id="bottomscreen">
+<img id="Image-Maps_4201103061645385" src="http://dsihomepage.x10.mx/img/map.png" usemap="#Image-Maps_4201103061645385" border="0" width="240" height="176" alt="" />
+<map id="_Image-Maps_4201103061645385" name="Image-Maps_4201103061645385">
+<area shape="rect" coords="3,3,67,67" href="http://dsihomepage.x10.mx/games/" alt="Games" title="Games"    />
+<area shape="rect" coords="85,3,150,68" href="http://dsihomepage.x10.mx/extensions.html" alt="Extensions" title="Extensions"    />
+<area shape="rect" coords="170,3,235,68" href="http://dsihomepage.x10.mx/apps/" alt="Apps" title="Apps"    />
+<area shape="rect" coords="2,88,67,153" href="http://dsihomepage.x10.mx/videos/" alt="Videos" title="Videos"    />
+<area shape="rect" coords="87,87,152,152" href="http://dsihomepage.x10.mx/links.html" alt="links" title="links"    />
+<area shape="rect" coords="170,88,235,153" href="http://dsihomepage.x10.mx/news/" alt="News" title="News"    />
+<area shape="rect" coords="112,155,130,171" href="http://dsihomepage.x10.mx/apps/convert.html" alt="Converter" title="Converter"    />
+<area shape="rect" coords="130,155,148,171" href="http://dsihomepage.x10.mx/apps/down.html" alt="Countdown" title="Countdown"    />
+<area shape="rect" coords="148,155,166,171" href="http://dsihomepage.x10.mx/more/chatdemo.html" alt="Chat" title="Chat"    />
+<area shape="rect" coords="166,155,184,171" href="http://dsihomepage.x10.mx/more/weather.html" alt="Weather" title="Weather"    />
+<area shape="rect" coords="184,155,202,171" href="http://dsihomepage.x10.mx/apps/notecreator.html" alt="Note Creator" title="Note Creator"    />
+<area shape="rect" coords="202,155,220,171" href="http://dsihomepage.x10.mx/apps/calculator.html" alt="Calculator" title="Calculator"    />
+<area shape="rect" coords="221,155,235,171" href="http://dsihomepage.x10.mx/apps/calendar.html" alt="Calendar" title="Calendar"    />
+<area shape="rect" coords="236,172,238,174" href="http://www.image-maps.com/index.php?aff=mapped_users_4201103061645385" alt="Image Map" title="Image Map" />
+</map>
+</div>
+<div id="timedate">
+<font size="2">
+<center>
+<script type="text/javascript"> var a=new Date();var m=a.getMonth() + 1;var d=a.getDate();var y=a.getFullYear();document.write(m+"/"+d+"/"+y);</script>&#65372;<span id="clock">&nbsp;</span>
+</center>
+</font>
+</div>
+<div id="quadrplax"><font size="2">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By: quadrplax
+</font></div>
+<div id="counter">
+<font size=2>
+<script type="text/javascript" src="http://www.usuarios-online.com/usuarios.php?v=3ds.dsihomepage.x10.mx/"></script> <a href="http://www.usuarios-online.com/en/">users online</a>
+</font>
+</div>
+<div id="users">
+<a href="http://www.hitwebcounter.com/">
+<img src="http://hitwebcounter.com/counter/counter.php?page=151514&style=0007&nbdigits=7&type=ip&initCount=0" title="Free Web Counter" Alt="Free Web Counter" border="0">
+</a> 
+</div>
+<div id="more">
+<a href="more"><img border="0" src="/img/morebutton.png" width="42" height="18" alt="More" /></a>
+</div>
+<script>document.body.scrollTop = 176;</script>
 </body>
 </html>

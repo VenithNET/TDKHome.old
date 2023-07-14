@@ -1,0 +1,66 @@
+<html>
+<head>
+<title>Star Catcher</title>
+<meta name=viewport content=width=240>
+</head>
+<body bgcolor=lightgray>
+<script type=text/javascript> 
+function star1233214(){
+var left = Math.floor(Math.random()*206);
+var top = Math.floor(Math.random()*122);
+var score = document.getElementById("hagdkjdg").value;
+var t2 = document.getElementById("hagdkjdg").value;
+var add = 60;
+var tot = parseInt(t2) + parseInt(add);
+var num = 1
+var total = parseInt(score) + parseInt(num);
+document.getElementById("hagdkjdg").value=total;
+document.getElementById("Game").innerHTML="<img src='/img/star.png' style='position:absolute;left:"+left+";top:"+top+";' onClick='star1233214()'>";};
+function timer(){
+var num1 = 1;
+var time = document.getElementById("Time").value;
+var to = parseInt(time) - parseInt(num1);
+document.getElementById("Time").value=to;
+var s = document.getElementById("hagdkjdg").value;
+if(time=="1"){
+document.getElementById("Game").innerHTML="<br>Game Finished!<br><br><br>Your Score is:<br>"+s+"<br><br><input type=button style='border:2px outset orange;background-color:orange;font-size:1' onClick='window.refresh();' value='Play Again'>";}
+else{
+var t = setTimeout("timer()",1000);};};
+</script>
+<center>
+<span style='position:absolute;left:0;top:0'>
+<font size=1>
+<style type=text/css> 
+input#Time{border:0px;background-color:gray;font-size:1}
+input#hagdkjdg{border:0px;background-color:gray;font-size:1}
+</style>
+<div id="Game" style='width:240;height:158'>
+<br>
+<font color=red size=2 style='text-shadow:1px 1px 1px black'>
+Welcome to Star Catcher!
+<br>
+<font color=blue>
+(v1.0)
+</font>
+</font>
+<br>
+<br>
+<br>
+<button onClick='timer();star1233214()'>
+Start
+</button>
+<br>
+<br>
+<br>
+<br>
+<br>
+&copy; tsu 1316
+</div>
+<div style='border:2px outset gray;background-color:gray;width:236'>
+Score:
+<input type=button id="hagdkjdg" value='0'>
+ | 
+Time:
+<input type=button id="Time" value='60'>
+</body>
+</html>

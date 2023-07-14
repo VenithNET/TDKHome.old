@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta name="viewport" content="width=240">
+    <title>Defend Our Home (D.O.H.)</title>
+    <style>
+      body { margin: 0px; background-color: black; }
+      #topscreen, #bottomscreen { width: 240px; height: 176px; overflow: hidden; color: white; font-family: sans-serif; font-size: 8pt; }
+      .link { margin: 7px; text-align: justify; text-align: right; position: absolute; left: 100px; top: 325px; }
+      .link a { text-decoration: none; color: yellow; }
+      #powerups { position: absolute; left: 15px; top: 191px; }
+      #getpowerups { position: absolute; left: 10px; top: 291px; width: 100px; color: red; }
+      #shoottext { position: absolute; left: 115px; top: 271px; }
+      #shootpaddle { position: absolute; left: 200px; top: 311px; }
+      #paddle { position: absolute; left: 180px; top: 250px; }
+      #paddletext { position: absolute; left: 115px; top: 225px; color: green; }
+      #goldtext { position: absolute; left: 150px; top: 175px; color: gold; }
+      #shot1 { position: absolute; left: 200px; top: 296px; }
+      #shot2 { position: absolute; left: 218px; top: 296px; }
+      #block1 { position: absolute; left: 195px; top: 266px; }
+      #block2 { position: absolute; left: 145px; top: 205px; }
+      .title { font-size: 12pt; color: yellow; }
+    </style>
+  </head>
+  <body>
+    <div id="topscreen"><img src="images/logo.png"></div>
+    <div id="bottomscreen">
+        <div id="powerups">
+            <div class="title">Power Ups</div>
+            <div><img src="images/pr1.png"> Shoot Bricks</div>
+            <div><img src="images/pp2.png"> Slows Ball</div>
+            <div><img src="images/pg3.png"> Skips Level</div>
+            <div><img src="images/pb4.png"> Larger Paddle</div>
+            <div><img src="images/pc5.png"> Multiball</div>
+            <div><img src="images/py6.png"> 25 Points</div>
+        </div>
+        <div id="getpowerups">Obtain power ups by smashing bricks!</div>
+        <img id="shootpaddle" src="images/paddle2.png">
+        <img id="shot1" src="images/shot.png">
+        <img id="shot2" src="images/shot.png">
+        <div id="block1">
+          <img src="images/b4.png"><img src="images/b4.png"><br>
+          <img src="images/b8.png"><img src="images/b8.png">
+        </div>
+        <div id="shoottext">Use shooting<br>power up to<br>destroy bricks!<br>(UP on DPad)</div>
+        <img id="paddle" src="images/paddle1.png">
+        <div id="block2">
+          <img src="images/b10.png"><img src="images/b1.png"><img src="images/b1.png"><img src="images/b10.png"><br>
+          <img src="images/b10.png"><img src="images/b3.png"><img src="images/b3.png"><img src="images/b10.png">
+        </div>
+        <div id="paddletext">Use the stylus<br>to control<br>the paddle.</div>
+        <div id="goldtext">Gold blocks are invulnerable.</div>
+        <div class="link"><a href="index.html">MENU</a></div>
+    </div>
+    <script>document.body.scrollTop = 176;</script>
+  </body>
+</html>

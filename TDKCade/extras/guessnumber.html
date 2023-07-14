@@ -1,0 +1,64 @@
+<html> 
+<head>
+<title>Guess My Number</title>
+<meta name="viewport" content="width=240">
+<style>
+body { margin: 0px; }
+#screen { width: 240px; height: 176px; overflow: hidden; }
+</style>
+</head>
+<body>
+<div id="screen">
+<SCRIPT> 
+var guessme=Math.round(Math.random()*(99)+1);
+var speech='Guess my number ( 1 to 100)';
+function process(mystery) {
+var guess=document.forms.guessquiz.guess.value;
+var speech='"'+guess+ '" does not make sense to me.';
+document.forms.guessquiz.guess.value='';
+if (guess==mystery)
+{
+document.forms.guessquiz.prompt.value='Congratulations! '+mystery+' is correct!';
+alert ('Well done - the mystery number is '+mystery+'! \n\nPress OK to play again.');
+speech='';
+document.location=document.location;
+}
+if (mystery<guess)
+{
+speech='Less than '+ guess;
+}
+if (mystery>guess)
+{
+speech='Greater than '+ guess;
+}
+if (guess=='')
+{
+speech='You didn\'t guess anything!'
+}
+document.forms.guessquiz.prompt.value=speech; document.forms.guessquiz.guess.focus();
+}
+</SCRIPT>
+<FORM onSubmit="" NAME="guessquiz">
+<CENTER>
+<TABLE ALIGN="CENTER" BGCOLOR="#888888" BORDER="3" CELLPADDING="4">
+<TR>
+<TD BGCOLOR="#004080">
+<FONT COLOR="#ffffff" FACE="Arial"><center>GUESS MY NUMBER<br> (1 - 100)</center></FONT>
+</TD>
+</TR>
+<TR>
+<TD>
+<CENTER>
+<INPUT TYPE="text" NAME="prompt" SIZE="28" MAXLENGTH="35" VALUE="Guess my number 1 to 100"><BR>
+<INPUT TYPE="text" NAME="guess" SIZE="3" MAXLENGTH="3" VALUE="">
+<INPUT TYPE="button" VALUE="Guess" onClick='process(guessme)'>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+</FORM>
+</div>
+<script>document.body.scrollTop = 176;</script>
+</body>
+</html>

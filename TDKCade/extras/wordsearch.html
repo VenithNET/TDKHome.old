@@ -1,0 +1,665 @@
+<!--
+/***********************************************************
+ jsWordsearch Lite
+ Version:	0.1
+ Author:	Robert
+ Email:	brathna@gmail.com
+ Website:	http://jswordsearch.sourceforge.net/
+************************************************************
+ jsWordsearch, prints out a letter grid with words hidden inside.
+ Copyright (C) Robert Klein
+ 
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License as
+ published by the Free Software Foundation; either version 2 of the
+ License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the
+ Free Software Foundation, Inc.
+ 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ or visit the following website:
+ http://www.opensource.org/licenses/gpl-license.php
+***********************************************************/
+-->
+ 
+<html>
+<head>
+<title>Wordsearch Maker/Player</title>
+<meta name="viewport" content="width=240"> 
+<style type="text/css"> 
+ 
+tr,td {
+  padding:3px;
+}
+ 
+.tablist {
+  border:1px solid black;
+  border-bottom:0px;
+  margin-left:3px;
+  padding-left:3px;
+  padding-right:3px;
+}
+ 
+.tabcontent {
+  padding:3px;
+}
+ 
+.inputTitle {
+  font-size:12px;
+}
+ 
+.invis {
+  display:none;
+}
+
+</style>
+ 
+<script type="text/javascript"> 
+ 
+var title = '<center><font size=3>Wordsearch Maker/Player</font></center>';
+ 
+var retries = 55;
+ 
+var defRows = 8;
+var defCols = 10;
+var defFontSize = 1;
+ 
+var fontColor = 'black';
+var backgroundColor = 'white';
+var highlightColor = 'limegreen';
+ 
+/****************************************/
+ 
+var createdMain = '';
+var createdTitle = '';
+ 
+var prev = 'main';
+var grid = new Array();
+var gridWords = new Array();
+var xyArray = new Array();
+var inserted = new Array();
+var wordsArray = new Array();
+var a = 0;
+var d = 0;
+var xnum = 0;
+var ynum = 0;
+var dir = 0;
+var mouseIsDown = 0;
+var xy = '';
+var revealed = '';
+var mistakes = 0;
+var puzzleActive = 0;
+var inputActive = 0;
+ 
+var rows;
+var cols;
+var fontSize;
+ 
+function eventHandle() {
+  document.onkeypress=keycheck;
+  document.onmousedown=omd;
+  document.onmouseup=omu;
+  document.onselectstart=omd;
+}
+ 
+function omd() { if(!puzzleActive) { return true; } mouseIsDown = 1; return false; }
+ 
+function omu() { if(!puzzleActive) { return true; } mouseIsDown = 0; if(highlighted.length) clearHighlighted(0,0); return false; }
+ 
+function showStart() {
+  createdTitle = document.createElement("DIV");
+  createdTitle.innerHTML = title;
+  document.getElementById('title').appendChild(createdTitle);
+}
+ 
+var menuToggle = 1;
+function keycheck(e) {
+  var code;
+  if (!e) var e = window.event;
+  if (e.keyCode) code = e.keyCode;
+  else if (e.which) code = e.which;
+  if(code==13) { // Enter key
+    if(puzzleActive) {
+    } else if(!inputActive) {
+      if(!document.getElementById('inputWords').focus()) {
+        document.getElementById('create').onclick();
+      }
+    }
+  }
+}
+ 
+function showMenu() {
+  document.getElementById('puzzle').style.display = 'none';
+  document.getElementById('menuButton').style.display = 'none';
+  document.getElementById('menu').style.display = 'block';
+  document.getElementById('buttons').style.display = 'block';
+  document.getElementById('returnToGame').style.visibility = 'visible';
+  puzzleActive = 0;
+}
+ 
+function returnToGame() {
+  document.getElementById('menuButton').style.display = 'block';
+  document.getElementById('puzzle').style.display = 'block';
+  document.getElementById('menu').style.display = 'none';
+  document.getElementById('buttons').style.display = 'none';
+  document.getElementById('returnToGame').style.visibility = 'hidden';
+  puzzleActive = 1;
+}
+ 
+function createPuzzle() {
+ 
+  puzzleActive = 1;
+ 
+  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+ 
+  if(createdMain) {
+    document.getElementById('puzzleText').removeChild(createdMain);
+    inserted = new Array();
+  }
+ 
+  var tempWords = document.getElementById('inputWords').value;
+  tempWords = tempWords.replace(/ /g,",");
+  tempWords = tempWords.replace(/\n/g,",");
+  tempWords = tempWords.replace(/\r/g,",");
+  tempWords = tempWords.replace(/[^a-z,]/gi,"");
+  tempWords = tempWords.split(',');
+ 
+  var words = new Array();
+  for(var a=tempWords.length-1;a>=0;a--) {
+    var good = true;
+    for(var b=words.length-1;b>=0;b--) {
+      if(tempWords[a]==words[b]) { good = false; break; }
+    }
+    if(good) words[words.length] = tempWords[a];
+  }
+ 
+  rows = (document.getElementById('numRows').value!='') ? parseInt(document.getElementById('numRows').value) : defRows;
+  cols = (document.getElementById('numCols').value!='') ? parseInt(document.getElementById('numCols').value) : defCols;
+  fontSize = (document.getElementById('fontSize').value!='') ? parseInt(document.getElementById('fontSize').value) : defFontSize;
+ 
+  var echoThis = '';
+ 
+  document.getElementById('menu').style.display = 'none';
+  document.getElementById('buttons').style.display = 'none';  
+ 
+  for(var x=1;x<=rows;x++) {
+    for(var y=1;y<=cols;y++) {
+      a = ((x-1)*cols)+y;
+      grid[a] = '';
+      gridWords[a] = '';
+      xyArray[a] = '';
+    }
+  }
+ 
+  d = 0;
+  var tempInserted = new Array();
+  for(var ab=(words.length-1);ab>=0;ab--) {
+    for(var tries=1;tries<=retries;tries++) {
+      if(words[ab]!='') {
+        make_random();
+        if(check(words[ab],1)) { tempInserted[d]=words[ab]; xyArray[tempInserted[d]]=xy; d++; break; }
+      }
+    }
+  }
+ 
+  inserted = tempInserted;
+  tempInserted = words = new Array();
+ 
+  echoThis += '<table border="0" style="margin-left:auto;margin-right:auto;font-size:'+fontSize+'mm"><tr><td style="vertical-align:top;border:0px;">';
+ 
+  var t = 1;
+  var ran = 0;
+  for(var x=1;x<=rows;x++) {
+    for(var y=1;y<=cols;y++) {
+      a = ((x-1)*cols)+y;
+      var gridWordsTemp = new Array();
+      var gridTemp = '';
+      var xyTemp = '';
+      if(gridWords[a]!='') {
+        gridWordsTemp = gridWords[a].split(',');
+        var c = gridWordsTemp.length-1;
+ 
+        gridTemp = 'w=new Array(\''+gridWordsTemp[0]+'\'';
+ 
+        xyTemp = 'x=new Array(\''+xyArray[gridWordsTemp[0]].replace(/,/gi,'|')+'\'';
+ 
+        for(var z=1;z<c;z++) { gridTemp += ',\''+gridWordsTemp[z]+'\''; xyTemp += ',\''+xyArray[gridWordsTemp[0]].replace(/,/gi,'|')+'\''; }
+ 
+        gridTemp += ')';
+        xyTemp += ')';
+      }
+ 
+      ran = Math.floor(Math.random()*chars.length);
+ 
+      var gridChar = grid[t].toUpperCase();
+      var ranChar = chars.charAt(ran).toUpperCase();
+ 
+      if(grid[t]) { echoThis += '<span id="_'+t+'" style="font-family:Courier New;padding:0px '+(fontSize+1)+'px 0px '+(fontSize+1)+'px;" onmouseover="if(mouseIsDown) cellHighlight('+t+');" onmousedown="mouseIsDown=1;cellHighlight('+t+');" onmouseup="'+gridTemp+';'+xyTemp+';clearHighlighted(x,w);">'+gridChar+'</span>'; }
+      else { echoThis += '<span id="_'+t+'" style="font-family:Courier New;padding:0px '+(fontSize+1)+'px 0px '+(fontSize+1)+'px;" onmouseover="if(mouseIsDown) cellHighlight('+t+');" onmousedown="mouseIsDown=1;cellHighlight('+t+');" onmouseup="var w,x=0;clearHighlighted(x,w);">'+ranChar+'</span>'; }
+ 
+      if((t%cols)==0) echoThis += '<br />';
+ 
+      t++;
+    }
+  }
+ 
+  echoThis += '</td><td style="width:0px;border:0px;">&nbsp;</td><td style="padding-left:20px;vertical-align:top;border:0px;border-left:1px solid '+fontColor+';font-family:Courier New;">';
+ 
+  echoThis += '<span style="float:left;">';
+ 
+  a=(inserted.length-1);
+  for(var i=0;i<=a;i++) {
+    var xyArrayTemp = xyArray[inserted[i]].split(',');
+    var xyTemp = 'v=\''+xyArrayTemp+'\'';
+ 
+    var inWord = inserted[i].toUpperCase();
+ 
+    echoThis += '<div id="'+inserted[i]+'"><span id="'+inserted[i]+'r" onmousedown="'+xyTemp+';r(\''+inserted[i]+'\',v);"> (?) </span>'+inWord+'</div>';
+    if(((i+1)%rows)==0) echoThis += '</span><span style="float:left;">';
+  }
+ 
+  echoThis += '</span>';
+ 
+  echoThis += '</td></tr></table>';
+ 
+  createdMain = document.createElement("DIV");
+  createdMain.innerHTML = echoThis;
+  document.getElementById('puzzleText').appendChild(createdMain);
+ 
+  document.getElementById('puzzle').style.display = 'block';
+  document.getElementById('menuButton').style.display = 'block';
+  menuToggle = 0;
+}
+ 
+function r(cross,revealLetters) {
+  revealLetters = revealLetters.split(",");
+  var id = '';
+ 
+  if(!mouseIsDown) {
+    for(var i=0;i<revealLetters.length-1;i++) {
+      id = revealLetters[i];
+      document.getElementById('_'+id).style.color = 'red';
+    }
+    revealed+=cross+'r,';
+    hideQM(cross+'r');
+    lineme(cross,1);
+ 
+  } else {
+    for(var i=0;i<revealLetters.length;i++) {
+      id = revealLetters[i];
+      document.getElementById('_'+id).style.backgroundColor = highlightColor;
+    }
+    hideQM(cross+'r');
+    lineme(cross,0);
+  }
+}
+ 
+function hideQM(id) {
+  document.getElementById(id).style.visibility = 'hidden';
+}
+ 
+function lineme(id,revealed) {
+  document.getElementById(id).style.textDecoration = 'line-through';
+}
+ 
+var highlighted = new Array();
+var startingCell = 0;
+var endingCell = 0;
+var startX = 0;
+var startY = 0;
+function cellHighlight(cell) {
+ 
+  var good = true;
+  var x = Math.ceil(cell/cols);
+  var y = (cols-((x*cols)-cell));
+ 
+  endingCell = cell;
+  if(startingCell==0) {
+    startingCell = cell;
+    startX = Math.ceil(cell/cols);
+    startY = (cols-((x*cols)-cell));
+  }
+ 
+  var relX = x - startX;
+  var relY = y - startY;
+ 
+  if(startingCell==endingCell) {
+    document.getElementById('_'+cell).style.backgroundColor = highlightColor;
+    highlighted[highlighted.length]=cell;
+  } else if(relY==0 && relX<0) {
+    cleanUp();
+    for(var a=startingCell;;a=(a-cols)) {
+      highlightMe(a);
+      if(a==endingCell) break;
+    }
+  } else if(relY==0 && relX>0) {
+    cleanUp();
+    for(var a=startingCell;;a=(a+cols)) {
+      highlightMe(a);
+      if(a==endingCell) break;
+    }
+  } else if(relX==0 && relY<0) {
+    cleanUp();
+    for(var a=startingCell;;a=(a-1)) {
+      highlightMe(a);
+      if(a==endingCell) break;
+    }
+  } else if(relX==0 && relY>0) {
+    cleanUp();
+    for(var a=startingCell;;a=(a+1)) {
+      highlightMe(a);
+      if(a==endingCell) break;
+    }
+  } else if(Math.abs(relX)==Math.abs(relY)) {
+    cleanUp();
+    if(relX<0 && relY<0) {
+      for(var a=startingCell;;a=(a-(cols+1))) {
+        highlightMe(a);
+        if(a==endingCell) break;
+      }
+    } else if(relX<0 && relY>0) {
+      for(var a=startingCell;;a=(a-(cols-1))) {
+        highlightMe(a);
+        if(a==endingCell) break;
+      }
+    } else if(relX>0 && relY<0) {
+      for(var a=startingCell;;a=(a+cols-1)) {
+        highlightMe(a);
+        if(a==endingCell) break;
+      }
+    } else if(relX>0 && relY>0) {
+      for(var a=startingCell;;a=(a+cols+1)) {
+        highlightMe(a);
+        if(a==endingCell) break;
+      }
+    }
+  } else { good = false; }
+}
+ 
+function clearHighlighted(xy,word) {
+  var good = false;
+  var temp = 0;
+  if(xy!=0) {
+    for(var x=xy.length-1;x>=0;x--) {
+      var xyTemp = xy[x].split("|");
+      var xyt = '';
+      if(highlighted.length==xyTemp.length-1) {
+        for(var a=xyTemp.length-1;a>=0;a--) {
+          for(var b=xyTemp.length-2;b>=0;b--) {
+            var highTemp = highlighted[b].toString();
+            if(highTemp.charAt(0)=='x') xyt='x'+xyTemp[a];
+            else xyt = xyTemp[a];
+            if(xyt==highlighted[b]) { temp++; break; }
+          }
+        }
+        if(temp==xyTemp.length-1) {
+          if(document.getElementById(word[x]).style.textDecoration!='line-through') {
+            wordsArray[wordsArray.length] = word[x];
+            hideQM(word[x]+'r');
+            lineme(word[x],0);
+            good = true;
+          } else if(document.getElementById('_'+highlighted[0]).style.color=='red') {
+            good = false;
+          } else { good = true; }
+        }
+      }
+    }
+  }
+ 
+  if(!good) {
+    if(highlighted.length>0) mistakes++;
+    for(var a=highlighted.length-1;a>=0;a--) {
+      var highTemp = highlighted[a].toString();
+      if(highTemp.charAt(0)!='x') {
+        document.getElementById('_'+highlighted[a]).style.backgroundColor = backgroundColor;
+      }
+    }
+  }
+  highlighted = new Array();
+  startingCell = 0;
+  savedGame = 0;
+}
+ 
+function cleanUp() {
+  for(var a=highlighted.length-1;a>=0;a--) {
+    var highTemp = highlighted[a].toString();
+    if(highTemp.charAt(0)!='x') {
+      document.getElementById('_'+highlighted[a]).style.backgroundColor = backgroundColor;
+    }
+  }
+  highlighted = new Array();
+}
+ 
+function highlightMe(a) {
+  if(document.getElementById('_'+a).style.backgroundColor != highlightColor) {
+    document.getElementById('_'+a).style.backgroundColor = highlightColor;
+    highlighted[highlighted.length]=a;
+  } else {
+    highlighted[highlighted.length]='x'+a;
+  }
+}
+ 
+function make_random() {
+  direction();
+ 
+  xnum = Math.ceil(Math.random()*rows);
+  ynum = Math.ceil(Math.random()*cols);
+}
+ 
+function direction() {
+  dir = Math.ceil(Math.random()*8);
+}
+ 
+function check(word,add) {
+  xy = '';
+  var count = word.length;
+ 
+  var x = xnum;
+  var y = ynum;
+ 
+  if(dir==1) {
+    if((xnum-count)>=0 && (ynum-count)>=0) {
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        if(grid[a]!='' && grid[a]!=word.charAt(i)) return 0;
+        x--; y--;
+      }
+      x = xnum; y = ynum;
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        grid[a] = word.charAt(i);
+        xy += a+',';
+        gridWords[a]+=word+',';
+        x--; y--;
+      }
+    } else {
+      return 0;
+    }
+  }
+  else if(dir==2) {
+    if((xnum-count)>=0) {
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        if(grid[a]!='' && grid[a]!=word.charAt(i)) return 0;
+        x--;
+      }
+      x = xnum; y = ynum;
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        grid[a] = word.charAt(i);
+        xy += a+',';
+        gridWords[a]+=word+',';
+        x--;
+      }
+    } else {
+      return 0;
+    }
+  }
+  else if(dir==3) {
+    if((xnum-count)>=0 && (ynum+(count-1))<=cols) {
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        if(grid[a]!='' && grid[a]!=word.charAt(i)) return 0;
+        x--; y++;
+      }
+      x = xnum; y = ynum;
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        grid[a] = word.charAt(i);
+        xy += a+',';
+        gridWords[a]+=word+',';
+        x--; y++;
+      }
+    } else {
+      return 0;
+    }
+  }
+  else if(dir==4) {
+    if((ynum-count)>=0) {
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        if(grid[a]!='' && grid[a]!=word.charAt(i)) return 0;
+        y--;
+      }
+      x = xnum; y = ynum;
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        grid[a] = word.charAt(i);
+        xy += a+',';
+        gridWords[a]+=word+',';
+        y--;
+      }
+    } else {
+      return 0;
+    }
+  }
+  else if(dir==5) {
+    if((ynum+(count-1))<=cols) {
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        if(grid[a]!='' && grid[a]!=word.charAt(i)) return 0;
+        y++;
+      }
+      x = xnum; y = ynum;
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        grid[a] = word.charAt(i);
+        xy += a+',';
+        gridWords[a]+=word+',';
+        y++;
+      }
+    } else {
+      return 0;
+    }
+  }
+  else if(dir==6) {
+    if((xnum+(count-1))<=rows && (ynum-count)>=0) {
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        if(grid[a]!='' && grid[a]!=word.charAt(i)) return 0;
+        x++; y--;
+      }
+      x = xnum; y = ynum;
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        grid[a] = word.charAt(i);
+        xy += a+',';
+        gridWords[a]+=word+',';
+        x++; y--;
+      }
+    } else {
+      return 0;
+    }
+  }
+  else if(dir==7) {
+    if((xnum+(count-1))<=rows) {
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        if(grid[a]!='' && grid[a]!=word.charAt(i)) return 0;
+        x++;
+      }
+      x = xnum; y = ynum;
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        grid[a] = word.charAt(i);
+        xy += a+',';
+        gridWords[a]+=word+',';
+        x++;
+      }
+    } else {
+      return 0;
+    }
+  }
+  else if(dir==8) {
+    if((xnum+(count-1))<=rows && (ynum+(count-1))<=cols) {
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        if(grid[a]!='' && grid[a]!=word.charAt(i)) return 0;
+        x++; y++;
+      }
+      x = xnum; y = ynum;
+      for(var i=0;i<count;i++) {
+        a = ((x-1)*cols)+y;
+        grid[a] = word.charAt(i);
+        xy += a+',';
+        gridWords[a]+=word+',';
+        x++; y++;
+      }
+    } else {
+      return 0;
+    }
+  }
+ 
+  return 1;
+}
+ 
+</script>
+ 
+</head>
+ 
+<body onload="eventHandle();showStart();" style="margin:1px;">
+ 
+<div>
+ 
+  <div id="header">
+    <div style="margin-bottom:5px;margin-top:5px;font-size:14px;font-family:Arial;font-weight:bold;" id="title"></div>
+    <div id="menuButton" style="font-size:10px;display:none;" onclick="showMenu();">[MENU]</div>
+  </div>
+ 
+  <div id="menu">
+ 
+    <div id="_main" style="display:block" class="tabcontent">
+      <div class="inputTitle">Enter your words</div>
+      <div><textarea cols="28" rows="5" name="inputWords" id="inputWords" onfocus="inputActive=1;" onblur="inputActive=0;"></textarea></div>
+    </div>
+ 
+    <div id="_options" style="display:block;" class="tabcontent">
+      <table cellspacing="0" class="invis">
+      <tr><td><div class="inputTitle">Rows</div></td><td><div><input type="text" id="numRows" value="" size="2" maxlength="3" /></div></td></tr>
+      <tr><td><div class="inputTitle">Columns</div></td><td><div><input type="text" id="numCols" value="" size="2" maxlength="3" /></div></td></tr>
+      <tr><td><div class="inputTitle">Font size</div></td><td><div><input type="text" id="fontSize" value="" size="2" /> mm</div></td></tr>
+      </table>
+    </div>
+  </div>
+ 
+  <div id="buttons">
+      <input type="button" value="Create" id="create" onclick="createPuzzle();" />&nbsp;<input type="button" value="Return" id="returnToGame" style="visibility:hidden;" onclick="returnToGame();" />
+  </div>
+ 
+</div>
+ 
+<div id="puzzle" style="display:none;">
+  <table border="0"><tr><td style="text-align:center;border:0px;">
+    <div id="puzzleText"></div>
+  </td></tr></table>
+</div>
+ 
+</body>
+ 
+</html>

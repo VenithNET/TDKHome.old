@@ -1,0 +1,18 @@
+<html>
+<HEAD>
+<title>Checkboxes</title>
+<meta name="viewport" content="width=240">
+<style> 
+body { margin: 0px; }
+#screen { width: 240px; height:175px; overflow: hidden; }
+#bottom { width: 240px; height:1px; overflow: hidden; }
+</style>
+</head>
+<body bgcolor=slate>
+<div id="screen">
+<script>
+var total = 0;var play = false;function display(element) {var now = new Date();if (!play) {play = true;startTime = now.getTime();}if (now.getTime() - startTime > 20000) {element.checked = !element.checked;return;}if (element.checked){total++}else{total--}element.form.num.value = total;}function restart(form) {total = 0;play = false;for (var i = 1; i <= 112; ++i) {form.elements[i].checked = false;}}document.write('<FORM><CENTER><INPUT TYPE="text" VALUE="0" NAME="num" SIZE=20 onfocus="this.blur()" readonly><INPUT TYPE="button" VALUE="restart" onclick="restart(this.form)"><br>');for (var i = 0; i <8; ++i) {for (var j = 0; j < 14; ++j) {document.write('<INPUT TYPE="checkbox" onclick="display(this)">');}document.write('<BR>');}document.write("</CENTER><font size='1'>Check as many checkboxes as you can<a href='javascript:alert("+'"'+"...in 20 seconds. The timer starts once you click your first checkbox. Can you check all 112?"+'"'+");'>...</a></font></FORM>");
+</script>
+</div>
+</body>
+</html>

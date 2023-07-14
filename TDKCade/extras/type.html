@@ -1,0 +1,87 @@
+<html>
+<HEAD>
+<title>Typing Test</title>
+<meta name="viewport" content="width=240">
+<style>
+body { margin: 0px; }
+#topscreen, #bottomscreen { width: 240px; height:176px; overflow: hidden; }
+</style>
+<!-- Original: Michael Tartaglia <stonedstan@hotmail.com> -->
+<!-- Web Site:  http://www.geocities.com/SiliconValley/Horizon/5235 -->
+<!-- http://javascript.internet.com -->
+<SCRIPT>
+msg = new Array("Practicing with your typing can greatly help your overall computer skills.",
+"A new computer is sold in the US every hour!",
+"When do birds migrate from North to South?",
+"Perplexing phrases, like this one, are tougher to type.")
+word = 10
+function m() {
+msg = new Array("Practicing with your typing can greatly help your overall computer skills.",
+"A new computer is sold in the US every hour!",
+"When do birds migrate from North to South?",
+"Perplexing phrases, like this one, are tough to type.")
+word = 10
+}
+function e() {
+msg = new Array("If you can correctly, and quickly, type this perplexing sentence, you are one superb typist!",
+"You are one superb typist if you can correctly, and quickly, type this long phrase.",
+"I believe you're a good typist, so I believe you will correctly copy this statement!",
+"Because this is not a fairly simple phrase, could you swiftly, and precisely, copy it?")
+word = 15
+}
+function s() {
+msg = new Array("Computers are the medium of the future.",
+"Can you type this phrase rather quickly?",
+"Who is the President of the US?",
+"I believe that you can type well!")
+word = 7
+}
+function beginIt() {
+randNum = Math.floor((Math.random() * 10)) % 4
+msgType = msg[randNum]
+day = new Date();
+startType = day.getTime();
+document.theForm.given.value = msgType
+document.theForm.typed.focus();
+document.theForm.typed.select();
+}
+function cheat() {
+alert("You can not change that!");
+document.theForm.typed.focus();
+}
+function stopIt() {
+dayTwo = new Date();
+endType = dayTwo.getTime();
+totalTime = ((endType - startType) / 1000)
+spd = Math.round((word/totalTime) * 60)
+if (document.theForm.typed.value == document.theForm.given.value) {
+alert("\nYou typed a " + word + " word sentence in " 
++ totalTime + " seconds, a speed of about " + spd + " words per minute!")
+}
+else {
+alert("You made an error, but typed at a speed of " + spd + " words per minute.")
+   }
+}
+</SCRIPT>
+</HEAD>
+<BODY>
+<div id="topscreen">
+<CENTER>
+<FORM name="theForm">
+<textarea name="given" cols=30 rows=10 wrap=on onFocus="cheat()">Tap start to begin.</textarea>
+</CENTER>
+</div>
+<div id="bottomscreen">
+<CENTER>
+<input type=radio name="sme" value="Beginner" onClick="s()" checked>Beginner
+<input type=radio name="sme" value="Novice" onClick="m()">Novice<br>
+<input type=radio name="sme" value="Expert" onClick="e()">Expert<br><br><br><br><br>
+<input type=text name="typed" size=30>
+<input type=button value="START" name="start" onClick="beginIt()">
+<input type=button value="STOP"  name="stop"  onClick="stopIt()">
+</FORM>
+</CENTER>
+</div>
+<script>document.body.scrollTop = 176;</script>
+</BODY>
+</html>
