@@ -1,0 +1,330 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<HTML lang="en">
+<head>
+
+<link href='http://fonts.googleapis.com/css?family=Molengo&subset=latin' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cabin:bold' rel='stylesheet' type='text/css'>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../shared/sean.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../shared/printsean.css" type="text/css" media="print">
+<link rel="stylesheet" href="../shared/seanhandheld.css" type="text/css" media="handheld">
+
+<!-- hd link -->
+
+
+<title>Play Misfit by Sean McManus</title>
+<META name="description" content="Sean's Nintendo DS Site">
+
+
+<!-- 
+
+
+
+All games on this site are (C) Sean McManus - www.sean.co.uk
+      All rights reserved
+      Unauthorised reproduction prohibited 
+
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="meta" href="http://www.sean.co.uk/labels.rdf" type="application/rdf+xml" title="ICRA labels" >
+<meta http-equiv="pics-Label" content='(pics-1.1 "http://www.icra.org/pics/vocabularyv03/" l gen true for "http://sean.co.uk" r (n 1 s 2 v 0 l 1 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 0) gen true for "http://www.sean.co.uk" r (n 1 s 2 v 0 l 1 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 0))' >
+
+
+
+ <STYLE type="text/css">
+IMG {padding:0px;}
+ </STYLE>
+
+
+<script language="javascript">
+
+
+var offset=5;
+
+function initialise()
+{
+oldspace=8;
+correcttiles=0;
+emptytile=8;
+tileno=8;
+automated=0;
+shifts=0;
+setstartscn();
+document.settings.theirgoes.value=0;
+}
+
+
+function setstartscn()
+{
+for (g=0; g<9; g++)
+{wheretilesare[g]=g;
+document.images[g+offset].src=puzzlenames[chosenpuzzle]+g+".gif";
+}
+document.images[8+offset].src="gfx/black.gif";
+document.thumbnail.src=puzzlenames[chosenpuzzle]+"thumbnail.gif";
+}
+
+
+
+function outputcheck()
+{
+alert(wheretilesare[0]+" "+wheretilesare[1]+" "+wheretilesare[2]+" "+wheretilesare[3]+" "+wheretilesare[4]+" "+wheretilesare[5]+" "+wheretilesare[6]+" "+wheretilesare[7]+" "+wheretilesare[8]+" ");
+}
+
+function shuffle(noshuffles)
+{
+
+for (i=0; i<noshuffles; i++)
+{
+automated=1;
+numberofdirections=0;
+if (emptytile!=2 && emptytile!=5 && emptytile!=8 && oldspace!=emptytile+1) {directionoffsets[numberofdirections]=1; numberofdirections++;}
+if (emptytile!=0 && emptytile!=3 && emptytile!=6 && oldspace!=emptytile-1) {directionoffsets[numberofdirections]=-1; numberofdirections++;}
+if (emptytile!=0 && emptytile!=1 && emptytile!=2 && oldspace!=emptytile-3) {directionoffsets[numberofdirections]=-3; numberofdirections++;}
+if (emptytile!=6 && emptytile!=7 && emptytile!=8 && oldspace!=emptytile+3) {directionoffsets[numberofdirections]=3; numberofdirections++;}
+numberofdirections--;
+
+tileno=emptytile+directionoffsets[Math.round(numberofdirections*Math.random())];
+oldspace=emptytile;
+emptytile=slide(tileno,emptytile);
+
+}
+
+automated=0;
+// that variable stops it declaring a win if it happens during shuffling
+
+}
+
+
+function slide(tileno,emptyspace)
+{
+var tiledifference=emptyspace-tileno;
+var okflag=0;
+
+if (tiledifference==1 && tileno!=2 && tileno!=5 && tileno!=8) {okflag=1;}
+if (tiledifference==-1 && tileno!=0 && tileno!=3 && tileno!=6) {okflag=1;}
+if (tiledifference==-3 && tileno!=0 && tileno!=1 && tileno!=2) {okflag=1;}
+if (tiledifference==3 && tileno!=6 && tileno!=7 && tileno!=8) {okflag=1;}
+
+if (okflag==1)
+{
+wheretilesare[emptyspace]=wheretilesare[tileno];
+document.images[emptyspace+offset].src=puzzlenames[chosenpuzzle]+wheretilesare[tileno]+".gif";
+document.images[tileno+offset].src="gfx/black.gif";
+wheretilesare[tileno]=8;
+emptyspace=tileno;
+checkfinished();
+
+if (automated==0) {shifts++; document.settings.theirgoes.value=shifts;}
+}
+
+return emptyspace;
+}
+
+function checkfinished()
+{
+correcttiles=0;
+for (j=0; j<8; j++)
+{if (wheretilesare[j]==j) {correcttiles++}}
+
+if (correcttiles==8 && automated==0) {document.images[8+offset].src=puzzlenames[chosenpuzzle]+"8.gif";alert("Finished!\r\nYou took "+shifts+" goes to complete the puzzle.");}
+
+}
+
+</script>
+
+
+</HEAD>
+
+<BODY>
+
+	<script type="text/javascript">
+	
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-76519-1']);
+	  _gaq.push(['_setDomainName', 'sean.co.uk']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
+	<script language="javascript">var offset=31;</script>
+
+<div class="screenonly">
+<a name="top"></a>
+<div id="skip"><a href="#body" accesskey="s" class="acclink">Skip navigation</a><a href="http://www.sean.co.uk/help/accessibility.shtm" accesskey="0" class="acclink">Accessibility</a><a href="http://www.sean.co.uk/help/search.shtm" accesskey="4" class="acclink">Search</a><a href="http://www.sean.co.uk/help/help.shtm" accesskey="6" class="acclink">Help</a></div>
+
+
+	
+		<div class="all-header" >
+			<div id="topright_nav">
+				<ul>
+                <li><a id="searchnav" class="navlink" href="http://www.sean.co.uk/about.shtm">About Me</a></li>
+					<li><a id="searchnav" class="navlink" href="http://www.sean.co.uk/help/search.shtm">Search</a></li>
+					<li><a id="connav" class="navlink" href="http://www.sean.co.uk/contact.shtm">Contact</a></li>
+				</ul>
+			</div>
+			<div id="sub_title">
+				<a class="sean_iconlink" href="http://www.sean.co.uk"><img src="http://www.sean.co.uk/shared/icon_230x230.png" alt="It's Sean!" class="nofotomoto"></a>
+				<p>UK freelance journalist, author<br />and writer <strong>Sean McManus</strong></p>
+			</div>		
+			<a name="navanchor"></a>
+            <div class="horiznav">
+				<nav>
+					<ul>
+						<!-- <li><a id="homenav" class="navlink space_right" href="http://www.sean.co.uk/index.shtm">Home</a></li> -->
+						<li><a id="booksnav" class="navlink space_right" href="http://www.sean.co.uk/books/index.shtm">Books</a></li>
+						<li><a id="servicesnav" class="navlink space_right" href="http://www.sean.co.uk/services/index.shtm">Services</a></li>
+                        <li><a id="shopnav" class="navlink space_right" href="http://www.sean.co.uk/shop/index.shtm">Shop</a></li>
+                        <li><a id="blonav" class="navlink space_right" href="http://news.sean.co.uk/">Blog</a></li>
+                        <li><a id="servicesnav" class="navlink space_right" href="http://www.sean.co.uk/photography/stock/index.shtm">Photos</a></li>
+						<li><a id="othernav" class="navlink" href="http://www.sean.co.uk/a/index.shtm">Other Stuff</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+        
+</div> <!-- screenonly -->
+<div class="printnotice">Printed from www.sean.co.uk. &copy; Sean McManus.</div>        
+        
+		<div id="wrapper">
+<!--		<p style="margin-left:100px;font-size:16px;"><a href="http://www.sean.co.uk/newsletter.shtm">NEW: Sign up for my newsletter!</a></p>-->
+		
+
+<div class="treebar">
+<!-- old tbi -->
+<a href="../index.shtm">Home</a> > <a href="index.shtm">NDS</a> > Misfit
+</div>
+
+<div class="main">
+<a name="body"> </a>
+
+<h1>Misfit: Puzzle game for the Nintendo DS</h1>
+
+
+<p>This game is for the Nintendo DS Browser. You can also <a href="../a/javascriptgames/misfit/index.shtm">play Misfit using a normal PC browser</a>.
+<p>Touch a tile to slide it into the empty space. Your target is to rearrange the puzzle in 30 goes or less.</p>
+
+
+<form name="settings">
+
+<center>
+
+<input type="button" value="Shuffle it!"  onClick="initialise();shuffle(30);">
+
+
+<table cellpadding=0 cellspacing=0 border=2>
+<TR><TD>
+<IMG SRC="gfx/black.gif" BORDER=0 WIDTH=60 HEIGHT=44 vspace=0 hspace=0 align="left" onClick='emptytile=slide(0,emptytile);'>
+</td>
+<TD>
+
+<IMG SRC="gfx/black.gif"  BORDER=0 WIDTH=60 HEIGHT=44 vspace=0 hspace=0 align="left" onClick='emptytile=slide(1,emptytile);'></td>
+<TD>
+
+<IMG SRC="gfx/black.gif"  BORDER=0 WIDTH=60 HEIGHT=44 vspace=0 hspace=0 align="left" onClick='emptytile=slide(2,emptytile);'>
+</td>
+
+<TR><TD>
+<IMG SRC="gfx/black.gif"  BORDER=0 WIDTH=60 HEIGHT=44 vspace=0 hspace=0 align="left" onClick='emptytile=slide(3,emptytile);'>
+</td>
+<TD>
+<IMG SRC="gfx/black.gif"  BORDER=0 WIDTH=60 HEIGHT=44 vspace=0 hspace=0 align="left" onClick='emptytile=slide(4,emptytile);'>
+</td>
+<TD>
+<IMG SRC="gfx/black.gif"  BORDER=0 WIDTH=60 HEIGHT=44 vspace=0 hspace=0 align="left" onClick='emptytile=slide(5,emptytile);'>
+</td>
+
+<TR><TD>
+<IMG SRC="gfx/black.gif"  BORDER=0 WIDTH=60 HEIGHT=44 vspace=0 hspace=0 align="left" onClick='emptytile=slide(6,emptytile);'>
+</td>
+<td>
+<IMG SRC="gfx/black.gif"  BORDER=0 WIDTH=60 HEIGHT=44 vspace=0 hspace=0 align="left" onClick='emptytile=slide(7,emptytile);'>
+</td>
+<TD>
+<IMG SRC="gfx/black.gif" WIDTH=60 HEIGHT=44 BORDER=0 vspace=0 hspace=0 align="left" onClick='emptytile=slide(8,emptytile);'>
+</td>
+<TR>
+<TD colspan=3>
+<IMG SRC="gfx/misfit/thumbnail.gif" name="thumbnail"  ALT="Thumbnail of finished puzzle" WIDTH=45 HEIGHT=33 BORDER=0 align="right">Your goes:<input type=text size=5 value="0" name="theirgoes">
+</td>
+
+</table>
+</center>
+
+<h2>Credits</h2>
+Game &copy;2003-2007 Sean McManus. Images &copy;Brian Eno. Used by permission. Created using <a href="http://www.sean.co.uk/photography/lightbox/brian_eno_77_million_paintings.shtm">77 Million Paintings</a> (review at my main site).
+</center>
+</form>
+
+<script language="Javascript">
+
+
+var oldspace=8;
+var correcttiles=0;
+var emptytile=8;
+var tileno=8;
+var automated=0;
+var shifts=0;
+directionoffsets=new Array(0,0,0,0);
+wheretilesare=new Array(0,1,2,3,4,5,6,7,8);
+puzzlenames=new Array("gfx/misfit/circuit/","gfx/misfit/");
+chosenpuzzle=1;
+setstartscn();
+
+</script>
+
+
+</table>
+
+</div>
+
+
+<div class="main">
+<a href="http://www.sean.co.uk/nds/index.shtm">www.sean.co.uk/nds</a> | <a href="#top">Top</a> | <a href="http://www.sean.co.uk/index.shtm">Main site</a>
+</div>
+
+</div>
+</BODY>
+</HTML>

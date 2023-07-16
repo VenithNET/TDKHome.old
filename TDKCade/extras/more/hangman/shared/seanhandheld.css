@@ -1,0 +1,98 @@
+<!--
+
+IMG {max-width:150px;padding:4px;clear:both; display:block; margin-left:auto; margin-right:auto;}
+
+.notnds{display:none;}
+
+.access{font-size:x-small;background: #f0f0f0;padding:2px;position:absolute;left:0px;top:0px;border:1px #000000 solid;border-right:1px #000000 solid; border-left:1px #000000 solid; }
+.newtop{width:220px;color:#ffffff;position:relative;top:8px;background:#000000; border:2px #000000 solid;margin:auto;margin-bottom:16px;padding:2px;}
+.brandbar{position:relative;left:0px;top:8px;color:#000000;margin-bottom:8px;margin-top:0px;margin-left:0px;padding:0px;font-size:xx-large;}
+.brandbar A {text-decoration:none; color:#000000;font:acidic;}
+.brandbar A:hover {text-decoration:none; color:#ff0000;}
+.navlink{color:#ffffff;padding:2px;margin:0px;border-right:0px solid #cc99cc;text-decoration:none;}
+.navlink A:hover,.navlink A:active,.navlink A:focus {text-decoration:underline;background:#ffff99;}
+.acclink{background-color:#ffffff;font-size:small;padding:2px;margin:2px;border-right:1px solid #cc99cc;text-decoration:none;}
+
+.datestamp {color:#000000;text-align:left;font-style:italic;margin-top:0px;margin-bottom:0px;padding-bottom:0px;font-size:small;}
+
+h1{padding:2px;border-bottom:2px solid #ff0000;background-color:#ffffff;color: #cc0000;font-size:x-large;}
+h2{color:#ffffff;background-color:#cc0000;padding:4px;margin-top:8px;border:1px solid #000000;font-size:medium;}
+
+.treebar{width:220px; background-color:#ffffff;text-align:left;color:#000000;margin-bottom:16px;margin:auto;padding:2px;border:1px solid #000000;font-size:small;}
+.treebar IMG {display:none;}
+.treebar A {text-decoration:none;}
+A:hover  {text-decoration:underline; color:#ff0000;background:#ffffff;}
+
+#wrapper{width: 230px;
+margin:0 auto;
+padding:00px;
+font: normal normal 88% Verdana, sans-serif;
+}
+.main{
+background:#ffffff;
+padding: 2px;
+margin:4px;
+width:220px;
+
+}
+.more{background-color:#ffffff;text-align:left;color:#000000;margin-right:0px;margin-bottom:16px;padding:16px;border:1px solid #000000;margin-left:140px;}
+.more A:hover,.more A:active,.more A:focus {text-decoration:underline;background-color:#fff0f0;}
+.more h2{background-color:#ffffff;padding:4px;border:1px solid #cc99cc;font-size:medium;}
+
+body{font-family:Verdana, Arial, Helvetica, sans-serif; background-color:#ff6969;color:#000000;width:230px;font-size:12px;}
+UL LI{list-style-image: url(/web/20140601065233im_/http://www.sean.co.uk/shared/gfx/bobble.gif);text-indent: 0px; }
+UL LI LI{list-style-image: url(/web/20140601065233im_/http://www.sean.co.uk/shared/gfx/bobble2.gif);text-indent: 8px;}
+UL LI LI{list-style-image: url(/web/20140601065233im_/http://www.sean.co.uk/shared/gfx/bobble3.gif);text-indent: 16px;}
+
+.potm{padding:16px;background-color:#fff0f0;text-align:center;margin-top:16px;color:#000000;border:1px solid #000000;font-size:medium;}
+.adverts{text-align:left;color:#000000;margin:16px;padding:4px;font-size:medium;}
+.navbar {
+margin:4px;
+padding: 2px;
+width: 220px;
+
+}
+
+.navbar hr
+{
+border: 2px dotted red;
+margin:4px;
+}
+
+
+.nav2{padding:8px;background-color:#fff0f0;text-align:left;color:#000000;border:1px solid #000000;font-size:small;margin-bottom:8px;}
+.nav2 ul li {list-style-image: url(/web/20140601065233im_/http://www.sean.co.uk/shared/gfx/bobble.gif);text-indent:0px;margin-left:-20px; margin-bottom:8px;}
+
+.nav3{margin-top:16px;padding:8px;background-color:#ffffff;text-align:left;color:#000000;border:1px solid #000000;font-size:medium;}
+.boxout{border:1px dashed #cc99cc;background-color:#fff0f0;text-align:left;color:#000000;margin:16px;padding:8px;}
+.caption{text-align:center;font-size:small;font-style:italic;}
+.credit{font-style:italic;}
+.picture{clear:none;text-align:center;}
+.stretchquote{ background:#fff0f0;padding:8px;margin: 8px; font-size: 1.4em; text-align: center;  border-bottom:4px double #cc99cc;border-top:4px double #cc99cc;} /* sbwtw */
+.pullquote{ background:#fff0f0;padding:8px;margin: 8px; font-size: 1.4em; text-align: center; width: 200px;  border-bottom:4px double #cc99cc;border-top:4px double #cc99cc;}
+.standfirst{background: #fff0f0;background-image: none;color: #000000;padding:4px;font-weight: bold;}
+.webring{background:#ffffff}
+.printnotice{display:none;}
+-->
+
+
+/*
+     FILE ARCHIVED ON 06:52:33 Jun 01, 2014 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 18:41:47 Jul 16, 2023.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 158.84
+  exclusion.robots: 0.162
+  exclusion.robots.policy: 0.146
+  cdx.remote: 0.092
+  esindex: 0.012
+  LoadShardBlock: 128.76 (3)
+  PetaboxLoader3.datanode: 180.039 (5)
+  load_resource: 188.729 (2)
+  PetaboxLoader3.resolve: 64.653 (2)
+*/

@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<HTML lang="en">
+<head>
+
+<link href='http://fonts.googleapis.com/css?family=Molengo&subset=latin' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cabin:bold' rel='stylesheet' type='text/css'>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../shared/sean.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../shared/printsean.css" type="text/css" media="print">
+<link rel="stylesheet" href="../shared/seanhandheld.css" type="text/css" media="handheld">
+
+<!-- hd link -->
+
+
+<title>Random joke by Sean McManus</title>
+<META name="description" content="Sean's Nintendo DS Site">
+
+<link rel="meta" href="http://www.sean.co.uk/labels.rdf" type="application/rdf+xml" title="ICRA labels" >
+<meta http-equiv="pics-Label" content='(pics-1.1 "http://www.icra.org/pics/vocabularyv03/" l gen true for "http://sean.co.uk" r (n 1 s 2 v 0 l 1 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 0) gen true for "http://www.sean.co.uk" r (n 1 s 2 v 0 l 1 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 0))' >
+</HEAD>
+
+<BODY >
+
+	<script type="text/javascript">
+	
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-76519-1']);
+	  _gaq.push(['_setDomainName', 'sean.co.uk']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
+	<script language="javascript">var offset=29;</script>
+
+<div class="screenonly">
+<a name="top"></a>
+<div id="skip"><a href="#body" accesskey="s" class="acclink">Skip navigation</a><a href="http://www.sean.co.uk/help/accessibility.shtm" accesskey="0" class="acclink">Accessibility</a><a href="http://www.sean.co.uk/help/search.shtm" accesskey="4" class="acclink">Search</a><a href="http://www.sean.co.uk/help/help.shtm" accesskey="6" class="acclink">Help</a></div>
+
+
+	
+		<div class="all-header" >
+			<div id="topright_nav">
+				<ul>
+                <li><a id="searchnav" class="navlink" href="http://www.sean.co.uk/about.shtm">About Me</a></li>
+					<li><a id="searchnav" class="navlink" href="http://www.sean.co.uk/help/search.shtm">Search</a></li>
+					<li><a id="connav" class="navlink" href="http://www.sean.co.uk/contact.shtm">Contact</a></li>
+				</ul>
+			</div>
+			<div id="sub_title">
+				<a class="sean_iconlink" href="http://www.sean.co.uk"><img src="http://www.sean.co.uk/shared/icon_230x230.png" alt="It's Sean!" class="nofotomoto"></a>
+				<p>UK freelance journalist, author<br> and writer <strong>Sean McManus</strong></p>
+			</div>		
+			<a name="navanchor"></a>
+            <div class="horiznav">
+				<nav>
+					<ul>
+						<!-- <li><a id="homenav" class="navlink space_right" href="http://www.sean.co.uk/index.shtm">Home</a></li> -->
+						<li><a id="booksnav" class="navlink space_right" href="http://www.sean.co.uk/books/index.shtm">Books</a></li>
+						<li><a id="servicesnav" class="navlink space_right" href="http://www.sean.co.uk/services/index.shtm">Services</a></li>
+                        <li><a id="shopnav" class="navlink space_right" href="http://www.sean.co.uk/shop/index.shtm">Shop</a></li>
+                        <li><a id="blonav" class="navlink space_right" href="http://news.sean.co.uk/">Blog</a></li>
+                        <li><a id="servicesnav" class="navlink space_right" href="http://www.sean.co.uk/photography/stock/index.shtm">Photos</a></li>
+						<li><a id="othernav" class="navlink" href="http://www.sean.co.uk/a/index.shtm">Other Stuff</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+        
+</div> <!-- screenonly -->
+<div class="printnotice">Printed from www.sean.co.uk. &copy; Sean McManus.</div>        
+        
+		<div id="wrapper">
+		
+		
+<div class="treebar">
+<!-- old tbi -->
+<a href="../index.shtm">Home</a> > <a href="index.shtm">NDS</a> > Jokes
+</div>
+<div class="main">
+<a name="body"> </a>
+
+<a name="here1"></a><h2>Random joke machine</h2><p><IMG SRC="http://www.sean.co.uk/a/javascriptgames/gfx/fotoclown.jpg" ALT="Clown cartoon" WIDTH=103 HEIGHT=89 BORDER=0 align="right" hspace=8>
+I say, I say, I say... <script language="Javascript"><!-- code and jokes database (C) Sean McManus www.sean.co.uk
+
+function punchline(){
+document.getElementById("haha").style.display="block";
+}
+
+question=new Array();answer=new Array();
+question[0]="What do you call a donkey with three legs?";answer[0]="A wonkey";
+question[1]="What's brown and falls off walls?";answer[1]="Humpty Dump";
+question[2]="What do you get if you cross an elephant with a rhinoceros?";answer[2]="An eleoceros";
+question[3]="What have Winnie the Pooh and John the Baptist got in common?";answer[3]="They have the same middle name";
+question[4]="Why did the mermaid wear sea shells?";answer[4]="Because b shells were too small";
+question[5]="What's the difference between snowmen and snowwomen?";answer[5]="Snowballs";
+question[6]="What does a constipated mathematician do?";answer[6]="Work it out with a pencil";
+question[7]="What did one doe say to the other doe as they left the woods?";answer[7]="I'll never do that for two bucks again";
+question[8]="How do you find Ronald McDonald in a nudist colony?";answer[8]="He's the only one with sesame seed buns";
+question[9]="What's the difference between the Rolling Stones and a Scotsman?";answer[9]="The Rolling Stones sing 'Hey you, get off my cloud' and the Scotsman sings 'Hey McCloud, get off my ewe'";
+question[10]="What's orange and sounds like a parrot?";answer[10]="A carrot";
+question[11]="What do you get if you push a piano off a barracks roof?";answer[11]="A flat major";
+question[12]="What did the tie say to the hat?";answer[12]="You go on ahead and I'll hang around!";
+question[13]="What do you get if you cross a grizzly bear and a harp?";answer[13]="A bear faced lyre";
+question[14]="How do frogs die?";answer[14]="They kermit suicide";
+question[15]="What did the spider say when he broke his new web?";answer[15]="Darn it!";
+question[16]="How do snails get their shells so shiny?";answer[16]="They use snail varnish";
+question[17]="What has four legs and says 'Boo'?";answer[17]="A cow with a cold";
+question[18]="What do you get if you divide the circumference of a pumpkin by its diameter?";answer[18]="Pumpkin pi";
+question[19]="Who are the most decent people in the hospital?";answer[19]="The ultrasound people";
+question[20]="How do you kill a circus?";answer[20]="Go for the juggler";
+question[21]="According to Freud, what comes between fear and sex?";answer[21]="funf";
+question[22]="Why did Karl Marx drink herbal tea?";answer[22]="Because proper tea is theft";
+question[23]="What's the difference between a weasel and a stoat?";answer[23]="A weasel's weasily recognised, but a stoat's stoatally different.";
+question[24]="Why are there no aspirin in the jungle?";answer[24]="Because the parrots eat 'em all";
+question[25]="How many photographers does it take to change a lightbulb?";answer[25]="Just one more!";
+question[26]="What do you call a Frenchman wearing sandals?";answer[26]="Philippe Faloppe";
+question[27]="Why couldn't the drummer get in his house?";answer[27]="Because of his hi hat";
+question[28]="What’s the only cheese that’s made backwards?";answer[28]="Edam";
+question[29]="What’s the first sign of madness?";answer[29]="Suggs walking down your garden path";
+question[30]="What has eight legs, is brown and green, and kills you by dropping out a tree?";answer[30]="A snooker table";
+question[31]="What's the difference between roast beef and pea soup?";answer[31]="Anyone can roast beef...";
+question[32]="What did the dung beetle say when he walked into the bar?";answer[32]="Is this stool taken?";
+question[33]="What's made of brass and sounds like Tom Jones?";answer[33]="Trombones";
+question[34]="Why didn't the lifeguard save the hippy?";answer[34]="Because he was too far out";
+question[35]="What do you call a man with cat scratches on his face?";answer[35]="Claude";
+question[36]="What has four legs and goes boo?";answer[36]="A cow with a cold";
+question[37]="What sound does a nut make when it sneezes?";answer[37]="Cashew";
+
+
+
+joke=Math.floor(Math.random()*question.length);
+document.write("<p><a href=\"javascript:;\" onClick='punchline();'>"+question[joke]+"</a><br><div style='display:none;' id='haha'>"+answer[joke]+"</div>");
+// www.sean.co.uk -->
+</script></p>
+
+</p>
+
+<p>Come back soon for another joke!</p>
+</div>
+
+
+<div class="main">
+<a href="http://www.sean.co.uk/nds/index.shtm">www.sean.co.uk/nds</a> | <a href="#top">Top</a> | <a href="http://www.sean.co.uk/index.shtm">Main site</a>
+</div>
+
+</div>
+</BODY>
+</HTML>

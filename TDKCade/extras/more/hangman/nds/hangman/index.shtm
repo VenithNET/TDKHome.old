@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<HTML lang="en">
+<head>
+
+<link href='http://fonts.googleapis.com/css?family=Molengo&subset=latin' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cabin:bold' rel='stylesheet' type='text/css'>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../../shared/sean.css" type="text/css" media="screen"> 
+<link rel="stylesheet" href="../../shared/seanhandheld.css" type="text/css" media="handheld">
+
+<!-- hd link -->
+
+
+<title>Hangman for Nintendo DS by Sean McManus</title>
+<META name="description" content="Sean's Nintendo DS Site">
+
+<!-- 
+
+
+
+All games on this site are (C) Sean McManus - www.sean.co.uk
+      All rights reserved
+      Unauthorised reproduction prohibited 
+
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="meta" href="http://www.sean.co.uk/labels.rdf" type="application/rdf+xml" title="ICRA labels" >
+<meta http-equiv="pics-Label" content='(pics-1.1 "http://www.icra.org/pics/vocabularyv03/" l gen true for "http://sean.co.uk" r (n 1 s 2 v 0 l 1 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 0) gen true for "http://www.sean.co.uk" r (n 1 s 2 v 0 l 1 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 0))' >
+
+ <STYLE type="text/css">
+IMG {padding:0px;display:inline; clear:none;}
+ </STYLE>
+
+</HEAD>
+
+<BODY onLoad="ready=1;setup();">
+
+	<script type="text/javascript">
+	
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-76519-1']);
+	  _gaq.push(['_setDomainName', 'sean.co.uk']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
+	<script language="javascript">var offset=31;</script>
+
+<div class="screenonly">
+<a name="top"></a>
+<div id="skip"><a href="#body" accesskey="s" class="acclink">Skip navigation</a><a href="http://www.sean.co.uk/help/accessibility.shtm" accesskey="0" class="acclink">Accessibility</a><a href="http://www.sean.co.uk/help/search.shtm" accesskey="4" class="acclink">Search</a><a href="http://www.sean.co.uk/help/help.shtm" accesskey="6" class="acclink">Help</a></div>
+
+
+	
+		<div class="all-header" >
+			<div id="topright_nav">
+				<ul>
+                <li><a id="searchnav" class="navlink" href="http://www.sean.co.uk/about.shtm">About Me</a></li>
+					<li><a id="searchnav" class="navlink" href="http://www.sean.co.uk/help/search.shtm">Search</a></li>
+					<li><a id="connav" class="navlink" href="http://www.sean.co.uk/contact.shtm">Contact</a></li>
+				</ul>
+			</div>
+			<div id="sub_title">
+				<a class="sean_iconlink" href="http://www.sean.co.uk"><img src="http://www.sean.co.uk/shared/icon_230x230.png" alt="It's Sean!" class="nofotomoto"></a>
+				<p>UK freelance journalist, author<br />and writer <strong>Sean McManus</strong></p>
+			</div>		
+			<a name="navanchor"></a>
+            <div class="horiznav">
+				<nav>
+					<ul>
+						<!-- <li><a id="homenav" class="navlink space_right" href="http://www.sean.co.uk/index.shtm">Home</a></li> -->
+						<li><a id="booksnav" class="navlink space_right" href="http://www.sean.co.uk/books/index.shtm">Books</a></li>
+						<li><a id="servicesnav" class="navlink space_right" href="http://www.sean.co.uk/services/index.shtm">Services</a></li>
+                        <li><a id="shopnav" class="navlink space_right" href="http://www.sean.co.uk/shop/index.shtm">Shop</a></li>
+                        <li><a id="blonav" class="navlink space_right" href="http://news.sean.co.uk/">Blog</a></li>
+                        <li><a id="servicesnav" class="navlink space_right" href="http://www.sean.co.uk/photography/stock/index.shtm">Photos</a></li>
+						<li><a id="othernav" class="navlink" href="http://www.sean.co.uk/a/index.shtm">Other Stuff</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+        
+</div> <!-- screenonly -->
+<div class="printnotice">Printed from www.sean.co.uk. &copy; Sean McManus.</div>        
+        
+		<div id="wrapper">
+<!--		<p style="margin-left:100px;font-size:16px;"><a href="http://www.sean.co.uk/newsletter.shtm">NEW: Sign up for my newsletter!</a></p>-->
+		
+
+<div class="treebar">
+<!-- old tbi -->
+<a href="../../index.shtm">Home</a> > <a href="../index.shtm">NDS</a> > Hangman
+</div>
+
+<div class="main">
+<a name="body"> </a>
+<h1>Hangman: Nintendo DS game</h1>
+<p>This game is for the Nintendo DS Browser. You can also <a href="../../a/javascriptgames/hangman/index.shtm">play Hangman using a normal PC browser</a>.
+
+<p><div style="text-align:right;"><a name="play"> </a><small><a href="#help">Help</a></small></div><IMG src="glass.gif" WIDTH=100 HEIGHT=100 BORDER=1 name="gallows"></p>
+
+<table border=0 cellpadding=0 cellspacing=0>
+<TR><TD>
+<IMG src="p.gif" WIDTH=20 HEIGHT=20 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="letter1">
+</td>
+<TD>
+<IMG src="l.gif" WIDTH=20 HEIGHT=20 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="letter2">
+</td><TD>
+<IMG src="e.gif" WIDTH=20 HEIGHT=20 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="letter3">
+</td><TD>
+<IMG src="a.gif" WIDTH=20 HEIGHT=20 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="letter4">
+</td><TD>
+<IMG src="s.gif" WIDTH=20 HEIGHT=20 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="letter5">
+</td><TD>
+<IMG src="e.gif" WIDTH=20 HEIGHT=20 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="letter6">
+</td><TD>
+<IMG src="w.gif" WIDTH=20 HEIGHT=20 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="letter7">
+</td><TD>
+<IMG src="a.gif" WIDTH=20 HEIGHT=20 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="letter8">
+</td><TD>
+<IMG src="i.gif" WIDTH=20 HEIGHT=20 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="letter9">
+</td><TD>
+<IMG src="t.gif" WIDTH=20 HEIGHT=20 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="letter10">
+</td>
+<TR>
+<TD>
+<IMG src="glass.gif" WIDTH=20 HEIGHT=10 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="dash1">
+</td>
+<TD>
+<IMG src="glass.gif" WIDTH=20 HEIGHT=10 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="dash2">
+</td>
+<TD>
+<IMG src="glass.gif" WIDTH=20 HEIGHT=10 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="dash3">
+</td>
+<TD>
+<IMG src="glass.gif" WIDTH=20 HEIGHT=10 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="dash4">
+</td>
+<TD>
+<IMG src="glass.gif" WIDTH=20 HEIGHT=10 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="dash5">
+</td>
+<TD>
+<IMG src="glass.gif" WIDTH=20 HEIGHT=10 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="dash6">
+</td>
+<TD>
+<IMG src="glass.gif" WIDTH=20 HEIGHT=10 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="dash7">
+</td>
+<TD>
+<IMG src="glass.gif" WIDTH=20 HEIGHT=10 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="dash8">
+</td>
+<TD>
+<IMG src="glass.gif" WIDTH=20 HEIGHT=10 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="dash9">
+</td>
+<TD>
+<IMG src="glass.gif" WIDTH=20 HEIGHT=10 HSPACE=0 VSPACE=0 BORDER=0 ALIGN="LEFT" name="dash10">
+</td>
+</tr></table>
+<BR><p><B>Pick a letter:</B><IMG src="glass.gif" WIDTH=1 HEIGHT=1 BORDER=0> <!-- ugly hack! -->
+<BR><IMG src="a.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('a');">
+<IMG src="b.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('b');">
+<IMG src="c.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('c');">
+<IMG src="d.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('d');">
+<IMG src="e.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('e');">
+
+<IMG src="f.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('f');">
+<IMG src="g.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('g');">
+<IMG src="h.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('h');">
+
+<IMG src="i.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('i');">
+<BR>
+<IMG src="j.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('j');">
+<IMG src="k.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('k');">
+<IMG src="l.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('l');">
+<IMG src="m.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('m');">
+<IMG src="n.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('n');">
+<IMG src="o.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('o');">
+<IMG src="p.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('p');">
+
+<IMG src="q.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('q');">
+
+<IMG src="r.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('r');">
+<BR>
+<IMG src="s.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('s');">
+<IMG src="t.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('t');">
+<IMG src="u.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('u');">
+<IMG src="v.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('v');">
+<IMG src="w.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('w');">
+<IMG src="x.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('x');">
+<IMG src="y.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('y');">
+<IMG src="z.gif" WIDTH=15 HEIGHT=15 BORDER=0 onClick="guess('z');">
+</p>
+
+<p>
+<FORM name="hangform" >
+<STRONG>Previous guesses:</STRONG><BR>
+<input type="text" size=26 name="guessed">
+</form>
+
+<form><input type="button" name="start" value="New game" onclick="if (ready==0) {alert('Please wait, caching images');} else {setup();}">
+</form>
+
+<script>
+
+function keyDivert(keyPressed) 
+{
+var whichbrowser = (document.layers) ? keyPressed.which : event.keyCode;
+var letterpressed = String.fromCharCode(whichbrowser).toLowerCase();
+guess(letterpressed);
+
+}
+
+document.onkeypress = keyDivert;
+var impatient=0;
+var offset=-2;
+var ready=0
+var score=0;
+var word="";
+var howdead=0;
+
+// ---------- word list is protected by copyright. Unauthorised reproduction or adaptation prohibited
+wordlist=new Array("chair","phlegm","fuchsia","rhythm","buxom","fjord","gnarly","twelve","cycle","whistle","yummy","canary","agnostic","psychotic","zoom","jinx","charity","wonder","yet","jeopardy","machine","clown","segue","inert","jailbait","oblique","tiny","cataclysm", "marvellous","insipid", "archaic", "heinous","bogus","trundle","cirrus","lynx","consider","think","bony","jiffy","do","twice","life","november","february","limited","stamp","authority","phone","earth","tsunami","conifer","weasel","slaughter","drivel","suspect","pillow","hobo","triumph","bystander","camber","democrat","wally","weirdo","turbine","amplify","iguana","xylophone","giraffe","craft","sympathy","jewellery","spaghetti","origami","chopstick","placebo","workhorse","urban","suburb","blatant","psycho","chrysalis","gorgon","errand","worthwhile","ethereal","gown","monkey","betwixt","almighty","inset","angular","ocular","nougat","photon","nautical","nuisance","invoke","nova","boomerang","motif","moribund","mud","nit","zany","paste","zinc","outrun","complex","clientele","nicotine","ochre","mummify","winceyette","copse","windpipe","fortunate","fickle","craving","viaduct","aqueduct","aqueous","glimmer","vitriol","escalator","brawn","brevity","revision","cathode","pendulous","dell","preamble","pitchfork","mitre","comb","twitch","mitten","nirvana","vitality","ceiling","cranberry","celluloid","cavort","caviar","cohort","cinch","gristle","lizard","wriggle","dictaphone","precarious","ecstasy","oxymoron","turquoise","kiwi","wrought","faint","edge","rhetoric","parsimony","spangle","plural","enormity","magnitude","magnet","balance","fey","jocund","breeze","encrust","pyre","gymnast","crystal","obviate","bamboozle","porpoise","relegate","womb","printing","supreme","candle","consumer","question","career","job","final","hangman","navy","gem","audit","expect","preclude","wasp","bespoke");
+// ---------- word list is protected by copyright. Unauthorised reproduction or adaptation prohibited
+
+// ---------- set up a game to start
+
+function setup()
+{
+document.gallows.src="glass.gif";
+score=0;
+chosen=Math.floor(Math.random()*wordlist.length);
+word=wordlist[chosen];
+howdead=0;
+
+for (i=0;i<21;i++)
+{document.images[i+8+offset].src="glass.gif";}
+
+
+for (i=0;i<word.length;i++)
+{document.images[18+i+offset].src="dash.gif";}
+
+document.hangform.guessed.value="";
+
+}
+
+
+
+
+function guess(guessedletter)
+{
+
+if (word.length==0) {return;}
+
+
+// --------- only proceed if they haven't already guessed that letter
+
+if (document.hangform.guessed.value.indexOf(guessedletter)==-1)
+
+{document.hangform.guessed.value+=guessedletter;
+
+
+// -------- dealing with wrong guesses
+
+if (word.indexOf(guessedletter)=="-1")
+{howdead++; document.gallows.src="stand"+howdead+".gif";
+if (howdead==11) 
+{
+alert("Game Over. You lose"); 
+for (i=0;i<word.length;i++)
+{document.images[8+i+offset].src=word.charAt(i)+".gif"; }
+word="";}
+
+}
+else
+
+
+// -------------- dealing with right guesses
+
+{
+for (i=0;i<word.length;i++)
+{if (word.charAt(i)==guessedletter)
+{document.images[8+i+offset].src=guessedletter+".gif"; score++;}
+}
+
+if (score==word.length) {alert("Well done! You won!"); word="";}
+
+}
+
+
+}
+
+// -------------- telling them that they've already guessed that letter
+
+else
+{alert ("You've already guessed that letter! Guess again!");}
+
+
+}
+
+
+</script>
+
+<a name="help"> </a>
+<h2>About</h2>
+<p>Guess the hidden word before the man hangs. Enter letters by touching them with the stylus. At the end, use the 'New game' button to start a new game.
+<script language="Javascript">
+document.write("<p>There are "+wordlist.length+" words to guess.");
+// dictionary tester for (i=0;i<wordlist.length;i++){document.write("<a href=http://www.askoxford.com/concise_oed/"+wordlist[i]+"?view=uk>"+wordlist[i]+"</a><BR>");}
+</script>
+<p><a href="../contact.shtm">Let me know</a> your favourite difficult Hangman words.
+<p>This game is designed to show the gallows and word on the top screen, and the letter list, guesses and new game button on the bottom screen. <a href="#play">Align now</a>.
+<h2>Credits</h2>
+<p>&copy;2003-2007 Sean McManus. All rights reserved.</p>
+
+</div>
+
+<IMG src="stand1.gif" WIDTH=1 HEIGHT=1 BORDER=0 alt="">
+<IMG src="stand2.gif" WIDTH=1 HEIGHT=1 BORDER=0 alt="">
+<IMG src="stand3.gif" WIDTH=1 HEIGHT=1 BORDER=0 alt="">
+<IMG src="stand4.gif" WIDTH=1 HEIGHT=1 BORDER=0 alt="">
+<IMG src="stand5.gif" WIDTH=1 HEIGHT=1 BORDER=0 alt="">
+<IMG src="stand6.gif" WIDTH=1 HEIGHT=1 BORDER=0 alt="">
+<IMG src="stand7.gif" WIDTH=1 HEIGHT=1 BORDER=0 alt="">
+<IMG src="stand8.gif" WIDTH=1 HEIGHT=1 BORDER=0 alt="">
+<IMG src="stand9.gif" WIDTH=1 HEIGHT=1 BORDER=0 alt="">
+<IMG src="stand10.gif" WIDTH=1 HEIGHT=1 BORDER=0 alt="">
+<IMG src="stand11.gif" WIDTH=1 HEIGHT=1 BORDER=0 alt="">
+
+
+<div class="main">
+<a href="http://www.sean.co.uk/nds/index.shtm">www.sean.co.uk/nds</a> | <a href="#top">Top</a> | <a href="http://www.sean.co.uk/index.shtm">Main site</a>
+</div>
+
+</div>
+
+
+</div>
+
+</BODY>
+</HTML>

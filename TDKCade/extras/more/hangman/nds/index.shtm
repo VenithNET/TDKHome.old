@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<HTML lang="en">
+<head>
+
+<link href='http://fonts.googleapis.com/css?family=Molengo&subset=latin' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Cabin:bold' rel='stylesheet' type='text/css'>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="../shared/sean.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../shared/printsean.css" type="text/css" media="print">
+<link rel="stylesheet" href="../shared/seanhandheld.css" type="text/css" media="handheld">
+
+<!-- hd link -->
+
+<title>Nintendo DS homepage by Sean McManus</title>
+<META name="description" content="Sean's Nintendo DS Site">
+<link rel="meta" href="http://www.sean.co.uk/labels.rdf" type="application/rdf+xml" title="ICRA labels" >
+<meta http-equiv="pics-Label" content='(pics-1.1 "http://www.icra.org/pics/vocabularyv03/" l gen true for "http://sean.co.uk" r (n 1 s 2 v 0 l 1 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 0) gen true for "http://www.sean.co.uk" r (n 1 s 2 v 0 l 1 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 0))' >
+</HEAD>
+
+<BODY >
+
+	<script type="text/javascript">
+	
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-76519-1']);
+	  _gaq.push(['_setDomainName', 'sean.co.uk']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>
+	<script language="javascript">var offset=31;</script>
+
+<div class="screenonly">
+<a name="top"></a>
+<div id="skip"><a href="#body" accesskey="s" class="acclink">Skip navigation</a><a href="http://www.sean.co.uk/help/accessibility.shtm" accesskey="0" class="acclink">Accessibility</a><a href="http://www.sean.co.uk/help/search.shtm" accesskey="4" class="acclink">Search</a><a href="http://www.sean.co.uk/help/help.shtm" accesskey="6" class="acclink">Help</a></div>
+
+
+	
+		<div class="all-header" >
+			<div id="topright_nav">
+				<ul>
+                <li><a id="searchnav" class="navlink" href="http://www.sean.co.uk/about.shtm">About Me</a></li>
+					<li><a id="searchnav" class="navlink" href="http://www.sean.co.uk/help/search.shtm">Search</a></li>
+					<li><a id="connav" class="navlink" href="http://www.sean.co.uk/contact.shtm">Contact</a></li>
+				</ul>
+			</div>
+			<div id="sub_title">
+				<a class="sean_iconlink" href="http://www.sean.co.uk"><img src="http://www.sean.co.uk/shared/icon_230x230.png" alt="It's Sean!" class="nofotomoto"></a>
+				<p>UK freelance journalist, author<br />and writer <strong>Sean McManus</strong></p>
+			</div>		
+			<a name="navanchor"></a>
+            <div class="horiznav">
+				<nav>
+					<ul>
+						<!-- <li><a id="homenav" class="navlink space_right" href="http://www.sean.co.uk/index.shtm">Home</a></li> -->
+						<li><a id="booksnav" class="navlink space_right" href="http://www.sean.co.uk/books/index.shtm">Books</a></li>
+						<li><a id="servicesnav" class="navlink space_right" href="http://www.sean.co.uk/services/index.shtm">Services</a></li>
+                        <li><a id="shopnav" class="navlink space_right" href="http://www.sean.co.uk/shop/index.shtm">Shop</a></li>
+                        <li><a id="blonav" class="navlink space_right" href="http://news.sean.co.uk/">Blog</a></li>
+                        <li><a id="servicesnav" class="navlink space_right" href="http://www.sean.co.uk/photography/stock/index.shtm">Photos</a></li>
+						<li><a id="othernav" class="navlink" href="http://www.sean.co.uk/a/index.shtm">Other Stuff</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+        
+</div> <!-- screenonly -->
+<div class="printnotice">Printed from www.sean.co.uk. &copy; Sean McManus.</div>        
+        
+		<div id="wrapper">
+<!--		<p style="margin-left:100px;font-size:16px;"><a href="http://www.sean.co.uk/newsletter.shtm">NEW: Sign up for my newsletter!</a></p>-->
+		
+
+<div class="treebar">
+<!-- old tbi -->
+<a href="../index.shtm">Home</a> > NDS
+</div>
+
+<div class="main">
+<a name="body"> </a>
+
+<h1>Sean's Nintendo DS website</h1>
+<p>I've optimised my website for the SSR mode of the Nintendo DS browser, including creating some content especially for the browser.</p>
+<p>Use the 'skip navigation' link at the top of each screen to jump straight to its content.</p>
+<h2>Nintendo specific content</h2>
+<p>I've tried to make my whole site accessible using the NDS, but I've also made some content especially for it:
+<ul>
+<li><a href="hangman/index.shtm">Play Hangman</a>
+<li><a href="misfit.shtm">Play Misfit</a>
+<li><a href="joke.shtm">Random joke machine</a>
+<li><a href="topgames.shtm">Top 10 Nintendo DS games</a>
+<li><a href="portal.shtm">Portal to recommended sites for NDS</a>
+<li><a href="amazon.shtm">Shop</a>
+</ul>
+
+
+<h2>My main website</h2>
+<p>My main website runs to over 600 pages. It won't all work on the DS browser (there's no flash or video support, for example, and the games in the main part of the site won't work), but most content should be readable.
+<p>Here are some highlights:
+<ul>
+<li><a href="http://news.sean.co.uk">My blog</a>
+<li><a href="http://news.sean.co.uk/search/label/nintendo">Blog posts about Nintendo</a>
+<li><a href="../books/universityofdeath/index.shtm">My novel: University of Death</a>
+<li><a href="../a/musicjournalism/index.shtm">Articles about music</a>
+<li><a href="../a/science/index.shtm">Articles about Science and technology</a>
+<li><a href="../a/journalism/index.shtm">Articles about writing and journalism</a>
+<li><a href="../photography/travelphotography/index.shtm">Travel photography</a>
+<li><a href="../photography/rockandpop/index.shtm">Concert photography</a>
+<li><a href="../a/webdesign/index.shtm">Website design tutorials</a>
+</ul>
+
+<h2>NDS design guidelines</h2>
+<p>I've written some <a href="http://www.sean.co.uk/a/webdesign/webdesign_for_nintendo_ds_opera_browser.shtm">guidelines for designing sites for the NDS</a>.</p>
+
+
+<h2>Feedback</h2>
+<p>You can <a href="http://news.sean.co.uk/2007/03/nintendo-ds-mini-site-launched.html">leave your feedback on my blog</a> at my main site. You might need to switch to Overview mode for best results. You can also <a href="contact.shtm">email me</a>.</p>
+</div>
+
+
+<div class="main">
+<a href="http://www.sean.co.uk/nds/index.shtm">www.sean.co.uk/nds</a> | <a href="#top">Top</a> | <a href="http://www.sean.co.uk/index.shtm">Main site</a>
+</div>
+
+</div>
+</BODY>
+</HTML>
