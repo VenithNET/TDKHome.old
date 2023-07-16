@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="ja"><head>
+<meta http-equiv="content-type" content="text/html;charset=Shift_JIS">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="content-script-type" content="text/javascript">
+<meta name="robots" content="index,follow">
+<meta name="description" content="無料で遊べるJavaScriptのオセロゲーム（1人プレイ用）です！お気軽におたのしみください">
+<meta name="keywords" content="JavaScript,ゲーム,オセロゲーム">
+<link rel="stylesheet" type="text/css" href="../01.css">
+<title>無料テトリスゲーム（JavaScript版）</title>
+
+<html>
+<head>
+<title>JavaScriptテトリス</title>
+<script type="text/javascript" src="tetris.js"></script>
+</head>
+<BODY BGCOLOR="#000000" TEXT="#ffffdd" LINK="#88ffff" VLINK="#88ffcc" ALINK="#88ffcc">
+<div align="center">
+<h1 style="font-size:25px;margin:0px;color:#ff8800;">無料テトリスゲーム（JavaScript版）</h1>
+<hr>
+
+<table border=0 cellpadding=10 ><tr valign="top"><td>
+<!-- ゲームの枠 -->
+<table border="2"><tr><td>
+<table border=0 cellspacing=0 cellpadding=0>
+<center>
+<!-- 1行 -->
+<tr><td>
+<img src=0.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+</td></tr>
+<!-- 2行 -->
+<tr><td>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=9.jpg>
+</td></tr>
+<!-- 3行 -->
+<tr><td>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=0.jpg>
+<img src=1.jpg>
+</td></tr>
+<!-- 4行 -->
+<tr><td>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=9.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+</td></tr>
+<!-- 5行 -->
+<tr><td>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=0.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+</td></tr>
+<!-- 6行 -->
+<tr><td>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=9.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+</td></tr>
+<!-- 7行 -->
+<tr><td>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=0.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+</td></tr>
+<!-- 8行 -->
+<tr><td>
+<img src=7.jpg>
+<img src=9.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+</td></tr>
+<!-- 9行 -->
+<tr><td>
+<img src=0.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+</td></tr>
+<!-- 10行 -->
+<tr><td>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=9.jpg>
+</td></tr>
+<!-- 11行 -->
+<tr><td>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=0.jpg>
+<img src=1.jpg>
+</td></tr>
+<!-- 12行 -->
+<tr><td>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=9.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+</td></tr>
+<!-- 13行 -->
+<tr><td>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=0.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+</td></tr>
+<!-- 14行 -->
+<tr><td>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=9.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+</td></tr>
+<!-- 15行 -->
+<tr><td>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=0.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+</td></tr>
+<!-- 16行 -->
+<tr><td>
+<img src=7.jpg>
+<img src=9.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+</td></tr>
+<!-- 17行 -->
+<tr><td>
+<img src=0.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+</td></tr>
+<!-- 18行 -->
+<tr><td>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=9.jpg>
+</td></tr>
+<!-- 19行 -->
+<tr><td>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=0.jpg>
+<img src=1.jpg>
+</td></tr>
+<!-- 20行 -->
+<tr><td>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=9.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+</td></tr>
+<!-- 21行 -->
+<tr><td>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=0.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+</td></tr>
+<!-- 22行 -->
+<tr><td>
+<img src=5.jpg>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=9.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+</td></tr>
+<!-- 23行 -->
+<tr><td>
+<img src=6.jpg>
+<img src=7.jpg>
+<img src=0.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+</td></tr>
+<!-- 24行 -->
+<tr><td>
+<img src=7.jpg>
+<img src=9.jpg>
+<img src=1.jpg>
+<img src=2.jpg>
+<img src=3.jpg>
+<img src=4.jpg>
+<img src=5.jpg>
+<img src=6.jpg>
+</td></tr>
+</center>
+</table>
+</td></tr></table>
+
+</td>
+
+<!-- 次のブロック -->
+<td>
+<table border=0 cellpadding=10 ><tr valign=top><tr><td>
+<table border="2"><tr><td>
+<table border=0 cellspacing=0 cellpadding=0>
+<tr><td>
+<!-- 1行 -->
+<img src=0.jpg> <img src=0.jpg> <img src=0.jpg> <img src=0.jpg>
+</td></tr>
+<tr><td>
+<!-- 2行 -->
+<img src=0.jpg> <img src=0.jpg> <img src=0.jpg> <img src=0.jpg>
+</td></tr>
+<tr><td>
+<!-- 3行 -->
+<img src=0.jpg> <img src=0.jpg> <img src=0.jpg> <img src=0.jpg>
+</td></tr>
+<tr><td>
+<!-- 4行 -->
+<img src=0.jpg> <img src=0.jpg> <img src=0.jpg> <img src=0.jpg>
+</td></tr>
+</table>
+</td></tr></table>
+</td></tr>
+<tr><td>
+
+<!-- コントローラ -->
+<div align="center">
+<a href=JavaScript:blk_lft()><img src=left.jpg border=0></a>
+<a href=JavaScript:blk_trn()><img src=turn.jpg border=0></a>
+<a href=JavaScript:blk_rgt()><img src=right.jpg border=0></a>
+<br>
+<a href=JavaScript:blk_dwn()><img src=down.jpg border=0></a>
+</div>
+</td></tr></table>
+
+<!-- スコア -->
+<div align="center">
+<form name=sc_form>
+<input type=button value="★START★" onClick=init_game()><br>
+<span style="font-size:12px;">スコア：</span><input type=text size=8 name=score value="">
+</form>
+</div>
+
+</td>
+</tr></table>
+<hr>
+<div style="margin:0px;"><a href="../../index.html">無料JavaScriptゲーム</a></div>
+<hr>
+<p style="font-size:12px;margin-top:10px;">
+★<a href="http://html.seo-search.com/game/" target="_blank">JavaScriptサンプル置き場</a>
+★<a href="http://blog298.blog25.fc2.com/" target="_blank">無料ブログ テンプレート</a>
+★<a href="http://weblog.seo-search.com/" target="_blank">無料ブログ比較評価</a>
+★<a href="http://seo10pure.blog52.fc2.com/" target="_blank">ブログSEOアフィリエイト</a>
+★<a href="http://seo.seo-search.com/" target="_blank">アクセスアップSEO対策</a>
+★<a href="http://rent123.blog20.fc2.com/" target="_blank">おすすめレンタルサービス</a>
+<br>
+★<a href="http://weblog29.blog31.fc2.com/" target="_blank">インターネット サービス情報</a>
+★<a href="http://accessup.seo-search.com/" target="_blank">アクセスアップ !SEO</a>
+★<a href="http://bloglink29.blog58.fc2.com/" target="_blank">無料ホームページ作成講座ブログ</a>
+★<a href="http://yakibuta.blog14.fc2.com/" target="_blank">ただ タダ 無料ブログ</a>
+★<a href="http://yakibuta.seo-search.com/" target="_blank">SEO対策検索エンジン</a>
+★<a href="http://link298.blog2.fc2.com/" target="_blank">バックリンク ブログ</a>
+</p>
+
+</div>
+
+<script type="text/javascript"><!--
+var ID="100210684";
+var AD=0;
+var FRAME=0;
+// --></script>
+<script src="http://j1.ax.xrea.com/l.j?id=100210684" type="text/javascript"></script>
+<noscript>
+<a href="http://w1.ax.xrea.com/c.f?id=100210684" target="_blank"><img src="http://w1.ax.xrea.com/l.f?id=100210684&url=X" alt="AX" border="0"></a>
+</noscript>
+
+</body>
+</html>

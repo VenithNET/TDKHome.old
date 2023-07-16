@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+<META NAME="description" content="Threefit is a PC-Game, which is a part of the '7 by one stroke' package, translated from C++ into HTML and JavaScript">
+<META NAME="author" content="Lutz Tautenhahn">
+<META NAME="keywords" content="Game, Tetris, Streich, Stroke, JavaScript">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<title>Threefit</title></head>
+<BODY bgcolor=#CCCCFF>
+<form>
+<DIV ALIGN=center>
+<table noborder cellpadding=0 cellspacing=0>
+<tr>
+<td colspan=3>Level:</td>
+<td colspan=2>Score:</td>
+</tr>
+<tr>
+<td><input type=button value="-" width=16 style="width:16;background-color:#FFFFFF" onClick="KeyDown(45);HideFocus()"></td>
+<td><input size=1 name="Level" onFocus="HideFocus()"></td>
+<td><input type=button value="+" width=16 style="width:16;background-color:#FFFFFF" onClick="KeyDown(43);HideFocus()"></td>
+<td><input size=4 name="Score" onFocus="HideFocus()"></td>
+<td><input type=button value="?" name="Help" width=16 style="width:16;background-color:#FFFFFF" onClick="ShowHelp();HideFocus()"></td>
+</tr></table>
+<script language="JavaScript1.2">
+var IsNetscape;
+if(navigator.appName == "Netscape") IsNetscape = true;
+else IsNetscape = false;
+if (navigator.appName != "Microsoft Internet Explorer")
+  document.captureEvents(Event.KEYDOWN)
+document.onkeydown = NetscapeKeyDown;
+function NetscapeKeyDown(key)
+{ KeyDown(key.which);
+}
+</script>
+<script for=document event="onkeydown()" language="JScript">
+if (window.event) KeyDown(window.event.keyCode);
+</script>
+
+<script language="JavaScript">
+var i, j, c, nc, dt, IsOver, MaxW=3, MaxH=12, w, h, Level, Score, TimerInterval, IsHideFocus=true;
+
+document.open("text/plain");
+
+if (navigator.appName == "Konqueror")
+{ document.write("<input width=0 height=0 style=\"width:0; height:0\" name=\"KeyCatch\" onBlur=\"KeyCatchFocus()\" onKeyUp=\"KeyCatchChange()\">");
+  KeyCatchFocus();
+  IsHideFocus=false;
+}
+function KeyCatchFocus()
+{ setTimeout("document.forms[0].KeyCatch.focus()",100);
+}
+function KeyCatchChange()
+{ var vv=""+document.forms[0].KeyCatch.value;
+  if (vv=="") return;
+  KeyDown(vv.charCodeAt(0));
+  document.forms[0].KeyCatch.value="";
+}
+
+document.writeln("<table noborder cellpadding=0 cellspacing=0 bgcolor=#FFFFFF><tr><td>");
+for (j=0; j < MaxH; j++)
+{ for (i=0; i < MaxW; i++)
+    document.write("<IMG src=\"ball0.gif\" border=0>");
+  document.writeln("<BR>");
+}
+document.writeln("</td></tr></table>");
+document.close();
+
+Level=4;
+Fld = new Array(MaxW);
+for (i=0; i < MaxW; i++)
+{ Fld[i]=new Array(MaxH);
+} 
+BFld = new Array(MaxW);
+for (i=0; i < MaxW; i++)
+{ BFld[i]=new Array(MaxH);
+} 
+Pic= new Array(5);
+Pic[0] = new Image(); Pic[0].src = "ball0.gif"; 
+Pic[1] = new Image(); Pic[1].src = "ball1.gif";
+Pic[2] = new Image(); Pic[2].src = "ball2.gif";   
+Pic[3] = new Image(); Pic[3].src = "ball3.gif";   
+Pic[4] = new Image(); Pic[4].src = "ball4.gif";   
+
+function KeyDown(whichkey)
+{ //alert(whichkey);
+  if ((whichkey==43)||(whichkey==107)||(whichkey==65451))
+  { Level++;
+    if (Level>8) Level=8;
+    else Init();
+  }    
+  if ((whichkey==45)||(whichkey==109)||(whichkey==65453))
+  { Level--;
+    if (Level<1) Level=1;
+    else Init();
+  }    
+  if (whichkey == 37) AllLeft();
+  if (whichkey == 39) AllRight();
+  if (whichkey == 40) AllSpace();
+  if (whichkey == 32) AllSpace();
+  if (whichkey == 52) AllLeft();
+  if (whichkey == 53) AllSpace();
+  if (whichkey == 54) AllRight();
+  if (whichkey == 12) AllSpace();
+  if (whichkey == 65460) AllLeft();
+  if (whichkey == 65461) AllMiddle();
+  if (whichkey == 65462) AllRight();
+}  
+
+function Timer()
+{ if (! IsOver)
+  { if (nc)
+    { dt=0;
+      ThreeTest();
+      if (dt>0) Erase();
+      if (dt==0)
+      { NewChip();
+        nc=false;
+      }
+    }
+    else ChipDown();
+  }
+  RefreshScreen();
+}
+
+function Init()
+{ for (i=0; i<MaxW; i++)
+  { for (j=0; j<MaxH; j++)
+    { Fld[i][j]=0;
+      BFld[i][j]=false;
+    }
+  }
+  nc=true;
+  IsOver=false;
+  Score=0;
+  RefreshScreen();  
+  window.clearInterval(TimerInterval); 
+  TimerInterval=window.setInterval("Timer()",50*(8-Level)+Level);
+}
+
+function AllLeft()
+{ if ((IsOver)||(nc)) return;
+  if (w>0)
+  { if (Fld[w-1][h]==0)
+    { Fld[w-1][h]=c;
+      Fld[w][h]=0;
+      w--; 
+    }
+  }
+  RefreshScreen();
+}
+
+function AllRight()
+{ if ((IsOver)||(nc)) return;
+  if (w<MaxW-1)
+  { if (Fld[w+1][h]==0)
+    { Fld[w+1][h]=c;
+      Fld[w][h]=0;
+      w++;
+    }
+  }
+  RefreshScreen();  
+}
+
+function AllMiddle()
+{ if (w>1) AllLeft();
+  if (w<1) AllRight();
+}
+
+function AllSpace()
+{ while ((!nc)&&(!IsOver)) ChipDown();
+}
+
+function NewChip()
+{ w=Math.round(Math.random()*100) % MaxW;
+  c=Math.round(Math.random()*100) % (MaxW+1) + 1;
+  h=0;
+  Fld[w][h]=c;
+}
+
+function ChipDown()
+{ if (h<MaxH-1)
+  { if (Fld[w][h+1]==0)
+    { Fld[w][h+1]=c;
+      Fld[w][h]=0;
+      h++;
+    }
+    else
+    { if (h==0)
+      { IsOver=true;
+        if (window.opener)
+        { if (window.opener.SetHighscores)
+            window.opener.SetHighscores("Threefit","",Score,1);
+        }
+        if (confirm("Game over ! Score: " + Score + ". Play again?")) Init();
+      }
+      else nc=true;
+    }
+  }
+  else
+  nc=true;
+}
+
+function ThreeTest()
+{ dt=0;
+  for (j=MaxH-1; j>=2; j--)
+  { i=0;
+    c=Fld[i][j];
+    if (c!=0)
+    { if ((Fld[i][j-1]==c)&&(Fld[i][j-2]==c))
+      { dt++;
+        BFld[i][j]=true;
+        BFld[i][j-1]=true;
+        BFld[i][j-2]=true;
+      }
+      if ((Fld[i+1][j-1]==c)&&(Fld[i+2][j-2]==c))
+      { dt++;
+        BFld[i][j]=true;
+        BFld[i+1][j-1]=true;
+        BFld[i+2][j-2]=true;
+      }
+    }
+    i=1;
+    c=Fld[i][j];
+    if (c!=0)
+    { if ((Fld[i][j-1]==c)&&(Fld[i][j-2]==c))
+      { dt++;
+        BFld[i][j]=true;
+        BFld[i][j-1]=true;
+        BFld[i][j-2]=true;
+      }
+      if ((Fld[i-1][j]==c)&&(Fld[i+1][j]==c))
+      { dt++;
+        BFld[i-1][j]=true;
+        BFld[i][j]=true;
+        BFld[i+1][j]=true;
+      }
+    }
+    i=2;
+    c=Fld[i][j];
+    if (c!=0)
+    { if ((Fld[i][j-1]==c)&&(Fld[i][j-2]==c))
+      { dt++;
+        BFld[i][j]=true;
+        BFld[i][j-1]=true;
+        BFld[i][j-2]=true;
+      }
+      if ((Fld[i-1][j-1]==c)&&(Fld[i-2][j-2]==c))
+      { dt++;
+        BFld[i][j]=true;
+        BFld[i-1][j-1]=true;
+        BFld[i-2][j-2]=true;
+      }
+    }
+  }
+} 
+
+function Erase()
+{ for (j=0; j<MaxH; j++)
+  { for (i=0; i<MaxW; i++)
+    { if (BFld[i][j])
+      { BFld[i][j]=false;
+        Fld[i][j]=0;
+      }
+    }
+  }
+  do
+  { c=0;
+    for (j=MaxH-1; j>=1; j--)
+    { for (i=0; i<MaxW; i++)
+      { if ((Fld[i][j]==0)&&(Fld[i][j-1]!=0))
+        { Fld[i][j]=Fld[i][j-1];
+          Fld[i][j-1]=0;
+          c++;
+        }
+      }
+    }
+  }
+  while (c>0);
+  Score+=3*Level*dt;
+  i=1;
+  if ((Score>33)&&(Level<2)) i=2;
+  if ((Score>99)&&(Level<3)) i=3;
+  if ((Score>333)&&(Level<4)) i=4;
+  if ((Score>666)&&(Level<5)) i=5;
+  if ((Score>1111)&&(Level<6)) i=6;
+  if ((Score>1919)&&(Level<7)) i=7;
+  if ((Score>3333)&&(Level<8)) i=8;
+  if (i>Level)
+  { Level=i;
+    window.clearInterval(TimerInterval); 
+    TimerInterval=window.setInterval("Timer()",50*(8-Level)+Level);
+  }
+}
+ 
+function RefreshScreen()
+{ for (i=0; i < MaxW; i++)
+  { for (j=0; j < MaxH; j++)
+      window.document.images[i+MaxW*j].src = Pic[Fld[i][j]].src; 
+  }
+  window.document.forms[0].Level.value = Level;
+  window.document.forms[0].Score.value = Score;
+}
+function ShowHelp()
+{ window.clearInterval(TimerInterval); 
+  alert("Try to get 3 balls of the same color in a line."+
+        "\nUse arrow the keys or '4', '5', '6' and the"+
+        "\nspace bar to move a ball. Use '+' and '-' to"+
+        "\nchange the level. Good luck !");
+  TimerInterval=window.setInterval("Timer()",50*(8-Level)+Level);
+}
+function HideFocus()
+{ if (IsHideFocus)
+  { window.document.forms[0].Help.focus();
+    window.document.forms[0].Help.blur();
+  }
+}
+Init();
+HideFocus();
+</script>
+<table noborder cellpadding=0 cellspacing=0>
+<tr>
+<td><input type=button value="<-" width=37 style="width:37;background-color:#FFFFFF" onClick="KeyDown(37);this.blur()"></td>
+<td><input type=button value="\/" width=37 style="width:37;background-color:#FFFFFF" onClick="KeyDown(40);this.blur()"></td>
+<td><input type=button value="->" width=37 style="width:37;background-color:#FFFFFF" onClick="KeyDown(39);this.blur()"></td>
+</tr>
+</table>
+</DIV>
+</form>
+</BODY>
+</HTML>

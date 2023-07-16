@@ -1,0 +1,257 @@
+<html><head><title>Space Maze</title>
+
+<script language="JavaScript">
+var px=1,py=1,maps,lv,nm=0,pl=0,level=0;
+
+	var pageloc = location.href
+	
+	for (t = pageloc.length-1;t>=0;t--){
+		if (pageloc.charAt(t) == "/") {
+			pageloc = pageloc.substring(0,t+1)
+			t = -1
+		}
+	}
+
+	pageloc = pageloc.toLowerCase();
+
+maps  = "X#G           #;" // 1
+maps += " ############  ;" // 2
+maps += "   #######    #;" // 3
+maps += "## #   ### ####;" // 4
+maps += "#  # # ##  #  #;" // 5
+maps += "# ## # ## ### #;" // 6
+maps += "# ## # ##  #  #;" // 7
+maps += "# ## # ### # ##;" // 8
+maps += "# ## #   # #  #;" // 9
+maps += "# ##  ##   ## #;" // 10
+maps += "#  ####### ## #;" // 11
+maps += "##            #;" // 12
+maps += "## ####### ####;" // 13
+maps += "#          ####;" // 14
+maps += "# #############;" // 15
+
+maps += "|"
+
+maps += "X     ########G;" // 1
+maps += " ### ##     ## ;" // 2
+maps += "  ## ## ##### #;" // 3
+maps += "# ## #  #     #;" // 4
+maps += "# ## # ## ###  ;" // 5
+maps += "#  ### ## #### ;" // 6
+maps += "##     ##  ### ;" // 7
+maps += "#  # ##### ##  ;" // 8
+maps += "# #   ####### #;" // 9
+maps += "# # #      ## #;" // 10
+maps += "# #   #### #  #;" // 11
+maps += "# ## ####  # ##;" // 12
+maps += "# ##   ## ##  #;" // 13
+maps += "#  # # ###### #;" // 14
+maps += "######        #;" // 15
+
+numlevs = 1
+minmvs = 71
+
+function start(){
+	pl=1
+	nm=0
+	map = maps.split("|")[0].split(";");
+	for (y=0;y<=14;y++) {
+		for (x=0;x<=14;x++) {
+			tmp = map[y];
+			tmp = tmp.charAt(x)
+			tmp = tmp.toUpperCase();
+			im = document.all['maze' + (x+1) + '_' + (y+1)]
+			
+			if (tmp == "X") {
+				px = x + 1
+				py = y + 1
+				im.src = "p.gif"
+			} else if (tmp == "#") {
+				im.src = "w.gif"
+			} else if (tmp == "G") {
+				im.src = "g.gif"
+			} else {
+				im.src = "n.gif"
+			}
+		}
+	}
+}
+
+function goal(){
+	if (level >= numlevs) {
+		
+		alert("Space Angel: You solved the whole maze! Few people know that secret click move. Number of moves: " + nm + " " + ((nm <= minmvs)?"\n *Perfect Number of Moves*":""));
+		nm = 0
+		level = -1
+	} else {
+		alert("Space Angel: Level 1 solved. Be prepared for the next hard level.");
+	}
+	level++
+	map = maps.split("|")[level].split(";");
+	for (y=0;y<=14;y++) {
+		for (x=0;x<=14;x++) {
+			tmp = map[y];
+			tmp = tmp.charAt(x)
+			tmp = tmp.toUpperCase();
+			im = document.all['maze' + (x+1) + '_' + (y+1)]
+			
+			if (tmp == "X") {
+				px = x + 1
+				py = y + 1
+				im.src = "p.gif"
+			} else if (tmp == "#") {
+				im.src = "w.gif"
+			} else if (tmp == "G") {
+				im.src = "g.gif"
+			} else {
+				im.src = "n.gif"
+			}
+		}
+	}
+	
+}
+
+function clickMove(x,y){
+	var cx=0, cy=0
+	if (x > px)
+		cx = 1
+	if (x < px)
+		cx = -1
+	if (y > py)
+		cy = 1
+	if (y < py)
+		cy = -1	
+
+	pMove(cx,cy);
+}
+
+function keyUp() {
+	k = String.fromCharCode(event.keyCode).toLowerCase();
+
+	if (pl != 1)
+		return true;
+
+	var cx=0,cy=0;
+	if (k == "1" || k == "a" || k == "#") {
+		cx = -1
+		cy = 1
+	} else if (k == "2" || k == "(" || k == "b") {
+		cy = 1
+	} else if (k == "3" || k == "c" || k == '"') {
+		cx = 1
+		cy = 1
+	} else if (k == "4" || k == "%" || k == "d") {
+		cx = -1
+	} else if (k == "6" || k == "'" || k == "f") {
+		cx = 1
+	} else if (k == "7" || k == "$" || k == "g") {
+		cx = -1
+		cy = -1
+	} else if (k == "8" || k == "&" || k == "h") {
+		cy = -1
+	} else if (k == "9" || k == "i" || k == "!") {
+		cx = 1
+		cy = -1
+	}
+
+	pMove(cx,cy)
+}
+
+
+function pMove(cx,cy) {
+	nx = px + cx
+	ny = py + cy
+
+	if (nx > 15 || nx < 1 || ny > 15 || ny < 1) {
+		alert("Space Angel: You can't walk on the sides.");
+	} else {
+		imto = document.all['maze' + nx + '_' + ny]
+		imfrom = document.all['maze' + px + '_' + py]
+		if (imto.src.toLowerCase() == "w.gif" || imto.src.toLowerCase() == pageloc + "w.gif") {
+			alert("Space Angel: Sorry but you can't go through walls.");
+		} else if (imto.src.toLowerCase() == "g.gif" || imto.src.toLowerCase() == pageloc + "g.gif") {
+			imfrom.src = "n.gif"
+			imto.src = "p.gif"
+			px = nx
+			py = ny
+			goal();
+		} else {
+			imfrom.src = "n.gif"
+			imto.src = "p.gif"
+			px = nx
+			py = ny
+		}
+	}
+	nm++
+	self.focus()
+}
+
+document.onkeyup=keyUp;
+
+</script>
+
+<style>
+IMG.maze {
+	height:16;
+	width:16;
+	border:0;
+}
+</style>
+
+</head>
+<body bgcolor=black text=white background="bg.bmp">
+<table border=0>
+<tr><td valign=top width=280>
+<script language="javascript">
+<!--
+document.write("<img src='spaceangel." + "j" + "p" + "g" + "'><br>");
+//-->
+</script>
+
+<font style="font-size:12pt;">Welcome to Space Maze...</font><br>
+<br>
+<font style="font-size:10pt;">In Space Maze you are the star and you goal is to go to the moon.<br>
+Move using the buttons on the number key-pad on the right of your keyboard or the arrow buttons.<br>
+<br>
+</font>
+</td><td>
+
+<script language="Javascript">
+<!-- Begin Script Cloaker
+var w,y,x;
+
+document.write("<table border=0 cellpadding=0 cellspacing=0>\n");
+document.write("<tr>\n");
+
+for (w=1;w<=17;w++){
+	document.write("<td><img src='w.gif' class='maze'></td>\n");
+}
+
+document.write("</tr>\n");
+
+for (y=1;y<=15;y++) {
+	document.write("<tr>\n<td><img src='w.gif'></td>\n");
+	for (x=1;x<=15;x++){
+		document.write("<td><a href='javascript:void(0);' onClick='clickMove(" + x + "," + y + ");'><img src='n.gif' id='maze" + x + "_" + y + "' class='maze'></a></td>\n");
+	}
+	document.write("<td><img src='w.gif'></td>\n</tr>\n");
+}
+
+document.write("<tr>\n");
+
+for (w=1;w<=17;w++){
+	document.write("<td><img src='w.gif' class='maze'></td>\n");
+}
+
+document.write("</tr>\n</table>\n");
+
+document.all['maze1_1'].src="p.gif"
+document.all['maze15_15'].src="g.gif"
+
+start();
+//End Of Cloaker -->
+</script>
+
+</td></tr></table>
+
+</body></html>
