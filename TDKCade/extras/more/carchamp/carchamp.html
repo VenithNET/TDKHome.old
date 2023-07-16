@@ -1,0 +1,443 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META NAME="description" content="CarChamp is a PC-Game written in HTML and JavaScript">
+<META NAME="author" content="JavaScript-Clone 2004: Lutz Tautenhahn">
+<META NAME="keywords" content="Game, CarChamp, Streich, Stroke, JavaScript">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META HTTP-EQUIV="imagetoolbar" CONTENT="false">
+<title>CarChamp</title>
+<script language="JavaScript">
+var n, m, IsOver=true, StartTime, EndTime, Level=1, MaxLevel=39, Size=6, IsAni=false, NMoves, Start=0, Clicks;
+
+CarBgPic=new Image();
+CarBgPic.src="car_bg.gif";
+
+Car2vPic=new Array(7);
+for (n=0; n<7; n++)
+  Car2vPic[n]=new Array(2);
+for (n=0; n<7; n++)
+{ for (m=0; m<2; m++)
+  { Car2vPic[n] = new Image(); 
+    Car2vPic[n].src = "car2v"+n+m+".gif"; 
+  }
+}
+
+Car2hPic=new Array(6);
+for (n=0; n<6; n++)
+  Car2hPic[n]=new Array(2);
+for (n=0; n<6; n++)
+{ for (m=0; m<2; m++)
+  { Car2hPic[n] = new Image(); 
+    Car2hPic[n].src = "car2h"+n+m+".gif"; 
+  }
+}
+
+Car3vPic=new Array(6);
+for (n=0; n<6; n++)
+  Car3vPic[n]=new Array(3);
+for (n=0; n<6; n++)
+{ for (m=0; m<3; m++)
+  { Car3vPic[n] = new Image(); 
+    Car3vPic[n].src = "car3v"+n+m+".gif"; 
+  }
+}
+
+Car3hPic=new Array(6);
+for (n=0; n<6; n++)
+  Car3hPic[n]=new Array(3);
+for (n=0; n<6; n++)
+{ for (m=0; m<3; m++)
+  { Car3hPic[n] = new Image(); 
+    Car3hPic[n].src = "car3h"+n+m+".gif"; 
+  }
+}
+
+Fld=new Array(Size);
+for (n=0; n<Size; n++)
+  Fld[n]=new Array(Size);
+
+Cars=new Array(MaxLevel); 
+n=0;
+Cars[n++]=new Array(2,3,2,4, 0,0,0,2, 0,4,1,4, 1,1,3,1, 1,2,2,2, 1,5,2,5, 2,0,3,0, 3,2,3,4, 3,5,4,5, 4,0,5,0, 5,1,5,2);
+Cars[n++]=new Array(2,4,2,5, 0,0,0,2, 0,5,1,5, 1,0,3,0, 1,2,2,2, 2,1,3,1, 3,3,3,5, 4,0,4,1, 4,3,5,3, 5,1,5,2, 5,4,5,5);
+Cars[n++]=new Array(2,3,2,4, 0,0,2,0, 1,2,3,2, 0,4,0,5, 1,5,3,5, 4,0,4,1, 5,1,5,3, 4,5,5,5);
+Cars[n++]=new Array(2,4,2,5, 0,0,0,1, 0,2,0,3, 0,4,1,4, 1,0,1,1, 1,2,2,2, 2,0,3,0, 4,0,5,0, 2,1,4,1, 3,2,3,4, 4,3,5,3, 3,5,5,5);
+Cars[n++]=new Array(2,4,2,5, 0,0,0,1, 0,2,0,3, 0,4,1,4, 1,0,1,1, 1,2,2,2, 2,0,3,0, 2,1,4,1, 3,2,3,4, 3,5,5,5, 4,0,5,0, 4,3,5,3);
+Cars[n++]=new Array(2,4,2,5, 0,1,2,1, 0,3,0,5, 1,3,2,3, 2,0,3,0, 3,1,3,2, 3,3,3,4, 3,5,4,5, 4,0,5,0, 4,2,5,2, 4,3,4,4);
+Cars[n++]=new Array(2,3,2,4, 0,4,0,5, 0,2,2,2, 0,0,1,0, 1,5,3,5, 1,1,3,1, 2,0,3,0, 3,2,3,4, 4,5,5,5, 4,0,4,1, 5,0,5,1); 
+Cars[n++]=new Array(2,4,2,5, 0,0,0,2, 0,5,1,5, 1,3,1,4, 1,2,2,2, 2,0,4,0, 2,3,3,3, 4,1,4,2, 4,3,5,3, 5,0,5,2);
+Cars[n++]=new Array(2,3,2,4, 0,2,1,2, 0,4,0,5, 1,4,1,5, 1,0,3,0, 1,1,3,1, 2,2,4,2, 3,3,4,3, 3,4,3,5, 4,5,5,5, 5,0,5,2);
+Cars[n++]=new Array(2,3,2,4, 0,0,1,0, 0,1,1,1, 0,2,0,3, 0,4,1,4, 1,2,2,2, 2,0,3,0, 3,2,3,3, 4,2,5,2);
+Cars[n++]=new Array(2,4,2,5, 0,0,2,0, 0,1,0,2, 1,1,2,1, 1,2,1,3, 2,2,3,2, 2,3,3,3, 3,4,3,5, 4,0,4,2, 5,0,5,2, 4,3,5,3, 4,4,4,5, 5,4,5,5);
+Cars[n++]=new Array(2,1,2,2, 0,1,1,1, 0,2,0,3, 0,4,0,5, 1,0,3,0, 1,3,2,3, 2,4,3,4, 3,1,3,2, 3,5,5,5, 4,0,4,1, 4,2,5,2, 5,0,5,1);
+Cars[n++]=new Array(2,3,2,4, 0,4,0,5, 0,3,1,3, 0,0,0,1, 1,4,1,5, 1,0,3,0, 2,5,4,5, 3,2,3,4, 4,2,5,2, 4,0,4,1, 5,4,5,5, 5,0,5,1);
+Cars[n++]=new Array(2,2,2,3, 0,3,0,4, 0,1,0,2, 1,4,1,5, 1,2,1,3, 1,1,3,1, 1,0,3,0, 2,5,4,5, 2,4,4,4, 3,3,4,3, 3,2,4,2, 4,0,4,1, 5,3,5,4, 5,1,5,2);
+Cars[n++]=new Array(2,2,2,3, 1,0,1,1, 2,0,3,0, 2,1,3,1, 4,0,4,1, 0,3,1,3, 3,2,3,3, 4,3,5,3, 0,4,0,5, 2,4,3,4, 2,5,3,5, 5,4,5,5);
+Cars[n++]=new Array(2,4,2,5, 0,0,2,0, 0,3,0,4, 0,5,1,5, 1,3,3,3, 3,0,3,2, 4,1,5,1, 5,3,5,5);
+Cars[n++]=new Array(2,3,2,4, 3,0,5,0, 2,2,4,2, 3,3,3,4, 4,4,5,4, 5,2,5,3);
+Cars[n++]=new Array(2,1,2,2, 0,0,2,0, 0,1,1,1, 0,2,0,3, 0,4,0,5, 1,2,1,3, 1,5,2,5, 2,3,4,3, 2,4,3,4, 3,0,3,2, 5,4,5,5);
+Cars[n++]=new Array(2,2,2,3, 0,3,1,3, 0,1,0,2, 1,1,2,1, 2,4,3,4, 3,2,3,3, 3,1,4,1, 4,2,4,4);
+Cars[n++]=new Array(2,3,2,4, 0,0,0,2, 0,3,1,3, 1,0,1,1, 1,2,3,2, 1,5,2,5, 3,0,3,1, 3,4,4,4, 4,0,5,0, 4,2,4,3, 4,5,5,5, 5,2,5,4);
+Cars[n++]=new Array(2,4,2,5, 0,2,0,4, 0,5,1,5, 1,0,1,1, 1,2,1,3, 2,3,3,3, 3,2,5,2, 3,4,3,5, 4,0,5,0, 4,1,5,1, 4,3,4,5, 5,3,5,5);
+Cars[n++]=new Array(2,3,2,4, 0,4,0,5, 0,3,1,3, 0,2,2,2, 1,5,3,5, 3,2,3,4, 5,0,5,2);
+Cars[n++]=new Array(2,4,2,5, 1,0,1,1, 0,2,1,2, 0,3,0,5, 1,3,3,3, 3,0,5,0, 3,1,3,2, 4,1,4,3, 3,4,4,4, 3,5,4,5, 5,2,5,3, 5,4,5,5);
+Cars[n++]=new Array(2,1,2,2, 0,1,0,3, 0,0,2,0, 1,3,2,3, 1,1,1,2, 3,3,4,3, 3,2,4,2, 3,0,3,1, 4,0,4,1, 5,1,5,3);
+Cars[n++]=new Array(2,2,2,3, 0,1,0,2, 0,3,1,3, 1,4,2,4, 2,1,3,1, 2,5,3,5, 3,3,3,4, 4,1,5,1, 4,3,4,5, 5,4,5,5);
+Cars[n++]=new Array(2,3,2,4, 0,5,2,5, 0,3,1,3, 0,0,0,2, 1,2,2,2, 3,4,3,5, 3,2,3,3, 3,0,5,0, 5,4,5,5, 5,2,5,3);
+Cars[n++]=new Array(2,3,2,4, 0,5,2,5, 0,3,0,4, 0,2,2,2, 3,3,4,3, 3,0,3,2, 4,0,5,0, 5,1,5,3);
+Cars[n++]=new Array(2,3,2,4, 0,0,0,1, 0,3,1,3, 0,4,0,5, 1,4,1,5, 1,0,3,0, 2,1,3,1, 4,0,4,1, 5,0,5,1, 3,2,3,4, 4,2,5,2, 4,4,5,4, 2,5,4,5);
+Cars[n++]=new Array(2,4,2,5, 0,2,2,2, 0,3,0,4, 0,5,1,5, 1,3,1,4, 2,0,4,0, 2,3,3,3, 3,1,3,2, 4,3,5,3, 5,0,5,2);
+Cars[n++]=new Array(2,3,2,4, 0,2,2,2, 0,3,1,3, 0,4,0,5, 1,4,1,5, 2,5,4,5, 3,2,3,4, 4,3,4,4, 5,3,5,5);
+Cars[n++]=new Array(2,4,2,5, 0,0,0,1, 0,2,1,2, 0,3,2,3, 0,4,0,5, 3,0,5,0, 3,1,3,2, 3,3,3,4, 3,5,4,5, 4,2,5,2, 5,4,5,5);
+Cars[n++]=new Array(2,2,2,3, 0,0,0,1, 0,2,0,4, 0,5,2,5, 1,0,3,0, 1,2,1,3, 1,4,2,4, 3,2,4,2, 3,3,3,5, 4,0,4,1, 4,3,5,3, 5,4,5,5);
+Cars[n++]=new Array(2,4,2,5, 0,0,0,2, 0,5,1,5, 1,0,3,0, 1,2,2,2, 2,1,3,1, 3,2,4,2, 3,3,3,5, 4,0,4,1, 4,3,5,3, 5,1,5,2, 5,4,5,5);
+Cars[n++]=new Array(2,4,2,5, 0,0,0,1, 0,3,2,3, 0,4,1,4, 3,0,5,0, 3,1,3,2, 4,1,5,1, 4,2,5,2, 3,3,3,4, 4,3,4,4, 3,5,4,5, 5,3,5,5);
+Cars[n++]=new Array(2,4,2,5, 0,0,2,0, 0,1,0,2, 0,3,2,3, 1,2,2,2, 3,2,3,4, 3,5,4,5, 4,1,5,1, 4,2,5,2, 4,3,4,4, 5,4,5,5);
+Cars[n++]=new Array(2,1,2,2, 0,5,2,5, 0,3,0,4, 0,1,1,1, 1,4,2,4, 1,3,2,3, 1,0,3,0, 3,3,3,5, 3,2,4,2, 4,3,5,3, 4,0,4,1, 5,4,5,5, 5,1,5,2);
+Cars[n++]=new Array(2,4,2,5, 0,0,0,2, 0,3,1,3, 1,2,2,2, 2,0,4,0, 3,1,3,2, 2,3,3,3, 3,4,3,5, 4,2,4,3, 5,2,5,3, 4,4,5,4, 4,5,5,5);
+Cars[n++]=new Array(2,4,2,5, 0,0,0,2, 0,5,1,5, 1,2,2,2, 1,3,1,4, 2,0,4,0, 2,3,3,3, 3,1,3,2, 4,1,4,2, 4,3,5,3, 5,0,5,2);
+Cars[n++]=new Array(2,3,2,4, 0,4,0,5, 0,0,0,2, 1,2,2,2, 1,0,1,1, 2,5,3,5, 2,0,4,0, 3,3,5,3, 3,1,3,2, 4,4,4,5, 5,0,5,2);
+
+TmpCars=new Array();
+CarNum=new Array(19);
+Solution = new Array(MaxLevel);
+n=0;
+Solution[n++]=new Array(3,5, 3,2, 5,1, 1,2, 2,2, 1,1, 2,1, 0,0, 3,0, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(2,5, 0,5, 0,0, 0,1, 0,2, 2,2, 3,1, 2,1, 4,0, 1,0, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(0,5, 3,5, 5,5, 5,1, 5,2, 4,0, 4,1, 4,2, 1,2, 2,2, 0,0, 1,0, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(2,5, 5,5, 4,5, 3,5, 3,2, 1,2, 2,2, 2,4, 0,4, 0,2, 0,0, 1,0, 3,0, 2,0, 2,1, 2,3, 2,2);
+Solution[n++]=new Array(2,5, 5,5, 4,5, 3,5, 3,2, 1,2, 2,2, 3,2, 2,1, 2,4, 2,3, 0,4, 0,2, 0,0, 1,0, 3,0, 2,0, 2,2);
+Solution[n++]=new Array(3,5, 3,3, 3,1, 0,1, 1,1, 2,1, 0,5, 0,4, 0,3, 2,3, 2,5, 2,4, 2,3, 0,3, 0,0, 3,0, 2,0, 2,2);
+Solution[n++]=new Array(0,5, 3,5, 3,2, 4,0, 4,1, 4,2, 5,0, 5,1, 5,2, 0,2, 1,2, 2,2, 1,1, 2,1, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(1,2, 1,4, 1,3, 3,3, 2,3, 5,3, 4,3, 4,1, 4,2, 4,3, 2,3, 3,3, 2,2, 2,5, 2,4, 2,3, 5,3, 5,0, 2,0, 2,2);
+Solution[n++]=new Array(3,3, 3,5, 1,5, 0,5, 5,5, 4,5, 3,5, 2,5, 3,3, 5,3, 5,0, 5,1, 5,2, 2,2, 1,1, 2,1, 1,0, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(2,0, 0,0, 0,1, 0,3, 0,2, 2,2, 2,4, 0,4, 1,4, 2,4, 2,2, 0,2, 0,0, 0,1, 0,2, 2,2, 2,1, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(1,2, 1,3, 0,1, 0,2, 0,3, 3,3, 2,3, 3,2, 2,2, 2,1, 2,5, 2,4, 2,3, 5,3, 4,3, 4,0, 5,0, 0,0, 1,0, 2,0, 2,2);
+Solution[n++]=new Array(1,3, 2,3, 2,4, 2,1, 2,2, 2,3, 0,1, 0,3, 0,2, 4,3, 3,3, 2,3, 3,4, 3,1, 3,2, 5,2, 4,2, 3,2, 2,2, 4,0, 4,1, 5,0, 1,1, 2,1, 1,0, 2,0, 2,5, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(0,0, 3,0, 2,4, 2,3, 3,4, 3,3, 0,3, 1,3, 2,3, 3,3, 0,5, 1,5, 4,5, 3,5, 3,0, 3,1, 3,2, 2,1, 2,2, 5,2, 4,2, 3,2, 4,0, 5,0, 0,0, 1,0, 2,0, 0,2, 2,2, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(5,2, 5,4, 2,4, 2,5, 2,2, 2,3, 4,3, 4,2, 4,0, 4,1, 1,1, 1,0, 1,3, 1,2, 0,2, 0,3, 3,3, 2,3, 3,2, 2,2, 2,5, 2,4, 5,4, 5,5, 5,2, 5,3, 5,0, 5,1, 2,1, 2,0, 2,3, 2,2);
+Solution[n++]=new Array(2,5, 2,4, 2,2, 2,3, 0,3, 0,5, 0,4, 0,3, 2,3, 2,5, 2,4, 4,4, 3,4, 2,4, 4,5, 3,5, 2,5, 2,2, 2,3, 3,2, 3,3, 5,3, 4,3, 4,0, 4,1, 4,2, 4,3, 2,3, 2,1, 2,0, 2,5, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(0,4, 0,3, 3,3, 3,0, 3,1, 5,1, 4,1, 3,1, 3,4, 3,3, 5,5, 5,4, 5,3, 0,3, 1,3, 2,3, 0,1, 2,1, 2,5, 2,4, 2,3, 0,5, 0,2, 0,3, 5,3, 4,3, 3,3, 3,0, 3,1, 3,2, 5,0, 5,1, 5,2, 0,0, 1,0, 2,0, 2,2);
+Solution[n++]=new Array(4,2, 3,2, 5,0, 4,0, 3,0, 3,4, 3,3, 3,2, 5,3, 5,2, 0,2, 1,2, 2,2, 2,4, 5,4, 4,4, 3,4, 2,4, 2,2, 5,2, 4,2, 3,2, 3,0, 3,1, 3,2, 5,0, 5,1, 5,2, 0,2, 1,2, 2,2, 0,0, 1,0, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(2,4, 1,5, 2,5, 2,3, 2,1, 2,2, 2,3, 1,2, 1,3, 0,1, 0,3, 5,3, 4,3, 3,3, 5,5, 5,4, 3,4, 3,0, 3,1, 1,1, 2,1, 3,1, 3,4, 3,3, 5,4, 5,2, 5,3, 0,3, 1,3, 2,3, 2,5, 2,4, 2,3, 5,3, 4,3, 3,3, 3,0, 0,0, 1,0, 2,0, 2,2);
+Solution[n++]=new Array(3,4, 2,4, 2,2, 2,3, 0,3, 0,1, 2,1, 4,1, 4,4, 4,3, 3,2, 3,3, 1,3, 2,3, 3,3, 2,5, 2,4, 3,5, 3,4, 0,4, 1,4, 2,4, 3,4, 2,2, 2,3, 3,2, 3,3, 5,3, 4,3, 3,3, 3,5, 3,4, 0,2, 0,3, 2,3, 2,5, 2,4, 5,4, 4,4, 4,0, 4,1, 2,1, 2,3, 2,2);
+Solution[n++]=new Array(2,5, 2,3, 4,3, 0,3, 1,3, 2,3, 2,5, 0,5, 0,0, 0,1, 0,2, 3,2, 3,0, 5,0, 4,0, 4,2, 5,4, 5,3, 3,3, 3,4, 3,1, 3,2, 0,2, 1,2, 1,0, 1,1, 1,2, 3,0, 2,0, 4,2, 3,2, 3,4, 3,3, 3,2, 5,3, 5,4, 5,0, 5,1, 5,5, 5,2, 0,2, 1,2, 2,2, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(1,2, 5,2, 4,2, 5,1, 4,1, 5,0, 4,0, 4,5, 4,4, 4,3, 5,5, 5,4, 5,3, 2,3, 3,3, 2,5, 3,5, 0,5, 1,5, 2,5, 3,5, 0,4, 0,3, 1,3, 2,3, 3,3, 5,3, 4,3, 3,3, 2,3, 2,5, 3,5, 5,5, 4,5, 4,0, 4,1, 4,2, 5,0, 5,1, 5,2, 1,2, 2,2, 2,1, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(1,5, 2,5, 2,3, 3,4, 3,3, 0,3, 1,3, 2,3, 3,3, 2,5, 0,5, 5,5, 4,5, 3,5, 3,0, 3,1, 3,2, 0,2, 0,4, 0,3, 0,2, 3,2, 3,5, 3,4, 3,3, 0,5, 1,5, 2,5, 2,3, 5,3, 4,3, 3,3, 2,3, 2,5, 5,5, 4,5, 3,5, 3,0, 3,1, 3,2, 5,0, 5,1, 5,2, 0,2, 1,2, 2,2, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(5,0, 5,3, 5,2, 5,5, 5,4, 3,4, 3,5, 0,2, 0,5, 0,4, 0,3, 3,3, 3,1, 3,2, 3,3, 1,2, 0,3, 1,0, 4,0, 4,3, 1,3, 1,1, 1,2, 1,3, 4,3, 3,3, 3,2, 3,5, 3,4, 3,3, 5,4, 5,5, 5,2, 5,3, 0,3, 1,3, 2,3, 0,0, 0,1, 0,2, 2,2, 2,5, 2,4, 2,3, 5,3, 4,3, 4,0, 5,0, 1,0, 2,0, 2,2);
+Solution[n++]=new Array(5,3, 3,3, 1,3, 1,1, 1,2, 1,3, 3,3, 5,3, 5,0, 5,1, 5,2, 3,2, 3,0, 0,0, 0,3, 2,3, 2,1, 2,2, 2,3, 0,3, 0,0, 3,0, 3,2, 5,2, 4,2, 3,2, 5,5, 5,4, 5,3, 3,3, 3,0, 3,1, 3,2, 3,3, 5,3, 0,0, 0,3, 2,3, 4,3, 4,0, 4,1, 4,2, 4,3, 1,2, 2,2, 2,3, 2,5, 2,4, 2,3, 5,0, 1,0, 2,0, 2,2);
+Solution[n++]=new Array(2,4, 3,5, 2,5, 2,2, 2,3, 0,3, 0,1, 3,1, 2,1, 5,1, 4,1, 4,5, 4,4, 4,3, 5,5, 5,4, 5,3, 3,3, 1,3, 2,3, 3,3, 3,5, 3,4, 2,5, 2,4, 0,4, 1,4, 2,4, 3,4, 0,5, 1,5, 2,5, 3,5, 0,2, 0,3, 2,2, 2,3, 3,2, 3,3, 5,3, 4,3, 3,3, 2,3, 2,5, 2,4, 3,5, 3,4, 5,4, 4,4, 4,0, 4,1, 2,1, 2,3, 2,2);
+Solution[n++]=new Array(3,3, 3,5, 5,3, 5,5, 0,5, 1,5, 2,5, 2,3, 0,3, 0,0, 5,0, 4,0, 3,0, 3,2, 5,2, 1,2, 2,2, 3,2, 3,0, 0,0, 0,3, 2,3, 2,5, 2,4, 2,3, 5,5, 4,5, 3,5, 3,3, 0,3, 0,0, 3,0, 5,3, 1,3, 2,3, 3,3, 3,5, 0,5, 0,1, 0,2, 2,1, 2,2, 3,2, 5,2, 4,2, 3,2, 2,2, 3,0, 5,0, 0,0, 1,0, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(0,5, 1,5, 2,5, 2,3, 4,3, 3,3, 3,0, 5,0, 4,0, 3,0, 3,3, 1,3, 2,3, 2,5, 5,3, 3,3, 5,5, 4,5, 3,5, 3,0, 3,1, 3,2, 0,2, 0,4, 0,3, 0,2, 3,2, 3,5, 3,4, 3,3, 0,5, 1,5, 2,5, 2,3, 5,3, 4,3, 3,3, 2,3, 2,5, 5,5, 4,5, 3,5, 3,0, 3,1, 3,2, 5,0, 5,1, 5,2, 0,2, 1,2, 2,2, 1,0, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(0,0, 3,0, 3,1, 3,4, 3,3, 2,5, 2,3, 0,3, 1,3, 2,3, 3,3, 2,5, 1,5, 0,5, 5,5, 4,5, 3,5, 3,0, 3,1, 3,2, 5,2, 4,2, 3,2, 4,0, 5,0, 3,5, 3,4, 5,4, 0,5, 1,5, 2,5, 2,3, 1,3, 0,3, 3,3, 5,3, 4,3, 3,3, 2,3, 5,1, 5,2, 3,0, 0,0, 1,0, 2,0, 0,2, 2,2, 2,5, 2,4, 5,4, 3,4, 3,1, 4,1, 1,1, 2,1, 2,3, 2,2);
+Solution[n++]=new Array(4,0, 3,0, 3,2, 0,2, 1,2, 1,4, 1,3, 0,4, 0,3, 3,3, 2,3, 2,5, 0,5, 1,5, 2,5, 2,3, 0,3, 1,3, 1,1, 1,2, 1,3, 0,1, 0,2, 3,3, 4,2, 3,2, 3,5, 3,0, 3,1, 3,2, 3,3, 1,3, 0,2, 1,2, 1,5, 1,4, 1,3, 0,4, 0,3, 3,3, 2,3, 2,5, 3,5, 5,5, 4,5, 3,5, 3,3, 5,3, 5,0, 5,1, 5,2, 2,2, 0,0, 1,0, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(3,4, 3,3, 4,4, 4,3, 4,2, 5,5, 5,4, 5,3, 2,5, 2,3, 0,3, 1,3, 2,3, 3,3, 2,5, 1,5, 0,5, 5,5, 4,5, 3,5, 3,0, 3,1, 3,2, 0,2, 1,2, 1,4, 1,3, 1,2, 0,4, 0,3, 0,2, 4,2, 3,2, 3,5, 3,4, 3,3, 0,5, 1,5, 2,5, 2,3, 5,3, 4,3, 3,3, 2,3, 2,5, 5,5, 4,5, 3,5, 3,0, 3,1, 3,2, 5,0, 5,1, 5,2, 0,2, 1,2, 2,2, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(0,2, 0,0, 5,0, 4,0, 3,0, 3,2, 5,2, 5,5, 5,4, 5,3, 5,2, 3,5, 3,3, 0,3, 1,3, 2,3, 3,2, 3,0, 0,0, 0,2, 2,2, 2,5, 2,4, 2,3, 5,3, 4,3, 3,3, 3,5, 5,5, 4,5, 3,5, 3,3, 0,3, 1,3, 2,3, 2,1, 2,2, 0,2, 0,0, 3,0, 3,2, 5,2, 0,5, 2,5, 2,3, 5,3, 5,0, 5,1, 5,2, 5,3, 2,3, 3,2, 3,0, 0,0, 1,0, 2,0, 0,2, 2,2, 2,5, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(3,2, 3,5, 0,5, 0,2, 0,0, 3,0, 3,4, 3,3, 2,3, 1,3, 5,3, 4,3, 3,3, 3,0, 3,1, 0,0, 0,2, 0,5, 3,5, 3,2, 5,2, 5,5, 5,4, 5,3, 5,2, 3,2, 3,5, 3,4, 0,5, 0,2, 0,0, 3,0, 3,3, 1,3, 2,3, 3,3, 1,4, 2,4, 3,4, 3,0, 0,0, 0,2, 0,5, 3,5, 3,1, 3,2, 2,1, 2,2, 1,1, 1,2, 5,2, 4,2, 3,2, 3,5, 0,5, 0,2, 2,2, 4,0, 5,0, 1,0, 2,0, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(0,0, 3,0, 5,2, 3,2, 3,1, 3,5, 3,4, 3,3, 2,5, 0,5, 1,5, 2,5, 5,3, 5,5, 3,5, 2,3, 4,3, 3,3, 3,0, 3,1, 3,2, 0,1, 0,2, 2,2, 5,2, 4,2, 4,0, 4,1, 4,2, 2,2, 3,2, 0,2, 0,5, 0,4, 0,0, 0,3, 2,3, 2,5, 3,5, 5,5, 4,5, 3,5, 2,5, 4,3, 5,3, 2,3, 0,3, 0,0, 3,0, 3,4, 3,3, 1,3, 2,3, 3,3, 2,5, 0,5, 0,1, 0,2, 2,2, 2,4, 3,0, 3,1, 3,2, 5,2, 5,0, 2,1, 0,0, 1,0, 2,0, 2,3, 2,2);
+Solution[n++]=new Array(0,0, 5,0, 4,0, 3,0, 3,2, 5,2, 4,2, 3,2, 5,5, 3,5, 3,3, 3,0, 3,1, 5,1, 4,1, 3,1, 3,3, 3,2, 4,4, 4,3, 4,2, 5,4, 5,3, 0,3, 1,3, 2,3, 1,2, 2,2, 2,5, 2,4, 0,4, 0,1, 0,2, 0,3, 2,1, 2,3, 5,3, 4,3, 3,3, 3,5, 5,5, 4,5, 3,5, 3,3, 0,3, 1,3, 2,3, 0,5, 0,4, 2,4, 2,5, 2,1, 2,2, 2,3, 5,3, 4,3, 4,2, 4,0, 4,1, 4,2, 4,3, 2,2, 1,3, 2,3, 2,5, 2,4, 2,3, 5,3, 5,0, 5,1, 5,2, 3,2, 3,0, 0,0, 1,0, 2,0, 2,2);
+Solution[n++]=new Array(5,5, 3,5, 3,2, 0,0, 0,2, 2,2, 5,2, 4,2, 5,1, 4,1, 4,4, 4,3, 4,2, 5,4, 5,3, 5,2, 2,2, 3,2, 0,2, 0,0, 3,0, 3,1, 3,5, 3,4, 3,3, 0,3, 1,3, 2,3, 2,5, 5,5, 4,5, 3,5, 2,5, 2,3, 5,3, 4,3, 3,3, 3,0, 3,1, 3,2, 0,0, 0,2, 2,2, 5,2, 4,2, 4,0, 4,1, 4,2, 5,0, 5,1, 5,2, 2,2, 3,2, 0,2, 0,0, 3,0, 3,5, 3,4, 3,3, 4,3, 5,3, 0,3, 1,3, 2,3, 0,1, 0,2, 2,2, 2,1, 2,5, 2,4, 2,3, 0,5, 0,3, 5,3, 4,3, 3,3, 3,0, 0,0, 1,0, 2,0, 2,2);
+Solution[n++]=new Array(5,2, 3,2, 3,0, 3,5, 3,4, 3,3, 5,3, 5,5, 0,5, 1,5, 2,5, 1,4, 2,4, 0,3, 2,3, 2,1, 2,2, 2,3, 0,3, 0,5, 0,4, 0,1, 0,3, 2,3, 2,5, 2,4, 4,4, 3,4, 2,4, 5,5, 4,5, 3,5, 5,3, 3,3, 3,0, 3,1, 3,2, 2,2, 5,2, 4,2, 3,2, 0,0, 0,2, 2,2, 2,4, 3,5, 3,4, 0,4, 1,4, 2,4, 2,2, 0,2, 0,0, 3,0, 3,3, 5,3, 5,5, 0,5, 1,5, 2,5, 2,3, 0,3, 0,1, 0,2, 0,3, 2,3, 2,2, 2,1, 2,5, 2,4, 2,3, 5,5, 5,3, 3,3, 3,0, 4,0, 5,0, 0,0, 1,0, 2,0, 2,2);
+Solution[n++]=new Array(4,3, 5,3, 2,3, 0,3, 0,0, 4,0, 3,0, 3,2, 4,2, 5,2, 3,3, 1,2, 2,2, 3,2, 3,0, 0,0, 0,3, 2,3, 2,5, 3,5, 5,5, 4,5, 3,5, 2,5, 2,4, 2,3, 0,3, 0,0, 3,0, 3,2, 3,4, 5,4, 4,4, 3,4, 2,4, 3,2, 3,0, 0,0, 0,3, 2,3, 2,1, 2,2, 2,3, 0,3, 0,0, 3,0, 3,2, 5,2, 4,2, 3,2, 3,0, 0,0, 0,3, 2,3, 3,3, 5,3, 4,3, 4,0, 4,1, 4,2, 4,3, 5,0, 5,1, 5,2, 5,3, 2,3, 0,3, 0,0, 3,0, 3,2, 1,2, 2,2, 3,2, 3,0, 0,0, 0,3, 2,3, 2,5, 2,4, 2,3, 1,0, 2,0, 2,2);
+Solution[n++]=new Array(0,0, 4,0, 3,0, 3,2, 4,2, 1,2, 1,4, 1,3, 3,3, 5,3, 5,0, 5,1, 5,2, 2,2, 3,2, 3,0, 0,0, 0,3, 2,3, 2,5, 0,5, 1,5, 2,5, 2,3, 0,3, 0,0, 3,0, 3,2, 5,2, 5,5, 5,4, 5,3, 3,3, 1,3, 1,1, 1,2, 1,3, 4,2, 3,2, 3,3, 3,0, 3,1, 3,2, 0,0, 0,3, 2,3, 1,2, 2,2, 2,5, 2,4, 2,3, 3,5, 3,3, 0,3, 1,3, 1,5, 1,4, 1,3, 3,3, 2,3, 3,5, 5,5, 4,5, 3,5, 3,3, 5,3, 5,0, 5,1, 5,2, 3,2, 2,1, 2,5, 2,2, 2,3, 4,3, 5,2, 4,2, 4,0, 4,1, 4,2, 4,3, 2,3, 2,2, 1,0, 2,0, 2,5, 2,4, 2,3, 2,2);
+Solution[n++]=new Array(0,5, 3,5, 2,5, 2,3, 5,3, 4,3, 4,5, 4,4, 4,3, 1,3, 2,3, 2,5, 0,5, 1,5, 2,5, 2,3, 0,3, 5,3, 4,3, 3,3, 3,1, 3,2, 1,2, 1,0, 4,0, 4,2, 5,0, 5,1, 5,2, 2,2, 3,2, 3,4, 3,3, 0,3, 0,0, 3,0, 3,2, 5,2, 5,5, 5,4, 5,3, 1,3, 2,3, 2,5, 2,4, 2,3, 5,3, 4,3, 5,0, 5,1, 5,2, 3,2, 3,0, 0,0, 0,3, 3,3, 4,5, 3,5, 3,1, 3,2, 3,3, 5,2, 5,5, 5,4, 5,3, 0,3, 1,3, 2,3, 0,5, 2,5, 2,1, 2,2, 2,3, 4,2, 5,3, 4,3, 4,0, 4,1, 4,2, 4,3, 1,3, 2,3, 2,2, 2,5, 2,4, 2,3, 5,3, 5,0, 1,0, 2,0, 2,2);
+
+function sign(vv)
+{ if (vv>0) return(1);
+  if (vv<0) return(-1);
+  return(0);
+}
+
+function Init(ss)
+{ var nn, tt=parseInt(ss)-1;
+  if (IsAni) return;
+  IsOver=false;
+  if (tt>=0) Level=tt;
+  else tt=Level;
+  TmpCars.length=0;
+  for (nn=0; nn<Cars[tt].length; nn++)
+  TmpCars[nn]=Cars[tt][nn];
+  CarNum[0]=6;
+  if (ss>0) 
+  { Start=Math.floor(Math.random()*1000)%6;
+    for (nn=1; nn<19; nn++) CarNum[nn]=(Start+nn)%6;
+  }
+  UpdateFld();
+  RefreshScreen();
+  NMoves=0; 
+  window.document.Options.Moves.value=NMoves;
+  Now = new Date();
+  StartTime = Now.getTime() / 1000;
+//  Clicks="";
+}
+
+function UpdateFld()
+{ var nn, ii, jj;
+  for (ii=0; ii<Size; ii++)
+  { for (jj=0; jj<Size; jj++)
+      Fld[ii][jj]=-1;
+  }
+  for (nn=0; 4*nn<TmpCars.length; nn++)
+  { ii=TmpCars[4*nn];
+    jj=TmpCars[4*nn+1];
+    Fld[ii][jj]=nn;
+    do
+    { ii+=sign(TmpCars[4*nn+2]-TmpCars[4*nn]);
+      jj+=sign(TmpCars[4*nn+3]-TmpCars[4*nn+1]);
+      Fld[ii][jj]=nn;  
+    }
+    while ((ii!=TmpCars[4*nn+2])||(jj!=TmpCars[4*nn+3]));
+  }
+}
+
+function GetFld(ii, jj)
+{ if (ii<0) return(-2);
+  if (ii>=Size) return(-2);
+  if (jj<0) return(-2);
+  if (jj>=Size) return(-2);
+  return(Fld[ii][jj]);
+}
+  
+function Clicked(ii, jj)
+{ var ddi, ddj, nn;
+  if (IsAni) return;
+  if (IsOver) return;
+//  Clicks+=ii+","+jj+", ";
+  for (nn=0; 4*nn<TmpCars.length; nn++)
+  { if ((ii==TmpCars[4*nn])&&(jj==TmpCars[4*nn+1]))
+    { ddi=sign(TmpCars[4*nn+2]-TmpCars[4*nn]);
+      ddj=sign(TmpCars[4*nn+3]-TmpCars[4*nn+1]);
+      if (GetFld(TmpCars[4*nn+2]+ddi,TmpCars[4*nn+3]+ddj)==-1) 
+      { NMoves++; 
+        window.document.Options.Moves.value=NMoves;
+        MoveCar(nn,ddi,ddj);
+      }
+      return;
+    }
+    if ((ii==TmpCars[4*nn+2])&&(jj==TmpCars[4*nn+3]))
+    { ddi=sign(TmpCars[4*nn]-TmpCars[4*nn+2]);
+      ddj=sign(TmpCars[4*nn+1]-TmpCars[4*nn+3]);
+      if (GetFld(TmpCars[4*nn]+ddi,TmpCars[4*nn+1]+ddj)==-1) 
+      { NMoves++; 
+        window.document.Options.Moves.value=NMoves;
+        MoveCar(nn,ddi,ddj);
+      }  
+      return;
+    }
+  }
+} 
+
+function MoveCar(nn,ddi,ddj)
+{ ii=TmpCars[4*nn];
+  jj=TmpCars[4*nn+1];
+  Fld[ii][jj]=-1;
+  document.images[ii+Size*jj].src = CarBgPic.src;
+  do
+  { ii+=sign(TmpCars[4*nn+2]-TmpCars[4*nn]);
+    jj+=sign(TmpCars[4*nn+3]-TmpCars[4*nn+1]);
+    Fld[ii][jj]=-1;
+    document.images[ii+Size*jj].src = CarBgPic.src;  
+  }
+  while ((ii!=TmpCars[4*nn+2])||(jj!=TmpCars[4*nn+3]));
+  
+  TmpCars[4*nn]+=ddi;
+  TmpCars[4*nn+1]+=ddj;
+  TmpCars[4*nn+2]+=ddi;
+  TmpCars[4*nn+3]+=ddj;
+  
+  ii=TmpCars[4*nn];
+  jj=TmpCars[4*nn+1];
+  Fld[ii][jj]=nn;
+  if (TmpCars[4*nn]==TmpCars[4*nn+2])
+    document.images[ii+Size*jj].src = "car"+eval(TmpCars[4*nn+3]-TmpCars[4*nn+1]+1)+"v"+CarNum[nn]+eval(jj-TmpCars[4*nn+1])+".gif";
+  else
+    document.images[ii+Size*jj].src = "car"+eval(TmpCars[4*nn+2]-TmpCars[4*nn]+1)+"h"+CarNum[nn]+eval(ii-TmpCars[4*nn])+".gif";  
+  do
+  { ii+=sign(TmpCars[4*nn+2]-TmpCars[4*nn]);
+    jj+=sign(TmpCars[4*nn+3]-TmpCars[4*nn+1]);
+    Fld[ii][jj]=nn;
+    if (TmpCars[4*nn]==TmpCars[4*nn+2])
+      document.images[ii+Size*jj].src = "car"+eval(TmpCars[4*nn+3]-TmpCars[4*nn+1]+1)+"v"+CarNum[nn]+eval(jj-TmpCars[4*nn+1])+".gif";
+    else
+      document.images[ii+Size*jj].src = "car"+eval(TmpCars[4*nn+2]-TmpCars[4*nn]+1)+"h"+CarNum[nn]+eval(ii-TmpCars[4*nn])+".gif";  
+  }
+  while ((ii!=TmpCars[4*nn+2])||(jj!=TmpCars[4*nn+3]));  
+  OverTest(); 
+}
+
+function OverTest()
+{ var nn;
+  if (IsOver) return;
+  if (TmpCars[1]!=0) return;
+  IsOver=true;
+  Now = new Date();
+  EndTime = Now.getTime() / 1000;
+  nn=Math.floor(EndTime - StartTime);
+//  ww=window.open();
+//  ww.document.writeln(Clicks);
+  if (Level+1==MaxLevel)
+    alert("Super, you solved this game with "+NMoves+" moves in "+nn+ " seconds !");
+  else
+  { if (confirm("Super, you solved this game with "+NMoves+" moves in "+nn+ " seconds !\nDo you want to try the next level ?"))
+    { document.Options.SelectLevel.selectedIndex=eval(Level+1);
+      Init(Level+2);
+    }  
+  }  
+}
+
+function RefreshScreen()
+{ var nn, mm;
+  for (nn=0; nn < Size; nn++)
+  { for (mm=0; mm < Size; mm++)
+      document.images[nn+Size*mm].src = CarBgPic.src;
+  }
+  for (nn=0; 4*nn<TmpCars.length; nn++) MoveCar(nn,0,0);
+}
+
+function Show()
+{ if (IsAni) return;
+  if (Solution[Level].length==0)
+  { alert("Sorry, there is no solution available.");
+    return;
+  }
+  alert("Show is not solve !");
+  Init(-2);
+  IsAni=true;
+  IsOver=true;
+  setTimeout("Animation("+Level+",0)",500);
+}
+
+function Animation(tt, mm)
+{ if (! IsOver) return;
+  if (mm==Solution[tt].length)
+  { IsAni=false;
+    return;
+  }
+  NMoves++; 
+  window.document.Options.Moves.value=NMoves;
+  var ii, jj, ddi, ddj, nn;
+  ii=Solution[tt][mm];
+  jj=Solution[tt][mm+1];
+  for (nn=0; 4*nn<TmpCars.length; nn++)
+  { if ((ii==TmpCars[4*nn])&&(jj==TmpCars[4*nn+1]))
+    { ddi=sign(TmpCars[4*nn+2]-TmpCars[4*nn]);
+      ddj=sign(TmpCars[4*nn+3]-TmpCars[4*nn+1]);
+      if (Fld[TmpCars[4*nn+2]+ddi][TmpCars[4*nn+3]+ddj]==-1) MoveCar(nn,ddi,ddj);
+    }
+    else
+    { if ((ii==TmpCars[4*nn+2])&&(jj==TmpCars[4*nn+3]))
+      { ddi=sign(TmpCars[4*nn]-TmpCars[4*nn+2]);
+        ddj=sign(TmpCars[4*nn+1]-TmpCars[4*nn+3]);
+        if (Fld[TmpCars[4*nn]+ddi][TmpCars[4*nn+1]+ddj]==-1) MoveCar(nn,ddi,ddj);
+      }
+    }
+  }   
+  setTimeout("Animation("+tt+","+eval(mm+2)+")",500);
+}
+
+function Help()
+{ alert("This is a clone of the games 'Rush Hour' and 'Car Jam'."+
+      "\nYour task is to move the black car to the exit."+
+      "\nClick on a car to push it."+
+      "\nGood luck!");
+}
+</script>
+</head>
+<BODY bgcolor=#eeeeee>
+<DIV ALIGN=center>
+<form name="Options">
+<br>
+<table border=0 cellpadding=0 cellspacing=0 bgcolor=#888888>
+<script language="JavaScript">
+document.open();
+document.writeln("<tr>");
+document.write("<td bgcolor=#888888>&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+for (n=0; n < 2; n++) document.write("<td width=45 bgcolor=#888888>&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+document.write("<th width=45 bgcolor=#eeeeee><font size='1'>EXIT</font></th>");
+for (n=4; n < Size+1; n++) document.write("<td width=45 bgcolor=#888888>&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+document.write("<td bgcolor=#888888>&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+document.writeln("</tr>");
+document.writeln("<tr>");
+document.write("<td height=45 bgcolor=#888888>&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+document.write("<td colspan="+Size+" rowspan="+Size+">");
+for (m=0; m < Size; m++)
+{ document.write("<nobr>");
+  for (n=0; n < Size; n++)
+    document.write("<img src='car_bg.gif' border=0 onMouseDown='Clicked("+n+","+m+")'>");
+  document.write("</nobr>");
+  if (m<Size-1) document.write("<br>");
+}
+document.write("</td>");
+document.write("<td bgcolor=#888888>&nbsp;&nbsp;&nbsp;&nbsp;</td>");  
+document.writeln("</tr>");
+for (m=0; m < Size-1; m++)
+{ document.writeln("<tr>");
+  document.write("<td height=45 bgcolor=#888888>&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+  document.write("<td bgcolor=#888888>&nbsp;&nbsp;&nbsp;&nbsp;</td>");  
+  document.writeln("</tr>");
+}
+document.writeln("<tr>");
+for (n=0; n < Size+2; n++) document.write("<td bgcolor=#888888>&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+document.writeln("</tr>");
+document.close();
+</script>
+</table>
+<br>
+<table noborder><tr>
+<td align=center><SELECT name="SelectLevel" onChange="Init(this.options[selectedIndex].value)" SIZE=1>
+  <OPTION VALUE=1>Level 1
+  <OPTION VALUE=2>Level 2
+  <OPTION VALUE=3>Level 3
+  <OPTION VALUE=4>Level 4
+  <OPTION VALUE=5>Level 5
+  <OPTION VALUE=6>Level 6
+  <OPTION VALUE=7>Level 7
+  <OPTION VALUE=8>Level 8
+  <OPTION VALUE=9>Level 9
+  <OPTION VALUE=10>Level 10
+  <OPTION VALUE=11>Level 11
+  <OPTION VALUE=12>Level 12
+  <OPTION VALUE=13>Level 13
+  <OPTION VALUE=14>Level 14
+  <OPTION VALUE=15>Level 15
+  <OPTION VALUE=16>Level 16
+  <OPTION VALUE=17>Level 17
+  <OPTION VALUE=18>Level 18      
+  <OPTION VALUE=19>Level 19 
+  <OPTION VALUE=20>Level 20 
+  <OPTION VALUE=21>Level 21 
+  <OPTION VALUE=22>Level 22 
+  <OPTION VALUE=23>Level 23 
+  <OPTION VALUE=24>Level 24 
+  <OPTION VALUE=25>Level 25 
+  <OPTION VALUE=26>Level 26 
+  <OPTION VALUE=27>Level 27 
+  <OPTION VALUE=28>Level 28 
+  <OPTION VALUE=29>Level 29 
+  <OPTION VALUE=30>Level 30 
+  <OPTION VALUE=31>Level 31 
+  <OPTION VALUE=32>Level 32 
+  <OPTION VALUE=33>Level 33 
+  <OPTION VALUE=34>Level 34 
+  <OPTION VALUE=35>Level 35 
+  <OPTION VALUE=36>Level 36 
+  <OPTION VALUE=37>Level 37 
+  <OPTION VALUE=38>Level 38   
+  <OPTION VALUE=39>Level 39        
+</SELECT>
+</td><td>
+<input type=button value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" width=40 style="width:35;background-color:#FFFFFF" name="Moves">
+</td></tr></table>
+<table noborder><tr>
+<td><input type=button value="Repeat" width=70 style="width:70" onClick="javascript:Init(0)"></td>
+<td><input type=button value="Show" width=70 style="width:70" onClick="javascript:Show()"></td>
+<td><input type=button value="Help" width=70 style="width:70" onClick="javascript:Help()"></td>
+</tr></table>
+</form>
+</DIV>
+<script language="JavaScript">
+  Init(1);
+</script>
+</BODY>
+</HTML>
