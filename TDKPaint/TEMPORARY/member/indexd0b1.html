@@ -1,416 +1,0 @@
-<!DOCTYPE html>
-<html lang="en">
-	
-<!-- Mirrored from dsipaint.com/member/?id=143394 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:10:52 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta name="viewport" content="width=device-width" />
-<meta name="description" content="3DSPaint: Games and Apps for the Nintendo 3DS Internet Browser" />
-<meta name="keywords" content="3D Photo Gallery, 3DS Photo Gallery, Upload 3D Photos, Upload 3DS Photos, MPO, 3DSPaint, 3DS Opera SDK, Nintendo 3DS, 3DS, JavaScript, video games" />
-<link rel="shortcut icon" href="../favicon.ico" />
-<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
-<link rel="stylesheet" href="../stylee993.css" type="text/css" />
-<link rel="stylesheet" href="../lighte993.css" type="text/css" />
-<script type="text/javascript">
-	function parse(json){
-		return (typeof JSON == 'object') ? JSON.parse(json) : eval(json);
-	}
-
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-702344-11']);
-	_gaq.push(['_trackPageview']);
-	(function() {
-		var ga = document.createElement('script');
-		ga.type = 'text/javascript';
-		ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0];
-		s.parentNode.insertBefore(ga, s);
-	})();
-</script>
-		<title>Profile for CdogYEET</title>
-		<script type="text/javascript">
-			'use strict';
-
-			function flag(obj, comment) {
-				var params = 'action=comment_flag&comment=' + comment;
-
-				if (confirm("Flag comment?")) {
-					xhrCall(params);
-					obj.style.display = 'none';
-				}
-				return false;
-			}
-			function remove_comment(obj, comment) {
-				var div = obj.parentNode.parentNode,
-						params = 'action=comment_delete&comment=' + comment;
-
-				if (confirm("Delete comment?")) {
-					xhrCall(params);
-					div.parentNode.removeChild(div);
-				}
-				return false;
-			}
-			function xhrCall(params) {
-				xhr.abort();
-				xhr.open('GET.html', '?id=143394&ajax=' + (new Date()).getTime() + '&' + params, true);
-				xhr.send(null);
-			}
-
-			function mousedown(e) {
-				context.beginPath();
-				context.moveTo(e.offsetX - 1, e.offsetY - 1);
-				painting = true;
-			}
-			function mousemove(e) {
-				if (painting) {
-					context.lineTo(e.offsetX - 1, e.offsetY - 1);
-					context.stroke();
-				}
-			}
-			function mouseup(e) {
-				painting = false;
-			}
-
-			function save() {
-				if (!saving) {
-					saving = true;
-					var data = 'id=143394&data=' + canvas.toDataURL('image/png');
-					console.log(data);
-					var xhrSave = new XMLHttpRequest();
-					xhrSave.open('POST.html', '../includes/ajax_comment_save.html', true);
-					xhrSave.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-					xhrSave.setRequestHeader('Content-length', data.length);
-					xhrSave.setRequestHeader('Connection', 'close');
-					xhrSave.send(data);
-					xhrSave.onreadystatechange = function () {
-						if (xhrSave.readyState == 4 && xhrSave.responseText == 'true') {
-							location.reload();
-						}
-					};
-				}
-				return false;
-			}
-
-			var xhr = new XMLHttpRequest();
-
-			window.onload = function () {
-				var images = document.getElementsByName('body_images');
-				var maxwidth = 800;
-				if (document.domain.indexOf('3dspaint')) {
-					maxwidth = 300;
-				} else if (document.domain.indexOf('dsipaint')) {
-					maxwidth = 220;
-				}
-				for (var index in images) {
-					if (images[index].width > maxwidth) {
-						images[index].width = maxwidth;
-					}
-				}
-			}
-		</script>
-		<style type="text/css">
-			TD.profile_page{
-				background:#8f8;
-				border:1px outset #888;
-				color:#fff;
-				font-size:9pt;
-				text-align:center;
-			}
-			.button {
-				background: #fff;
-				border: 1px outset #888;
-				margin: 3px;
-				padding: 3px;
-				width: 10px;
-				height: 10px;
-			}
-			.admin TD, .admin TEXTAREA {
-				background:#fff !important;
-				color:#000 !important;
-			}
-		</style>
-		<style type="text/css">
-			avatar{width:200px;height:200px}
-
-{background-image:url(../../external.html?link=https://static.wikia.nocookie.net/74b017b3-7e56-44cb-a98b-726e22559c5b/scale-to-width/755)!important}{background-position:center!important;}
-
-
-h1:before, h1:after{content:url(../../i.imgur.com/icXqXEC.gif);}div		</style>
-	</head>
-	<body style="background: url(../images/backgrounds/background6.png)">
-
-<div style="padding:2px; text-align:center">
-	<a href="../index.html"><img src="../images/logo.png" alt="Logo" /></a>
-</div>
-
-<div class="menu_section" style="padding:0px">
-
-
-	<div class="menu_section">
-		<div class="nav_avatar">
-			<a onclick="showLogin();"><img src="../avatars_site/0.png" alt="Login" title="Login" /></a>
-		</div>
-
-		<div class="nav_div">Welcome, Guest.</div>
-		<div class="nav_div">
-			<a onclick="showLogin();">Login</a> | <a href="../register.html">Register</a>
-		</div>
-
-		<div id="divLogin"  style="display:none" >
-			<form action="#" method="post">
-				Username: <input type="text" name="username" class="form_field" /><br />
-				Password: <input type="password" name="password" class="form_field" /><br />
-				Remember me: <input type="checkbox" value="true" name="remember" /><br />
-				<input type="submit" value="Login" class="form_button" />
-			</form>
-		</div>
-	</div>
-	<script type="text/javascript">
-		function showLogin(){
-			document.getElementById('divLogin').style.display='block';
-		}
-	</script>
-
-</div>
-
-		<h1>Profile for CdogYEET</h1>
-
-
-		<div class="menu_section">
-			<div class="head">
-				&quot;Time to take your final bow!&quot;
-			</div>
-			<div class="row"><div>FIRST NAME</div>conor</div>
-			<div class="row"><div>BIRTHDAY</div>14 Nov 2008</div>
-			<div class="row"><div>MEMBER SINCE</div>13 May 2020</div>
-			<div class="row"><div>LAST LOGIN</div>10 Mar 2023</div>
-			<div class="row"><div>MOOD</div>Idiomorphic</div>
-			<div class="row"><div>DOING NOW</div></div>
-			<div class="row"><div>STANDING</div>Active</div>
-			<div class="row"><div>3DS CODE</div>0000-0000-0003</div>
-			<div class="row"><div>SWITCH CODE</div>SW-1138-3293-4523</div>
-			<div class="row"><div>NINT NETWK ID</div>coulnt be bothered</div>
-		</div>
-
-
-		<h1>Biography</h1>
-		<div class="menu_section">
-			<div class="form_body" id="blog_body">
-
-				<img src="../saviis/savii_gallery/32180.png" style="border:1px inset #888; float:left; margin:3px" />
-				BEFORE I START I WOULD LIKE TO THANK @draconid_jo FOR THE SPINNY THINGS<br /><br /><br /><br />Just some irish dude who takes games too deeply<br />I like to play alot of games such as:<br />Titanfall 2<br />overwatch<br />Undertale<br />Deltarune<br />Dreams<br />Just cause 3<br />Doom<br />Farming sim<br />Fnaf (favourite one is probably fnaf 6)<br />The escapists (1 and 2)<br />Uncharted<br />Apex legends<br />Destiny 2<br />Spiderman PS4<br />terraria<br />minecraft<br />And last and probably least<br />Subnautica<br /><br />I dont know what else to add<br />Balls<br />Also if i change my name it will probs be from CdogYEET (cringe) to mrctothec<br />Add me on ps:mrctothec<br /><br />SADDO WARNING FOR AHEAD<br /><br /><br />I am very, very, very, very, very, very, very, VERY big into fnaf and I have made my own theories.<br />I even made theories on the hoax animitronics that I spent ages on before they were debunked :,) <br />I joined the fnaf community in between fnaf 2 and 3.<br />My favourite fnaf yters are markiplier, dawko and fuzionZgamer.<br />Unnoficially part of the lore!<br />I am thinking about making a fangame called aftermath of freddys where its the fnaf 1 location but its run down after 30 years of neglect, it will take a while to make it as I have no-one to help me make it, if you are interested in helping pls tell me, I might try making a blog abut it.<br />I have beat all nights in all games and got all endings except for the 50 20 ending in UCN.<br />favourite fnaf quote:<br />Im sorry but there was never enough room on this stage for the both of us!- ft foxy			</div>
-		</div>
-
-		<h1>Profile Pages</h1>
-		<div class="menu_section" style="width:200px">
-			<div class="button_div">
-				<a href="timelined0b1.html">TIMELINE</a>
-			</div>
-			<div class="button_div">
-				<a href="commentsd0b1.html">COMMENTS</a>
-			</div>
-			<div class="button_div">
-				<a href="../blog/index47c0.html">BLOGS</a>
-			</div>
-			<div class="button_div">
-				<a href="../poll/index47c0.html">POLLS</a>
-			</div>
-
-			<div class="button_div">
-				<a href="../saviis/savii_gallerycbf4.html">SAVII GALLERY</a>
-			</div>
-
-			<div class="button_div">
-				<a href="page6f36.html">Face reveal</a>
-			</div>
-
-			<div class="button_div">
-				<a href="pagea696.html">about me :)</a>
-			</div>
-
-		</div>
-
-
-<h1>Badges</h1>
-<div class="menu_section">
-
-
-        <div class="badge">
-            <a href="#"><img src="../images/badges/courier3.png" /></a><br />Courier        </div>
-
-    
-        <div class="badge">
-            <a href="#"><img src="../images/badges/socialite5.png" /></a><br />Socialite        </div>
-
-    
-</div>
-
-		<h1>Last Blogs</h1>
-		<div class="menu_section">
-
-
-				<div class="zebra">
-					<img class="rating left" src="../images/rating_t32.png" alt="T" />
-
-					<div class="blog_right">
-						<div style="background:#8f0; border:1px solid #8f0">4</div>
-					</div>
-
-					<a href="../blog/index26ae.html">Them</a><br />
-					In Poetry and Lyrics<br />
-					On 17 Feb 2023				</div>
-
-
-				<div class="zebra">
-					<img class="rating left" src="../images/rating_t32.png" alt="T" />
-
-					<div class="blog_right">
-						<div style="background:#8f0; border:1px solid #8f0">7</div>
-					</div>
-
-					<a href="../blog/index1bac.html">Trapped inside </a><br />
-					In Poetry and Lyrics<br />
-					On 22 Jul 2022				</div>
-
-			</div>
-
-			<h1>Comments</h1>
-			<div class="menu_section">
-				<form action="#" method="post">
-					<div>
-					<div class="zebra" style="padding:0px">
-						<img src="../images/art_gallery/247116.png" alt="Avatar" class="avatar" />
-						<a href="index0d57.html">ich_trink_cola</a><br />
-						18 Feb 2023 20:22						<div style="clear:both"></div>
-					</div>
-					<div class="zebra">yes</div>
-				</div>
-					<div>
-					<div class="zebra" style="padding:0px">
-						<img src="../images/art_gallery/246675.png" alt="Avatar" class="avatar" />
-						<a href="indexaf5e.html">JinxCade</a><br />
-						13 Feb 2023 19:03						<div style="clear:both"></div>
-					</div>
-					<div class="zebra">Hey Wait YOUR BACK?!?!</div>
-				</div>
-					<div>
-					<div class="zebra" style="padding:0px">
-						<img src="../images/art_gallery/246735.png" alt="Avatar" class="avatar" />
-						<a href="index2fb6.html">Draconid_Jo</a><br />
-						17 Dec 2022 12:13						<div style="clear:both"></div>
-					</div>
-					<div class="zebra">Yeah, that's because back in October I was basically only able to sneak online quickly to feature people's blogs and polls every now and then, and for the past couple of months or so (from late October until now) I wasn't able to get online at all. <img src="../chatrooms/smilies/alien2.gif" /><br />(At least Dad finally let me get online again today, though.)</div>
-				</div>
-					<div>
-					<div class="zebra" style="padding:0px">
-						<img src="../images/art_gallery/247359.png" alt="Avatar" class="avatar" />
-						<a href="indexef8b.html">Siling-La</a><br />
-						17 Nov 2022 01:09						<div style="clear:both"></div>
-					</div>
-					<div class="zebra">Not bad. You?<br /></div>
-				</div>
-					<div>
-					<div class="zebra" style="padding:0px">
-						<img src="../images/art_gallery/247156.png" alt="Avatar" class="avatar" />
-						<a href="indexadc1.html">MilliFoxii</a><br />
-						16 Nov 2022 01:36						<div style="clear:both"></div>
-					</div>
-					<div class="zebra">can i help you make aftermath of freddy's?<br />i can make good music with LMMS (music program)<br />and Could maybe make the logo too.</div>
-				</div>
-					<div>
-					<div class="zebra" style="padding:0px">
-						<img src="../images/art_gallery/247359.png" alt="Avatar" class="avatar" />
-						<a href="indexef8b.html">Siling-La</a><br />
-						14 Nov 2022 21:36						<div style="clear:both"></div>
-					</div>
-					<div class="zebra">Hathy Bippday!<br /><br />I mean... Happy Birthday!</div>
-				</div>
-					<div>
-					<div class="zebra" style="padding:0px">
-						<img src="../images/art_gallery/246575.png" alt="Avatar" class="avatar" />
-						<a href="index196c.html">Weeeheeep</a><br />
-						14 Nov 2022 15:32						<div style="clear:both"></div>
-					</div>
-					<div class="zebra">birthday </div>
-				</div>
-					<div>
-					<div class="zebra" style="padding:0px">
-						<img src="../images/art_gallery/247403.png" alt="Avatar" class="avatar" />
-						<a href="indexfb6e.html">DCTheGamr</a><br />
-						14 Nov 2022 08:17						<div style="clear:both"></div>
-					</div>
-					<div class="zebra">Happy bday <img src="../chatrooms/smilies/alien16.gif" /></div>
-				</div>
-					<div>
-					<div class="zebra" style="padding:0px">
-						<img src="../images/art_gallery/242900.png" alt="Avatar" class="avatar" />
-						<a href="index617c.html">aidansocool</a><br />
-						13 Nov 2022 10:04						<div style="clear:both"></div>
-					</div>
-					<div class="zebra">Yooo</div>
-				</div>
-					<div>
-					<div class="zebra" style="padding:0px">
-						<img src="../images/art_gallery/247047.png" alt="Avatar" class="avatar" />
-						<a href="indexd44e.html">Jaystation</a><br />
-						30 Oct 2022 13:53						<div style="clear:both"></div>
-					</div>
-					<div class="zebra">It happened to me<br />Was online, left, came back, no accesss to my acc, i check it in member search, the css is ruined, then, my acc dissapears, luckily, i remembered this acc and it's password <br />-royal</div>
-				</div>
-			</form>
-		</div>
-
-		<div style="margin:5px; text-align:center">
-			<a href="../index.html"><img class="icon" src="../images/icons/icon_home.png" alt="Home" /></a>
-		</div>
-
-
-<div style="font-size:10px; text-align:center">
-	Nintendo 3DS is &trade; Nintendo Co. Ltd.
-	This website is &copy;2009-2023 HullBreach Studios. All rights reserved.
-	Members are responsible for their own content.
-	No account information will be given to third-parties without your consent.
-</div>
-
-<div id="divAlertPopup" class="alerts_popup menu_section"></div>
-<script type="text/javascript">
-	var AlertPopupObj = new XMLHttpRequest();
-	function refreshMyPopupAlerts(){
-		AlertPopupObj.open('GET.html', '../includes/ajax.section.my_alert_popup.html', true);
-		AlertPopupObj.send(null);
-		AlertPopupObj.onreadystatechange = function(){
-			if(AlertPopupObj.readyState>2 && AlertPopupObj.status>=400){
-				AlertPopupObj.onreadystatechange = function(){ setTimeout(refreshMyPopupAlerts, 60000); }
-				AlertPopupObj.abort();
-				return;
-			}
-			if(AlertPopupObj.readyState==4){
-				if(AlertPopupObj.responseText){
-					var divAlertPopup = document.getElementById('divAlertPopup'),
-						alerts = [];
-					try{ alerts = eval(AlertPopupObj.responseText); }catch(err){ }
-					if(alerts.length){
-						var alertString = '',
-							index = 0;
-						while(index<alerts.length){
-							alertString += 'New <a href="/mymessageviewer.php?message='+alerts[index].mess+'">Message</a> from <a href="/member?id='+alerts[index].id+'">'+alerts[index].name+'</a>';
-							index++;
-						}
-						divAlertPopup.innerHTML = alertString;
-						divAlertPopup.style.display = 'block';
-					}else{
-						divAlertPopup.style.display = 'none';
-					}
-				}
-				setTimeout(refreshMyPopupAlerts, 10000);
-			}
-		}
-	}
-	refreshMyPopupAlerts();
-</script>
-	</body>
-
-<!-- Mirrored from dsipaint.com/member/?id=143394 by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 06 Apr 2023 23:14:50 GMT -->
-</html>
