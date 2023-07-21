@@ -1,4 +1,0 @@
-# HTTrack Website Copier Cookie File
-# This file format is compatible with Netscape cookies
-dsipaint.com	TRUE	/	FALSE	1999999999	PHPSESSID	bfab4fb9c3d5e36125c1da860e8cbdb5
-
