@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link href="/settings/settingscss.css" rel="stylesheet" type="text/css" />
+  <link rel="shortcut icon" href="/images/icon_browser/homebrew32x32.png">
+  <link href="/manifest.json" rel="manifest">
+  <title>Settings</title>
+</head>
+<body>
+  <header>
+      <h1>Settings - HomeBlog</h1>
+  </header>
+
+  <br>
+
+  <div class="settings-list">
+    
+    <div class="settings-button" onclick="showInfo()">
+      <h2>Version & Information about device</h2>
+      <div class="settings-icon">
+        <img src="/images/settings_icons/information.png" alt="Version Pic">
+      </div>
+    </div>
+    
+    <div class="settings-button">
+      <h2><a href="https://dsc.gg/homeblog">Join Discord Server</a></h2>
+      <div class="settings-icon">
+        <img src="/images/settings_icons/discord.png" alt="Version Pic">
+      </div>
+    </div>
+    
+    <div class="settings-button">
+      <h2>Create a post</h2>
+      <div class="settings-icon">
+        <img src="/images/settings_icons/pen.png" alt="Version Pic">
+      </div>
+    </div>
+  </div>
+
+  <footer class="taskbar">
+    <button class="taskbar-button" id="info-button" title="Info Page"><a href='/info/info'>&#9432;</a></button>
+    <button class="taskbar-button" id="home-button" title="Home"><a href='/'>&#8962;</a></button>
+    <button class="taskbar-button" id="settings-button" title="Settings"><a href='/settings/settings'>&#9881;</a></button>
+  </footer>
+  <script src="settings.js"></script>
+</body>
+</html>
