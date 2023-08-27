@@ -1,0 +1,99 @@
+/* BODY & HTML*/
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(0,132,255);
+  background: linear-gradient(328deg, rgba(0,132,255,1) 35%, rgba(68,175,255,1) 93%);
+  -webkit-user-select: none; /* Für Webkit-Browser (Chrome, Safari) */
+  -moz-user-select: none; /* Für Firefox */
+  -ms-user-select: none; /* Für Internet Explorer/Edge */
+  user-select: none; /* Standardmäßig für andere Browser */
+}
+
+/* HEADER */
+
+header {
+  background-color: #333;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+/* TASKBAR */
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f2f2f2;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskbar-button {
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+a {
+  text-decoration-line: none;
+  color: black;
+}
+
+/* SETTINGS */
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Abstand zwischen den Buttons anpassen */
+}
+
+/* CSS-Datei für die Styling der Settings Buttons */
+
+.settings-button {
+  display: flex;
+  padding: 10px 20px;
+  background-color: #f2f2f2;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-button:hover {
+  background-color: #ddd;
+}
+
+.settings-button:active {
+  background-color: #bbb;
+}
+
+.settings-icon {
+  margin-right: 5px;
+}
+
+h2 {
+  color: black;
+}
